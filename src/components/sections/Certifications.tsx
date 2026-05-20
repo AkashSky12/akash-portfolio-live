@@ -22,11 +22,11 @@ export default function Certifications() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-[11px] tracking-[0.15em] uppercase font-semibold text-[#00d4aa] mb-3">
+          <p className="text-[13px] tracking-[0.12em] uppercase font-semibold text-[#00d4aa] mb-3">
             Credentials
           </p>
           <h2
-            className="font-syne font-extrabold text-white leading-[1.1] mb-10"
+            className="font-jakarta font-extrabold leading-[1.1] mb-10 section-heading"
             style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
           >
             Certifications & Education
@@ -46,7 +46,7 @@ export default function Certifications() {
                 {c.icon}
               </div>
               <div>
-                <p className="font-syne font-bold text-[13px] text-white leading-tight mb-1">
+                <p className="font-jakarta font-bold text-[14px] text-[#f0f4ff] leading-tight mb-1">
                   {c.name}
                 </p>
                 <p className="text-[12px] text-[#00d4aa] mb-1">{c.body}</p>

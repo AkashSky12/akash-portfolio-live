@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 
 const stats = [
-  { num: '8+', label: 'Years in QA' },
+  { num: '9+', label: 'Years in QA' },
   { num: '30+', label: 'EU Storefronts' },
   { num: '40%', label: 'Test Authoring Reduction' },
   { num: '10+', label: 'Engineers Led' },
@@ -44,10 +44,13 @@ export default function Hero() {
         {/* Headline */}
         <motion.h1
           {...fadeUp(0.2)}
-          className="font-syne font-extrabold text-white leading-[1.05] tracking-tight mb-4"
+          className="font-jakarta font-extrabold leading-[1.05] mb-4 section-heading"
           style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}
         >
           Akash Simon
+          <br />
+          <span className="text-[#00d4aa]">Software Engineer</span>
+          <br />
           <br />
           <span className="text-[#00d4aa]">QA Lead &</span>
           <br />
@@ -62,7 +65,7 @@ export default function Hero() {
           className="text-[#8892a4] font-light max-w-xl mb-8 leading-relaxed"
           style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)' }}
         >
-          8+ years engineering quality at scale — from building GenAI QA agent
+          9+ years engineering quality at scale — from building GenAI QA agent
           infrastructure at Domino&apos;s 30+ EU storefronts to leading cross-geo
           teams in blockchain healthcare. I turn shift-left strategy into
           measurable business outcomes.
@@ -72,13 +75,13 @@ export default function Hero() {
         <motion.div {...fadeUp(0.4)} className="flex flex-wrap gap-4 mb-12">
           <a
             href="#contact"
-            className="font-syne font-semibold text-sm bg-[#00d4aa] text-[#0a0f1e] px-7 py-3 rounded-lg hover:bg-[#00a88a] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+            className="font-jakarta font-semibold text-sm bg-[#00d4aa] text-[#0a0f1e] px-7 py-3 rounded-lg hover:bg-[#00a88a] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
           >
             Let&apos;s Work Together
           </a>
           <a
             href="#experience"
-            className="font-syne font-semibold text-sm border border-white/[0.12] text-white px-7 py-3 rounded-lg hover:border-[#00d4aa] hover:text-[#00d4aa] transition-all hover:-translate-y-0.5"
+            className="font-jakarta font-semibold text-sm border border-white/[0.12] text-white px-7 py-3 rounded-lg hover:border-[#00d4aa] hover:text-[#00d4aa] transition-all hover:-translate-y-0.5"
           >
             View Experience
           </a>
@@ -91,7 +94,7 @@ export default function Hero() {
         >
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="font-syne font-extrabold text-3xl text-white">
+              <div className="font-jakarta font-extrabold text-3xl text-[#f0f4ff]">
                 {s.num.replace(/[+%]/, '')}
                 <span className="text-[#00d4aa]">
                   {s.num.includes('+') ? '+' : s.num.includes('%') ? '%' : ''}

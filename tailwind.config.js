@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        syne: ['Syne', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
         dm: ['DM Sans', 'sans-serif'],
       },
       colors: {

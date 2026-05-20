@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Akash Simon | QA Lead & GenAI Automation Engineer',
+  title: 'Akash Simon | Software Engineer | QA Lead & GenAI Automation Engineer',
   description:
-    'GenAI-powered QA Lead with 8+ years of enterprise test automation, European regulatory compliance, and distributed team leadership. Built GenAI QA agent infrastructure at Domino\'s Pizza Enterprises covering 30+ EU country storefronts.',
+    'GenAI-powered Software Engineer, QA Lead with 8+ years of enterprise test automation, European regulatory compliance, and distributed team leadership. Built GenAI QA agent infrastructure at Domino\'s Pizza Enterprises covering 30+ EU country storefronts.',
   keywords: [
     'Akash Simon',
     'QA Lead',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Akash Simon | QA Lead & GenAI Automation Engineer',
+    title: 'Akash Simon | Software Engineer | QA Lead & GenAI Automation Engineer',
     description:
       '8+ years engineering quality at scale. Currently at Domino\'s Pizza Enterprises — 30+ EU storefronts.',
   },

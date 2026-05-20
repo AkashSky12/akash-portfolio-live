@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="border-t border-white/[0.08] py-8 px-6 md:px-10">
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          <p className="font-syne font-extrabold text-white text-[15px]">
+          <p className="font-jakarta font-extrabold text-white text-[15px]">
             Akash<span className="text-[#00d4aa]">.</span>
           </p>
           <p className="text-[12px] text-[#8892a4] mt-0.5">

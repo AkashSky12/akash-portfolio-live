@@ -110,11 +110,11 @@ export default function Experience() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-[11px] tracking-[0.15em] uppercase font-semibold text-[#00d4aa] mb-3">
+          <p className="text-[13px] tracking-[0.12em] uppercase font-semibold text-[#00d4aa] mb-3">
             Career
           </p>
           <h2
-            className="font-syne font-extrabold text-white leading-[1.1] mb-4"
+            className="font-jakarta font-extrabold leading-[1.1] mb-4 section-heading"
             style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
           >
             Professional Experience
@@ -144,7 +144,7 @@ export default function Experience() {
               <span className="text-[11px] text-[#00d4aa] font-semibold uppercase tracking-widest">
                 {exp.period}
               </span>
-              <h3 className="font-syne font-bold text-[1.1rem] text-white mt-1 mb-0.5">
+              <h3 className="font-jakarta font-bold text-[1.15rem] text-[#f0f4ff] mt-1 mb-0.5">
                 {exp.role}
               </h3>
               <p className="text-[13px] text-[#8892a4] mb-0.5">

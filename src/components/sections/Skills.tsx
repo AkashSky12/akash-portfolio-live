@@ -42,11 +42,11 @@ export default function Skills() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-[11px] tracking-[0.15em] uppercase font-semibold text-[#00d4aa] mb-3">
+          <p className="text-[13px] tracking-[0.12em] uppercase font-semibold text-[#00d4aa] mb-3">
             Tech Stack
           </p>
           <h2
-            className="font-syne font-extrabold text-white leading-[1.1] mb-4"
+            className="font-jakarta font-extrabold leading-[1.1] mb-4 section-heading"
             style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
           >
             Skills & Technology
@@ -65,7 +65,7 @@ export default function Skills() {
               transition={{ duration: 0.4, delay: 0.07 * i }}
               className="glass-card p-5"
             >
-              <p className="text-[11px] tracking-[0.12em] uppercase font-bold text-[#00d4aa] mb-4">
+              <p className="text-[12px] tracking-[0.10em] uppercase font-bold text-[#00d4aa] mb-4">
                 {group.title}
               </p>
               <div className="flex flex-wrap gap-1.5">

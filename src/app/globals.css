@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,6 +27,23 @@ body {
   color: var(--light);
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Global heading readability */
+h1, h2, h3, h4 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.section-heading {
+  color: #f0f4ff;
+  text-shadow: 0 0 40px rgba(240, 244, 255, 0.08);
+  letter-spacing: -0.03em;
 }
 
 .hero-grid-bg {
@@ -52,7 +69,7 @@ body {
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 12px;
-  color: var(--light);
+  color: #c8d3e5;
   transition: all 0.2s;
   display: inline-block;
 }

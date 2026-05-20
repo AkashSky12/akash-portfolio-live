@@ -25,7 +25,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="font-syne font-extrabold text-[18px] text-white">
+      <div className="font-jakarta font-extrabold text-[18px] text-[#f0f4ff]">
         Akash<span className="text-[#00d4aa]">.</span>
       </div>
       <div className="hidden md:flex items-center gap-8">
@@ -33,7 +33,7 @@ export default function Navbar() {
           <a
             key={l.href}
             href={l.href}
-            className="text-[#8892a4] text-[13px] font-medium tracking-widest uppercase transition-colors hover:text-[#00d4aa]"
+            className="text-[#c8d3e5] text-[13px] font-medium tracking-widest uppercase transition-colors hover:text-[#00d4aa]"
           >
             {l.label}
           </a>
@@ -41,7 +41,7 @@ export default function Navbar() {
       </div>
       <a
         href="mailto:akash.simon@outlook.com"
-        className="hidden md:inline-block text-[13px] font-syne font-semibold bg-[#00d4aa] text-[#0a0f1e] px-4 py-2 rounded-lg hover:bg-[#00a88a] transition-colors"
+        className="hidden md:inline-block text-[13px] font-jakarta font-semibold bg-[#00d4aa] text-[#0a0f1e] px-4 py-2 rounded-lg hover:bg-[#00a88a] transition-colors"
       >
         Hire Me
       </a>
