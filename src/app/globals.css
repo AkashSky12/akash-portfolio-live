@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0a0f1e;
+  --teal: #00d4aa;
+  --teal2: #00a88a;
+  --slate: #8892a4;
+  --light: #e8edf5;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--navy);
+  color: var(--light);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.hero-grid-bg {
+  background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 212, 170, 0.25);
+}
+
+.skill-tag {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--light);
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.skill-tag:hover {
+  background: rgba(0,212,170,0.1);
+  border-color: rgba(0,212,170,0.3);
+  color: var(--teal);
+}
