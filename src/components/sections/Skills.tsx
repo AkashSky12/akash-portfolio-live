@@ -1,81 +1,118 @@
 'use client'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import {
+  Bot,
+  Cog,
+  ShieldCheck,
+  GitBranch,
+  Webhook,
+  ClipboardCheck,
+} from 'lucide-react'
+import { useReveal } from '@/lib/useReveal'
 
-const skillGroups = [
+const groups = [
   {
+    Icon: Cog,
     title: 'Automation',
-    tags: ['Playwright (Python)', 'Selenium (Java)', 'Appium', 'WebDriverIO', 'REST Assured', 'TestNG', 'Cucumber BDD', 'Maven'],
+    tags: [
+      'Playwright (Python)',
+      'Selenium (Java)',
+      'Appium',
+      'WebDriverIO',
+      'REST Assured',
+      'TestNG',
+      'Cucumber BDD',
+      'Maven',
+    ],
   },
   {
+    Icon: Bot,
     title: 'AI & GenAI',
-    tags: ['GenAI QA Agents', 'AI-Driven Automation', 'Prompt Engineering', 'Synthetic Data Generation'],
+    tags: [
+      'GenAI QA Agents',
+      'AI-Driven Automation',
+      'Prompt Engineering',
+      'Synthetic Data Generation',
+    ],
   },
   {
+    Icon: ShieldCheck,
     title: 'Accessibility & Compliance',
     tags: ['Axe-core', 'WCAG 2.1 AA', 'EN 301 549', 'EAA', 'GDPR', 'IEC 62304'],
   },
   {
+    Icon: GitBranch,
     title: 'CI/CD & DevOps',
-    tags: ['GitHub Actions', 'Jenkins', 'Git', 'Build Pipeline Management', 'Deployment Oversight'],
+    tags: [
+      'GitHub Actions',
+      'Jenkins',
+      'Git',
+      'Pipeline Management',
+      'Deployment Oversight',
+    ],
   },
   {
+    Icon: Webhook,
     title: 'API & Integration',
-    tags: ['Postman', 'Swagger', 'REST Automation', 'Blockchain API', 'Smart Contract Testing', 'API Contract Testing'],
+    tags: [
+      'Postman',
+      'Swagger',
+      'REST Automation',
+      'Blockchain API',
+      'Smart Contract Testing',
+      'API Contract Testing',
+    ],
   },
   {
+    Icon: ClipboardCheck,
     title: 'Management & Quality',
-    tags: ['Jira', 'TestRail', 'Shift-Left Strategy', 'JMeter', 'MySQL', 'PostgreSQL', 'Risk Assessment'],
+    tags: [
+      'Jira',
+      'TestRail',
+      'Shift-Left Strategy',
+      'JMeter',
+      'MySQL',
+      'PostgreSQL',
+      'Risk Assessment',
+    ],
   },
 ]
 
 export default function Skills() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
-    <section id="skills" className="py-24 px-6 md:px-10">
-      <div className="max-w-4xl mx-auto" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-[13px] tracking-[0.12em] uppercase font-semibold text-[#00d4aa] mb-3">
-            Tech Stack
-          </p>
-          <h2
-            className="font-jakarta font-extrabold leading-[1.1] mb-4 section-heading"
-            style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
-          >
-            Skills & Technology
+    <section id="skills" className="section">
+      <div className="container">
+        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
+          <p className="eyebrow mb-4">Tech Stack</p>
+          <h2 className="heading-lg text-balance mb-5 text-ink-high">
+            A battle-tested toolkit.
           </h2>
-          <p className="text-[#8892a4] max-w-lg text-[15px] leading-relaxed mb-12">
-            A battle-tested toolkit spanning automation, AI, accessibility, CI/CD, and enterprise QA leadership.
+          <p className="text-pretty mb-14 max-w-2xl text-[15px] leading-relaxed text-ink-muted">
+            Spanning automation, AI, accessibility, CI/CD, and enterprise QA
+            leadership.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skillGroups.map((group, i) => (
-            <motion.div
-              key={group.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.07 * i }}
-              className="glass-card p-5"
-            >
-              <p className="text-[12px] tracking-[0.10em] uppercase font-bold text-[#00d4aa] mb-4">
-                {group.title}
-              </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {groups.map(({ Icon, title, tags }) => (
+            <div key={title} className="glass-card p-6">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent">
+                  <Icon size={16} strokeWidth={2} />
+                </div>
+                <p className="font-display text-[13px] font-bold uppercase tracking-[0.1em] text-ink-high">
+                  {title}
+                </p>
+              </div>
               <div className="flex flex-wrap gap-1.5">
-                {group.tags.map((tag) => (
-                  <span key={tag} className="skill-tag">
+                {tags.map((tag) => (
+                  <span key={tag} className="chip">
                     {tag}
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

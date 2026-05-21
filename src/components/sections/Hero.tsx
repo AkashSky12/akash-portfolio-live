@@ -1,111 +1,103 @@
 'use client'
-import { motion } from 'framer-motion'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
+import { useReveal } from '@/lib/useReveal'
 
 const stats = [
-  { num: '9+', label: 'Years in QA' },
-  { num: '30+', label: 'EU Storefronts' },
-  { num: '40%', label: 'Test Authoring Reduction' },
-  { num: '10+', label: 'Engineers Led' },
+  { num: '9', suffix: '+', label: 'Years in QA' },
+  { num: '30', suffix: '+', label: 'EU Storefronts' },
+  { num: '40', suffix: '%', label: 'Authoring Cut' },
+  { num: '10', suffix: '+', label: 'Engineers Led' },
 ]
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
-})
-
 export default function Hero() {
+  const { ref, visible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center px-6 md:px-10 pt-20 pb-16 overflow-hidden"
+      className="relative flex min-h-[100svh] items-center overflow-hidden pb-20 pt-32 sm:pt-36"
     >
-      {/* Radial glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,212,170,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 50% at 10% 80%, rgba(0,168,138,0.05) 0%, transparent 60%)',
-          }}
-        />
-        <div className="absolute inset-0 hero-grid-bg opacity-100" />
+      {/* Background layers */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="bg-grid absolute inset-0 opacity-90" />
+        <div className="aurora-blob aurora-blob--primary" />
+        <div className="aurora-blob aurora-blob--secondary" />
+        {/* Bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-bg" />
       </div>
 
-      <div className="relative max-w-4xl mx-auto w-full">
-        {/* Badge */}
-        <motion.div {...fadeUp(0.1)}>
-          <span className="inline-flex items-center gap-2 bg-[#00d4aa]/10 border border-[#00d4aa]/25 px-4 py-1.5 rounded-full text-[#00d4aa] text-xs font-semibold tracking-widest uppercase mb-6">
-            <span className="w-1.5 h-1.5 bg-[#00d4aa] rounded-full animate-pulse" />
-            Available for senior roles
-          </span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          {...fadeUp(0.2)}
-          className="font-jakarta font-extrabold leading-[1.05] mb-4 section-heading"
-          style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}
+      <div className="container relative">
+        <div
+          ref={ref}
+          className={`reveal mx-auto max-w-4xl ${visible ? 'is-visible' : ''}`}
         >
-          Akash Simon
-          <br />
-          <span className="text-[#00d4aa]">Software Engineer</span>
-          <br />
-          <br />
-          <span className="text-[#00d4aa]">QA Lead &</span>
-          <br />
-          GenAI Automation
-          <br />
-          Engineer
-        </motion.h1>
+          {/* Eyebrow */}
+          <div className="mb-8 flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inset-0 animate-pulse-dot rounded-full bg-accent" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                Available for senior roles
+              </span>
+            </span>
+          </div>
 
-        {/* Tagline */}
-        <motion.p
-          {...fadeUp(0.3)}
-          className="text-[#8892a4] font-light max-w-xl mb-8 leading-relaxed"
-          style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)' }}
-        >
-          9+ years engineering quality at scale — from building GenAI QA agent
-          infrastructure at Domino&apos;s 30+ EU storefronts to leading cross-geo
-          teams in blockchain healthcare. I turn shift-left strategy into
-          measurable business outcomes.
-        </motion.p>
+          {/* Headline */}
+          <h1 className="heading-xl text-balance mb-6 text-ink-high">
+            Engineering quality at the{' '}
+            <span className="accent-text">speed of AI</span>.
+          </h1>
 
-        {/* CTAs */}
-        <motion.div {...fadeUp(0.4)} className="flex flex-wrap gap-4 mb-12">
-          <a
-            href="#contact"
-            className="font-jakarta font-semibold text-sm bg-[#00d4aa] text-[#0a0f1e] px-7 py-3 rounded-lg hover:bg-[#00a88a] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
-          >
-            Let&apos;s Work Together
-          </a>
-          <a
-            href="#experience"
-            className="font-jakarta font-semibold text-sm border border-white/[0.12] text-white px-7 py-3 rounded-lg hover:border-[#00d4aa] hover:text-[#00d4aa] transition-all hover:-translate-y-0.5"
-          >
-            View Experience
-          </a>
-        </motion.div>
+          {/* Subtitle */}
+          <p className="text-pretty mb-10 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
+            I&apos;m{' '}
+            <span className="text-ink-high">Akash Simon</span> — a QA Lead &amp;
+            GenAI Automation Engineer with 9+ years building test infrastructure
+            that ships. Currently architecting GenAI QA agents across{' '}
+            <span className="text-ink-high">30+ EU storefronts</span> at
+            Domino&apos;s Pizza Enterprises.
+          </p>
 
-        {/* Stats */}
-        <motion.div
-          {...fadeUp(0.5)}
-          className="flex flex-wrap gap-8 pt-8 border-t border-white/[0.08]"
-        >
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="font-jakarta font-extrabold text-3xl text-[#f0f4ff]">
-                {s.num.replace(/[+%]/, '')}
-                <span className="text-[#00d4aa]">
-                  {s.num.includes('+') ? '+' : s.num.includes('%') ? '%' : ''}
-                </span>
+          {/* CTAs */}
+          <div className="mb-16 flex flex-wrap items-center gap-3 sm:gap-4">
+            <a href="#contact" className="btn-primary group">
+              Let&apos;s work together
+              <ArrowUpRight
+                size={16}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </a>
+            <a href="#experience" className="btn-ghost">
+              <Sparkles size={15} />
+              View experience
+            </a>
+          </div>
+
+          {/* Stats strip */}
+          <div className="grid grid-cols-2 gap-6 border-t border-line pt-8 sm:grid-cols-4 sm:gap-8">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <div className="font-display text-3xl font-extrabold tracking-tightest text-ink-high sm:text-4xl">
+                  {s.num}
+                  <span className="accent-text">{s.suffix}</span>
+                </div>
+                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink-muted">
+                  {s.label}
+                </div>
               </div>
-              <div className="text-[11px] text-[#8892a4] uppercase tracking-widest mt-0.5">
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll hint */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 hidden justify-center sm:flex">
+        <div className="flex flex-col items-center gap-2 text-ink-subtle">
+          <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+          <span className="h-8 w-px bg-gradient-to-b from-ink-subtle to-transparent" />
+        </div>
       </div>
     </section>
   )

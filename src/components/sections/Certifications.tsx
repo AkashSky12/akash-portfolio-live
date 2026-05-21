@@ -1,66 +1,69 @@
 'use client'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { BadgeCheck, BrainCircuit, ClipboardList, GraduationCap } from 'lucide-react'
+import { useReveal } from '@/lib/useReveal'
 
 const certs = [
-  { icon: '🏅', name: 'ISTQB Foundation Level', body: 'ISTQB / UKITB', status: 'Certified' },
-  { icon: '🤖', name: 'AI Fundamentals Certification', body: 'Applied GenAI Workflows & Principles', status: 'Certified' },
-  { icon: '📋', name: 'ISTQB Advanced Level — Test Manager', body: 'ISTQB', status: 'In Progress' },
-  { icon: '🎓', name: 'B.E. Computer Science Engineering', body: 'Visvesvaraya Technological University', status: 'Graduated' },
+  {
+    Icon: BadgeCheck,
+    name: 'ISTQB Foundation Level',
+    body: 'ISTQB / UKITB',
+    status: 'Certified',
+  },
+  {
+    Icon: BrainCircuit,
+    name: 'AI Fundamentals Certification',
+    body: 'Applied GenAI Workflows & Principles',
+    status: 'Certified',
+  },
+  {
+    Icon: ClipboardList,
+    name: 'ISTQB Advanced — Test Manager',
+    body: 'ISTQB',
+    status: 'In Progress',
+  },
+  {
+    Icon: GraduationCap,
+    name: 'B.E. Computer Science Engineering',
+    body: 'Visvesvaraya Technological University',
+    status: 'Graduated',
+  },
 ]
 
 export default function Certifications() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
-    <section id="certs" className="py-24 px-6 md:px-10">
-      <div className="max-w-4xl mx-auto" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-[13px] tracking-[0.12em] uppercase font-semibold text-[#00d4aa] mb-3">
-            Credentials
-          </p>
-          <h2
-            className="font-jakarta font-extrabold leading-[1.1] mb-10 section-heading"
-            style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
-          >
-            Certifications & Education
+    <section id="certs" className="section">
+      <div className="container">
+        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
+          <p className="eyebrow mb-4">Credentials</p>
+          <h2 className="heading-lg text-balance mb-12 text-ink-high">
+            Certifications &amp; education.
           </h2>
-        </motion.div>
+        </div>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {certs.map((c, i) => (
-            <motion.div
-              key={c.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 * i }}
-              className="glass-card p-5 flex items-start gap-4"
-            >
-              <div className="text-2xl flex-shrink-0 w-11 h-11 bg-[#00d4aa]/10 rounded-xl flex items-center justify-center">
-                {c.icon}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {certs.map(({ Icon, name, body, status }) => (
+            <div key={name} className="glass-card flex items-start gap-4 p-6">
+              <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
+                <Icon size={20} strokeWidth={2} />
               </div>
-              <div>
-                <p className="font-jakarta font-bold text-[14px] text-[#f0f4ff] leading-tight mb-1">
-                  {c.name}
+              <div className="min-w-0">
+                <p className="font-display text-[14.5px] font-bold leading-tight text-ink-high">
+                  {name}
                 </p>
-                <p className="text-[12px] text-[#00d4aa] mb-1">{c.body}</p>
+                <p className="mt-1 text-[12.5px] text-ink-muted">{body}</p>
                 <span
-                  className={`text-[11px] px-2 py-0.5 rounded-full ${
-                    c.status === 'In Progress'
-                      ? 'bg-amber-500/10 text-amber-400'
-                      : 'bg-[#00d4aa]/10 text-[#00d4aa]'
+                  className={`mt-2.5 inline-block rounded-full px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-wider ${
+                    status === 'In Progress'
+                      ? 'bg-amber-500/10 text-amber-300 ring-1 ring-amber-400/20'
+                      : 'bg-accent/10 text-accent ring-1 ring-accent/20'
                   }`}
                 >
-                  {c.status}
+                  {status}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,50 +1,161 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 const links = [
   { href: '#about', label: 'About' },
   { href: '#experience', label: 'Experience' },
   { href: '#skills', label: 'Skills' },
+  { href: '#certs', label: 'Credentials' },
   { href: '#contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [active, setActive] = useState<string>('#home')
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Scrollspy
+  useEffect(() => {
+    const ids = ['home', ...links.map((l) => l.href.slice(1))]
+    const targets = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[]
+    if (targets.length === 0) return
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(`#${e.target.id}`)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    )
+    targets.forEach((t) => io.observe(t))
+    return () => io.disconnect()
+  }, [])
+
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 h-[60px] transition-all duration-300 ${
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0f1e]/90 backdrop-blur-xl border-b border-white/[0.08]'
+          ? 'bg-bg/80 backdrop-blur-xl border-b border-line'
           : 'bg-transparent'
       }`}
     >
-      <div className="font-jakarta font-extrabold text-[18px] text-[#f0f4ff]">
-        Akash<span className="text-[#00d4aa]">.</span>
-      </div>
-      <div className="hidden md:flex items-center gap-8">
-        {links.map((l) => (
-          <a
-            key={l.href}
-            href={l.href}
-            className="text-[#c8d3e5] text-[13px] font-medium tracking-widest uppercase transition-colors hover:text-[#00d4aa]"
-          >
-            {l.label}
-          </a>
-        ))}
-      </div>
-      <a
-        href="mailto:akash.simon@outlook.com"
-        className="hidden md:inline-block text-[13px] font-jakarta font-semibold bg-[#00d4aa] text-[#0a0f1e] px-4 py-2 rounded-lg hover:bg-[#00a88a] transition-colors"
+      <nav
+        aria-label="Primary"
+        className="container flex h-16 items-center justify-between"
       >
-        Hire Me
-      </a>
-    </nav>
+        <a
+          href="#home"
+          className="font-display text-[18px] font-extrabold tracking-tight text-ink-high"
+        >
+          Akash<span className="text-accent">.</span>
+        </a>
+
+        {/* Desktop nav */}
+        <ul className="hidden items-center gap-1 md:flex">
+          {links.map((l) => {
+            const isActive = active === l.href
+            return (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className={`relative px-3 py-2 text-[13px] font-medium tracking-wide transition-colors ${
+                    isActive ? 'text-accent' : 'text-ink-muted hover:text-ink-high'
+                  }`}
+                >
+                  {l.label}
+                  {isActive && (
+                    <span className="pointer-events-none absolute inset-x-3 -bottom-0.5 h-px bg-accent/70" />
+                  )}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+
+        <div className="hidden md:block">
+          <a href="#contact" className="btn-primary !py-2 !px-5 text-[13px]">
+            Hire Me
+          </a>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-controls="mobile-menu"
+          {...{ 'aria-expanded': open }}
+          onClick={() => setOpen((o) => !o)}
+          className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.03] text-ink-high md:hidden"
+        >
+          {open ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </nav>
+
+      {/* Mobile drawer */}
+      <div
+        id="mobile-menu"
+        className={`md:hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}
+      >
+        <div
+          className={`fixed inset-0 top-16 bg-bg/95 backdrop-blur-xl transition-opacity duration-300 ${
+            open ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
+        <div
+          className={`fixed inset-x-0 top-16 origin-top bg-bg-raised/95 backdrop-blur-xl transition-all duration-300 ${
+            open ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
+          }`}
+        >
+          <ul className="container flex flex-col gap-1 py-6">
+            {links.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center justify-between rounded-xl border border-transparent px-4 py-4 text-base font-medium transition-colors ${
+                    active === l.href
+                      ? 'border-accent/20 bg-accent/10 text-accent'
+                      : 'text-ink-high hover:bg-white/[0.04]'
+                  }`}
+                >
+                  <span>{l.label}</span>
+                  <span className="text-ink-subtle">→</span>
+                </a>
+              </li>
+            ))}
+            <li className="mt-2">
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="btn-primary w-full"
+              >
+                Hire Me
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
   )
 }
