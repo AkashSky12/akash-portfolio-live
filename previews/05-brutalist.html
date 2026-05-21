@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>05 — Brutalist Editorial · Akash Mahanty</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family:'Inter',sans-serif; background:#f4f1ea; color:#0a0a0a; }
+  .serif { font-family:'Fraunces',serif; font-feature-settings:"ss01" on; }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  .ink { background:#0a0a0a; color:#f4f1ea; }
+  .accent { color:#dc2626; }
+  hr.thick { border:none; height:6px; background:#0a0a0a; }
+  hr.thin { border-color:#0a0a0a; }
+  .caps { font-feature-settings:"smcp" on; }
+</style>
+</head>
+<body>
+  <a href="index.html" class="mono fixed top-3 left-4 text-[10px] uppercase tracking-[0.2em] text-neutral-500 hover:text-black z-50">← templates</a>
+
+  <!-- Masthead -->
+  <header class="border-b-[6px] border-black">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-3 text-xs mono uppercase tracking-[0.2em]">
+      <span>Vol. 01 · Issue 04 · May 2026</span>
+      <span>London Edition</span>
+      <span class="accent">★ Free ★</span>
+    </div>
+    <div class="border-y-[6px] border-black">
+      <h1 class="serif text-center font-black tracking-[-0.03em] py-2" style="font-size: clamp(64px, 13vw, 200px); line-height: 0.9">
+        THE&nbsp;<em class="font-normal italic">akash</em>&nbsp;TIMES
+      </h1>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-3 text-xs mono uppercase tracking-[0.2em]">
+      <span>Senior SRE · Automation · AI Ops</span>
+      <span>"Make it boring, then make it fast"</span>
+      <span>Page 01</span>
+    </div>
+  </header>
+
+  <!-- Hero feature -->
+  <main class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-12 gap-8">
+    <article class="md:col-span-8">
+      <p class="mono text-xs uppercase tracking-[0.3em] accent">→ Feature · Vol. 01</p>
+      <h2 class="serif font-black mt-4 leading-[0.9] tracking-[-0.035em]" style="font-size: clamp(48px, 7vw, 112px)">
+        Engineer found <em class="italic font-normal">enjoying</em> her on-call rotation, sources say.
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-2xl">
+        <span class="serif font-bold text-5xl float-left mr-3 leading-none">A</span>
+        kash Mahanty, 31, was reportedly seen smiling during a Tuesday 3am page —
+        a sight not witnessed at Sky's London office since the great runbook
+        rewrite of 2024. "We just stopped tolerating ambiguous alerts," she explained,
+        to no one in particular. The result: a 41% drop in MTTR across a 12-region
+        streaming platform, and one extremely overdue good night's sleep.
+      </p>
+    </article>
+
+    <aside class="md:col-span-4 border-l-[6px] border-black pl-6">
+      <p class="mono text-xs uppercase tracking-[0.3em]">In this issue</p>
+      <ol class="mt-4 space-y-3 text-sm">
+        <li class="border-b border-black pb-3"><span class="mono mr-2">01.</span> Stack &amp; tooling — p. 02</li>
+        <li class="border-b border-black pb-3"><span class="mono mr-2">02.</span> Career timeline — p. 03</li>
+        <li class="border-b border-black pb-3"><span class="mono mr-2">03.</span> Recent writing — p. 04</li>
+        <li class="border-b border-black pb-3"><span class="mono mr-2">04.</span> Contact &amp; bookings — p. 05</li>
+      </ol>
+      <div class="ink mt-6 p-5">
+        <p class="mono text-xs uppercase tracking-[0.3em] accent">Box ad</p>
+        <p class="serif text-2xl mt-2 leading-tight">"She rewrote our paging system over a weekend." — D., Eng Manager</p>
+      </div>
+    </aside>
+  </main>
+
+  <hr class="thick"/>
+
+  <!-- Stack section -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="flex items-end justify-between border-b-[6px] border-black pb-2">
+      <h3 class="serif font-black" style="font-size: clamp(40px, 6vw, 80px); line-height:0.9">02 — Stack</h3>
+      <span class="mono text-xs uppercase tracking-[0.2em]">★ as of may 2026 ★</span>
+    </div>
+    <div class="grid md:grid-cols-4 gap-0 mt-8">
+      <div class="border-r border-black pr-5">
+        <p class="mono text-xs uppercase tracking-[0.2em] accent">→ Cloud</p>
+        <p class="serif text-3xl mt-2 leading-tight">Azure · AKS · App Service · Functions · Cosmos</p>
+      </div>
+      <div class="border-r border-black px-5">
+        <p class="mono text-xs uppercase tracking-[0.2em] accent">→ Automation</p>
+        <p class="serif text-3xl mt-2 leading-tight">Python · Go · Terraform · Ansible · Bicep</p>
+      </div>
+      <div class="border-r border-black px-5">
+        <p class="mono text-xs uppercase tracking-[0.2em] accent">→ Observability</p>
+        <p class="serif text-3xl mt-2 leading-tight">OTel · Grafana · Prometheus · KQL · Loki</p>
+      </div>
+      <div class="pl-5">
+        <p class="mono text-xs uppercase tracking-[0.2em] accent">→ AI Ops</p>
+        <p class="serif text-3xl mt-2 leading-tight">Foundry · Eval pipelines · Agentic systems</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="thick"/>
+
+  <!-- Timeline -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h3 class="serif font-black" style="font-size: clamp(40px, 6vw, 80px); line-height:0.9">03 — Timeline</h3>
+    <table class="w-full mt-8 text-left">
+      <thead class="mono text-xs uppercase tracking-[0.2em] border-b-[6px] border-black">
+        <tr><th class="py-2 w-32">Years</th><th>Role</th><th>Org</th><th class="w-24 text-right">Page</th></tr>
+      </thead>
+      <tbody class="serif text-xl">
+        <tr class="border-b border-black"><td class="py-4 mono text-base">2023→</td><td>Senior SRE</td><td>Sky</td><td class="text-right mono text-base">003.a</td></tr>
+        <tr class="border-b border-black"><td class="py-4 mono text-base">2020–23</td><td>DevOps Engineer</td><td>Ericsson</td><td class="text-right mono text-base">003.b</td></tr>
+        <tr><td class="py-4 mono text-base">2018–20</td><td>Software Engineer</td><td>Wipro</td><td class="text-right mono text-base">003.c</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="thick"/>
+
+  <!-- Footer -->
+  <footer class="ink py-12 px-6 mono text-xs uppercase tracking-[0.3em] text-center">
+    ★ akash@hey.com ★ github/akash ★ linkedin/akash ★ printed in london ★
+  </footer>
+</body>
+</html>

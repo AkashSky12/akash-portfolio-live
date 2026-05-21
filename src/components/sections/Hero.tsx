@@ -19,8 +19,10 @@ export default function Hero() {
     >
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0">
+        <div className="sun-halo" />
         <div className="bg-grid absolute inset-0 opacity-90" />
         <div className="aurora-blob aurora-blob--primary" />
+        <div className="aurora-blob aurora-blob--glow" />
         <div className="aurora-blob aurora-blob--secondary" />
         {/* Bottom fade */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-bg" />

@@ -19,21 +19,21 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.03] text-ink-muted transition-all hover:border-accent/30 hover:bg-accent/[0.08] hover:text-accent"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-ink-muted transition-all hover:border-accent/30 hover:bg-accent/[0.08] hover:text-accent"
           >
             <Linkedin size={16} strokeWidth={2} />
           </a>
           <a
             href="mailto:akash.simon@outlook.com"
             aria-label="Email"
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.03] text-ink-muted transition-all hover:border-accent/30 hover:bg-accent/[0.08] hover:text-accent"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-ink-muted transition-all hover:border-accent/30 hover:bg-accent/[0.08] hover:text-accent"
           >
             <Mail size={16} strokeWidth={2} />
           </a>
           <a
             href="#home"
             aria-label="Back to top"
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.03] text-ink-muted transition-all hover:border-accent/30 hover:bg-accent/[0.08] hover:text-accent"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-ink-muted transition-all hover:border-accent/30 hover:bg-accent/[0.08] hover:text-accent"
           >
             <ArrowUp size={16} strokeWidth={2} />
           </a>

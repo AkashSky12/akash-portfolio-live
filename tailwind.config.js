@@ -31,22 +31,32 @@ module.exports = {
       },
       colors: {
         bg: {
-          DEFAULT: '#070b16',
-          raised: '#0a0f1e',
-          elevated: '#10162a',
+          DEFAULT:  'rgb(var(--bg) / <alpha-value>)',
+          raised:   'rgb(var(--bg-raised) / <alpha-value>)',
+          elevated: 'rgb(var(--bg-elevated) / <alpha-value>)',
         },
         ink: {
-          DEFAULT: '#e8edf5',
-          muted: '#8a96ac',
-          subtle: '#5b6479',
-          high: '#f4f7fc',
+          DEFAULT: 'rgb(var(--ink) / <alpha-value>)',
+          muted:   'rgb(var(--ink-muted) / <alpha-value>)',
+          subtle:  'rgb(var(--ink-subtle) / <alpha-value>)',
+          high:    'rgb(var(--ink-high) / <alpha-value>)',
         },
         accent: {
-          DEFAULT: '#3ee0b8',
-          bright: '#5af0c8',
-          dark: '#00a88a',
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          bright:  'rgb(var(--accent-bright) / <alpha-value>)',
+          dark:    'rgb(var(--accent-dark) / <alpha-value>)',
+          ink:     'rgb(var(--accent-ink) / <alpha-value>)',
         },
-        line: 'rgba(255, 255, 255, 0.08)',
+        surface: 'rgb(var(--surface-1) / <alpha-value>)',
+        line:    'rgb(var(--line) / <alpha-value>)',
+      },
+      borderColor: {
+        /* default `border-line` renders at low alpha for hairline dividers */
+        line: 'rgb(var(--line) / 0.10)',
+      },
+      backgroundColor: {
+        /* convenience: `bg-surface` defaults to a faint tint (theme-aware) */
+        surface: 'rgb(var(--surface-1) / 0.04)',
       },
       letterSpacing: {
         tightest: '-0.045em',
@@ -54,8 +64,8 @@ module.exports = {
         wider2: '0.18em',
       },
       boxShadow: {
-        glow: '0 0 60px -10px rgba(62, 224, 184, 0.45)',
-        card: '0 1px 0 0 rgba(255,255,255,0.04) inset, 0 24px 48px -24px rgba(0,0,0,0.6)',
+        glow: '0 0 60px -10px rgb(var(--accent) / 0.45)',
+        card: '0 1px 0 0 rgb(var(--surface-1) / 0.04) inset, 0 24px 48px -24px rgb(0 0 0 / 0.6)',
       },
       animation: {
         'fade-up': 'fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards',

@@ -80,7 +80,7 @@ export default function Contact() {
               {details.map(({ Icon, label, value, href }) => (
                 <li key={label}>
                   <div className="flex items-center gap-3">
-                    <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg border border-line bg-white/[0.03] text-accent">
+                    <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg border border-line bg-surface text-accent">
                       <Icon size={16} strokeWidth={2} />
                     </div>
                     <div className="min-w-0">
@@ -124,10 +124,11 @@ export default function Contact() {
             <Field name="subject" placeholder="Subject" type="text" required />
             <textarea
               name="message"
+              aria-label="Message"
               placeholder="Tell me about the opportunity..."
               rows={5}
               required
-              className="resize-y rounded-xl border border-line bg-white/[0.03] px-4 py-3 text-[14px] text-ink-high placeholder:text-ink-subtle transition-colors focus:border-accent/40"
+              className="resize-y rounded-xl border border-line bg-surface px-4 py-3 text-[14px] text-ink-high placeholder:text-ink-subtle transition-colors focus:border-accent/40"
             />
             <button type="submit" className="btn-primary mt-1 w-full sm:w-auto sm:self-start">
               {sent ? '✓ Opening your mail client…' : (
@@ -169,8 +170,9 @@ function Field({
       name={name}
       type={type}
       placeholder={placeholder}
+      aria-label={placeholder}
       required={required}
-      className="rounded-xl border border-line bg-white/[0.03] px-4 py-3 text-[14px] text-ink-high placeholder:text-ink-subtle transition-colors focus:border-accent/40"
+      className="rounded-xl border border-line bg-surface px-4 py-3 text-[14px] text-ink-high placeholder:text-ink-subtle transition-colors focus:border-accent/40"
     />
   )
 }

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>07 — Orbital · Akash Simon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#03040a;--surface:#080c18;--edge:#0f1628;
+  --ink:#e4eaf8;--muted:#6678a0;--subtle:#2e3b58;
+  --accent:#6c8cff;--accent2:#b06cff;--green:#3ef5b0;
+  --r:16px;
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--ink)}
+body{font-family:'Syne',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.mono{font-family:'DM Mono',monospace}
+/* ── canvas ───────────────────────────── */
+#canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+/* ── back link ────────────────────────── */
+.back{position:fixed;top:1.25rem;left:1.5rem;z-index:50;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color.2s}
+.back:hover{color:var(--accent)}
+/* ── layout ───────────────────────────── */
+.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:0 2rem}
+/* ── nav ──────────────────────────────── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:2rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.logo{font-weight:800;font-size:1.2rem;letter-spacing:-.03em}
+.logo span{color:var(--accent)}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color.2s}
+nav a:hover{color:var(--ink)}
+/* ── hero ─────────────────────────────── */
+.hero{display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;min-height:calc(100vh - 80px);padding:4rem 0}
+.hero-left h1{font-size:clamp(3rem,6vw,5.5rem);font-weight:800;line-height:.95;letter-spacing:-.05em}
+.hero-left h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-left p{margin-top:1.75rem;font-size:1.1rem;line-height:1.7;color:var(--muted);max-width:440px}
+.cta-row{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.75rem;border-radius:999px;font-size:.875rem;font-weight:700;text-decoration:none;transition:all.3s;cursor:pointer;border:none;font-family:'Syne',sans-serif}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 32px rgba(108,140,255,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(108,140,255,.5)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.12)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.tag-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem}
+.tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .85rem;border-radius:999px;background:rgba(108,140,255,.08);border:1px solid rgba(108,140,255,.2);color:var(--accent)}
+/* ── orbit widget ─────────────────────── */
+.orbit-wrap{position:relative;width:420px;height:420px;flex-shrink:0}
+.orbit-core{position:absolute;inset:50%;transform:translate(-50%,-50%);width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 60px rgba(108,140,255,.6),0 0 120px rgba(176,108,255,.3);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.orbit-ring{position:absolute;inset:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(255,255,255,.06)}
+.orbit-ring--1{width:200px;height:200px;animation:orb1 8s linear infinite}
+.orbit-ring--2{width:290px;height:290px;animation:orb2 14s linear infinite}
+.orbit-ring--3{width:380px;height:380px;animation:orb3 22s linear infinite reverse}
+.orbit-dot{position:absolute;border-radius:50%;top:0;left:50%;transform:translate(-50%,-50%)}
+.orbit-dot--sm{width:8px;height:8px;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.orbit-dot--md{width:10px;height:10px;background:var(--accent2);box-shadow:0 0 16px var(--accent2)}
+.orbit-dot--lg{width:6px;height:6px;background:var(--green);box-shadow:0 0 10px var(--green)}
+.orbit-label{position:absolute;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;letter-spacing:.08em;top:0;left:50%;transform:translate(-50%,-22px);pointer-events:none}
+@keyframes orb1{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes orb2{from{transform:translate(-50%,-50%) rotate(30deg)}to{transform:translate(-50%,-50%) rotate(390deg)}}
+@keyframes orb3{from{transform:translate(-50%,-50%) rotate(-60deg)}to{transform:translate(-50%,-50%) rotate(300deg)}}
+/* ── stats bar ────────────────────────── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);border-radius:var(--r);overflow:hidden;margin:3rem 0}
+.stat{background:var(--surface);padding:1.5rem 1.75rem}
+.stat-num{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.35rem}
+/* ── work timeline ────────────────────── */
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:2rem 0;border-top:1px solid rgba(255,255,255,.04);position:relative}
+.tl-item::before{content:'';position:absolute;left:200px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(108,140,255,.25),transparent)}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);position:absolute;left:196px;top:2.4rem;transform:translateX(-50%)}
+.tl-when{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:.2rem}
+.tl-body h3{font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.tl-body .co{color:var(--accent)}
+.tl-body p{margin-top:.6rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
+.tl-chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.85rem}
+.chip{font-family:'DM Mono',monospace;font-size:10px;padding:.25rem .65rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted)}
+/* ── skills grid ──────────────────────── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,.05);border-radius:var(--r);overflow:hidden;margin-bottom:5rem}
+.skill-card{background:var(--surface);padding:1.5rem 1.75rem;transition:background.2s}
+.skill-card:hover{background:var(--edge)}
+.skill-icon{font-size:1.5rem;margin-bottom:.75rem}
+.skill-title{font-weight:700;font-size:.95rem;margin-bottom:.4rem}
+.skill-desc{font-size:.82rem;line-height:1.6;color:var(--muted)}
+/* ── contact ──────────────────────────── */
+.contact-band{background:linear-gradient(135deg,rgba(108,140,255,.08),rgba(176,108,255,.06));border:1px solid rgba(108,140,255,.15);border-radius:1.5rem;padding:3.5rem;text-align:center;margin-bottom:5rem}
+.contact-band h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.04em}
+.contact-band p{margin:.75rem auto 2rem;max-width:500px;color:var(--muted);font-size:1rem;line-height:1.6}
+/* ── footer ───────────────────────────── */
+footer{border-top:1px solid rgba(255,255,255,.05);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none;transition:color.2s}
+footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← templates</a>
+
+<canvas id="canvas"></canvas>
+
+<div class="wrap">
+  <nav>
+    <p class="logo">Akash<span>.</span></p>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="tag-row">
+        <span class="tag">Available for senior roles</span>
+      </div>
+      <h1 style="margin-top:1.25rem">Engineering quality at the <em>speed of AI</em>.</h1>
+      <p>QA Lead &amp; GenAI Automation Engineer with 9+ years building test infrastructure that ships. Currently architecting GenAI QA agents across 30+ EU storefronts at Domino's Pizza Enterprises.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Let's work together ↗</a>
+        <a href="#work" class="btn btn-ghost">View experience</a>
+      </div>
+    </div>
+    <!-- Orbit widget -->
+    <div class="orbit-wrap" aria-hidden="true">
+      <div class="orbit-ring orbit-ring--1">
+        <div class="orbit-dot orbit-dot--sm">
+          <span class="orbit-label">Playwright</span>
+        </div>
+      </div>
+      <div class="orbit-ring orbit-ring--2">
+        <div class="orbit-dot orbit-dot--md">
+          <span class="orbit-label">GenAI&nbsp;QA</span>
+        </div>
+      </div>
+      <div class="orbit-ring orbit-ring--3">
+        <div class="orbit-dot orbit-dot--lg">
+          <span class="orbit-label">CI/CD</span>
+        </div>
+      </div>
+      <div class="orbit-core">AKASH</div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat"><p class="stat-num">9+</p><p class="stat-lbl">Years in QA</p></div>
+    <div class="stat"><p class="stat-num">30+</p><p class="stat-lbl">EU Storefronts</p></div>
+    <div class="stat"><p class="stat-num">40%</p><p class="stat-lbl">Authoring cut</p></div>
+    <div class="stat"><p class="stat-num">10+</p><p class="stat-lbl">Engineers led</p></div>
+  </div>
+
+  <!-- Work -->
+  <section id="work" style="padding:2rem 0 4rem">
+    <p class="section-label">Experience</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-when">2022 → Now</div>
+        <div class="tl-body">
+          <h3>QA Lead &amp; GenAI Automation <span class="co">/ Domino's Pizza Enterprises</span></h3>
+          <p>Architecting GenAI-powered QA agents across 30+ EU storefronts, reducing manual test authoring by 40% and slashing regression cycle time through intelligent test synthesis.</p>
+          <div class="tl-chips">
+            <span class="chip">Playwright</span><span class="chip">Python</span><span class="chip">Azure OpenAI</span><span class="chip">WCAG</span><span class="chip">GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent2);box-shadow:0 0 10px var(--accent2)"></div>
+        <div class="tl-when">2019 — 2022</div>
+        <div class="tl-body">
+          <h3>Senior QA Engineer <span class="co">/ Infosys</span></h3>
+          <p>Built the end-to-end automation framework for a GDPR-regulated banking platform in Germany. Owned accessibility testing (WCAG 2.1 AA) across all product surfaces.</p>
+          <div class="tl-chips">
+            <span class="chip">Selenium</span><span class="chip">Java</span><span class="chip">GDPR</span><span class="chip">Jenkins</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green);box-shadow:0 0 10px var(--green)"></div>
+        <div class="tl-when">2017 — 2019</div>
+        <div class="tl-body">
+          <h3>QA Engineer <span class="co">/ Wipro</span></h3>
+          <p>Established automated regression coverage from zero for three Agile squads, cutting release-blocking defects by 60% in the first two quarters.</p>
+          <div class="tl-chips">
+            <span class="chip">TestNG</span><span class="chip">Postman</span><span class="chip">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" style="padding:2rem 0 4rem">
+    <p class="section-label">Capabilities</p>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-icon">🤖</div><p class="skill-title">GenAI QA Agents</p><p class="skill-desc">Designing prompt-driven test-synthesis pipelines with Azure OpenAI, LangChain, and custom eval harnesses.</p></div>
+      <div class="skill-card"><div class="skill-icon">🎭</div><p class="skill-title">Test Automation</p><p class="skill-desc">Playwright, Selenium, Cypress — E2E, API, visual, and accessibility testing at enterprise scale.</p></div>
+      <div class="skill-card"><div class="skill-icon">♿</div><p class="skill-title">Accessibility &amp; WCAG</p><p class="skill-desc">WCAG 2.1/2.2 AA compliance audits, automated axe-core pipelines, GDPR alignment across EU storefronts.</p></div>
+      <div class="skill-card"><div class="skill-icon">⚙️</div><p class="skill-title">CI/CD &amp; DevOps</p><p class="skill-desc">GitHub Actions, Azure Pipelines, Docker — shift-left quality gates integrated into every PR.</p></div>
+      <div class="skill-card"><div class="skill-icon">📊</div><p class="skill-title">Observability</p><p class="skill-desc">Test-coverage dashboards, Allure reports, Azure Monitor integration for live quality KPIs.</p></div>
+      <div class="skill-card"><div class="skill-icon">🧠</div><p class="skill-title">Engineering Leadership</p><p class="skill-desc">Mentoring 10+ QA engineers, defining test strategy across cross-functional Agile squads.</p></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-band">
+      <h2>Ready to collaborate?</h2>
+      <p>I'm open to senior QA / automation roles, AI quality consulting, and fractional QA leadership engagements.</p>
+      <a href="mailto:akash.simon@outlook.com" class="btn btn-primary" style="display:inline-flex">akash.simon@outlook.com ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Akash Simon</span>
+    <div style="display:flex;gap:1.5rem">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Email</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// Animated star-field on canvas
+const cv=document.getElementById('canvas');
+const ctx=cv.getContext('2d');
+let W,H,stars=[];
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+resize();addEventListener('resize',resize);
+for(let i=0;i<160;i++)stars.push({x:Math.random()*9999,y:Math.random()*9999,r:Math.random()*1.2+.2,s:Math.random()*.3+.05});
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const t=Date.now()/1000;
+  stars.forEach(s=>{
+    const x=(s.x+t*s.s*20)%W,y=(s.y+t*s.s*8)%H;
+    const a=.15+Math.sin(t*s.s*2)*0.1;
+    ctx.beginPath();ctx.arc(x,y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(180,200,255,${a})`;ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>

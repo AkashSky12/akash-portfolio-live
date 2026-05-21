@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>10 — OS Shell · Akash Simon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--border:#262626;
+  --fg:#d4d4d4;--muted:#6b6b6b;--dim:#3a3a3a;
+  --green:#e65f1c;--cyan:#ff8237;--yellow:#ffd700;
+  --magenta:#ff5faf;--red:#ff5f57;--orange:#e65f1c;
+  --ps1-user:#5fd7ff;--ps1-at:#6b6b6b;--ps1-host:#4af626;--ps1-path:#ffd700;
+}
+html{background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;height:100%}
+body{font-family:'JetBrains Mono',monospace;min-height:100vh;font-size:13.5px;line-height:1.6}
+/* ── scanline overlay ─────────────────── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);
+}
+/* ── back link ────────────────────────── */
+.back{position:fixed;bottom:1.25rem;right:1.5rem;z-index:2000;font-size:11px;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color.2s}
+.back:hover{color:var(--orange)}
+/* ── window chrome ────────────────────── */
+.window{
+  max-width:920px;margin:2rem auto;
+  border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+}
+.titlebar{
+  background:#1c1c1c;padding:.55rem 1rem;display:flex;align-items:center;gap:.75rem;
+  border-bottom:1px solid var(--border);user-select:none;
+}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot-r{background:#ff5f57;box-shadow:0 0 5px rgba(255,95,87,.5)}
+.dot-y{background:#febc2e;box-shadow:0 0 5px rgba(254,188,46,.4)}
+.dot-g{background:#28c840;box-shadow:0 0 5px rgba(40,200,64,.4)}
+.tab-row{flex:1;display:flex;justify-content:center}
+.tab{font-size:11px;color:var(--muted);padding:.15rem 1.5rem;background:var(--bg);border:1px solid var(--border);border-radius:5px;letter-spacing:.05em}
+/* ── terminal body ────────────────────── */
+.term{padding:1.5rem;background:var(--bg);min-height:600px;font-size:13.5px}
+/* ── prompt & output primitives ──────── */
+.cmd{display:flex;gap:.5rem;margin-top:1.2rem;flex-wrap:wrap}
+.cmd:first-child{margin-top:0}
+.ps1{white-space:nowrap}
+.ps1 .user{color:var(--ps1-user)}
+.ps1 .at{color:var(--ps1-at)}
+.ps1 .host{color:var(--ps1-host)}
+.ps1 .sep{color:var(--ps1-at)}
+.ps1 .path{color:var(--ps1-path)}
+.ps1 .arrow{color:var(--magenta)}
+.command{color:#fff;font-weight:500}
+.flag{color:var(--cyan)}
+.arg{color:var(--yellow)}
+.out{padding:.25rem 0 .1rem 0;color:var(--muted)}
+.out p{line-height:1.65}
+/* ── special output types ─────────────── */
+.section-head{color:var(--cyan);font-weight:700;margin:.8rem 0 .3rem;letter-spacing:.05em;text-transform:uppercase;font-size:11px}
+.kv{display:flex;gap:0}
+.kv .k{color:var(--yellow);min-width:220px;flex-shrink:0}
+.kv .v{color:var(--fg)}
+.kv .g{color:var(--green)}
+.kv .c{color:var(--cyan)}
+.kv .m{color:var(--magenta)}
+.tag-line{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+.tag{color:var(--bg);background:var(--green);padding:.05rem .5rem;border-radius:2px;font-size:11px;font-weight:700}
+.tag-cyan{background:var(--cyan);color:#000}
+.tag-yellow{background:var(--yellow);color:#000}
+.tag-magenta{background:var(--magenta)}
+/* ── tree view ────────────────────────── */
+.tree{line-height:1.75}
+.tree .dir{color:var(--cyan)}
+.tree .file{color:var(--fg)}
+.tree .link{color:var(--magenta)}
+/* ── table ────────────────────────────── */
+.tbl{margin:.5rem 0;border-collapse:collapse;width:100%;max-width:680px}
+.tbl td,.tbl th{padding:.25rem .75rem .25rem 0;vertical-align:top}
+.tbl th{color:var(--cyan);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--dim)}
+.tbl td{color:var(--fg)}
+.tbl .num{color:var(--green);font-weight:700}
+.tbl .co{color:var(--yellow)}
+.tbl .yr{color:var(--muted)}
+/* ── progress bar ─────────────────────── */
+.prog-row{display:flex;align-items:center;gap:1rem;margin:.2rem 0}
+.prog-label{min-width:180px;color:var(--fg)}
+.prog-bar{flex:1;max-width:200px;height:8px;background:var(--dim);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:2px}
+.prog-pct{color:var(--green);font-size:12px;min-width:3ch}
+/* ── cursor blink ─────────────────────── */
+.cursor{display:inline-block;width:8px;height:14px;background:var(--fg);vertical-align:text-bottom;animation:blink 1s step-start infinite;margin-left:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+/* ── status bar ───────────────────────── */
+.statusbar{
+  background:#1c1c1c;border-top:1px solid var(--border);
+  padding:.4rem 1rem;display:flex;gap:2rem;align-items:center;
+  font-size:11px;color:var(--muted);
+}
+.sb-item{display:flex;align-items:center;gap:.4rem}
+.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.sb-dot-y{background:var(--yellow)}
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← templates</a>
+
+<div style="padding:4rem 1rem 5rem;min-height:100vh">
+<div class="window">
+  <!-- Title bar -->
+  <div class="titlebar">
+    <span class="dot dot-r"></span>
+    <span class="dot dot-y"></span>
+    <span class="dot dot-g"></span>
+    <div class="tab-row">
+      <span class="tab">akash@portfolio — zsh — 102×42</span>
+    </div>
+  </div>
+
+  <!-- Terminal body -->
+  <div class="term">
+
+    <!-- whoami -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~</span> <span class="arrow">❯</span></span>
+      <span class="command">whoami</span>
+      <span class="flag">--verbose</span>
+    </div>
+    <div class="out">
+      <p class="section-head">## Identity</p>
+      <div class="kv"><span class="k">name            </span><span class="v g">Akash Simon</span></div>
+      <div class="kv"><span class="k">title           </span><span class="v c">QA Lead &amp; GenAI Automation Engineer</span></div>
+      <div class="kv"><span class="k">location        </span><span class="v">Brisbane, Australia (remote-open)</span></div>
+      <div class="kv"><span class="k">years_experience</span><span class="v g">9+</span></div>
+      <div class="kv"><span class="k">availability    </span><span class="v g">✓ open to senior roles</span></div>
+      <div class="kv"><span class="k">contact         </span><span class="v c">akash.simon@outlook.com</span></div>
+    </div>
+
+    <!-- cat skills.txt -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~</span> <span class="arrow">❯</span></span>
+      <span class="command">cat</span>
+      <span class="arg">skills.txt</span>
+    </div>
+    <div class="out">
+      <p class="section-head">## Proficiency</p>
+      <div class="prog-row"><span class="prog-label">Playwright / Selenium</span><div class="prog-bar"><div class="prog-fill" style="width:95%"></div></div><span class="prog-pct">95%</span></div>
+      <div class="prog-row"><span class="prog-label">Python</span><div class="prog-bar"><div class="prog-fill" style="width:92%"></div></div><span class="prog-pct">92%</span></div>
+      <div class="prog-row"><span class="prog-label">GenAI / LLM tooling</span><div class="prog-bar"><div class="prog-fill" style="width:88%"></div></div><span class="prog-pct">88%</span></div>
+      <div class="prog-row"><span class="prog-label">CI/CD (GH Actions / Azure)</span><div class="prog-bar"><div class="prog-fill" style="width:90%"></div></div><span class="prog-pct">90%</span></div>
+      <div class="prog-row"><span class="prog-label">Accessibility (WCAG 2.2)</span><div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div><span class="prog-pct">85%</span></div>
+      <div class="prog-row"><span class="prog-label">GDPR &amp; Compliance</span><div class="prog-bar"><div class="prog-fill" style="width:80%"></div></div><span class="prog-pct">80%</span></div>
+      <div class="prog-row"><span class="prog-label">Engineering Leadership</span><div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div><span class="prog-pct">85%</span></div>
+      <p style="margin-top:.6rem">Tags:&nbsp;<span class="tag">Playwright</span>&nbsp;<span class="tag tag-cyan">Python</span>&nbsp;<span class="tag tag-yellow">Azure OpenAI</span>&nbsp;<span class="tag">LangChain</span>&nbsp;<span class="tag tag-cyan">WCAG</span>&nbsp;<span class="tag tag-yellow">GDPR</span>&nbsp;<span class="tag">GitHub Actions</span>&nbsp;<span class="tag tag-cyan">Docker</span>&nbsp;<span class="tag tag-magenta">Selenium</span></p>
+    </div>
+
+    <!-- git log experience -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~/career</span> <span class="arrow">❯</span></span>
+      <span class="command">git log</span>
+      <span class="flag">--oneline</span>
+      <span class="flag">--stat</span>
+    </div>
+    <div class="out">
+      <table class="tbl">
+        <thead>
+          <tr><th>SHA</th><th>Message</th><th>Company</th><th>Period</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">c3a7f91</td>
+            <td>feat: GenAI QA agent synthesis, 30+ EU storefronts</td>
+            <td class="co">Domino's Pizza Enterprises</td>
+            <td class="yr">2022 → now</td>
+          </tr>
+          <tr>
+            <td class="num">b81e04d</td>
+            <td>refactor: full framework rewrite, GDPR compliance pipeline</td>
+            <td class="co">Infosys</td>
+            <td class="yr">2019–2022</td>
+          </tr>
+          <tr>
+            <td class="num">a4c9120</td>
+            <td>init: automation from scratch, 3 agile squads</td>
+            <td class="co">Wipro</td>
+            <td class="yr">2017–2019</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:.4rem;color:var(--muted)">3 commits · 9 years · 0 unresolved conflicts</p>
+    </div>
+
+    <!-- ls highlights -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~/achievements</span> <span class="arrow">❯</span></span>
+      <span class="command">ls</span>
+      <span class="flag">-lah</span>
+    </div>
+    <div class="out">
+      <div class="tree">
+        <p><span style="color:var(--muted)">drwxr-xr-x  </span><span class="dir">genai-test-synthesis/</span><span style="color:var(--muted)">      &nbsp;— 40% manual authoring reduction at Domino's</span></p>
+        <p><span style="color:var(--muted)">drwxr-xr-x  </span><span class="dir">playwright-migration/</span><span style="color:var(--muted)">      &nbsp;— legacy Selenium → Playwright modernisation</span></p>
+        <p><span style="color:var(--muted)">-rw-r--r--  </span><span class="file">wcag-audit-pipeline.sh</span><span style="color:var(--muted)">     &nbsp;— axe-core integrated in every PR check</span></p>
+        <p><span style="color:var(--muted)">-rw-r--r--  </span><span class="file">gdpr-banking-framework.py</span><span style="color:var(--muted)">  &nbsp;— full GDPR data-flow validation, Infosys</span></p>
+        <p><span style="color:var(--muted)">-rw-r--r--  </span><span class="link">defect-reduction-60pct.log</span><span style="color:var(--muted)"> &nbsp;→ first 18 months at Infosys</span></p>
+        <p><span style="color:var(--muted)">-rw-r--r--  </span><span class="link">api-contract-testing.yml</span><span style="color:var(--muted)">   &nbsp;→ Postman/Newman in CI, Wipro</span></p>
+      </div>
+    </div>
+
+    <!-- cat README -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~/about</span> <span class="arrow">❯</span></span>
+      <span class="command">cat</span>
+      <span class="arg">README.md</span>
+    </div>
+    <div class="out">
+      <p><span style="color:var(--green)"># Akash Simon — QA Lead &amp; GenAI Automation Engineer</span></p>
+      <p style="margin-top:.4rem;color:var(--muted)">I don't just find bugs — I architect systems that prevent them, and now</p>
+      <p style="color:var(--muted)">I build AI agents that redefine how testing happens at scale.</p>
+      <p style="margin-top:.5rem;color:var(--muted)">My current superpower: hooking LLMs into test pipelines so that acceptance</p>
+      <p style="color:var(--muted)">criteria become runnable Playwright specs in seconds, not hours.</p>
+      <p style="margin-top:.5rem">Philosophy: <span style="color:var(--yellow)">quality is not a phase — it's the architecture.</span></p>
+    </div>
+
+    <!-- contact -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~</span> <span class="arrow">❯</span></span>
+      <span class="command">open</span>
+      <span class="flag">--new-job</span>
+      <span class="arg">mailto:akash.simon@outlook.com</span>
+    </div>
+    <div class="out">
+      <p><span style="color:var(--green)">✓</span> Composing message to <span style="color:var(--cyan)">akash.simon@outlook.com</span> …</p>
+      <p style="color:var(--muted)">Open to: senior QA roles · GenAI quality consulting · fractional QA leadership</p>
+    </div>
+
+    <!-- active cursor prompt -->
+    <div class="cmd">
+      <span class="ps1"><span class="user">akash</span><span class="at">@</span><span class="host">portfolio</span><span class="sep"> </span><span class="path">~</span> <span class="arrow">❯</span></span>
+      <span class="cursor"></span>
+    </div>
+
+  </div><!-- /term -->
+
+  <!-- Status bar -->
+  <div class="statusbar">
+    <span class="sb-item"><span class="sb-dot"></span> zsh — 5.9</span>
+    <span class="sb-item"><span class="sb-dot sb-dot-y"></span> main ✓ clean</span>
+    <span class="sb-item">Python 3.12.2</span>
+    <span class="sb-item">Node 22.2.0</span>
+    <span class="sb-item" style="margin-left:auto;color:var(--cyan)">akash.simon@outlook.com</span>
+  </div>
+</div><!-- /window -->
+</div>
+
+</body>
+</html>

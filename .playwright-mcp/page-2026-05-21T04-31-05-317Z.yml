@@ -1,0 +1,156 @@
+- generic [active] [ref=e1]:
+  - region "Color theme" [ref=e2]:
+    - generic [ref=e3]:
+      - link "← templates" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+      - generic [ref=e5]: "Palette:"
+      - group "Color palettes" [ref=e6]:
+        - button "Mint Teal (current)" [ref=e7] [cursor=pointer]:
+          - generic: Mint Teal (current)
+        - button "Cobalt Ink" [ref=e8] [cursor=pointer]:
+          - generic: Cobalt Ink
+        - button "Synthwave" [ref=e9] [cursor=pointer]:
+          - generic: Synthwave
+        - button "Forest Loam" [ref=e10] [cursor=pointer]:
+          - generic: Forest Loam
+        - button "Solar Amber" [ref=e11] [cursor=pointer]:
+          - generic: Solar Amber
+        - button "Mono Slate" [ref=e12] [cursor=pointer]:
+          - generic: Mono Slate
+        - button "Paper Vermillion (light)" [ref=e13] [cursor=pointer]:
+          - generic: Paper Vermillion (light)
+        - button "Porcelain Cobalt (light)" [ref=e14] [cursor=pointer]:
+          - generic: Porcelain Cobalt (light)
+        - generic [ref=e15]: "Elite:"
+        - button "Geist Mono (Vercel)" [ref=e16] [cursor=pointer]:
+          - generic: Geist Mono (Vercel)
+        - button "Stripe Indigo" [ref=e17] [cursor=pointer]:
+          - generic: Stripe Indigo
+        - button "Linear Iris" [ref=e18] [cursor=pointer]:
+          - generic: Linear Iris
+        - button "Tokyo Night" [ref=e19] [cursor=pointer]:
+          - generic: Tokyo Night
+        - button "Catppuccin Mocha" [ref=e20] [cursor=pointer]:
+          - generic: Catppuccin Mocha
+        - button "Nord Polar" [ref=e21] [cursor=pointer]:
+          - generic: Nord Polar
+        - button "Rosé Pine Moon" [ref=e22] [cursor=pointer]:
+          - generic: Rosé Pine Moon
+        - button "Noir & Gold" [ref=e23] [cursor=pointer]:
+          - generic: Noir & Gold
+        - button "Arc Sand (light)" [ref=e24] [cursor=pointer]:
+          - generic: Arc Sand (light)
+        - button "Sage & Bone (light)" [ref=e25] [cursor=pointer]:
+          - generic: Sage & Bone (light)
+        - generic [ref=e26]: "Atelier:"
+        - button "GitHub Dimmed" [ref=e27] [cursor=pointer]:
+          - generic: GitHub Dimmed
+        - button "Dracula" [pressed] [ref=e28] [cursor=pointer]:
+          - generic: Dracula
+        - button "Gruvbox Dark" [ref=e29] [cursor=pointer]:
+          - generic: Gruvbox Dark
+        - button "One Dark" [ref=e30] [cursor=pointer]:
+          - generic: One Dark
+        - button "Material Ocean" [ref=e31] [cursor=pointer]:
+          - generic: Material Ocean
+        - button "Aurora Borealis" [ref=e32] [cursor=pointer]:
+          - generic: Aurora Borealis
+        - button "Sunset Carmine" [ref=e33] [cursor=pointer]:
+          - generic: Sunset Carmine
+        - button "Cyber Lime" [ref=e34] [cursor=pointer]:
+          - generic: Cyber Lime
+        - button "Deep Ocean" [ref=e35] [cursor=pointer]:
+          - generic: Deep Ocean
+        - button "Champagne (light)" [ref=e36] [cursor=pointer]:
+          - generic: Champagne (light)
+        - button "Slate Coral (light)" [ref=e37] [cursor=pointer]:
+          - generic: Slate Coral (light)
+        - button "Notion Cream (light)" [ref=e38] [cursor=pointer]:
+          - generic: Notion Cream (light)
+      - generic [ref=e39]:
+        - text: "Active:"
+        - link "Dracula" [ref=e40] [cursor=pointer]:
+          - /url: "#"
+        - text: · accent
+        - code [ref=e41]: "#bd93f9"
+  - banner [ref=e42]:
+    - generic [ref=e43]:
+      - generic [ref=e44]: Available · May 2026
+      - heading "Engineer building reliable systems at broadcast scale." [level=1] [ref=e46]:
+        - text: Engineer building reliable systems
+        - text: at broadcast scale.
+      - paragraph [ref=e47]: "I'm Akash — a Senior SRE in London. I work on the unglamorous middle layer where production reliability meets AI ops: observability, runbooks, eval pipelines, and the automation that keeps a 12-region streaming platform honest."
+      - generic [ref=e48]:
+        - link "Get in touch →" [ref=e49] [cursor=pointer]:
+          - /url: "#"
+        - link "View work" [ref=e50] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - text: "7"
+            - emphasis [ref=e54]: +
+          - generic [ref=e55]: Years shipping
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - text: "41"
+            - emphasis [ref=e58]: "%"
+          - generic [ref=e59]: MTTR reduction
+        - generic [ref=e60]:
+          - generic [ref=e61]: "12"
+          - generic [ref=e62]: Regions on call
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - text: "99.97"
+            - emphasis [ref=e65]: "%"
+          - generic [ref=e66]: Availability
+  - generic [ref=e68]:
+    - paragraph [ref=e69]: // 01 — Focus
+    - heading "What I'm best at." [level=2] [ref=e70]
+    - paragraph [ref=e71]: A small set of things I keep coming back to because they reliably move incident counts in the right direction.
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - generic [ref=e74]: "{ }"
+        - heading "Reliability engineering" [level=3] [ref=e75]
+        - paragraph [ref=e76]: SLOs that survive the org chart, burn-rate alerts that don't cry wolf, and post-incident reviews people actually read.
+      - generic [ref=e77]:
+        - generic [ref=e78]: ⤳
+        - heading "Automation & infra" [level=3] [ref=e79]
+        - paragraph [ref=e80]: Terraform, Bicep, Helm, ArgoCD. GitOps-first AKS, App Service, and Functions on Azure.
+      - generic [ref=e81]:
+        - generic [ref=e82]: ∂
+        - heading "AI ops & evals" [level=3] [ref=e83]
+        - paragraph [ref=e84]: Continuous evals, dataset curation from production traces, and guardrails for agentic systems shipping to real users.
+  - generic [ref=e86]:
+    - paragraph [ref=e87]: // 02 — Experience
+    - heading "Selected roles." [level=2] [ref=e88]
+    - list [ref=e89]:
+      - listitem [ref=e90]:
+        - generic [ref=e91]: AUG 2023 — PRESENT
+        - heading "Senior Site Reliability Engineer · Sky Now" [level=4] [ref=e92]:
+          - text: Senior Site Reliability Engineer · Sky
+          - generic [ref=e93]: Now
+        - paragraph [ref=e94]: Owning observability and incident response for a 12-region streaming platform. Cut median MTTR 41% by rewriting our runbook system around event-driven automation.
+      - listitem [ref=e95]:
+        - generic [ref=e96]: 2020 — 2023
+        - heading "DevOps Engineer · Ericsson" [level=4] [ref=e97]
+        - paragraph [ref=e98]: Built CI/CD for a multi-tenant 5G core; led the migration from Jenkins monolith to GitOps with ArgoCD on AKS.
+      - listitem [ref=e99]:
+        - generic [ref=e100]: 2018 — 2020
+        - heading "Software Engineer · Wipro" [level=4] [ref=e101]
+        - paragraph [ref=e102]: Wrote the original automation framework that the SRE team still maintains six years later.
+  - generic [ref=e104]:
+    - paragraph [ref=e105]: // 03 — Contact
+    - heading "Let's talk." [level=2] [ref=e106]
+    - generic [ref=e107]:
+      - generic [ref=e108]:
+        - heading "Open to senior SRE / platform roles" [level=3] [ref=e109]
+        - paragraph [ref=e110]: London-based · remote-friendly · happy to chat about agentic systems and on-call sanity.
+      - link "akash@hey.com →" [ref=e111] [cursor=pointer]:
+        - /url: mailto:akash@hey.com
+  - contentinfo [ref=e112]:
+    - generic [ref=e113]:
+      - generic [ref=e114]: © 2026 Akash Mahanty · Built with Next.js
+      - generic [ref=e115]:
+        - text: "Color:"
+        - code [ref=e116]: Dracula

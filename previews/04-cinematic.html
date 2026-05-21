@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>04 — Cinematic · Akash Mahanty</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family:'Inter',sans-serif; background:#08070d; color:#f3f0ea; overflow-x:hidden; }
+  .serif { font-family:'Instrument Serif', serif; }
+  .kinetic { font-weight:900; letter-spacing:-0.055em; line-height:0.85; }
+  .glow1 { background: radial-gradient(60% 60% at 30% 30%, rgba(244,114,182,.35), transparent 60%); }
+  .glow2 { background: radial-gradient(50% 50% at 70% 60%, rgba(99,102,241,.4), transparent 60%); }
+  .marquee { display:flex; gap:3rem; animation: scroll 30s linear infinite; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+</style>
+</head>
+<body>
+  <a href="index.html" class="fixed top-4 left-4 z-50 text-[10px] uppercase tracking-[0.2em] text-white/60 hover:text-white">← templates</a>
+
+  <!-- HERO scene -->
+  <section class="relative h-screen overflow-hidden">
+    <div class="glow1 absolute inset-0"></div>
+    <div class="glow2 absolute inset-0"></div>
+    <nav class="relative z-10 flex justify-between px-8 py-6 text-sm">
+      <span class="serif italic text-xl">akash.</span>
+      <div class="space-x-8 text-white/70">
+        <a href="#" class="hover:text-white">work</a>
+        <a href="#" class="hover:text-white">about</a>
+        <a href="#" class="hover:text-white">contact</a>
+      </div>
+    </nav>
+
+    <div class="relative z-10 px-8 mt-[8vh]">
+      <p class="text-xs uppercase tracking-[0.4em] text-white/60">Senior SRE · London · 2026</p>
+      <h1 class="kinetic mt-6" style="font-size: clamp(72px, 14vw, 240px)">
+        AKASH<br/>
+        <span class="serif font-normal italic text-white/85" style="letter-spacing:-0.02em">mahanty</span>
+      </h1>
+      <p class="mt-10 max-w-md text-lg text-white/75">An engineer building the quiet infrastructure
+        behind broadcast platforms — and the messy AI systems learning to live inside them.</p>
+    </div>
+
+    <!-- bottom marquee -->
+    <div class="absolute bottom-0 left-0 right-0 overflow-hidden border-t border-white/10 py-4 text-xs uppercase tracking-[0.3em] text-white/40">
+      <div class="marquee">
+        <span>↓ scroll · automation · cloud · ai ops · sre · agents · eval · observability ·</span>
+        <span>↓ scroll · automation · cloud · ai ops · sre · agents · eval · observability ·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK scene (horizontal scroll metaphor with cards) -->
+  <section class="px-8 py-32 border-t border-white/10">
+    <p class="text-xs uppercase tracking-[0.4em] text-white/50">02 — selected work</p>
+    <h2 class="kinetic mt-4" style="font-size: clamp(56px, 10vw, 160px)">
+      Worth
+      <span class="serif italic font-normal">shipping.</span>
+    </h2>
+
+    <div class="mt-16 grid md:grid-cols-3 gap-6">
+      <article class="aspect-[3/4] rounded-3xl p-6 flex flex-col justify-between bg-gradient-to-br from-rose-500/30 to-fuchsia-700/10 border border-white/10">
+        <p class="serif italic text-2xl">01</p>
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-white/60">Sky · 2024</p>
+          <h3 class="mt-2 text-2xl font-bold">Streaming SLO platform</h3>
+          <p class="mt-2 text-sm text-white/70">Single-pane SLO/error-budget tracking for 12 regions. -41% MTTR.</p>
+        </div>
+      </article>
+      <article class="aspect-[3/4] rounded-3xl p-6 flex flex-col justify-between bg-gradient-to-br from-indigo-500/30 to-cyan-500/10 border border-white/10">
+        <p class="serif italic text-2xl">02</p>
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-white/60">Foundry · 2025</p>
+          <h3 class="mt-2 text-2xl font-bold">Agent eval harness</h3>
+          <p class="mt-2 text-sm text-white/70">Continuous evals + dataset curation from production traces.</p>
+        </div>
+      </article>
+      <article class="aspect-[3/4] rounded-3xl p-6 flex flex-col justify-between bg-gradient-to-br from-amber-400/25 to-rose-500/10 border border-white/10">
+        <p class="serif italic text-2xl">03</p>
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-white/60">Ericsson · 2022</p>
+          <h3 class="mt-2 text-2xl font-bold">5G core GitOps</h3>
+          <p class="mt-2 text-sm text-white/70">Migrated a Jenkins monolith to ArgoCD on AKS, multi-tenant.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ABOUT scene -->
+  <section class="px-8 py-32 border-t border-white/10">
+    <p class="text-xs uppercase tracking-[0.4em] text-white/50">03 — about</p>
+    <p class="serif italic mt-8 max-w-4xl" style="font-size: clamp(28px, 4vw, 56px); line-height:1.15">
+      I'm most useful at the point where production systems get noisy,
+      where the wiki is wrong, and where someone needs to make the bleeding stop —
+      <span class="text-white/60">then turn it into a story everyone can learn from.</span>
+    </p>
+  </section>
+
+  <!-- CONTACT scene -->
+  <section class="px-8 py-40 border-t border-white/10 text-center">
+    <p class="text-xs uppercase tracking-[0.4em] text-white/50">04 — get in touch</p>
+    <h2 class="kinetic mt-6" style="font-size: clamp(64px, 12vw, 200px)">say<br/><span class="serif italic font-normal">hello.</span></h2>
+    <a href="mailto:akash@hey.com" class="inline-block mt-10 px-8 py-4 rounded-full bg-white text-black font-medium">akash@hey.com →</a>
+  </section>
+</body>
+</html>

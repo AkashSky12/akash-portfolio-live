@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>06 — Data-Dense Resume · Akash Mahanty</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family:'Inter', sans-serif; background:#fbfaf9; color:#1c1d22; font-size:14px; }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  .tag { display:inline-flex; align-items:center; gap:4px; padding:1px 8px; border-radius:999px; font-size:11px; line-height:18px; font-weight:500; }
+  .tag-green { background:#dcfce7; color:#166534; }
+  .tag-blue  { background:#dbeafe; color:#1e40af; }
+  .tag-amber { background:#fef3c7; color:#92400e; }
+  .tag-gray  { background:#f1f5f9; color:#475569; }
+  tr.row:hover { background:#f5f4f1; }
+  .kbd { font-family:'JetBrains Mono',monospace; font-size:10px; padding:1px 5px; border:1px solid #d4d4d8; border-bottom-width:2px; border-radius:4px; background:white; color:#3f3f46; }
+</style>
+</head>
+<body class="min-h-screen">
+  <a href="index.html" class="mono fixed top-3 left-4 text-[10px] uppercase tracking-[0.2em] text-neutral-500 hover:text-black z-50">← templates</a>
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 border-r border-neutral-200 bg-white px-5 py-8 sticky top-0 h-screen overflow-y-auto">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-600"></div>
+        <div>
+          <p class="font-semibold leading-tight">Akash Mahanty</p>
+          <p class="text-[11px] text-neutral-500">akash@hey.com</p>
+        </div>
+      </div>
+      <p class="mt-6 mono text-[10px] uppercase tracking-[0.15em] text-neutral-400">Navigation</p>
+      <nav class="mt-2 space-y-0.5 text-sm">
+        <a class="block px-2 py-1.5 rounded bg-neutral-100 font-medium" href="#now">Now</a>
+        <a class="block px-2 py-1.5 rounded hover:bg-neutral-100" href="#work">Work history</a>
+        <a class="block px-2 py-1.5 rounded hover:bg-neutral-100" href="#projects">Projects · 14</a>
+        <a class="block px-2 py-1.5 rounded hover:bg-neutral-100" href="#stack">Stack</a>
+        <a class="block px-2 py-1.5 rounded hover:bg-neutral-100" href="#writing">Writing · 9</a>
+        <a class="block px-2 py-1.5 rounded hover:bg-neutral-100" href="#contact">Contact</a>
+      </nav>
+      <p class="mt-6 mono text-[10px] uppercase tracking-[0.15em] text-neutral-400">Shortcuts</p>
+      <ul class="mt-2 space-y-1.5 text-xs text-neutral-600">
+        <li class="flex justify-between"><span>Search</span><span class="kbd">⌘K</span></li>
+        <li class="flex justify-between"><span>Next item</span><span class="kbd">j</span></li>
+        <li class="flex justify-between"><span>Prev item</span><span class="kbd">k</span></li>
+        <li class="flex justify-between"><span>Print PDF</span><span class="kbd">⌘P</span></li>
+      </ul>
+      <button class="mt-8 w-full text-xs border border-neutral-300 rounded px-2 py-1.5 hover:bg-neutral-100">Export resume.pdf ↓</button>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 max-w-4xl px-10 py-10">
+      <!-- Breadcrumbs -->
+      <p class="mono text-[11px] text-neutral-500">akash <span class="mx-1">/</span> resume <span class="mx-1">/</span> v4.2 · updated may 2026</p>
+
+      <h1 class="mt-3 text-2xl font-semibold tracking-tight">Akash Mahanty <span class="text-neutral-400 font-normal">— Senior SRE, London</span></h1>
+      <p class="mt-2 text-neutral-600 max-w-2xl">Production reliability, automation, and the messy plumbing behind AI systems. 7 years building things that don't wake you up at 3am.</p>
+
+      <!-- Filters -->
+      <section id="work" class="mt-10">
+        <div class="flex items-end justify-between border-b border-neutral-200 pb-2">
+          <h2 class="text-base font-semibold">Work history</h2>
+          <div class="flex items-center gap-2 text-xs text-neutral-500">
+            <span>Filter:</span>
+            <button class="px-2 py-0.5 rounded border border-neutral-300 bg-white">All roles</button>
+            <button class="px-2 py-0.5 rounded border border-neutral-300 bg-white">2018 → 2026</button>
+            <button class="px-2 py-0.5 rounded border border-neutral-300 bg-white">Any stack</button>
+          </div>
+        </div>
+
+        <table class="w-full mt-3 border-collapse">
+          <thead class="text-[11px] uppercase tracking-wide text-neutral-500">
+            <tr class="border-b border-neutral-200">
+              <th class="text-left font-medium py-2 w-28">Period</th>
+              <th class="text-left font-medium">Role · Org</th>
+              <th class="text-left font-medium w-32">Stack</th>
+              <th class="text-left font-medium w-20">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row border-b border-neutral-100">
+              <td class="py-3 mono text-xs text-neutral-500 align-top">2023 → now</td>
+              <td class="py-3 align-top">
+                <p class="font-medium">Senior Site Reliability Engineer · Sky</p>
+                <p class="text-neutral-600 mt-0.5">Owning observability + incident response for a 12-region streaming platform. -41% MTTR, 99.97% availability.</p>
+              </td>
+              <td class="py-3 align-top text-xs text-neutral-600">Azure, AKS, OTel, KQL</td>
+              <td class="py-3 align-top"><span class="tag tag-green">● current</span></td>
+            </tr>
+            <tr class="row border-b border-neutral-100">
+              <td class="py-3 mono text-xs text-neutral-500 align-top">2020 — 2023</td>
+              <td class="py-3 align-top">
+                <p class="font-medium">DevOps Engineer · Ericsson</p>
+                <p class="text-neutral-600 mt-0.5">CI/CD for a multi-tenant 5G core. Led Jenkins → ArgoCD on AKS migration.</p>
+              </td>
+              <td class="py-3 align-top text-xs text-neutral-600">ArgoCD, AKS, Helm</td>
+              <td class="py-3 align-top"><span class="tag tag-gray">shipped</span></td>
+            </tr>
+            <tr class="row border-b border-neutral-100">
+              <td class="py-3 mono text-xs text-neutral-500 align-top">2018 — 2020</td>
+              <td class="py-3 align-top">
+                <p class="font-medium">Software Engineer · Wipro</p>
+                <p class="text-neutral-600 mt-0.5">Authored the SRE automation framework still in use 6 years later.</p>
+              </td>
+              <td class="py-3 align-top text-xs text-neutral-600">Python, Ansible</td>
+              <td class="py-3 align-top"><span class="tag tag-gray">shipped</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="mt-12">
+        <div class="flex items-end justify-between border-b border-neutral-200 pb-2">
+          <h2 class="text-base font-semibold">Projects</h2>
+          <span class="text-xs text-neutral-500">14 total · showing 4</span>
+        </div>
+        <ul class="mt-2 divide-y divide-neutral-100">
+          <li class="py-3 flex items-start gap-3">
+            <span class="tag tag-green mt-0.5">shipped</span>
+            <div class="flex-1">
+              <p class="font-medium">Foundry agent eval harness <span class="text-neutral-400 font-normal text-xs">· internal</span></p>
+              <p class="text-neutral-600 text-[13px]">Continuous evals + dataset curation from production traces.</p>
+            </div>
+            <span class="mono text-[11px] text-neutral-400 mt-1">2026</span>
+          </li>
+          <li class="py-3 flex items-start gap-3">
+            <span class="tag tag-blue mt-0.5">in-progress</span>
+            <div class="flex-1">
+              <p class="font-medium">SLO budget calculator <span class="text-neutral-400 font-normal text-xs">· open source</span></p>
+              <p class="text-neutral-600 text-[13px]">A small Go CLI that turns Prometheus rules into burn-rate alerts.</p>
+            </div>
+            <span class="mono text-[11px] text-neutral-400 mt-1">2026</span>
+          </li>
+          <li class="py-3 flex items-start gap-3">
+            <span class="tag tag-amber mt-0.5">archived</span>
+            <div class="flex-1">
+              <p class="font-medium">runbook.md → runbook.run</p>
+              <p class="text-neutral-600 text-[13px]">Executable runbooks generated from PR templates. Superseded by GitOps.</p>
+            </div>
+            <span class="mono text-[11px] text-neutral-400 mt-1">2023</span>
+          </li>
+          <li class="py-3 flex items-start gap-3">
+            <span class="tag tag-green mt-0.5">shipped</span>
+            <div class="flex-1">
+              <p class="font-medium">paging-quality dashboard</p>
+              <p class="text-neutral-600 text-[13px]">KQL workbook scoring alert quality across all on-call rotations.</p>
+            </div>
+            <span class="mono text-[11px] text-neutral-400 mt-1">2024</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Stack -->
+      <section id="stack" class="mt-12">
+        <h2 class="text-base font-semibold border-b border-neutral-200 pb-2">Stack</h2>
+        <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-2 text-[13px]">
+          <div><p class="mono text-[10px] uppercase text-neutral-500">Cloud</p><p>Azure · AKS · App Service · Functions</p></div>
+          <div><p class="mono text-[10px] uppercase text-neutral-500">Languages</p><p>Python · Go · TypeScript · Bash</p></div>
+          <div><p class="mono text-[10px] uppercase text-neutral-500">Infra</p><p>Terraform · Bicep · Helm · ArgoCD</p></div>
+          <div><p class="mono text-[10px] uppercase text-neutral-500">Observability</p><p>OTel · Grafana · KQL · Prometheus</p></div>
+        </div>
+      </section>
+
+      <footer class="mt-16 pt-6 border-t border-neutral-200 text-xs text-neutral-500 flex justify-between">
+        <span>v4.2 · updated 21 May 2026</span>
+        <span>Built with Next.js · 96 Lighthouse</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Color combinations · Akash Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070b16;
+    --bg-raised: #0c1224;
+    --bg-elev: #131a30;
+    --ink-high: #f4f7fc;
+    --ink: #cfd5e3;
+    --ink-muted: #8b94ab;
+    --ink-subtle: #5a637a;
+    --line: rgba(255,255,255,0.08);
+    --accent: #3ee0b8;
+    --accent-bright: #6dffd1;
+    --accent-dark: #1f9c7e;
+    --accent-ink: #06281f; /* readable text on accent fills */
+    --grid: rgba(255,255,255,0.04);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .35s ease, color .35s ease;
+  }
+  .display { font-family:'Plus Jakarta Sans', sans-serif; letter-spacing:-0.035em; color: var(--ink-high); }
+  .mono { font-family:'JetBrains Mono', monospace; }
+
+  /* Theme switcher */
+  .switcher {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 24px;
+  }
+  .switcher-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .switcher-label {
+    font-family:'JetBrains Mono', monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--ink-muted);
+  }
+  .swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+  .swatch {
+    --s1: #000; --s2: #000;
+    width: 40px; height: 26px; border-radius: 8px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: linear-gradient(135deg, var(--s1) 50%, var(--s2) 50%);
+    position: relative; padding: 0;
+    transition: transform .15s ease, outline-color .15s ease;
+    outline: 2px solid transparent;
+  }
+  .swatch:hover { transform: translateY(-2px); }
+  .swatch[aria-pressed="true"] {
+    outline-color: var(--accent);
+    outline-offset: 2px;
+  }
+  .swatch .tip {
+    position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+    font-family:'JetBrains Mono', monospace; font-size: 10px; white-space: nowrap;
+    color: var(--ink-muted); opacity: 0; pointer-events:none; transition: opacity .15s;
+  }
+  .swatch:hover .tip { opacity: 1; }
+  .meta { margin-left: auto; font-family:'JetBrains Mono',monospace; font-size:11px; color: var(--ink-muted); }
+  .meta a { color: var(--accent); text-decoration: none; }
+
+  /* Hero */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 120px 24px 100px;
+    background:
+      radial-gradient(900px 500px at 15% 10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%),
+      radial-gradient(700px 400px at 85% 80%, color-mix(in srgb, var(--accent-bright) 12%, transparent), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-raised) 100%);
+  }
+  .hero::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    pointer-events:none;
+  }
+  .container { max-width: 1180px; margin: 0 auto; position: relative; }
+  .eyebrow {
+    display: inline-flex; align-items:center; gap: 10px;
+    font-family:'JetBrains Mono', monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    color: var(--ink-muted);
+    padding: 6px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: color-mix(in srgb, var(--bg-elev) 60%, transparent);
+  }
+  .eyebrow .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  h1.heading {
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; letter-spacing: -0.045em; line-height: 0.95;
+    color: var(--ink-high);
+    font-size: clamp(48px, 7.5vw, 96px);
+    margin: 28px 0 0;
+    max-width: 16ch;
+  }
+  h1 .accent-text {
+    background: linear-gradient(120deg, var(--accent-bright) 0%, var(--accent) 60%, var(--accent-dark) 120%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede {
+    max-width: 60ch; margin-top: 28px; font-size: 18px; line-height: 1.6;
+    color: var(--ink);
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+  .btn-primary {
+    display: inline-flex; align-items:center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-ink);
+    font-weight: 600; font-size: 14px; text-decoration: none;
+    box-shadow: 0 12px 30px -10px color-mix(in srgb, var(--accent) 60%, transparent);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-flex; align-items:center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-high);
+    text-decoration: none; font-weight: 500; font-size: 14px;
+    background: color-mix(in srgb, var(--bg-elev) 50%, transparent);
+  }
+  .btn-ghost:hover { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
+
+  /* Stats */
+  .stats {
+    margin-top: 56px;
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+  }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat {
+    padding: 18px 20px;
+    background: color-mix(in srgb, var(--bg-elev) 80%, transparent);
+    border: 1px solid var(--line); border-radius: 18px;
+  }
+  .stat .v { font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size: 32px; color: var(--ink-high); letter-spacing:-0.03em; }
+  .stat .v em { font-style: normal; color: var(--accent); }
+  .stat .k { margin-top: 6px; font-size: 12px; color: var(--ink-muted); font-family:'JetBrains Mono',monospace; text-transform: uppercase; letter-spacing: 0.18em; }
+
+  /* Sections */
+  section.s { padding: 96px 24px; border-top: 1px solid var(--line); }
+  .s-eyebrow {
+    font-family:'JetBrains Mono',monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    color: var(--accent);
+  }
+  h2.heading { font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; color: var(--ink-high);
+    letter-spacing:-0.035em; font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05; margin: 12px 0 0; max-width: 22ch; }
+  .sub { color: var(--ink-muted); margin-top: 18px; max-width: 60ch; font-size: 16px; line-height: 1.65; }
+
+  /* Cards */
+  .card-grid { margin-top: 56px; display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+  @media (max-width: 920px) { .card-grid { grid-template-columns: 1fr; } }
+  .card {
+    padding: 26px; border-radius: 22px;
+    background: color-mix(in srgb, var(--bg-elev) 80%, transparent);
+    border: 1px solid var(--line);
+    transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); transform: translateY(-2px); }
+  .card .icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+    display: grid; place-items: center; font-weight: 700;
+    margin-bottom: 18px; font-family:'JetBrains Mono',monospace; font-size:14px;
+  }
+  .card h3 { color: var(--ink-high); margin: 0 0 8px; font-size: 18px; font-family:'Plus Jakarta Sans',sans-serif; }
+  .card p { color: var(--ink-muted); margin: 0; font-size: 14px; line-height: 1.6; }
+
+  /* Timeline */
+  .timeline { margin-top: 48px; position: relative; padding-left: 26px; }
+  .timeline::before { content:""; position:absolute; left: 8px; top: 4px; bottom: 4px; width: 2px;
+    background: linear-gradient(180deg, var(--accent), transparent); border-radius: 2px; }
+  .ti { position: relative; padding: 0 0 28px 18px; }
+  .ti::before { content:""; position:absolute; left: -22px; top: 8px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+  .ti .when { font-family:'JetBrains Mono',monospace; font-size: 11px; color: var(--ink-muted); letter-spacing:0.1em; }
+  .ti h4 { margin: 4px 0 4px; color: var(--ink-high); font-size: 17px; font-family:'Plus Jakarta Sans',sans-serif; }
+  .ti p { margin: 0; color: var(--ink-muted); font-size: 14px; line-height: 1.6; }
+  .badge {
+    display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-ink); font-size: 10px; font-weight: 700;
+    font-family:'JetBrains Mono',monospace; text-transform: uppercase; letter-spacing: 0.1em;
+    vertical-align: middle;
+  }
+
+  /* Contact */
+  .cta-card {
+    margin-top: 40px;
+    padding: 36px; border-radius: 28px;
+    background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      color-mix(in srgb, var(--accent-bright) 10%, transparent) 60%,
+      transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .cta-card h3 { font-family:'Plus Jakarta Sans',sans-serif; color: var(--ink-high); font-size: 24px; margin: 0 0 6px; }
+  .cta-card p { color: var(--ink); margin: 0; font-size: 14px; }
+
+  footer { padding: 32px 24px; border-top: 1px solid var(--line); }
+  footer .row { max-width: 1180px; margin: 0 auto; display:flex; justify-content: space-between; font-size: 12px; color: var(--ink-subtle); font-family:'JetBrains Mono',monospace; }
+</style>
+</head>
+<body>
+
+<!-- ───────────────── Theme switcher ───────────────── -->
+<div class="switcher" role="region" aria-label="Color theme">
+  <div class="switcher-inner">
+    <a href="index.html" class="mono" style="font-size:11px;color:var(--ink-muted);text-decoration:none;letter-spacing:.2em;text-transform:uppercase;">← templates</a>
+    <span class="switcher-label">Palette:</span>
+    <div class="swatches" id="swatches" role="group" aria-label="Color palettes"></div>
+    <span class="meta">Active: <a id="active-name" href="#">Mint Teal</a> · accent <code id="active-accent">#3ee0b8</code></span>
+  </div>
+</div>
+
+<!-- ───────────────── Hero ───────────────── -->
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow"><span class="dot"></span>Available · May 2026</span>
+    <h1 class="heading display">
+      Engineer building <span class="accent-text">reliable</span> systems<br/>at broadcast scale.
+    </h1>
+    <p class="lede">
+      I'm Akash — a Senior SRE in London. I work on the unglamorous middle layer
+      where production reliability meets AI ops: observability, runbooks,
+      eval pipelines, and the automation that keeps a 12-region streaming platform honest.
+    </p>
+    <div class="cta-row">
+      <a class="btn-primary" href="#">Get in touch →</a>
+      <a class="btn-ghost" href="#">View work</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="v">7<em>+</em></div><div class="k">Years shipping</div></div>
+      <div class="stat"><div class="v">41<em>%</em></div><div class="k">MTTR reduction</div></div>
+      <div class="stat"><div class="v">12</div><div class="k">Regions on call</div></div>
+      <div class="stat"><div class="v">99.97<em>%</em></div><div class="k">Availability</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ───────────────── About / Skills cards ───────────────── -->
+<section class="s">
+  <div class="container">
+    <p class="s-eyebrow">// 01 — Focus</p>
+    <h2 class="heading display">What I'm best at.</h2>
+    <p class="sub">A small set of things I keep coming back to because they reliably move incident counts in the right direction.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">{ }</div>
+        <h3>Reliability engineering</h3>
+        <p>SLOs that survive the org chart, burn-rate alerts that don't cry wolf, and post-incident reviews people actually read.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⤳</div>
+        <h3>Automation & infra</h3>
+        <p>Terraform, Bicep, Helm, ArgoCD. GitOps-first AKS, App Service, and Functions on Azure.</p>
+      </div>
+      <div class="card">
+        <div class="icon">∂</div>
+        <h3>AI ops & evals</h3>
+        <p>Continuous evals, dataset curation from production traces, and guardrails for agentic systems shipping to real users.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── Experience timeline ───────────────── -->
+<section class="s">
+  <div class="container">
+    <p class="s-eyebrow">// 02 — Experience</p>
+    <h2 class="heading display">Selected roles.</h2>
+
+    <ol class="timeline" style="list-style:none; padding-left: 26px;">
+      <li class="ti">
+        <div class="when">AUG 2023 — PRESENT</div>
+        <h4>Senior Site Reliability Engineer · Sky <span class="badge">Now</span></h4>
+        <p>Owning observability and incident response for a 12-region streaming platform. Cut median MTTR 41% by rewriting our runbook system around event-driven automation.</p>
+      </li>
+      <li class="ti">
+        <div class="when">2020 — 2023</div>
+        <h4>DevOps Engineer · Ericsson</h4>
+        <p>Built CI/CD for a multi-tenant 5G core; led the migration from Jenkins monolith to GitOps with ArgoCD on AKS.</p>
+      </li>
+      <li class="ti">
+        <div class="when">2018 — 2020</div>
+        <h4>Software Engineer · Wipro</h4>
+        <p>Wrote the original automation framework that the SRE team still maintains six years later.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ───────────────── Contact ───────────────── -->
+<section class="s">
+  <div class="container">
+    <p class="s-eyebrow">// 03 — Contact</p>
+    <h2 class="heading display">Let's talk.</h2>
+    <div class="cta-card">
+      <div>
+        <h3>Open to senior SRE / platform roles</h3>
+        <p>London-based · remote-friendly · happy to chat about agentic systems and on-call sanity.</p>
+      </div>
+      <a class="btn-primary" href="mailto:akash@hey.com">akash@hey.com →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <span>© 2026 Akash Mahanty · Built with Next.js</span>
+    <span>Color: <code id="footer-name">Mint Teal</code></span>
+  </div>
+</footer>
+
+<script>
+  // Palettes — each defines the full token set the page reads.
+  const palettes = {
+    'mint-teal': {
+      name: 'Mint Teal (current)', s1:'#070b16', s2:'#3ee0b8',
+      vars: {
+        '--bg':'#070b16', '--bg-raised':'#0c1224', '--bg-elev':'#131a30',
+        '--ink-high':'#f4f7fc', '--ink':'#cfd5e3', '--ink-muted':'#8b94ab', '--ink-subtle':'#5a637a',
+        '--line':'rgba(255,255,255,0.08)', '--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#3ee0b8', '--accent-bright':'#6dffd1', '--accent-dark':'#1f9c7e', '--accent-ink':'#06281f'
+      }
+    },
+    'cobalt': {
+      name: 'Cobalt Ink', s1:'#0a0f1e', s2:'#4f7dff',
+      vars: {
+        '--bg':'#0a0f1e','--bg-raised':'#101831','--bg-elev':'#172245',
+        '--ink-high':'#f1f4ff','--ink':'#cdd3eb','--ink-muted':'#8a93b5','--ink-subtle':'#5a627f',
+        '--line':'rgba(255,255,255,0.08)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#4f7dff','--accent-bright':'#7fa1ff','--accent-dark':'#2a4fcc','--accent-ink':'#0a1430'
+      }
+    },
+    'synthwave': {
+      name: 'Synthwave', s1:'#0d0418', s2:'#ff3df0',
+      vars: {
+        '--bg':'#0d0418','--bg-raised':'#160a2a','--bg-elev':'#22103e',
+        '--ink-high':'#fdf4ff','--ink':'#e0d2ee','--ink-muted':'#9c8fbb','--ink-subtle':'#665a82',
+        '--line':'rgba(255,255,255,0.09)','--grid':'rgba(255,90,240,0.06)',
+        '--accent':'#ff3df0','--accent-bright':'#ff7af5','--accent-dark':'#c413b3','--accent-ink':'#1a0319'
+      }
+    },
+    'forest': {
+      name: 'Forest Loam', s1:'#0d1410', s2:'#a8d66c',
+      vars: {
+        '--bg':'#0d1410','--bg-raised':'#131c17','--bg-elev':'#1b271f',
+        '--ink-high':'#f1f6ee','--ink':'#cdd6c8','--ink-muted':'#8b9489','--ink-subtle':'#5b6259',
+        '--line':'rgba(255,255,255,0.07)','--grid':'rgba(255,255,255,0.035)',
+        '--accent':'#a8d66c','--accent-bright':'#c8eb8d','--accent-dark':'#6f9a3b','--accent-ink':'#101807'
+      }
+    },
+    'solar': {
+      name: 'Solar Amber', s1:'#11100c', s2:'#e65f1c',
+      vars: {
+        '--bg':'#11100c','--bg-raised':'#1a1812','--bg-elev':'#26221a',
+        '--ink-high':'#fbf5e8','--ink':'#dfd6c2','--ink-muted':'#9c937e','--ink-subtle':'#675f4d',
+        '--line':'rgba(255,255,255,0.08)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#e65f1c','--accent-bright':'#ff8237','--accent-dark':'#af370a','--accent-ink':'#1b0a04'
+      }
+    },
+    'mono-slate': {
+      name: 'Mono Slate', s1:'#0e1014', s2:'#cfd2da',
+      vars: {
+        '--bg':'#0e1014','--bg-raised':'#15181f','--bg-elev':'#1f242d',
+        '--ink-high':'#f5f7fa','--ink':'#c8cdd5','--ink-muted':'#8b909a','--ink-subtle':'#5c606a',
+        '--line':'rgba(255,255,255,0.09)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#cfd2da','--accent-bright':'#eef0f4','--accent-dark':'#7e828c','--accent-ink':'#0e1014'
+      }
+    },
+    'paper-vermillion': {
+      name: 'Paper Vermillion (light)', s1:'#f7f4ee', s2:'#d24028',
+      vars: {
+        '--bg':'#f7f4ee','--bg-raised':'#efeae0','--bg-elev':'#ffffff',
+        '--ink-high':'#1a1410','--ink':'#3c3530','--ink-muted':'#736a62','--ink-subtle':'#a39a91',
+        '--line':'rgba(26,20,16,0.10)','--grid':'rgba(26,20,16,0.05)',
+        '--accent':'#d24028','--accent-bright':'#ee6147','--accent-dark':'#9a2a18','--accent-ink':'#fff7f4'
+      }
+    },
+    'porcelain-cobalt': {
+      name: 'Porcelain Cobalt (light)', s1:'#fafaf9', s2:'#1f4ed8',
+      vars: {
+        '--bg':'#fafaf9','--bg-raised':'#f3f3f1','--bg-elev':'#ffffff',
+        '--ink-high':'#0b0f1c','--ink':'#2a3142','--ink-muted':'#6a7184','--ink-subtle':'#a1a7b8',
+        '--line':'rgba(11,15,28,0.10)','--grid':'rgba(11,15,28,0.05)',
+        '--accent':'#1f4ed8','--accent-bright':'#3a6ef0','--accent-dark':'#13379e','--accent-ink':'#f0f4ff'
+      }
+    },
+
+    /* ── Elite tier ─────────────────────────────────────────────── */
+
+    'geist-mono': {
+      /* Vercel-style true-black, pure monochrome. Maximum confidence. */
+      name: 'Geist Mono (Vercel)', s1:'#000000', s2:'#ffffff',
+      vars: {
+        '--bg':'#000000','--bg-raised':'#0a0a0a','--bg-elev':'#111111',
+        '--ink-high':'#ffffff','--ink':'#ededed','--ink-muted':'#a1a1a1','--ink-subtle':'#666666',
+        '--line':'rgba(255,255,255,0.10)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#ffffff','--accent-bright':'#ffffff','--accent-dark':'#a1a1a1','--accent-ink':'#000000'
+      }
+    },
+
+    'stripe-indigo': {
+      /* Stripe brand: deep indigo + signature purple. Premium fintech feel. */
+      name: 'Stripe Indigo', s1:'#0a0e27', s2:'#635bff',
+      vars: {
+        '--bg':'#0a0e27','--bg-raised':'#10153a','--bg-elev':'#1a2057',
+        '--ink-high':'#f6f9fc','--ink':'#cfd7e6','--ink-muted':'#8792a6','--ink-subtle':'#56607a',
+        '--line':'rgba(99,91,255,0.14)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#635bff','--accent-bright':'#8e87ff','--accent-dark':'#3d34cc','--accent-ink':'#0a0e27'
+      }
+    },
+
+    'linear-iris': {
+      /* Linear's signature: blue-black with iris highlight. Calm engineering. */
+      name: 'Linear Iris', s1:'#08090a', s2:'#818cf8',
+      vars: {
+        '--bg':'#08090a','--bg-raised':'#101113','--bg-elev':'#1a1c20',
+        '--ink-high':'#f7f8f8','--ink':'#d0d6e0','--ink-muted':'#8a8f98','--ink-subtle':'#62666d',
+        '--line':'rgba(255,255,255,0.07)','--grid':'rgba(255,255,255,0.03)',
+        '--accent':'#818cf8','--accent-bright':'#a5acff','--accent-dark':'#5b67e0','--accent-ink':'#0b0c1f'
+      }
+    },
+
+    'tokyo-night': {
+      /* Beloved editor theme. Indigo bg, cyan-blue accent, gentle on eyes. */
+      name: 'Tokyo Night', s1:'#1a1b26', s2:'#7aa2f7',
+      vars: {
+        '--bg':'#1a1b26','--bg-raised':'#202231','--bg-elev':'#292e42',
+        '--ink-high':'#c0caf5','--ink':'#a9b1d6','--ink-muted':'#787c99','--ink-subtle':'#565a7c',
+        '--line':'rgba(192,202,245,0.10)','--grid':'rgba(192,202,245,0.05)',
+        '--accent':'#7aa2f7','--accent-bright':'#9bb6f9','--accent-dark':'#4c78d4','--accent-ink':'#0d1020'
+      }
+    },
+
+    'catppuccin-mocha': {
+      /* Soft, warm, balanced dark palette. Lavender on espresso. */
+      name: 'Catppuccin Mocha', s1:'#1e1e2e', s2:'#b4befe',
+      vars: {
+        '--bg':'#1e1e2e','--bg-raised':'#181825','--bg-elev':'#313244',
+        '--ink-high':'#cdd6f4','--ink':'#bac2de','--ink-muted':'#7f849c','--ink-subtle':'#585b70',
+        '--line':'rgba(205,214,244,0.10)','--grid':'rgba(205,214,244,0.05)',
+        '--accent':'#b4befe','--accent-bright':'#cbd2ff','--accent-dark':'#8088d4','--accent-ink':'#1e1e2e'
+      }
+    },
+
+    'nord-polar': {
+      /* Frost on polar night. Arctic, professional, easy to live in. */
+      name: 'Nord Polar', s1:'#2e3440', s2:'#88c0d0',
+      vars: {
+        '--bg':'#2e3440','--bg-raised':'#3b4252','--bg-elev':'#434c5e',
+        '--ink-high':'#eceff4','--ink':'#d8dee9','--ink-muted':'#8b95a3','--ink-subtle':'#5e6776',
+        '--line':'rgba(236,239,244,0.10)','--grid':'rgba(236,239,244,0.05)',
+        '--accent':'#88c0d0','--accent-bright':'#a8d4e0','--accent-dark':'#5e8a9a','--accent-ink':'#1c2330'
+      }
+    },
+
+    'rose-pine-moon': {
+      /* Painterly muted, warm-magenta accent on aubergine. Distinctive. */
+      name: 'Rosé Pine Moon', s1:'#232136', s2:'#ea9a97',
+      vars: {
+        '--bg':'#232136','--bg-raised':'#2a283e','--bg-elev':'#393552',
+        '--ink-high':'#e0def4','--ink':'#c4c1e0','--ink-muted':'#908caa','--ink-subtle':'#6e6a86',
+        '--line':'rgba(224,222,244,0.10)','--grid':'rgba(224,222,244,0.05)',
+        '--accent':'#ea9a97','--accent-bright':'#f3b4b1','--accent-dark':'#c47471','--accent-ink':'#2a1818'
+      }
+    },
+
+    'noir-gold': {
+      /* Luxury watch-spec. Charcoal bg + heritage gold. Confident, restrained. */
+      name: 'Noir & Gold', s1:'#14110d', s2:'#d4af37',
+      vars: {
+        '--bg':'#14110d','--bg-raised':'#1c1814','--bg-elev':'#26201a',
+        '--ink-high':'#f6efdb','--ink':'#d8d1bd','--ink-muted':'#8c8473','--ink-subtle':'#5b5547',
+        '--line':'rgba(212,175,55,0.16)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#d4af37','--accent-bright':'#ecc964','--accent-dark':'#9c7e1f','--accent-ink':'#14110d'
+      }
+    },
+
+    'arc-sand': {
+      /* Arc Browser inspired: warm sand paper with deep rust. Editorial, alive. */
+      name: 'Arc Sand (light)', s1:'#f1ede4', s2:'#b5482b',
+      vars: {
+        '--bg':'#f1ede4','--bg-raised':'#e9e3d6','--bg-elev':'#fdfaf2',
+        '--ink-high':'#1a1612','--ink':'#3e362e','--ink-muted':'#7a6f63','--ink-subtle':'#a8a094',
+        '--line':'rgba(26,22,18,0.12)','--grid':'rgba(26,22,18,0.05)',
+        '--accent':'#b5482b','--accent-bright':'#d05f43','--accent-dark':'#7f2e17','--accent-ink':'#fff5ef'
+      }
+    },
+
+    'sage-bone': {
+      /* Quiet, organic, biophilic. Light bone bg with deep sage. Calm authority. */
+      name: 'Sage & Bone (light)', s1:'#f7f5f0', s2:'#4f6b53',
+      vars: {
+        '--bg':'#f7f5f0','--bg-raised':'#efece4','--bg-elev':'#ffffff',
+        '--ink-high':'#171a17','--ink':'#373b35','--ink-muted':'#6d7368','--ink-subtle':'#a3a899',
+        '--line':'rgba(23,26,23,0.10)','--grid':'rgba(23,26,23,0.04)',
+        '--accent':'#4f6b53','--accent-bright':'#6f8c73','--accent-dark':'#324735','--accent-ink':'#f4f8f3'
+      }
+    },
+
+    /* ── Atelier tier ───────────────────────────────────────────── */
+
+    'github-dimmed': {
+      /* GitHub Dark Dimmed — the dev theme everyone secretly uses. */
+      name: 'GitHub Dimmed', s1:'#22272e', s2:'#539bf5',
+      vars: {
+        '--bg':'#22272e','--bg-raised':'#2d333b','--bg-elev':'#373e47',
+        '--ink-high':'#cdd9e5','--ink':'#adbac7','--ink-muted':'#768390','--ink-subtle':'#545d68',
+        '--line':'rgba(205,217,229,0.10)','--grid':'rgba(205,217,229,0.05)',
+        '--accent':'#539bf5','--accent-bright':'#79b8ff','--accent-dark':'#316dca','--accent-ink':'#0e1117'
+      }
+    },
+
+    'dracula': {
+      /* Iconic editor purple. Recognized instantly worldwide. */
+      name: 'Dracula', s1:'#282a36', s2:'#bd93f9',
+      vars: {
+        '--bg':'#282a36','--bg-raised':'#21222c','--bg-elev':'#44475a',
+        '--ink-high':'#f8f8f2','--ink':'#e2e2dc','--ink-muted':'#8a8da8','--ink-subtle':'#6272a4',
+        '--line':'rgba(248,248,242,0.10)','--grid':'rgba(248,248,242,0.05)',
+        '--accent':'#bd93f9','--accent-bright':'#d4b5ff','--accent-dark':'#8b5fd6','--accent-ink':'#21162d'
+      }
+    },
+
+    'gruvbox': {
+      /* Retro warmth. Mustard accent on espresso. Beloved by terminal people. */
+      name: 'Gruvbox Dark', s1:'#282828', s2:'#fabd2f',
+      vars: {
+        '--bg':'#282828','--bg-raised':'#32302f','--bg-elev':'#3c3836',
+        '--ink-high':'#fbf1c7','--ink':'#ebdbb2','--ink-muted':'#a89984','--ink-subtle':'#7c6f64',
+        '--line':'rgba(251,241,199,0.10)','--grid':'rgba(251,241,199,0.04)',
+        '--accent':'#fabd2f','--accent-bright':'#fed85e','--accent-dark':'#b57614','--accent-ink':'#1d2021'
+      }
+    },
+
+    'one-dark': {
+      /* Atom / VSCode classic. The "I write JavaScript" palette. */
+      name: 'One Dark', s1:'#282c34', s2:'#61afef',
+      vars: {
+        '--bg':'#282c34','--bg-raised':'#21252b','--bg-elev':'#2c313a',
+        '--ink-high':'#dcdfe4','--ink':'#abb2bf','--ink-muted':'#7f848e','--ink-subtle':'#5c6370',
+        '--line':'rgba(220,223,228,0.10)','--grid':'rgba(220,223,228,0.05)',
+        '--accent':'#61afef','--accent-bright':'#8dcaff','--accent-dark':'#3e88c3','--accent-ink':'#1a1f29'
+      }
+    },
+
+    'material-ocean': {
+      /* IDE staple. Deep ink-blue, calm blue accent. Reads as "senior IDE user". */
+      name: 'Material Ocean', s1:'#0f111a', s2:'#82aaff',
+      vars: {
+        '--bg':'#0f111a','--bg-raised':'#191b29','--bg-elev':'#1f2233',
+        '--ink-high':'#eeffff','--ink':'#a6accd','--ink-muted':'#717cb4','--ink-subtle':'#4b526d',
+        '--line':'rgba(238,255,255,0.08)','--grid':'rgba(238,255,255,0.04)',
+        '--accent':'#82aaff','--accent-bright':'#a8c3ff','--accent-dark':'#5470cc','--accent-ink':'#0a0d18'
+      }
+    },
+
+    'aurora': {
+      /* Original: abyssal navy + cyan-mint aurora gradient. Polar magic. */
+      name: 'Aurora Borealis', s1:'#06101c', s2:'#5eead4',
+      vars: {
+        '--bg':'#06101c','--bg-raised':'#0a1828','--bg-elev':'#102236',
+        '--ink-high':'#ecfeff','--ink':'#c6d6e0','--ink-muted':'#7a8aa0','--ink-subtle':'#4c5b71',
+        '--line':'rgba(94,234,212,0.14)','--grid':'rgba(94,234,212,0.05)',
+        '--accent':'#5eead4','--accent-bright':'#99f6e4','--accent-dark':'#0d9488','--accent-ink':'#04201c'
+      }
+    },
+
+    'sunset-carmine': {
+      /* Warm plum bg + coral-pink accent. Sophisticated but emotive. */
+      name: 'Sunset Carmine', s1:'#1c0f17', s2:'#fb7185',
+      vars: {
+        '--bg':'#1c0f17','--bg-raised':'#241420','--bg-elev':'#311a2b',
+        '--ink-high':'#fdf2f8','--ink':'#e8d5e0','--ink-muted':'#a08a98','--ink-subtle':'#6b5963',
+        '--line':'rgba(251,113,133,0.14)','--grid':'rgba(255,255,255,0.04)',
+        '--accent':'#fb7185','--accent-bright':'#ff95a4','--accent-dark':'#c54a5e','--accent-ink':'#2a0a14'
+      }
+    },
+
+    'cyber-lime': {
+      /* True black + acid lime. Linear-meets-cyberpunk. High-energy IC voice. */
+      name: 'Cyber Lime', s1:'#000000', s2:'#d4ff3a',
+      vars: {
+        '--bg':'#000000','--bg-raised':'#0a0d05','--bg-elev':'#11160a',
+        '--ink-high':'#f0ffd9','--ink':'#c8d4b0','--ink-muted':'#8a9577','--ink-subtle':'#56604a',
+        '--line':'rgba(212,255,58,0.15)','--grid':'rgba(212,255,58,0.05)',
+        '--accent':'#d4ff3a','--accent-bright':'#e7ff6e','--accent-dark':'#8aac1d','--accent-ink':'#0a0f00'
+      }
+    },
+
+    'deep-ocean': {
+      /* Abyss navy + electric cyan glow. macOS Big Sur dark vibe. */
+      name: 'Deep Ocean', s1:'#020817', s2:'#06b6d4',
+      vars: {
+        '--bg':'#020817','--bg-raised':'#0a1024','--bg-elev':'#0f1a35',
+        '--ink-high':'#f0fdff','--ink':'#bfd1e0','--ink-muted':'#7c8ba5','--ink-subtle':'#4d5973',
+        '--line':'rgba(6,182,212,0.15)','--grid':'rgba(6,182,212,0.05)',
+        '--accent':'#06b6d4','--accent-bright':'#22d3ee','--accent-dark':'#0e7490','--accent-ink':'#02151a'
+      }
+    },
+
+    'champagne': {
+      /* Light: cream paper + champagne-pink. Refined editorial. */
+      name: 'Champagne (light)', s1:'#faf6f0', s2:'#c8847a',
+      vars: {
+        '--bg':'#faf6f0','--bg-raised':'#f2ece2','--bg-elev':'#ffffff',
+        '--ink-high':'#1f1612','--ink':'#3f342d','--ink-muted':'#776a60','--ink-subtle':'#a59989',
+        '--line':'rgba(31,22,18,0.10)','--grid':'rgba(31,22,18,0.04)',
+        '--accent':'#c8847a','--accent-bright':'#dca197','--accent-dark':'#995a52','--accent-ink':'#fffaf7'
+      }
+    },
+
+    'slate-coral': {
+      /* Light: cool stone + coral. Fresh modern, perfect for a portfolio. */
+      name: 'Slate Coral (light)', s1:'#f4f5f7', s2:'#ff6f61',
+      vars: {
+        '--bg':'#f4f5f7','--bg-raised':'#eaecf0','--bg-elev':'#ffffff',
+        '--ink-high':'#0f172a','--ink':'#334155','--ink-muted':'#64748b','--ink-subtle':'#94a3b8',
+        '--line':'rgba(15,23,42,0.10)','--grid':'rgba(15,23,42,0.04)',
+        '--accent':'#ff6f61','--accent-bright':'#ff9285','--accent-dark':'#c4493d','--accent-ink':'#fff5f4'
+      }
+    },
+
+    'notion-cream': {
+      /* Light: Notion's warm off-white + near-black + emerald accent. Productivity. */
+      name: 'Notion Cream (light)', s1:'#faf9f5', s2:'#0f7a5a',
+      vars: {
+        '--bg':'#faf9f5','--bg-raised':'#f1efe8','--bg-elev':'#ffffff',
+        '--ink-high':'#1a1a18','--ink':'#37352f','--ink-muted':'#787774','--ink-subtle':'#a8a59e',
+        '--line':'rgba(26,26,24,0.10)','--grid':'rgba(26,26,24,0.04)',
+        '--accent':'#0f7a5a','--accent-bright':'#1b9b75','--accent-dark':'#0a5a42','--accent-ink':'#eefaf5'
+      }
+    }
+  };
+
+  const root = document.documentElement;
+  const swatchesEl = document.getElementById('swatches');
+  const activeNameEl = document.getElementById('active-name');
+  const activeAccentEl = document.getElementById('active-accent');
+  const footerNameEl = document.getElementById('footer-name');
+
+  function apply(key) {
+    const p = palettes[key];
+    Object.entries(p.vars).forEach(([k,v]) => root.style.setProperty(k, v));
+    activeNameEl.textContent = p.name;
+    activeAccentEl.textContent = p.vars['--accent'];
+    footerNameEl.textContent = p.name;
+    document.querySelectorAll('.swatch').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.key === key)));
+    try { localStorage.setItem('akash.palette', key); } catch(_) {}
+    const url = new URL(window.location.href);
+    url.searchParams.set('p', key); history.replaceState(null,'',url);
+  }
+
+  Object.entries(palettes).forEach(([key, p]) => {
+    if (key === 'geist-mono') {
+      const sep = document.createElement('span');
+      sep.className = 'switcher-label';
+      sep.style.cssText = 'margin-left:6px;padding-left:14px;border-left:1px solid var(--line);color:var(--accent);';
+      sep.textContent = 'Elite:';
+      swatchesEl.appendChild(sep);
+    }
+    if (key === 'github-dimmed') {
+      const sep = document.createElement('span');
+      sep.className = 'switcher-label';
+      sep.style.cssText = 'margin-left:6px;padding-left:14px;border-left:1px solid var(--line);color:var(--accent);';
+      sep.textContent = 'Atelier:';
+      swatchesEl.appendChild(sep);
+    }
+    const b = document.createElement('button');
+    b.className = 'swatch';
+    b.type = 'button';
+    b.dataset.key = key;
+    b.setAttribute('aria-label', p.name);
+    b.style.setProperty('--s1', p.s1);
+    b.style.setProperty('--s2', p.s2);
+    b.innerHTML = '<span class="tip">'+p.name+'</span>';
+    b.addEventListener('click', () => apply(key));
+    swatchesEl.appendChild(b);
+  });
+
+  const initial = (new URL(location.href)).searchParams.get('p')
+    || (function(){ try { return localStorage.getItem('akash.palette'); } catch(_){ return null; } })()
+    || 'mint-teal';
+  apply(palettes[initial] ? initial : 'mint-teal');
+</script>
+</body>
+</html>

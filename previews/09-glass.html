@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>09 — Glass · Akash Simon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  min-height:100vh;
+  background:#050714;
+  color:#e8edff;
+}
+.mono{font-family:'DM Mono',monospace}
+/* ── mesh gradient bg ─────────────────── */
+.bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(110,70,255,.45) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 70%, rgba(30,200,180,.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,60,220,.2) 0%, transparent 70%),
+    #050714;
+}
+.bg-noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+/* ── glass card ───────────────────────── */
+.glass{
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(20px) saturate(1.4);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:1.25rem;
+  box-shadow:0 4px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.glass-sm{
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:.875rem;
+  box-shadow:0 2px 20px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
+}
+/* ── back link ────────────────────────── */
+.back{position:fixed;top:1.25rem;left:1.5rem;z-index:100;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color.2s}
+.back:hover{color:rgba(255,255,255,.9)}
+/* ── layout ───────────────────────────── */
+.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:0 2rem}
+/* ── nav ──────────────────────────────── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.75rem 2rem;
+  margin-top:1.5rem;
+}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.03em;color:#fff}
+.logo span{background:linear-gradient(90deg,#a78bfa,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav ul{list-style:none;display:flex;gap:.5rem}
+nav a{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);text-decoration:none;padding:.45rem .85rem;border-radius:999px;
+  transition:all.25s;
+}
+nav a:hover{color:#fff;background:rgba(255,255,255,.1)}
+/* ── hero ─────────────────────────────── */
+.hero{padding:4rem 0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;background:rgba(110,70,255,.15);border:1px solid rgba(110,70,255,.3);border-radius:999px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#a78bfa;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.6rem,4.5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-.04em;color:#fff}
+.hero h1 .grad{background:linear-gradient(120deg,#a78bfa 0%,#34d399 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin-top:1.25rem;font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,.55)}
+.cta-row{display:flex;gap:.75rem;margin-top:2rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.5rem;border-radius:999px;font-size:.875rem;font-weight:700;text-decoration:none;transition:all.3s;cursor:pointer;border:none;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-primary{background:linear-gradient(135deg,#7c3aed,#059669);color:#fff;box-shadow:0 6px 30px rgba(124,58,237,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(124,58,237,.55)}
+.btn-ghost{color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);background:transparent}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff;transform:translateY(-2px)}
+/* ── profile card (right of hero) ────── */
+.profile-card{position:relative}
+.profile-card .avatar-ring{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#059669);padding:3px;margin-bottom:1.25rem}
+.profile-card .avatar-ring .inner{width:100%;height:100%;border-radius:50%;background:rgba(20,20,40,.9);display:flex;align-items:center;justify-content:center;font-size:2.25rem;font-weight:800;color:#fff}
+.profile-card h2{font-size:1.5rem;font-weight:800;letter-spacing:-.03em}
+.profile-card .role{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a78bfa;margin:.35rem 0 1rem}
+.meta-list{display:flex;flex-direction:column;gap:.6rem}
+.meta-row{display:flex;align-items:center;gap:.75rem;font-size:.875rem;color:rgba(255,255,255,.6)}
+.meta-dot{width:6px;height:6px;border-radius:50%;background:#34d399;flex-shrink:0}
+/* ── stats glass row ──────────────────── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem}
+.stat-card{padding:1.5rem 1.25rem;text-align:center;transition:transform.3s}
+.stat-card:hover{transform:translateY(-4px)}
+.stat-n{font-size:2.25rem;font-weight:800;letter-spacing:-.05em;background:linear-gradient(135deg,#a78bfa,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.stat-l{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.35rem}
+/* ── bento experience ─────────────────── */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:1rem;margin-bottom:3rem}
+.exp-feature{grid-column:span 2}
+.exp-card{padding:1.75rem;height:100%;transition:transform.3s,border-color.3s}
+.exp-card:hover{transform:translateY(-3px);border-color:rgba(167,139,250,.3)}
+.exp-meta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#a78bfa;margin-bottom:.6rem}
+.exp-card h3{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.6rem}
+.exp-card p{font-size:.875rem;line-height:1.65;color:rgba(255,255,255,.5)}
+.exp-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.chip{font-family:'DM Mono',monospace;font-size:10px;padding:.25rem .65rem;border-radius:999px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:#a78bfa}
+.chip-green{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.2);color:#34d399}
+/* ── skills section ───────────────────── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:3rem}
+.skill-pill{padding:1rem 1.25rem;display:flex;align-items:center;gap:.85rem;transition:transform.25s,border-color.25s}
+.skill-pill:hover{transform:translateY(-2px);border-color:rgba(52,211,153,.35)}
+.skill-icon{font-size:1.35rem;flex-shrink:0}
+.skill-name{font-weight:600;font-size:.9rem}
+.skill-level{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.15rem}
+/* ── contact ──────────────────────────── */
+.contact-hero{padding:3rem;margin-bottom:4rem;text-align:center;position:relative;overflow:hidden}
+.contact-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(110,70,255,.25),transparent 70%);pointer-events:none}
+.contact-hero h2{font-size:clamp(1.8rem,3vw,2.75rem);font-weight:800;letter-spacing:-.04em;color:#fff;position:relative}
+.contact-hero p{margin:.75rem auto 2rem;max-width:460px;color:rgba(255,255,255,.5);font-size:1rem;line-height:1.6;position:relative}
+/* ── footer ───────────────────────────── */
+footer{border-top:1px solid rgba(255,255,255,.07);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3)}
+footer a{color:rgba(255,255,255,.3);text-decoration:none;transition:color.2s}
+footer a:hover{color:rgba(255,255,255,.8)}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .exp-grid{grid-template-columns:1fr}
+  .exp-feature{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="bg-noise"></div>
+<a href="index.html" class="back">← templates</a>
+
+<div class="wrap">
+  <!-- Nav -->
+  <nav class="glass-sm">
+    <span class="logo">Akash<span>Simon</span></span>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge">Available · Actively looking</div>
+      <h1>Redefining how <span class="grad">AI tests AI</span>.</h1>
+      <p>QA Lead &amp; GenAI Automation Engineer with 9+ years building the infrastructure that keeps products reliable. Architect of AI-driven test synthesis across 30+ EU storefronts.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Work with me ↗</a>
+        <a href="#work" class="btn btn-ghost">See experience</a>
+      </div>
+    </div>
+    <div class="glass profile-card" style="padding:2rem">
+      <div class="avatar-ring"><div class="inner">AS</div></div>
+      <h2>Akash Simon</h2>
+      <p class="role">QA Lead · GenAI Automation</p>
+      <div class="meta-list">
+        <div class="meta-row"><span class="meta-dot"></span>Brisbane, Australia (remote-open)</div>
+        <div class="meta-row"><span class="meta-dot"></span>9+ years · QA → Automation → AI</div>
+        <div class="meta-row"><span class="meta-dot"></span>Domino's Pizza Enterprises · 2022–now</div>
+        <div class="meta-row"><span class="meta-dot" style="background:#a78bfa;box-shadow:0 0 8px #a78bfa"></span>AWS &amp; Azure certified</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="glass-sm stat-card"><p class="stat-n">9+</p><p class="stat-l">Years in QA</p></div>
+    <div class="glass-sm stat-card"><p class="stat-n">30+</p><p class="stat-l">EU Storefronts</p></div>
+    <div class="glass-sm stat-card"><p class="stat-n">40%</p><p class="stat-l">Test authoring cut</p></div>
+    <div class="glass-sm stat-card"><p class="stat-n">10+</p><p class="stat-l">Engineers led</p></div>
+  </div>
+
+  <!-- Experience -->
+  <section id="work" style="margin-bottom:1rem">
+    <p class="mono" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.25rem">Experience</p>
+    <div class="exp-grid">
+      <div class="glass exp-card exp-feature">
+        <p class="exp-meta">Domino's Pizza Enterprises · 2022 → Now</p>
+        <h3>QA Lead &amp; GenAI Automation Engineer</h3>
+        <p>Architecting next-generation test infrastructure for 30+ EU storefronts. Designed and shipped a GenAI test-synthesis pipeline using Azure OpenAI that generates first-draft Playwright tests from JIRA acceptance criteria — cutting manual authoring by 40% and accelerating sprint velocity across six squads.</p>
+        <div class="exp-chips">
+          <span class="chip">Playwright</span><span class="chip">Python</span><span class="chip">Azure OpenAI</span><span class="chip chip-green">WCAG 2.2</span><span class="chip chip-green">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="glass exp-card">
+        <p class="exp-meta">Infosys · 2019–2022</p>
+        <h3>Senior QA Engineer</h3>
+        <p>Quality engineering for a GDPR-regulated German banking platform. Owned WCAG 2.1 AA accessibility audit pipeline; reduced release-blocking defects by 60%.</p>
+        <div class="exp-chips"><span class="chip">Selenium</span><span class="chip">Java</span><span class="chip chip-green">GDPR</span></div>
+      </div>
+      <div class="glass exp-card">
+        <p class="exp-meta">Wipro · 2017–2019</p>
+        <h3>QA Engineer</h3>
+        <p>Established automation coverage from scratch for three Agile squads. Introduced API contract testing in CI using Newman.</p>
+        <div class="exp-chips"><span class="chip">TestNG</span><span class="chip">Postman</span><span class="chip">SQL</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="mono" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.25rem">Capabilities</p>
+    <div class="skills-grid">
+      <div class="glass-sm skill-pill"><span class="skill-icon">🤖</span><div><p class="skill-name">GenAI QA Agents</p><p class="skill-level">Current focus</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">🎭</span><div><p class="skill-name">Playwright / Selenium</p><p class="skill-level">Expert · 6 yrs</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">🐍</span><div><p class="skill-name">Python</p><p class="skill-level">Primary language</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">♿</span><div><p class="skill-name">WCAG &amp; Accessibility</p><p class="skill-level">2.1 &amp; 2.2 AA</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">🔁</span><div><p class="skill-name">CI/CD Pipelines</p><p class="skill-level">GitHub Actions · Azure</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">🛡️</span><div><p class="skill-name">GDPR Compliance</p><p class="skill-level">EU data regulations</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">☁️</span><div><p class="skill-name">Cloud Platforms</p><p class="skill-level">AWS · Azure certified</p></div></div>
+      <div class="glass-sm skill-pill"><span class="skill-icon">🧠</span><div><p class="skill-name">Engineering Leadership</p><p class="skill-level">10+ engineers mentored</p></div></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="glass contact-hero">
+      <h2>Let's build something excellent.</h2>
+      <p>Open to senior QA / automation roles, GenAI quality consulting, and fractional QA leadership opportunities worldwide.</p>
+      <a href="mailto:akash.simon@outlook.com" class="btn btn-primary" style="display:inline-flex;position:relative">akash.simon@outlook.com ↗</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Akash Simon</span>
+    <div style="display:flex;gap:1.5rem">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="mailto:akash.simon@outlook.com">Email</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>03 — Bento Showcase · Akash Mahanty</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; background:#06070a; color:#e7e9ee; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .glass { background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.07); }
+  .glass:hover { border-color: rgba(255,255,255,.18); }
+  .glow { box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+</style>
+</head>
+<body class="min-h-screen">
+  <a href="index.html" class="mono fixed top-4 left-4 text-[10px] uppercase tracking-[0.2em] text-neutral-500 hover:text-white">← templates</a>
+
+  <header class="max-w-6xl mx-auto px-6 pt-16 pb-8 flex items-center justify-between">
+    <p class="font-bold text-lg">akash<span class="text-[#e65f1c]">.</span></p>
+    <nav class="mono text-xs text-neutral-400 flex gap-6">
+      <a class="hover:text-white" href="#">work</a>
+      <a class="hover:text-white" href="#">about</a>
+      <a class="hover:text-white" href="#">writing</a>
+      <a class="hover:text-white" href="#">contact</a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 pb-24">
+    <!-- intro -->
+    <h1 class="text-5xl sm:text-7xl font-bold tracking-[-0.04em] leading-[0.95] max-w-4xl">
+      Engineer obsessed with <span class="text-[#e65f1c]">reliable</span> systems
+      <span class="text-neutral-500">— and the boring tooling that makes them safe.</span>
+    </h1>
+
+    <!-- bento grid -->
+    <div class="mt-12 grid grid-cols-6 auto-rows-[140px] gap-4">
+      <!-- big hero card -->
+      <article class="glass glow rounded-3xl p-7 col-span-4 row-span-2 flex flex-col justify-between">
+        <p class="mono text-[10px] uppercase tracking-[0.2em] text-[#e65f1c]">Now</p>
+        <div>
+          <p class="text-3xl font-semibold leading-tight">Building a continuous-eval pipeline for an in-house Foundry agent at Sky.</p>
+          <p class="mt-3 text-neutral-400">It's the unsexy infra layer that lets the product team ship prompts twice a day without blowing up production.</p>
+        </div>
+      </article>
+
+      <!-- location -->
+      <article class="glass rounded-3xl p-5 col-span-2 row-span-1 flex flex-col justify-between">
+        <p class="mono text-[10px] uppercase tracking-[0.2em] text-neutral-500">Currently</p>
+        <p class="text-lg">London · GMT+0 · 09:42</p>
+      </article>
+
+      <!-- spotify -->
+      <article class="glass rounded-3xl p-5 col-span-2 row-span-1 flex items-center gap-3">
+        <div class="w-10 h-10 rounded bg-gradient-to-br from-[#e65f1c] to-[#af370a]"></div>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs text-[#e65f1c] mono">▶ now playing</p>
+          <p class="text-sm truncate">Pneuma — Above & Beyond</p>
+        </div>
+      </article>
+
+      <!-- stat 1 -->
+      <article class="glass rounded-3xl p-5 col-span-2 row-span-1">
+        <p class="text-4xl font-bold tracking-tight">41<span class="text-[#e65f1c]">%</span></p>
+        <p class="mt-1 text-xs text-neutral-400">MTTR reduction · Sky streaming, 2024</p>
+      </article>
+
+      <!-- stat 2 -->
+      <article class="glass rounded-3xl p-5 col-span-2 row-span-1">
+        <p class="text-4xl font-bold tracking-tight">12</p>
+        <p class="mt-1 text-xs text-neutral-400">Regions on-call across</p>
+      </article>
+
+      <!-- stat 3 -->
+      <article class="glass rounded-3xl p-5 col-span-2 row-span-1">
+        <p class="text-4xl font-bold tracking-tight">7y</p>
+        <p class="mt-1 text-xs text-neutral-400">Building production systems</p>
+      </article>
+
+      <!-- writing -->
+      <article class="glass rounded-3xl p-7 col-span-3 row-span-2 flex flex-col justify-between">
+        <p class="mono text-[10px] uppercase tracking-[0.2em] text-[#e65f1c]">Writing</p>
+        <ul class="space-y-3">
+          <li><p class="text-lg font-medium">Designing eval harnesses for agents in production</p><p class="text-xs text-neutral-500">May 2026 · 8 min</p></li>
+          <li><p class="text-lg font-medium">The 3am case for boring runbooks</p><p class="text-xs text-neutral-500">Mar 2026 · 5 min</p></li>
+          <li><p class="text-lg font-medium">SLOs that survive the org chart</p><p class="text-xs text-neutral-500">Jan 2026 · 12 min</p></li>
+        </ul>
+      </article>
+
+      <!-- skills -->
+      <article class="glass rounded-3xl p-7 col-span-3 row-span-2">
+        <p class="mono text-[10px] uppercase tracking-[0.2em] text-[#e65f1c]">Stack</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">Azure</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">AKS</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">Terraform</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">Go</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">Python</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">OpenTelemetry</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">Grafana</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">Foundry</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">KQL</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 text-xs">GitOps</span>
+        </div>
+      </article>
+
+      <!-- contact -->
+      <article class="glass rounded-3xl p-7 col-span-6 row-span-1 flex items-center justify-between">
+        <div>
+          <p class="mono text-[10px] uppercase tracking-[0.2em] text-[#e65f1c]">Open to chats</p>
+          <p class="mt-1 text-2xl font-semibold">akash@hey.com</p>
+        </div>
+        <button class="px-5 py-3 rounded-full bg-[#e65f1c] text-white font-medium">Say hello →</button>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

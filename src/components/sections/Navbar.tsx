@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const links = [
   { href: '#about', label: 'About' },
@@ -91,23 +92,27 @@ export default function Navbar() {
           })}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           <a href="#contact" className="btn-primary !py-2 !px-5 text-[13px]">
             Hire Me
           </a>
         </div>
 
         {/* Mobile toggle */}
-        <button
-          type="button"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-controls="mobile-menu"
-          {...{ 'aria-expanded': open }}
-          onClick={() => setOpen((o) => !o)}
-          className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.03] text-ink-high md:hidden"
-        >
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-controls="mobile-menu"
+            {...{ 'aria-expanded': open }}
+            onClick={() => setOpen((o) => !o)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface text-ink-high"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile drawer */}
@@ -136,7 +141,7 @@ export default function Navbar() {
                   className={`flex items-center justify-between rounded-xl border border-transparent px-4 py-4 text-base font-medium transition-colors ${
                     active === l.href
                       ? 'border-accent/20 bg-accent/10 text-accent'
-                      : 'text-ink-high hover:bg-white/[0.04]'
+                      : 'text-ink-high surface-1-hover'
                   }`}
                 >
                   <span>{l.label}</span>

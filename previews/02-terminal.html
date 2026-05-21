@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>02 — Terminal · akash@portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { --bg:#0b0d10; --fg:#cdd6f4; --green:#a6e3a1; --cyan:#94e2d5; --pink:#f5c2e7; --yellow:#f9e2af; --muted:#6c7086; }
+  body { font-family:'JetBrains Mono', monospace; background:var(--bg); color:var(--fg); }
+  .green{color:var(--green)} .cyan{color:var(--cyan)} .pink{color:var(--pink)} .yellow{color:var(--yellow)} .muted{color:var(--muted)}
+  .prompt::before { content:"akash@portfolio:~$ "; color:var(--green); }
+  .cursor::after { content:"▍"; animation: blink 1s steps(2) infinite; color:var(--cyan); }
+  @keyframes blink { 50%{opacity:0} }
+  hr { border-color: #313244; }
+  .tab { border:1px solid #313244; border-bottom:none; padding:4px 14px; background:#11141a; }
+  .tab.active { background: var(--bg); color: var(--cyan); }
+</style>
+</head>
+<body class="min-h-screen">
+  <a href="index.html" class="fixed top-3 left-4 text-[10px] uppercase tracking-[0.2em] muted hover:text-white">← templates</a>
+
+  <!-- window chrome -->
+  <div class="max-w-5xl mx-auto mt-12 rounded-t-lg border border-[#313244] bg-[#11141a] px-4 py-2 flex items-center gap-2">
+    <span class="w-3 h-3 rounded-full bg-[#f38ba8]"></span>
+    <span class="w-3 h-3 rounded-full bg-[#f9e2af]"></span>
+    <span class="w-3 h-3 rounded-full bg-[#a6e3a1]"></span>
+    <span class="ml-3 text-xs muted">— zsh — 124×38 — akash@portfolio</span>
+    <span class="ml-auto text-xs muted">⌘K</span>
+  </div>
+  <div class="max-w-5xl mx-auto flex text-xs">
+    <span class="tab active">~/portfolio</span>
+    <span class="tab muted">~/work</span>
+    <span class="tab muted">~/writing</span>
+    <span class="tab muted">+</span>
+  </div>
+
+  <main class="max-w-5xl mx-auto border border-[#313244] border-t-0 p-8 text-sm leading-7">
+    <p class="prompt">whoami</p>
+    <p class="cyan">akash</p>
+    <p class="muted">→ Senior SRE · Automation · Cloud · AI Ops</p>
+    <p class="muted">→ London, UK · GMT+0 · 09:42 local</p>
+
+    <p class="prompt mt-6">cat about.md</p>
+    <p>Engineer who turns 3am incident pages into 9am pull requests.</p>
+    <p>Currently most interested in <span class="pink">agentic systems</span>, <span class="pink">eval harnesses</span>, and the unglamorous middle layer that makes them production-safe.</p>
+
+    <p class="prompt mt-6">ls experience/</p>
+<pre class="text-[13px] leading-6">
+<span class="green">drwxr-xr-x</span>  <span class="cyan">sky.tv/</span>             <span class="muted">2023-08 → present</span>   Senior SRE
+<span class="green">drwxr-xr-x</span>  <span class="cyan">ericsson/</span>          <span class="muted">2020-04 → 2023-07</span>   DevOps Engineer
+<span class="green">drwxr-xr-x</span>  <span class="cyan">wipro/</span>             <span class="muted">2018-09 → 2020-03</span>   Software Engineer
+</pre>
+
+    <p class="prompt mt-6">cat skills.json | jq</p>
+<pre class="text-[13px] leading-6">
+{
+  <span class="yellow">"automation"</span>: [<span class="green">"python"</span>, <span class="green">"go"</span>, <span class="green">"ansible"</span>, <span class="green">"terraform"</span>],
+  <span class="yellow">"cloud"</span>:      [<span class="green">"azure"</span>, <span class="green">"aks"</span>, <span class="green">"app-service"</span>, <span class="green">"functions"</span>],
+  <span class="yellow">"observability"</span>: [<span class="green">"otel"</span>, <span class="green">"grafana"</span>, <span class="green">"prometheus"</span>, <span class="green">"kql"</span>],
+  <span class="yellow">"ai_ops"</span>:     [<span class="green">"foundry"</span>, <span class="green">"agents"</span>, <span class="green">"eval-pipelines"</span>]
+}
+</pre>
+
+    <p class="prompt mt-6">git log --oneline --since=90d</p>
+<pre class="text-[13px] leading-6 muted">
+<span class="yellow">a1f4c8e</span> <span class="">feat(eval):</span> continuous eval for foundry agent
+<span class="yellow">9c3b22a</span> <span class="">fix(otel):</span>  drop spans > 32kb at sampler
+<span class="yellow">7d10e5b</span> <span class="">chore:</span>    migrate runbooks to gitops
+<span class="yellow">2b8f0aa</span> <span class="">docs:</span>     postmortem — 2025-12 cdn flap
+</pre>
+
+    <p class="prompt mt-6">contact --help</p>
+    <p><span class="cyan">--email</span>     akash@hey.com</p>
+    <p><span class="cyan">--github</span>    github.com/akash</p>
+    <p><span class="cyan">--linkedin</span>  linkedin.com/in/akash</p>
+
+    <p class="prompt mt-8 cursor"></p>
+  </main>
+
+  <footer class="max-w-5xl mx-auto py-6 text-[11px] muted text-center">
+    type <span class="cyan">help</span> · <span class="cyan">theme dracula</span> · <span class="cyan">clear</span> · 95+ lighthouse · zero JS frameworks needed
+  </footer>
+</body>
+</html>

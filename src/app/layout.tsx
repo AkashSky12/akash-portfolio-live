@@ -25,9 +25,18 @@ const mono = JetBrains_Mono({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#070b16',
-  colorScheme: 'dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)',  color: '#12100a' },
+    { media: '(prefers-color-scheme: light)', color: '#f3ede0' },
+  ],
+  colorScheme: 'dark light',
 }
+
+/**
+ * Inlined in <head> so the correct theme is applied before paint.
+ * Reads stored preference, falls back to OS preference, defaults to dark.
+ */
+const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://akashsimon.com'),
@@ -80,8 +89,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${sans.variable} ${display.variable} ${mono.variable} scroll-smooth`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="antialiased">
         <a href="#main" className="skip-link">Skip to content</a>
         {children}

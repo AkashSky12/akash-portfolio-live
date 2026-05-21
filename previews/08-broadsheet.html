@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>08 — Broadsheet · Akash Simon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#faf8f3;--paper2:#f3f0e8;--edge:#e8e3d6;
+  --ink:#14120e;--ink2:#3b3730;--ink3:#7a7268;
+  --red:#b91c1c;--blue:#1d4ed8;
+}
+html{background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+body{font-family:'Source Serif 4',Georgia,serif;line-height:1.55}
+.mono{font-family:'JetBrains Mono',monospace}
+.display{font-family:'Playfair Display',Georgia,serif}
+/* ── back link ────────────────────────── */
+.back{position:fixed;top:1.25rem;left:1.5rem;z-index:50;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);text-decoration:none;transition:color.2s}
+.back:hover{color:var(--red)}
+/* ── masthead ─────────────────────────── */
+.masthead{text-align:center;border-bottom:3px double var(--ink);padding:2rem 0 1.25rem}
+.masthead-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem}
+.masthead-name{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,8vw,7rem);font-weight:900;letter-spacing:-.04em;line-height:1}
+.masthead-rule{display:flex;align-items:center;gap:1rem;margin-top:1rem}
+.masthead-rule::before,.masthead-rule::after{content:'';flex:1;height:1px;background:var(--ink)}
+.masthead-tagline{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);white-space:nowrap;padding:0 .5rem}
+.dateline{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--ink);margin:0 2rem}
+/* ── page wrap ────────────────────────── */
+.page{max-width:1160px;margin:0 auto;padding:0 2rem}
+/* ── main grid ────────────────────────── */
+.main-grid{display:grid;grid-template-columns:1fr 300px;gap:2.5rem;padding:2.5rem 0;border-bottom:1px solid var(--edge)}
+/* ── lead story ───────────────────────── */
+.lead{}
+.lead-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.6rem;font-weight:500}
+.lead h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:900;line-height:1.08;letter-spacing:-.03em}
+.lead h1 em{font-style:italic;color:var(--red)}
+.byline{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin:.85rem 0;display:flex;gap:1.25rem}
+.byline span::before{content:'By '}
+.lead-drop{font-size:1.3rem;line-height:1.5;font-weight:300;color:var(--ink2);border-left:3px solid var(--red);padding-left:1.25rem;margin:1.5rem 0}
+.lead p{font-size:1.025rem;line-height:1.72;color:var(--ink2)}
+.lead p+p{margin-top:.9rem}
+/* ── sidebar ──────────────────────────── */
+.sidebar{display:flex;flex-direction:column;gap:2rem;border-left:1px solid var(--edge);padding-left:2rem}
+.box{border:1px solid var(--edge);padding:1.25rem;border-radius:2px}
+.box-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--edge);padding-bottom:.5rem;margin-bottom.8rem}
+.box-title{margin-bottom:.75rem}
+/* ── column rule grid ─────────────────── */
+.column-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;padding:2.5rem 0;border-bottom:1px solid var(--edge)}
+.col-story{}
+.col-story+.col-story{border-left:1px solid var(--edge);padding-left:2.5rem}
+.col-kicker{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:.4rem}
+.col-head{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;line-height:1.2;letter-spacing:-.02em}
+.col-head em{font-style:italic;color:var(--blue)}
+.col-divider{width:2.5rem;height:2px;background:var(--red);margin:.75rem 0}
+.col-body{font-size:.9rem;line-height:1.7;color:var(--ink2)}
+/* ── stat row ─────────────────────────── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--edge)}
+.stat-cell{padding:1.5rem 0;text-align:center;border-right:1px solid var(--edge)}
+.stat-cell:last-child{border-right:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:2.75rem;font-weight:900;letter-spacing:-.05em;color:var(--ink)}
+.stat-n span{color:var(--red)}
+.stat-l{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin-top:.2rem}
+/* ── pull quote ───────────────────────── */
+.pullquote{font-family:'Playfair Display',serif;font-size:1.65rem;font-style:italic;line-height:1.35;color:var(--ink);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:1.25rem 0;margin:1.5rem 0;text-align:center}
+/* ── index table ──────────────────────── */
+.index-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem}
+.index-table td{padding:.45rem .35rem;border-bottom:1px solid var(--edge);vertical-align:top}
+.index-table td:first-child{font-weight:600;width:55%}
+.index-table td:last-child{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);text-align:right;white-space:nowrap}
+/* ── skill pill list ──────────────────── */
+.pill-list{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.pill{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;padding:.2rem .6rem;border:1px solid var(--edge);border-radius:2px;color:var(--ink2)}
+/* ── footer ───────────────────────────── */
+footer{border-top:3px double var(--ink);padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center}
+footer p{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+footer a{color:var(--ink3);text-decoration:none;transition:color.2s;margin-left:1.25rem}
+footer a:hover{color:var(--red)}
+@media(max-width:720px){
+  .main-grid,.column-grid{grid-template-columns:1fr}
+  .sidebar{border-left:none;padding-left:0}
+  .col-story+.col-story{border-left:none;padding-left:0;border-top:1px solid var(--edge);padding-top:2rem}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back">← templates</a>
+
+<div class="page" style="padding-top:4rem">
+  <!-- Masthead -->
+  <header class="masthead">
+    <p class="masthead-eyebrow">Portfolio · Est. 2017</p>
+    <h1 class="masthead-name display">Akash Simon</h1>
+    <div class="masthead-rule">
+      <span class="masthead-tagline">QA Lead &amp; GenAI Automation Engineer</span>
+    </div>
+  </header>
+  <div class="dateline">
+    <span>Vol. IX · May 2026</span>
+    <span>Brisbane, Australia</span>
+    <span>Available for senior roles</span>
+  </div>
+
+  <!-- Stat Row -->
+  <div class="stat-row">
+    <div class="stat-cell"><p class="stat-n">9<span>+</span></p><p class="stat-l">Years in QA</p></div>
+    <div class="stat-cell"><p class="stat-n">30<span>+</span></p><p class="stat-l">EU Storefronts</p></div>
+    <div class="stat-cell"><p class="stat-n">40<span>%</span></p><p class="stat-l">Authoring cut</p></div>
+    <div class="stat-cell"><p class="stat-n">10<span>+</span></p><p class="stat-l">Engineers led</p></div>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+    <div class="lead">
+      <p class="lead-kicker">Lead story</p>
+      <h1>Engineering quality at the <em>speed of AI</em>.</h1>
+      <div class="byline">
+        <span>Akash Simon</span>
+        <span>Brisbane · May 2026</span>
+      </div>
+      <div class="lead-drop">
+        "I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens."
+      </div>
+      <p>With nine-plus years spanning manual roots, deep automation, and the current frontier of generative AI quality systems, Akash Simon has built a career at the intersection of rigorous engineering and pragmatic delivery. Currently serving as QA Lead at Domino's Pizza Enterprises, he oversees test infrastructure for more than thirty European storefronts.</p>
+      <p style="margin-top:.9rem">His current focus — GenAI QA agents — represents a fundamental rethink of how test suites are written, maintained, and evolved. Where traditional automation requires painstaking authoring of each scenario, his system synthesises test cases from acceptance criteria, slashing that burden by forty percent while expanding coverage.</p>
+      <div class="pullquote">"Quality is not a phase. It's the architecture."</div>
+      <p>Akash is now exploring senior individual-contributor and leadership roles where he can bring this capability to a new domain. He holds a Bachelor of Engineering and multiple cloud certifications from AWS and Microsoft.</p>
+    </div>
+
+    <div class="sidebar">
+      <div class="box">
+        <p class="box-title">Index</p>
+        <table class="index-table">
+          <tr><td>Current employer</td><td>Domino's Pizza Ent.</td></tr>
+          <tr><td>Role</td><td>QA Lead</td></tr>
+          <tr><td>Location</td><td>Brisbane, AU</td></tr>
+          <tr><td>Open to remote</td><td>Yes</td></tr>
+          <tr><td>Visa status</td><td>AU Citizen</td></tr>
+          <tr><td>Notice period</td><td>4 weeks</td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <p class="box-title">Core stack</p>
+        <div class="pill-list">
+          <span class="pill">Playwright</span><span class="pill">Python</span><span class="pill">Azure OpenAI</span><span class="pill">Selenium</span><span class="pill">GitHub Actions</span><span class="pill">WCAG 2.2</span><span class="pill">LangChain</span><span class="pill">Docker</span><span class="pill">GDPR</span>
+        </div>
+      </div>
+      <div class="box">
+        <p class="box-title">Contact</p>
+        <p style="font-size:.875rem;color:var(--ink2);line-height:1.6">akash.simon@outlook.com<br>linkedin.com/in/akash-simon</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three columns -->
+  <div class="column-grid">
+    <div class="col-story">
+      <p class="col-kicker">Domino's Pizza Ent. · 2022–now</p>
+      <h2 class="col-head display">Architecting the <em>next generation</em> of QA.</h2>
+      <div class="col-divider"></div>
+      <p class="col-body">Led migration from legacy Selenium suites to a Playwright-first architecture with built-in accessibility scanning. Introduced Azure OpenAI-powered test synthesis — the team now generates first-draft test cases from JIRA acceptance criteria automatically.</p>
+    </div>
+    <div class="col-story">
+      <p class="col-kicker">Infosys · 2019–2022</p>
+      <h2 class="col-head display">GDPR compliance at <em>enterprise scale</em>.</h2>
+      <div class="col-divider"></div>
+      <p class="col-body">Owned quality engineering for a German digital banking platform, ensuring WCAG 2.1 AA compliance and continuous GDPR data-flow validation across 14 microservices. Reduced regression defects by 60% in 18 months by rewriting the automation framework from scratch.</p>
+    </div>
+    <div class="col-story">
+      <p class="col-kicker">Wipro · 2017–2019</p>
+      <h2 class="col-head display">Building quality from <em>ground zero</em>.</h2>
+      <div class="col-divider"></div>
+      <p class="col-body">Established automated regression suites for three Agile squads delivering a logistics SaaS. Introduced API contract testing using Postman / Newman, enabling faster service-boundary validation in CI without full E2E cycles.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Akash Simon · All rights reserved</p>
+    <nav>
+      <a href="mailto:akash.simon@outlook.com">Email</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>

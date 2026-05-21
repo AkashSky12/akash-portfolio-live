@@ -2,28 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg: #070b16;
-  --bg-raised: #0a0f1e;
-  --bg-elevated: #10162a;
-  --ink: #e8edf5;
-  --ink-high: #f4f7fc;
-  --ink-muted: #8a96ac;
-  --accent: #3ee0b8;
-  --accent-bright: #5af0c8;
-  --accent-dark: #00a88a;
-  --line: rgba(255, 255, 255, 0.08);
+/* ─────────────────────────────────────────────────────────────
+   Theme tokens — every color is an "R G B" tuple so Tailwind's
+   alpha modifiers (bg-bg/80, border-line/40 …) continue to work
+   via rgb(var(--xx) / <alpha-value>) in tailwind.config.js.
+   Default = dark. [data-theme="light"] overrides at the end.
+   ───────────────────────────────────────────────────────────── */
+:root,
+:root[data-theme='dark'] {
+  /* Golden Dark Orange — deep amber-espresso with warm solar gold */
+  --bg:          18 14 8;        /* near-black golden-espresso */
+  --bg-raised:   28 20 10;       /* lifted amber-dark */
+  --bg-elevated: 42 30 14;       /* card / elevated chrome */
+  --surface-1:   255 240 200;    /* warm gold tint for low-alpha chrome */
+  --ink:         228 218 196;    /* body copy on dark */
+  --ink-high:    252 246 230;    /* headings, warm cream */
+  --ink-muted:   158 148 124;    /* secondary */
+  --ink-subtle:  104 94 74;      /* tertiary */
+  --accent:      220 128 14;     /* golden dark orange #dc800e */
+  --accent-bright: 252 170 40;   /* warm gold highlight #fcaa28 */
+  --accent-dark: 168 80 6;       /* deep amber #a85006 */
+  --accent-ink:  18 8 0;         /* readable text on accent fills */
+  --line:        255 240 210;    /* warm low-alpha rules */
+  --line-strong: 255 240 210;
+  --grid:        255 240 210;
+  --scheme: dark;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* Solar Amber — cream paper with deep amber accent */
+  --bg:          243 236 224;    /* warm cream paper */
+  --bg-raised:   235 226 210;    /* slightly deeper sand */
+  --bg-elevated: 248 243 233;    /* lifted card */
+  --surface-1:   28 20 10;       /* espresso ink for low-alpha chrome */
+  --ink:         59 47 31;       /* body copy */
+  --ink-high:    28 20 10;       /* headings, espresso */
+  --ink-muted:   122 106 82;     /* secondary */
+  --ink-subtle:  165 152 129;    /* tertiary */
+  --accent:      168 80 6;       /* golden dark orange, AA-safe on cream */
+  --accent-bright: 210 112 12;   /* warm amber highlight */
+  --accent-dark: 122 50 2;       /* deep amber */
+  --accent-ink:  248 243 233;    /* readable on orange fills */
+  --line:        28 20 10;       /* espresso for low-alpha rules */
+  --line-strong: 28 20 10;
+  --grid:        28 20 10;
+  --scheme: light;
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
+  background: rgb(var(--bg));
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink);
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
   font-family: var(--font-sans), Inter, system-ui, sans-serif;
   font-feature-settings: 'cv11', 'ss01';
   overflow-x: hidden;
@@ -31,34 +68,36 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-synthesis: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display), 'Plus Jakarta Sans', system-ui, sans-serif;
   letter-spacing: -0.025em;
+  color: rgb(var(--ink-high));
 }
 
 ::selection {
-  background: rgba(62, 224, 184, 0.25);
-  color: var(--ink-high);
+  background: rgb(var(--accent) / 0.28);
+  color: rgb(var(--ink-high));
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(var(--surface-1) / 0.08);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(62, 224, 184, 0.35);
+  background: rgb(var(--accent) / 0.45);
   background-clip: padding-box;
 }
 
 :focus { outline: none; }
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid rgb(var(--accent));
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -68,8 +107,8 @@ h1, h2, h3, h4, h5 {
   top: -100px;
   left: 1rem;
   z-index: 100;
-  background: var(--accent);
-  color: #04101a;
+  background: rgb(var(--accent));
+  color: rgb(var(--accent-ink));
   padding: 0.65rem 1rem;
   border-radius: 8px;
   font-weight: 600;
@@ -106,56 +145,102 @@ h1, h2, h3, h4, h5 {
   }
 
   .accent-text {
-    background: linear-gradient(135deg, #5af0c8 0%, #3ee0b8 60%, #00d4aa 100%);
+    background: linear-gradient(135deg,
+      rgb(var(--accent-bright)) 0%,
+      rgb(var(--accent)) 40%,
+      rgb(var(--accent-dark)) 70%,
+      rgb(var(--accent)) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    filter: drop-shadow(0 0 18px rgb(var(--accent) / 0.50));
+  }
+
+  /* Theme-aware low-tint surface used by cards/inputs/icon buttons. */
+  .surface-1 {
+    background-color: rgb(var(--surface-1) / 0.04);
+  }
+  .surface-1-hover:hover {
+    background-color: rgb(var(--surface-1) / 0.07);
   }
 
   .glass-card {
     position: relative;
-    background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.015) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: linear-gradient(180deg,
+      rgb(var(--surface-1) / 0.04) 0%,
+      rgb(var(--surface-1) / 0.015) 100%);
+    border: 1px solid rgb(var(--line) / 0.08);
     border-radius: 16px;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
                 border-color 0.3s ease,
                 box-shadow 0.3s ease;
-    box-shadow: 0 1px 0 0 rgba(255,255,255,0.04) inset, 0 24px 48px -24px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 0 0 rgb(var(--surface-1) / 0.04) inset,
+                0 24px 48px -24px rgb(0 0 0 / 0.5);
+  }
+  :root[data-theme='light'] .glass-card {
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.6) inset,
+                0 12px 32px -16px rgb(15 23 42 / 0.10);
   }
   @media (hover: hover) {
     .glass-card:hover {
-      border-color: rgba(62, 224, 184, 0.28);
+      border-color: rgb(var(--accent) / 0.42);
       transform: translateY(-2px);
-      box-shadow: 0 1px 0 0 rgba(255,255,255,0.05) inset,
-                  0 32px 60px -24px rgba(0,0,0,0.6);
+      box-shadow: 0 1px 0 0 rgb(var(--surface-1) / 0.05) inset,
+                  0 32px 60px -24px rgb(0 0 0 / 0.6),
+                  0 0 48px -12px rgb(var(--accent) / 0.32);
+    }
+    :root[data-theme='light'] .glass-card:hover {
+      box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.7) inset,
+                  0 18px 42px -20px rgb(15 23 42 / 0.18);
     }
   }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-line bg-white/[0.03] px-3 py-1 text-[12px] text-ink-muted transition-colors;
+    @apply inline-flex items-center rounded-full px-3 py-1 text-[12px] text-ink-muted transition-colors;
+    border: 1px solid rgb(var(--line) / 0.10);
+    background-color: rgb(var(--surface-1) / 0.04);
   }
   .chip:hover {
     @apply border-accent/40 bg-accent/10 text-accent;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-bg-raised transition-all;
-    background: linear-gradient(135deg, #5af0c8 0%, #3ee0b8 100%);
-    box-shadow: 0 8px 28px -8px rgba(62, 224, 184, 0.55);
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all;
+    position: relative;
+    overflow: hidden;
+    color: rgb(var(--accent-ink));
+    background: linear-gradient(135deg, rgb(var(--accent-bright)) 0%, rgb(var(--accent)) 55%, rgb(var(--accent-dark)) 100%);
+    box-shadow: 0 8px 28px -8px rgb(var(--accent) / 0.65),
+                0 0 0 1px rgb(var(--accent-bright) / 0.30) inset;
     min-height: 44px;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.22) 50%, transparent 100%);
+    transform: skewX(-18deg);
+    animation: btn-shine 3.5s ease-in-out infinite;
+    pointer-events: none;
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px -8px rgba(62, 224, 184, 0.7);
+    box-shadow: 0 16px 44px -8px rgb(var(--accent) / 0.80),
+                0 0 24px -4px rgb(var(--accent-bright) / 0.40),
+                0 0 0 1px rgb(var(--accent-bright) / 0.40) inset;
   }
   .btn-primary:active { transform: translateY(0); }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm font-semibold text-ink-high transition-all;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ink-high transition-all;
+    border: 1px solid rgb(var(--line) / 0.12);
     min-height: 44px;
   }
   .btn-ghost:hover {
-    @apply border-accent/50 text-accent;
+    @apply text-accent;
+    border-color: rgb(var(--accent) / 0.5);
     transform: translateY(-2px);
   }
 
@@ -166,8 +251,8 @@ h1, h2, h3, h4, h5 {
 
 .bg-grid {
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgb(var(--grid) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--grid) / 0.05) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
   mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
@@ -176,33 +261,72 @@ h1, h2, h3, h4, h5 {
 .aurora-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.55;
+  filter: blur(64px);
+  opacity: 0.70;
   will-change: transform;
-  animation: aurora 18s ease-in-out infinite;
+  animation: aurora 22s ease-in-out infinite;
+  contain: layout style;
 }
+:root[data-theme='light'] .aurora-blob { opacity: 0.38; }
 
 .aurora-blob--primary {
-  top: -10%;
-  right: -15%;
-  width: 55vw;
-  height: 55vw;
-  background: radial-gradient(circle at 30% 30%, rgba(62, 224, 184, 0.35) 0%, transparent 60%);
+  top: -18%;
+  right: -22%;
+  width: 56vw;
+  height: 56vw;
+  background: radial-gradient(circle at 35% 35%,
+    rgb(var(--accent-bright) / 0.32) 0%,
+    rgb(var(--accent) / 0.22) 38%,
+    transparent 65%);
 }
 
 .aurora-blob--secondary {
-  bottom: -15%;
-  left: -10%;
-  width: 45vw;
+  bottom: -22%;
+  left: -15%;
+  width: 44vw;
+  height: 44vw;
+  background: radial-gradient(circle at 65% 65%, rgb(var(--accent-dark) / 0.36) 0%, transparent 60%);
+  animation-delay: -8s;
+}
+
+.aurora-blob--glow {
+  top: 5%;
+  left: 15%;
+  width: 65vw;
   height: 45vw;
-  background: radial-gradient(circle at 70% 70%, rgba(0, 168, 138, 0.28) 0%, transparent 60%);
-  animation-delay: -6s;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgb(var(--accent) / 0.11) 0%,
+    rgb(var(--accent-bright) / 0.06) 40%,
+    transparent 70%);
+  filter: blur(90px);
+  opacity: 1;
+  animation-delay: -14s;
 }
 
 @keyframes aurora {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%      { transform: translate(6%, -4%) scale(1.05); }
   66%      { transform: translate(-4%, 6%) scale(0.97); }
+}
+
+@keyframes btn-shine {
+  0%        { left: -100%; }
+  20%, 100% { left: 150%; }
+}
+
+.sun-halo {
+  position: absolute;
+  top: -35%;
+  right: -28%;
+  width: 85vw;
+  height: 85vw;
+  background: radial-gradient(circle at 60% 40%,
+    rgb(var(--accent-bright) / 0.12) 0%,
+    rgb(var(--accent) / 0.08) 28%,
+    rgb(var(--accent-dark) / 0.04) 48%,
+    transparent 65%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .reveal {

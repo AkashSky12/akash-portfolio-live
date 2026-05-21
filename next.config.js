@@ -8,7 +8,7 @@ const nextConfig = {
     unoptimized: true,
   },
   turbopack: {
-    root: path.join(__dirname),
+    root: path.resolve(__dirname),
   },
 }
 
