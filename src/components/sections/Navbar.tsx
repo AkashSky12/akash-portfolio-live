@@ -67,7 +67,7 @@ export default function Navbar() {
           href="#home"
           className="font-display text-[18px] font-extrabold tracking-tight text-ink-high"
         >
-          Akash<span className="text-accent">.</span>
+          GEN AI Engineer<span className="text-accent"></span>
         </a>
 
         {/* Desktop nav */}

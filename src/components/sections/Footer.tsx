@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div>
           <p className="font-display text-[15px] font-extrabold text-ink-high">
-            Akash<span className="text-accent">.</span>
+            Assured Quality<span className="text-accent"></span>
           </p>
           <p className="mt-1 text-[12.5px] text-ink-muted">
             © {new Date().getFullYear()} Akash Simon · Built with precision, deployed with confidence.

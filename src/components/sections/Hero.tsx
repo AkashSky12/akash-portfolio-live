@@ -55,7 +55,7 @@ export default function Hero() {
           {/* Subtitle */}
           <p className="text-pretty mb-10 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
             I&apos;m{' '}
-            <span className="text-ink-high">Akash Simon</span> — a QA Lead &amp;
+            <span className="text-ink-high">Akash Simon </span>Software Engineer — a QA Lead &amp;
             GenAI Automation Engineer with 9+ years building test infrastructure
             that ships. Currently architecting GenAI QA agents across{' '}
             <span className="text-ink-high">30+ EU storefronts</span> at

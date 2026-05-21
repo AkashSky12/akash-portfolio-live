@@ -11,18 +11,18 @@
 :root,
 :root[data-theme='dark'] {
   /* Golden Dark Orange — deep amber-espresso with warm solar gold */
-  --bg:          18 14 8;        /* near-black golden-espresso */
-  --bg-raised:   28 20 10;       /* lifted amber-dark */
-  --bg-elevated: 42 30 14;       /* card / elevated chrome */
-  --surface-1:   255 240 200;    /* warm gold tint for low-alpha chrome */
-  --ink:         228 218 196;    /* body copy on dark */
-  --ink-high:    252 246 230;    /* headings, warm cream */
-  --ink-muted:   158 148 124;    /* secondary */
-  --ink-subtle:  104 94 74;      /* tertiary */
-  --accent:      220 128 14;     /* golden dark orange #dc800e */
-  --accent-bright: 252 170 40;   /* warm gold highlight #fcaa28 */
-  --accent-dark: 168 80 6;       /* deep amber #a85006 */
-  --accent-ink:  18 8 0;         /* readable text on accent fills */
+  --bg:          24 18 10;        /* dark golden-espresso */
+  --bg-raised:   36 26 12;        /* lifted amber-dark */
+  --bg-elevated: 52 38 18;        /* card / elevated chrome */
+  --surface-1:   255 244 210;     /* warm gold tint for low-alpha chrome */
+  --ink:         235 226 206;     /* body copy on dark */
+  --ink-high:    255 250 238;     /* headings, bright warm cream */
+  --ink-muted:   168 158 132;     /* secondary */
+  --ink-subtle:  112 102 82;      /* tertiary */
+  --accent:      242 168 28;      /* bright amber-gold #f2a81c */
+  --accent-bright: 255 200 68;    /* vivid gold highlight #ffc844 */
+  --accent-dark: 188 110 10;      /* deep amber #bc6e0a */
+  --accent-ink:  18 8 0;          /* readable text on accent fills */
   --line:        255 240 210;    /* warm low-alpha rules */
   --line-strong: 255 240 210;
   --grid:        255 240 210;
@@ -40,9 +40,9 @@
   --ink-high:    28 20 10;       /* headings, espresso */
   --ink-muted:   122 106 82;     /* secondary */
   --ink-subtle:  165 152 129;    /* tertiary */
-  --accent:      168 80 6;       /* golden dark orange, AA-safe on cream */
-  --accent-bright: 210 112 12;   /* warm amber highlight */
-  --accent-dark: 122 50 2;       /* deep amber */
+  --accent:      188 106 10;      /* bright amber-gold, AA-safe on cream */
+  --accent-bright: 232 152 22;    /* vivid amber highlight */
+  --accent-dark: 140 72 4;        /* deep amber */
   --accent-ink:  248 243 233;    /* readable on orange fills */
   --line:        28 20 10;       /* espresso for low-alpha rules */
   --line-strong: 28 20 10;
