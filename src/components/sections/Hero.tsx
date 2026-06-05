@@ -6,7 +6,7 @@ const stats = [
   { num: '9', suffix: '+', label: 'Years in QA' },
   { num: '30', suffix: '+', label: 'EU Storefronts' },
   { num: '40', suffix: '%', label: 'Authoring Cut' },
-  { num: '10', suffix: '+', label: 'Engineers Led' },
+  { num: '12', suffix: '+', label: 'Engineers Led' },
 ]
 
 export default function Hero() {

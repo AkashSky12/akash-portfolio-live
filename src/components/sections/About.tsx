@@ -6,19 +6,19 @@ const awards = [
   {
     Icon: Trophy,
     title: 'Best Sprinter',
-    org: "Domino's Pizza Enterprises · 2023",
+    org: "Domino's Pizza Enterprises · 2024",
     desc: '300+ automated test cases in 3 sprints, enabling on-time release across 12+ EU storefronts.',
   },
   {
     Icon: Star,
     title: 'Best Employee',
-    org: 'Solve.Care · 2021',
+    org: 'Quinta Systems PVT LTD · 2021',
     desc: 'Established the first structured QA function in company history — pioneering blockchain + healthcare device testing.',
   },
   {
     Icon: Award,
     title: 'Client Appreciation',
-    org: 'Siemens Limited · 2019',
+    org: 'Quinta Systems PVT LTD · 2019',
     desc: 'Personally recognised for sole ownership of CI/CD pipeline and delivery under a compressed 6-week deadline.',
   },
 ]

@@ -40,7 +40,7 @@ const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://akashsimon.com'),
-  title: 'Akash Simon — QA Lead & GenAI Automation Engineer',
+  title: 'Akash Simon - Software Engineer — QA Lead & GenAI Automation Engineer',
   description:
     'GenAI-powered Software Engineer and QA Lead with 9+ years engineering quality at scale. Built GenAI QA agent infrastructure at Domino\'s Pizza Enterprises across 30+ EU storefronts.',
   keywords: [
