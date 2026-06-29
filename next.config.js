@@ -6,6 +6,9 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.jsdelivr.net' },
+    ],
   },
   turbopack: {
     root: path.resolve(__dirname),

@@ -68,14 +68,44 @@ module.exports = {
         card: '0 1px 0 0 rgb(var(--surface-1) / 0.04) inset, 0 24px 48px -24px rgb(0 0 0 / 0.6)',
       },
       animation: {
-        'fade-up': 'fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-        'aurora': 'aurora 18s ease-in-out infinite',
+        'fade-up':   'fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'fade-in':   'fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'scale-in':  'scaleIn 0.7s cubic-bezier(0.34, 1.2, 0.64, 1) forwards',
+        'slide-left':'slideLeft 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'aurora':    'aurora 22s ease-in-out infinite',
         'pulse-dot': 'pulseDot 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float':     'float 5s ease-in-out infinite',
+        'shimmer':   'shimmer 2.4s linear infinite',
+        'bounce-y':  'bounceY 1.8s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%':   { opacity: '0', transform: 'translateY(32px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%':   { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        scaleIn: {
+          '0%':   { opacity: '0', transform: 'scale(0.90) translateY(18px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+        },
+        slideLeft: {
+          '0%':   { opacity: '0', transform: 'translateX(-30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':      { transform: 'translateY(-8px)' },
+        },
+        shimmer: {
+          '0%':   { backgroundPosition: '-200% center' },
+          '100%': { backgroundPosition: '200% center' },
+        },
+        bounceY: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':      { transform: 'translateY(6px)' },
         },
         aurora: {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },

@@ -3,36 +3,39 @@ import { useState } from 'react'
 import { Mail, Phone, MapPin, Linkedin, ArrowUpRight, Send } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 
-const details = [
-  {
-    Icon: Mail,
-    label: 'Email',
-    value: 'akash.simon@outlook.com',
-    href: 'mailto:akash.simon@outlook.com',
+const locations = {
+  IN: {
+    label: 'India',
+    flag: '🇮🇳',
+    details: [
+      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com' },
+      { Icon: Phone, label: 'Phone', value: '+91 81058 44868', href: 'tel:+918105844868' },
+      { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: null as string | null },
+      { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/' },
+    ],
   },
-  {
-    Icon: Phone,
-    label: 'Phone',
-    value: '+60 12-747 4204',
-    href: 'tel:+60127474204',
+  MY: {
+    label: 'Malaysia',
+    flag: '🇲🇾',
+    details: [
+      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com' },
+      { Icon: Phone, label: 'Phone', value: '+60 12-747 4204', href: 'tel:+60127474204' },
+      { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: null as string | null },
+      { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/' },
+    ],
   },
-  {
-    Icon: MapPin,
-    label: 'Location',
-    value: 'Kuala Lumpur, Malaysia',
-    href: null as string | null,
-  },
-  {
-    Icon: Linkedin,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/akash-simon',
-    href: 'https://www.linkedin.com/in/akash-simon/',
-  },
-]
+} as const
+
+type CountryKey = keyof typeof locations
 
 export default function Contact() {
-  const { ref, visible } = useReveal<HTMLDivElement>()
+  const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>()
+  const { ref: cardRef, visible: cardVisible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
+  const hv = headerVisible ? 'is-visible' : ''
+  const cv = cardVisible ? 'is-visible' : ''
   const [sent, setSent] = useState(false)
+  const [country, setCountry] = useState<CountryKey>('MY')
+  const details = locations[country].details
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -47,7 +50,7 @@ export default function Contact() {
     const body = encodeURIComponent(
       `${message}\n\n— ${name}\n${email}`
     )
-    window.location.href = `mailto:akash.simon@outlook.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:akash.mosey99@gmail.com?subject=${encodeURIComponent(
       subject
     )}&body=${body}`
 
@@ -58,25 +61,49 @@ export default function Contact() {
   return (
     <section id="contact" className="section">
       <div className="container">
-        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
-          <p className="eyebrow mb-4">Get In Touch</p>
-          <h2 className="heading-lg text-balance mb-5 text-ink-high">
+        <div ref={headerRef}>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Get In Touch</p>
+          <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-5 text-ink-high`}>
             Let&apos;s build something{' '}
             <span className="accent-text">exceptional</span>.
           </h2>
-          <p className="text-pretty mb-12 max-w-2xl text-[15px] leading-relaxed text-ink-muted">
+          <p className={`reveal-item stagger-3 ${hv} text-pretty mb-12 max-w-2xl text-[15px] leading-relaxed text-ink-muted`}>
             Open to senior QA architect, automation lead, or AI-augmented testing
             roles globally. I respond within 24 hours.
           </p>
         </div>
 
-        <div className="glass-card grid gap-10 p-6 sm:p-8 md:grid-cols-[1fr_1.2fr] md:gap-12">
+        <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card grid gap-10 p-6 sm:p-8 md:grid-cols-[1fr_1.2fr] md:gap-12`}>
           {/* Details */}
           <div className="space-y-5">
             <h3 className="font-display text-[14px] font-bold uppercase tracking-[0.1em] text-ink-high">
               Contact details
             </h3>
-            <ul className="space-y-4">
+
+            {/* Country toggle */}
+            <div className="flex gap-2">
+              {(Object.keys(locations) as CountryKey[]).map((key) => {
+                const active = country === key
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setCountry(key)}
+                    {...{ 'aria-pressed': active }}
+                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-semibold transition-all ${
+                      active
+                        ? 'border-accent/50 bg-accent/[0.12] text-accent'
+                        : 'border-line bg-surface text-ink-muted hover:border-accent/30 hover:text-ink-high'
+                    }`}
+                  >
+                    <span className="text-base leading-none">{locations[key].flag}</span>
+                    {locations[key].label}
+                  </button>
+                )
+              })}
+            </div>
+
+            <ul key={country} className="space-y-4 animate-fade-in">
               {details.map(({ Icon, label, value, href }) => (
                 <li key={label}>
                   <div className="flex items-center gap-3">

@@ -100,31 +100,34 @@ const experiences: Job[] = [
 ]
 
 export default function Experience() {
-  const { ref, visible } = useReveal<HTMLDivElement>()
+  const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>()
+  const { ref: listRef, visible: listVisible } = useReveal<HTMLDivElement>({ threshold: 0.03 })
+  const hv = headerVisible ? 'is-visible' : ''
+  const lv = listVisible ? 'is-visible' : ''
 
   return (
     <section id="experience" className="section">
       <div className="container">
-        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
-          <p className="eyebrow mb-4">Career</p>
-          <h2 className="heading-lg text-balance mb-5 text-ink-high">
+        <div ref={headerRef}>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Career</p>
+          <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-5 text-ink-high`}>
             A track record of shipping quality at scale.
           </h2>
-          <p className="text-pretty mb-16 max-w-2xl text-[15px] leading-relaxed text-ink-muted">
+          <p className={`reveal-item stagger-3 ${hv} text-pretty mb-16 max-w-2xl text-[15px] leading-relaxed text-ink-muted`}>
             Nine years of progressive QA leadership across food-tech, blockchain
             healthcare, and enterprise software.
           </p>
         </div>
 
-        <div className="relative mx-auto max-w-3xl">
+        <div ref={listRef} className="relative mx-auto max-w-3xl">
           {/* Timeline line */}
           <span
             aria-hidden
             className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/40 via-line to-transparent"
           />
           <ol>
-          {experiences.map((exp) => (
-            <li key={exp.role + exp.company} className="relative pl-10 pb-14 last:pb-0">
+          {experiences.map((exp, i) => (
+            <li key={exp.role + exp.company} className={`reveal-left stagger-${i + 1} ${lv} relative pl-10 pb-14 last:pb-0`}>
               {/* Dot */}
               <span
                 aria-hidden

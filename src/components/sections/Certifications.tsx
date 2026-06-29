@@ -30,21 +30,24 @@ const certs = [
 ]
 
 export default function Certifications() {
-  const { ref, visible } = useReveal<HTMLDivElement>()
+  const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>()
+  const { ref: gridRef, visible: gridVisible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
+  const hv = headerVisible ? 'is-visible' : ''
+  const gv = gridVisible ? 'is-visible' : ''
 
   return (
     <section id="certs" className="section">
       <div className="container">
-        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
-          <p className="eyebrow mb-4">Credentials</p>
-          <h2 className="heading-lg text-balance mb-12 text-ink-high">
+        <div ref={headerRef}>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Credentials</p>
+          <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-12 text-ink-high`}>
             Certifications &amp; education.
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {certs.map(({ Icon, name, body, status }) => (
-            <div key={name} className="glass-card flex items-start gap-4 p-6">
+        <div ref={gridRef} className="grid gap-4 sm:grid-cols-2">
+          {certs.map(({ Icon, name, body, status }, i) => (
+            <div key={name} className={`reveal-scale stagger-${i + 1} ${gv} glass-card flex items-start gap-4 p-6`}>
               <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
                 <Icon size={20} strokeWidth={2} />
               </div>

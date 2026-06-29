@@ -24,25 +24,28 @@ const awards = [
 ]
 
 export default function About() {
-  const { ref, visible } = useReveal<HTMLDivElement>()
+  const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>({ threshold: 0.1 })
+  const { ref: bodyRef, visible: bodyVisible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
+  const hv = headerVisible ? 'is-visible' : ''
+  const bv = bodyVisible ? 'is-visible' : ''
 
   return (
     <section id="about" className="section">
       <div className="container">
-        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
-          <p className="eyebrow mb-4">Who I Am</p>
-          <h2 className="heading-lg text-balance mb-5 text-ink-high">
+        <div ref={headerRef}>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Who I Am</p>
+          <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-5 text-ink-high`}>
             Quality as a competitive advantage.
           </h2>
-          <p className="text-pretty mb-14 max-w-2xl text-[15px] leading-relaxed text-ink-muted">
+          <p className={`reveal-item stagger-3 ${hv} text-pretty mb-14 max-w-2xl text-[15px] leading-relaxed text-ink-muted`}>
             I don&apos;t just find bugs — I architect systems that prevent them,
             and now I build AI agents that redefine how testing happens.
           </p>
         </div>
 
-        <div className="grid gap-12 md:grid-cols-[1.1fr_1fr] md:gap-16">
+        <div ref={bodyRef} className="grid gap-12 md:grid-cols-[1.1fr_1fr] md:gap-16">
           {/* Bio */}
-          <div className="space-y-5 text-[15.5px] leading-[1.75] text-ink">
+          <div className={`reveal-item stagger-1 ${bv} space-y-5 text-[15.5px] leading-[1.75] text-ink`}>
             <p>
               I&apos;m a{' '}
               <span className="font-medium text-accent">
@@ -77,12 +80,12 @@ export default function About() {
 
           {/* Awards */}
           <div>
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
+            <p className={`reveal-item stagger-2 ${bv} mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-muted`}>
               Awards &amp; Recognition
             </p>
             <ul className="space-y-3">
-              {awards.map(({ Icon, title, org, desc }) => (
-                <li key={title} className="glass-card p-5">
+              {awards.map(({ Icon, title, org, desc }, i) => (
+                <li key={title} className={`reveal-scale stagger-${i + 3} ${bv} glass-card p-5`}>
                   <div className="flex items-start gap-4">
                     <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
                       <Icon size={18} strokeWidth={2} />

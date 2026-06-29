@@ -78,25 +78,28 @@ const groups = [
 ]
 
 export default function Skills() {
-  const { ref, visible } = useReveal<HTMLDivElement>()
+  const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>()
+  const { ref: gridRef, visible: gridVisible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
+  const hv = headerVisible ? 'is-visible' : ''
+  const gv = gridVisible ? 'is-visible' : ''
 
   return (
     <section id="skills" className="section">
       <div className="container">
-        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
-          <p className="eyebrow mb-4">Tech Stack</p>
-          <h2 className="heading-lg text-balance mb-5 text-ink-high">
+        <div ref={headerRef}>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Tech Stack</p>
+          <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-5 text-ink-high`}>
             A battle-tested toolkit.
           </h2>
-          <p className="text-pretty mb-14 max-w-2xl text-[15px] leading-relaxed text-ink-muted">
+          <p className={`reveal-item stagger-3 ${hv} text-pretty mb-14 max-w-2xl text-[15px] leading-relaxed text-ink-muted`}>
             Spanning automation, AI, accessibility, CI/CD, and enterprise QA
             leadership.
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {groups.map(({ Icon, title, tags }) => (
-            <div key={title} className="glass-card p-6">
+        <div ref={gridRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {groups.map(({ Icon, title, tags }, i) => (
+            <div key={title} className={`reveal-scale stagger-${i + 1} ${gv} glass-card p-6`}>
               <div className="mb-5 flex items-center gap-3">
                 <div className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent">
                   <Icon size={16} strokeWidth={2} />

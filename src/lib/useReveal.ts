@@ -14,11 +14,10 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
       setVisible(true)
       return
     }
+    // Re-trigger every time the element enters/leaves the viewport so
+    // animations replay on scroll up AND down (Apple-style).
     const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setVisible(true)
-        io.disconnect()
-      }
+      setVisible(entry.isIntersecting)
     }, options)
     io.observe(el)
     return () => io.disconnect()
@@ -27,3 +26,4 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
 
   return { ref, visible } as const
 }
+
