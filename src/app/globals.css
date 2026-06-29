@@ -10,43 +10,43 @@
    ───────────────────────────────────────────────────────────── */
 :root,
 :root[data-theme='dark'] {
-  /* Golden Dark Orange — deep amber-espresso with warm solar gold */
-  --bg:          24 18 10;        /* dark golden-espresso */
-  --bg-raised:   36 26 12;        /* lifted amber-dark */
-  --bg-elevated: 52 38 18;        /* card / elevated chrome */
-  --surface-1:   255 244 210;     /* warm gold tint for low-alpha chrome */
-  --ink:         235 226 206;     /* body copy on dark */
-  --ink-high:    255 250 238;     /* headings, bright warm cream */
-  --ink-muted:   168 158 132;     /* secondary */
-  --ink-subtle:  112 102 82;      /* tertiary */
-  --accent:      242 168 28;      /* bright amber-gold #f2a81c */
-  --accent-bright: 255 200 68;    /* vivid gold highlight #ffc844 */
-  --accent-dark: 188 110 10;      /* deep amber #bc6e0a */
-  --accent-ink:  18 8 0;          /* readable text on accent fills */
-  --line:        255 240 210;    /* warm low-alpha rules */
-  --line-strong: 255 240 210;
-  --grid:        255 240 210;
+  /* noon.ai — neutral pure-black canvas, warm golden glow, off-white text */
+  --bg:          6 6 7;          /* near-pure black, neutral */
+  --bg-raised:   14 14 16;       /* lifted panel */
+  --bg-elevated: 22 22 26;       /* card / elevated chrome */
+  --surface-1:   255 255 255;    /* neutral white tint for low-alpha chrome */
+  --ink:         224 224 228;    /* body copy, soft neutral white */
+  --ink-high:    246 246 247;    /* headings — noon's #f6f6f7 */
+  --ink-muted:   138 140 147;    /* secondary grey */
+  --ink-subtle:  84 86 91;       /* tertiary — noon's #54565b */
+  --accent:      255 165 31;     /* noon golden glow #ffa51f */
+  --accent-bright: 255 209 64;   /* bright yellow-gold #ffd140 */
+  --accent-dark: 224 106 0;      /* deep orange #e06a00 */
+  --accent-ink:  20 12 0;        /* readable text on gold fills */
+  --line:        255 255 255;    /* neutral white low-alpha rules */
+  --line-strong: 255 255 255;
+  --grid:        255 255 255;
   --scheme: dark;
   color-scheme: dark;
 }
 
 :root[data-theme='light'] {
-  /* Solar Amber — cream paper with deep amber accent */
-  --bg:          243 236 224;    /* warm cream paper */
-  --bg-raised:   235 226 210;    /* slightly deeper sand */
-  --bg-elevated: 248 243 233;    /* lifted card */
-  --surface-1:   28 20 10;       /* espresso ink for low-alpha chrome */
-  --ink:         59 47 31;       /* body copy */
-  --ink-high:    28 20 10;       /* headings, espresso */
-  --ink-muted:   122 106 82;     /* secondary */
-  --ink-subtle:  165 152 129;    /* tertiary */
-  --accent:      188 106 10;      /* bright amber-gold, AA-safe on cream */
-  --accent-bright: 232 152 22;    /* vivid amber highlight */
-  --accent-dark: 140 72 4;        /* deep amber */
-  --accent-ink:  248 243 233;    /* readable on orange fills */
-  --line:        28 20 10;       /* espresso for low-alpha rules */
-  --line-strong: 28 20 10;
-  --grid:        28 20 10;
+  /* noon.ai light — clean neutral paper with golden accent */
+  --bg:          250 250 251;    /* near-white paper */
+  --bg-raised:   244 244 245;    /* slightly deeper */
+  --bg-elevated: 255 255 255;    /* lifted card */
+  --surface-1:   0 0 0;          /* neutral ink for low-alpha chrome */
+  --ink:         60 62 68;       /* body copy */
+  --ink-high:    12 12 14;       /* headings, near-black */
+  --ink-muted:   110 112 120;    /* secondary */
+  --ink-subtle:  150 152 160;    /* tertiary */
+  --accent:      200 120 0;      /* gold, AA-safe on white */
+  --accent-bright: 240 170 20;   /* bright gold highlight */
+  --accent-dark: 150 80 0;       /* deep amber */
+  --accent-ink:  255 255 255;    /* readable on gold fills */
+  --line:        0 0 0;          /* neutral ink for low-alpha rules */
+  --line-strong: 0 0 0;
+  --grid:        0 0 0;
   --scheme: light;
   color-scheme: light;
 }
@@ -61,7 +61,7 @@ html {
 body {
   background: rgb(var(--bg));
   color: rgb(var(--ink));
-  font-family: var(--font-sans), Inter, system-ui, sans-serif;
+  font-family: var(--font-sans), 'Sora', system-ui, sans-serif;
   font-feature-settings: 'cv11', 'ss01';
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -72,7 +72,7 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: var(--font-display), 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-display), 'Sora', system-ui, sans-serif;
   letter-spacing: -0.025em;
   color: rgb(var(--ink-high));
 }
@@ -123,16 +123,16 @@ h1, h2, h3, h4, h5 {
   }
 
   .heading-xl {
-    font-size: clamp(2.6rem, 7vw, 5.5rem);
-    line-height: 1.02;
-    letter-spacing: -0.045em;
+    font-size: clamp(2.7rem, 7.4vw, 5.8rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
     font-weight: 700;
   }
 
   .heading-lg {
     font-size: clamp(1.9rem, 4vw, 3rem);
     line-height: 1.08;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.015em;
     font-weight: 700;
   }
 
@@ -264,7 +264,7 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   border-radius: 9999px;
   filter: blur(64px);
-  opacity: 0.70;
+  opacity: 0.45;
   will-change: transform;
   animation: aurora 22s ease-in-out infinite;
   contain: layout style;
@@ -309,6 +309,192 @@ h1, h2, h3, h4, h5 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%      { transform: translate(6%, -4%) scale(1.05); }
   66%      { transform: translate(-4%, 6%) scale(0.97); }
+}
+
+/* ── Site-wide ambient background (noon.ai living canvas) ─────────────────
+   Fixed behind all content: flowing line-waves + a soft warm glow so every
+   section feels alive — not flat black. */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 6%, rgb(var(--accent) / 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 82% 100%, rgb(var(--accent-dark) / 0.07) 0%, transparent 60%);
+}
+
+/* Drifting lime glow blobs — flammini's living-canvas background */
+.ambient-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+  contain: layout style;
+}
+:root[data-theme='light'] .ambient-blob { opacity: 0.32; }
+.ambient-blob--a {
+  top: -12%;
+  left: -10%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle at 40% 40%,
+    rgb(var(--accent) / 0.30) 0%, rgb(var(--accent) / 0.06) 45%, transparent 70%);
+  animation: ambientA 26s ease-in-out infinite;
+}
+.ambient-blob--b {
+  bottom: -16%;
+  right: -12%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle at 60% 60%,
+    rgb(var(--accent-dark) / 0.26) 0%, rgb(var(--accent-dark) / 0.05) 48%, transparent 72%);
+  animation: ambientB 32s ease-in-out infinite;
+}
+.ambient-blob--c {
+  top: 38%;
+  left: 52%;
+  width: 34vw;
+  height: 34vw;
+  background: radial-gradient(circle at 50% 50%,
+    rgb(var(--accent-bright) / 0.18) 0%, transparent 68%);
+  animation: ambientC 24s ease-in-out infinite;
+}
+
+/* Faint drifting grid overlay */
+.ambient-grid {
+  position: absolute;
+  inset: -2px;
+  background-image:
+    linear-gradient(rgb(var(--grid) / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--grid) / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 88% 80% at 50% 40%, #000 35%, transparent 88%);
+  mask-image: radial-gradient(ellipse 88% 80% at 50% 40%, #000 35%, transparent 88%);
+  animation: ambientGrid 40s linear infinite;
+}
+
+@keyframes ambientA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(6vw, 4vh) scale(1.08); }
+}
+@keyframes ambientB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-5vw, -4vh) scale(1.06); }
+}
+@keyframes ambientC {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50%      { transform: translate(-46%, -54%) scale(1.12); opacity: 1; }
+}
+@keyframes ambientGrid {
+  from { transform: translateY(0); }
+  to   { transform: translateY(64px); }
+}
+
+/* ── Hero gem — glossy faceted lime crystal (flammini signature) ──────────── */
+.hero-gem {
+  position: relative;
+  display: block;
+  height: clamp(270px, 47vh, 500px);
+  width: auto;
+  aspect-ratio: 240 / 320;
+  pointer-events: none;
+  animation: gemFloat 8s ease-in-out infinite;
+  filter: drop-shadow(0 30px 70px rgb(var(--accent) / 0.4));
+}
+.hero-gem svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+.hero-gem-glow {
+  position: absolute;
+  inset: -34%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgb(var(--accent) / 0.5) 0%,
+    rgb(var(--accent) / 0.14) 36%,
+    transparent 68%);
+  filter: blur(48px);
+  animation: gemGlow 6s ease-in-out infinite;
+}
+.gem-body {
+  transform-origin: 120px 160px;
+  animation: gemTurn 10s ease-in-out infinite;
+}
+.gem-glint { animation: gemGlint 5.5s ease-in-out infinite; }
+@keyframes gemFloat {
+  0%, 100% { transform: translateY(0) rotate(-1.6deg); }
+  50%      { transform: translateY(-22px) rotate(1.6deg); }
+}
+@keyframes gemTurn {
+  0%, 100% { transform: scaleX(1); }
+  50%      { transform: scaleX(0.9); }
+}
+@keyframes gemGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.08); }
+}
+@keyframes gemGlint {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(360px); }
+}
+
+/* ── Hero (flammini layout) — big bottom headline, floor glow, chevrons ──── */
+.hero-headline {
+  font-size: clamp(2.1rem, 6.2vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+/* On-load entrance (not scroll-gated, so the hero always paints) */
+.hero-rise {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: heroRise 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-rise.hr-crystal {
+  transform: translateY(0) scale(0.94);
+  animation-name: heroRiseScale;
+  animation-duration: 1.1s;
+}
+.hr-1 { animation-delay: 0.06s; }
+.hr-2 { animation-delay: 0.18s; }
+.hr-3 { animation-delay: 0.3s; }
+@keyframes heroRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroRiseScale {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-floor-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -16%;
+  width: 80vw;
+  height: 46vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 60% at 50% 100%,
+    rgb(var(--accent) / 0.32) 0%,
+    rgb(var(--accent) / 0.12) 34%,
+    transparent 70%);
+  filter: blur(36px);
+  pointer-events: none;
+  animation: floorGlow 7s ease-in-out infinite;
+}
+@keyframes floorGlow {
+  0%, 100% { opacity: 0.78; transform: translateX(-50%) scaleX(1); }
+  50%      { opacity: 1;    transform: translateX(-50%) scaleX(1.08); }
+}
+.hero-chevrons {
+  animation: chevronPulse 2.4s ease-in-out infinite;
+}
+@keyframes chevronPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(5px); opacity: 1; }
 }
 
 @keyframes btn-shine {
@@ -433,6 +619,290 @@ h1, h2, h3, h4, h5 {
   100% { transform: translateX(-50%); }
 }
 
+/* ── "Let's talk" CTA ticker (flammini.design signature) ──────────
+   A full-bleed, infinitely scrolling oversized link. Alternates solid
+   and outlined glyphs; speeds up + turns accent on hover. */
+.cta-ticker {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(1.5rem, 4vw, 3rem) 0;
+  border-top: 1px solid rgb(var(--line) / 0.12);
+  border-bottom: 1px solid rgb(var(--line) / 0.12);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.cta-ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: cta-ticker 26s linear infinite;
+}
+.cta-ticker:hover .cta-ticker-track { animation-duration: 11s; }
+.cta-ticker-group {
+  display: flex;
+  align-items: center;
+}
+.cta-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
+  padding: 0 0.5em;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: rgb(var(--ink-high));
+  transition: color 0.35s ease, -webkit-text-stroke-color 0.35s ease;
+}
+.cta-ticker-item--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.4px rgb(var(--ink-high) / 0.45);
+}
+.cta-ticker:hover .cta-ticker-item { color: rgb(var(--accent)); }
+.cta-ticker:hover .cta-ticker-item--outline {
+  color: transparent;
+  -webkit-text-stroke-color: rgb(var(--accent) / 0.8);
+}
+.cta-ticker-arrow {
+  width: 0.62em;
+  height: 0.62em;
+  flex-shrink: 0;
+  transition: transform 0.35s ease;
+}
+.cta-ticker:hover .cta-ticker-arrow { transform: translate(0.1em, -0.1em); }
+@keyframes cta-ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   3D ENGINE — perspective scenes, pointer tilt, parallax depth, the hero stage
+   Pure compositor transforms (rotate / translateZ / scale). Driven by the
+   --par-x/--par-y root vars (set in MotionEffects) and per-element CSS vars.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* A perspective context. Children with translateZ gain real depth. */
+.scene-3d {
+  perspective: 1500px;
+  perspective-origin: 50% 42%;
+}
+
+/* Pointer-tilt surface (see Tilt3D.tsx). */
+.tilt-3d {
+  --rx: 0deg; --ry: 0deg; --tz: 0px; --sc: 1; --mx: 50%; --my: 50%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform:
+    perspective(1100px)
+    rotateX(var(--rx)) rotateY(var(--ry))
+    translateZ(var(--tz)) scale(var(--sc));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tilt-glare::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx) var(--my),
+    rgb(255 255 255 / 0.18) 0%, transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  mix-blend-mode: soft-light;
+  z-index: 2;
+}
+@media (hover: hover) {
+  .tilt-glare:hover::after { opacity: 1; }
+}
+
+/* Mouse-parallax layer. Set --depth (unitless px factor) per element. */
+.parallax {
+  transform: translate3d(
+    calc(var(--par-x, 0) * var(--depth, 0) * 1px),
+    calc(var(--par-y, 0) * var(--depth, 0) * 1px),
+    0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.par-6  { --depth: 6; }
+.par-10 { --depth: 10; }
+.par-14 { --depth: 14; }
+.par-16 { --depth: 16; }
+.par-22 { --depth: 22; }
+
+/* Global card depth — attached to .glass-card by MotionEffects on fine pointers. */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+/* ── Hero 3D stage ───────────────────────────────────────────────────────── */
+.hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1.04;
+  transform-style: preserve-3d;
+}
+
+.stage-orb {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%,
+    rgb(var(--accent-bright) / 0.55) 0%,
+    rgb(var(--accent) / 0.20) 46%,
+    transparent 70%);
+  filter: blur(38px);
+  animation: stageOrb 9s ease-in-out infinite;
+}
+
+.stage-ring {
+  position: absolute;
+  inset: 2%;
+  border-radius: 50%;
+  border: 1px dashed rgb(var(--accent) / 0.30);
+  animation: stageRing 26s linear infinite;
+}
+.stage-ring--2 {
+  inset: 11%;
+  border-style: solid;
+  border-color: rgb(var(--accent) / 0.16);
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+.stage-ring::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: 50%;
+  width: 8px; height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: rgb(var(--accent-bright));
+  box-shadow: 0 0 14px 2px rgb(var(--accent) / 0.8);
+}
+
+.stage-panel {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%) translateZ(28px);
+  padding: 1rem 1.05rem 1.1rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg,
+    rgb(var(--bg-elevated) / 0.92) 0%,
+    rgb(var(--bg-raised) / 0.92) 100%);
+  border: 1px solid rgb(var(--line) / 0.14);
+  box-shadow:
+    0 1px 0 0 rgb(var(--surface-1) / 0.06) inset,
+    0 40px 80px -30px rgb(0 0 0 / 0.7),
+    0 0 60px -20px rgb(var(--accent) / 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+:root[data-theme='light'] .stage-panel {
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.7) inset,
+    0 30px 60px -28px rgb(15 23 42 / 0.28),
+    0 0 50px -22px rgb(var(--accent) / 0.30);
+}
+
+.stage-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgb(var(--surface-1) / 0.18);
+}
+.stage-dot--live { background: rgb(var(--accent)); box-shadow: 0 0 10px rgb(var(--accent) / 0.9); }
+
+.console-row {
+  opacity: 0;
+  animation: consoleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.console-row:nth-child(1) { animation-delay: 0.5s; }
+.console-row:nth-child(2) { animation-delay: 0.75s; }
+.console-row:nth-child(3) { animation-delay: 1.0s; }
+.console-row:nth-child(4) { animation-delay: 1.25s; }
+
+.console-spin {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgb(var(--accent) / 0.25);
+  border-top-color: rgb(var(--accent));
+  animation: spin 0.8s linear infinite;
+}
+
+.stage-bar {
+  height: 6px; border-radius: 999px;
+  background: rgb(var(--surface-1) / 0.10);
+  overflow: hidden;
+}
+.stage-bar > i {
+  display: block; height: 100%; width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg,
+    rgb(var(--accent-dark)), rgb(var(--accent)), rgb(var(--accent-bright)));
+  animation: stageFill 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+}
+
+.stage-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: rgb(var(--ink-high));
+  background: rgb(var(--bg-elevated) / 0.85);
+  border: 1px solid rgb(var(--accent) / 0.30);
+  box-shadow: 0 18px 36px -16px rgb(0 0 0 / 0.6),
+              0 0 24px -8px rgb(var(--accent) / 0.45);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.stage-badge svg { color: rgb(var(--accent)); }
+.stage-badge--ai {
+  top: 4%; right: -3%;
+  animation: badgeFloatA 6s ease-in-out infinite;
+}
+.stage-badge--pass {
+  bottom: 6%; left: -5%;
+  animation: badgeFloatB 7s ease-in-out infinite;
+}
+
+@keyframes stageOrb {
+  0%, 100% { transform: translateZ(-90px) scale(1); opacity: 0.9; }
+  50%      { transform: translateZ(-90px) scale(1.08); opacity: 1; }
+}
+@keyframes stageRing {
+  from { transform: translateZ(-50px) rotate(0deg); }
+  to   { transform: translateZ(-50px) rotate(360deg); }
+}
+@keyframes badgeFloatA {
+  0%, 100% { transform: translateZ(85px) translateY(0); }
+  50%      { transform: translateZ(85px) translateY(-12px); }
+}
+@keyframes badgeFloatB {
+  0%, 100% { transform: translateZ(65px) translateY(0); }
+  50%      { transform: translateZ(65px) translateY(10px); }
+}
+@keyframes consoleIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes stageFill {
+  from { width: 0; }
+  to   { width: 98%; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -441,7 +911,18 @@ h1, h2, h3, h4, h5 {
     scroll-behavior: auto !important;
   }
   .aurora-blob { animation: none; }
+  .ambient-blob, .ambient-grid { animation: none; }
+  .hero-gem, .gem-body, .gem-glint, .hero-gem-glow { animation: none; }
+  .hero-floor-glow, .hero-chevrons { animation: none; }
+  .hero-rise { animation: none; opacity: 1; transform: none; }
+  .wave-line, .wave-field { animation: none; }
   .reveal, .reveal-item, .reveal-scale, .reveal-left { opacity: 1; transform: none; }
   .marquee { animation: none; }
+  .cta-ticker-track { animation: none; }
   .hb-edge, .hb-node, .hb-scan { animation: none; }
+  /* Flatten all 3D so nothing depends on motion */
+  .tilt-3d, .parallax, .card-3d, .stage-panel,
+  .stage-orb, .stage-ring, .stage-badge { transform: none !important; }
+  .console-row, .stage-bar > i { opacity: 1 !important; width: 98%; }
+  .scene-3d { perspective: none; }
 }

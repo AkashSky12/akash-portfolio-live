@@ -177,6 +177,29 @@ export default function Contact() {
           </form>
         </div>
       </div>
+
+      {/* Flammini-style oversized scrolling “Let’s talk” CTA */}
+      <a
+        href="mailto:akash.mosey99@gmail.com?subject=Let%E2%80%99s%20talk"
+        aria-label="Let’s talk — send me an email"
+        className="cta-ticker mt-16 sm:mt-24"
+      >
+        <div className="cta-ticker-track" aria-hidden="true">
+          {[0, 1].map((g) => (
+            <div className="cta-ticker-group" key={g}>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`cta-ticker-item ${i % 2 ? 'cta-ticker-item--outline' : ''}`}
+                >
+                  Let’s talk
+                  <ArrowUpRight className="cta-ticker-arrow" strokeWidth={1.5} />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </a>
     </section>
   )
 }

@@ -1,0 +1,189 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SAVED THEME SET — "noon_set"
+   noon.ai-inspired neutral-black + golden glow + LINE-WAVES background
+   ────────────────────────────────────────────────────────────────────────
+   This is the COMPLETE noon look as shipped: neutral pure-black canvas,
+   off-white text (#f6f6f7), grey secondary (#54565b), single warm golden
+   accent (#ffa51f), DM Sans / Inter typography, and noon's signature flowing
+   "line-waves" contour-field background animation (site-wide, fixed behind
+   all content).
+
+   Unlike the palette-only `noon.css`, this file documents the FULL set:
+     1. Palette tokens          → globals.css :root blocks
+     2. Fonts                   → layout.tsx (Inter + DM Sans + JetBrains Mono)
+     3. Ambient + line-waves    → globals.css ambient/wave CSS
+     4. Components              → LineWaves.tsx + AmbientBackground.tsx
+
+   (This file is a backup only — it is NOT imported anywhere.)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   1. PALETTE TOKENS
+   Copy the two :root blocks below over the matching
+   `:root, :root[data-theme='dark']` and `:root[data-theme='light']` blocks
+   near the top of `src/app/globals.css`.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root,
+:root[data-theme='dark'] {
+  /* noon.ai — neutral pure-black canvas, warm golden glow, off-white text */
+  --bg:          6 6 7;          /* near-pure black, neutral */
+  --bg-raised:   14 14 16;       /* lifted panel */
+  --bg-elevated: 22 22 26;       /* card / elevated chrome */
+  --surface-1:   255 255 255;    /* neutral white tint for low-alpha chrome */
+  --ink:         224 224 228;    /* body copy, soft neutral white */
+  --ink-high:    246 246 247;    /* headings — noon's #f6f6f7 */
+  --ink-muted:   138 140 147;    /* secondary grey */
+  --ink-subtle:  84 86 91;       /* tertiary — noon's #54565b */
+  --accent:      255 165 31;     /* noon golden glow #ffa51f */
+  --accent-bright: 255 209 64;   /* bright yellow-gold #ffd140 */
+  --accent-dark: 224 106 0;      /* deep orange #e06a00 */
+  --accent-ink:  20 12 0;        /* readable text on gold fills */
+  --line:        255 255 255;    /* neutral white low-alpha rules */
+  --line-strong: 255 255 255;
+  --grid:        255 255 255;
+  --scheme: dark;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* noon.ai light — clean neutral paper with golden accent */
+  --bg:          250 250 251;    /* near-white paper */
+  --bg-raised:   244 244 245;    /* slightly deeper */
+  --bg-elevated: 255 255 255;    /* lifted card */
+  --surface-1:   0 0 0;          /* neutral ink for low-alpha chrome */
+  --ink:         60 62 68;       /* body copy */
+  --ink-high:    12 12 14;       /* headings, near-black */
+  --ink-muted:   110 112 120;    /* secondary */
+  --ink-subtle:  150 152 160;    /* tertiary */
+  --accent:      200 120 0;      /* gold, AA-safe on white */
+  --accent-bright: 240 170 20;   /* bright gold highlight */
+  --accent-dark: 150 80 0;       /* deep amber */
+  --accent-ink:  255 255 255;    /* readable on gold fills */
+  --line:        0 0 0;          /* neutral ink for low-alpha rules */
+  --line-strong: 0 0 0;
+  --grid:        0 0 0;
+  --scheme: light;
+  color-scheme: light;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   2. FONTS  →  src/app/layout.tsx
+   Imports:  import { Inter, DM_Sans, JetBrains_Mono } from 'next/font/google'
+
+   const sans = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-sans' })
+   const display = DM_Sans({ subsets: ['latin'], display: 'swap',
+                             weight: ['400','500','600','700'], variable: '--font-display' })
+   const mono = JetBrains_Mono({ subsets: ['latin'], display: 'swap',
+                                 weight: ['400','500'], variable: '--font-mono' })
+
+   viewport.themeColor: dark '#060607', light '#fafafb'
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   3. AMBIENT BACKGROUND + LINE-WAVES  →  src/app/globals.css
+   Paste this block in place of the existing `.ambient-bg` … `wave-bob`
+   section. NOTE: @keyframes wave-flow translateX MUST equal the WAVELENGTH
+   constant in LineWaves.tsx (520) for a seamless loop.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 8%, rgb(var(--accent) / 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgb(var(--accent-dark) / 0.08) 0%, transparent 60%);
+}
+
+/* Line-waves — noon's signature flowing contour field */
+.line-waves {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(ellipse 78% 72% at 50% 44%, #000 28%, transparent 86%);
+  mask-image: radial-gradient(ellipse 78% 72% at 50% 44%, #000 28%, transparent 86%);
+}
+.line-waves svg { display: block; width: 100%; height: 100%; }
+.wave-field {
+  transform-origin: center;
+  animation: wave-bob 15s ease-in-out infinite;
+}
+.wave-line { will-change: transform; }
+.wave-a { animation: wave-flow 17s linear infinite; }
+.wave-b { animation: wave-flow 21s linear infinite; }
+.wave-c { animation: wave-flow 25s linear infinite; }
+.wave-d { animation: wave-flow 29s linear infinite; }
+.wave-e { animation: wave-flow 33s linear infinite; }
+@keyframes wave-flow {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-520px); }
+}
+@keyframes wave-bob {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50%      { transform: translateY(-14px) scaleY(1.03); }
+}
+
+/* Reduced-motion guard — add alongside the others in the
+   @media (prefers-reduced-motion: reduce) block:
+     .wave-line, .wave-field { animation: none; }
+*/
+
+/* ─────────────────────────────────────────────────────────────────────────
+   4. COMPONENTS
+
+   ── src/components/LineWaves.tsx ────────────────────────────────────────
+   'use client'
+
+   const LINES = 18
+   const WAVELENGTH = 520            // must match @keyframes wave-flow translateX
+   const SPEEDS = ['wave-a','wave-b','wave-c','wave-d','wave-e']
+
+   function buildPath(index: number) {
+     const baseY = 40 + index * (820 / (LINES - 1))
+     const bell  = Math.exp(-(((index - 8.5) / 4.2) ** 2))
+     const amp   = 10 + 30 * bell
+     const phase = index * 0.55
+     let d = ''
+     for (let x = -260; x <= 1860; x += 40) {
+       const y = baseY + amp * Math.sin((x / WAVELENGTH) * Math.PI * 2 + phase)
+       d += (x === -260 ? 'M' : 'L') + x.toFixed(0) + ' ' + y.toFixed(1) + ' '
+     }
+     return { d: d.trim(), opacity: 0.05 + 0.16 * bell }
+   }
+
+   export default function LineWaves() {
+     const lines = Array.from({ length: LINES }, (_, i) => ({ ...buildPath(i), speed: SPEEDS[i % 5] }))
+     return (
+       <div className="line-waves" aria-hidden="true">
+         <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+           <g className="wave-field" fill="none" stroke="rgb(var(--ink-high))" strokeWidth="1.1">
+             {lines.map((l, i) => (
+               <path key={i} className={`wave-line ${l.speed}`} d={l.d} strokeOpacity={l.opacity} />
+             ))}
+           </g>
+         </svg>
+       </div>
+     )
+   }
+
+   ── src/components/AmbientBackground.tsx ────────────────────────────────
+   import LineWaves from '@/components/LineWaves'
+
+   export default function AmbientBackground() {
+     return (
+       <div className="ambient-bg" aria-hidden="true">
+         <div className="ambient-glow" />
+         <LineWaves />
+       </div>
+     )
+   }
+
+   Render <AmbientBackground /> once in page.tsx (after <MotionEffects />,
+   before <Navbar />). The hero's HeroGem (lime crystal) is REMOVED in this set.
+   ───────────────────────────────────────────────────────────────────────── */

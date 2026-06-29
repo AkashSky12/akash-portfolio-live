@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
+import { Inter, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const sans = Inter({
@@ -8,10 +8,10 @@ const sans = Inter({
   variable: '--font-sans',
 })
 
-const display = Plus_Jakarta_Sans({
+const display = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-display',
 })
 
@@ -26,8 +26,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: dark)',  color: '#12100a' },
-    { media: '(prefers-color-scheme: light)', color: '#f3ede0' },
+    { media: '(prefers-color-scheme: dark)',  color: '#060607' },
+    { media: '(prefers-color-scheme: light)', color: '#fafafb' },
   ],
   colorScheme: 'dark light',
 }

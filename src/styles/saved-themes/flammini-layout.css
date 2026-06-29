@@ -1,0 +1,234 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SAVED THEME SET — "flammini-layout"
+   flammini.design-inspired black + lime + Sora, WITH the centered-crystal
+   hero layout (big bottom headline, floor glow, focus-reticle crystal)
+   ────────────────────────────────────────────────────────────────────────
+   This is the COMPLETE flammini look as shipped after the hero rebuild:
+   pure-black canvas, white text, lime accent (#bdff00), Sora typography, a
+   glossy dark-translucent faceted CRYSTAL as the hero centerpiece, a lime
+   floor-glow, the headline pinned full-width to the bottom, a name/role/
+   availability meta row, and a site-wide drifting lime ambient background.
+
+   Unlike the palette-only `flammini.css` / `green.css`, this documents the
+   FULL set:
+     1. Palette tokens          → globals.css :root blocks
+     2. Fonts                   → layout.tsx (Sora + JetBrains Mono)
+     3. Hero + crystal CSS      → globals.css (.hero-headline, .hero-floor-glow,
+                                   .hero-chevrons, .hero-rise, .hero-gem sizing)
+     4. Ambient background      → globals.css (.ambient-blob / .ambient-grid)
+                                   + AmbientBackground.tsx (lime glow + grid)
+     5. Components / layout      → HeroGem.tsx (crystal), Hero.tsx (centered
+                                   crystal + bottom headline), Snapshot.tsx
+                                   (relocated QA console + stats), page.tsx
+
+   (This file is a backup only — it is NOT imported anywhere.)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   1. PALETTE TOKENS
+   Copy the two :root blocks below over the matching
+   `:root, :root[data-theme='dark']` and `:root[data-theme='light']` blocks
+   near the top of `src/app/globals.css`.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root,
+:root[data-theme='dark'] {
+  /* flammini.design — pure-black canvas, lime-green glow, white text */
+  --bg:          5 5 6;          /* near-pure black */
+  --bg-raised:   13 14 13;       /* lifted panel */
+  --bg-elevated: 20 22 20;       /* card / elevated chrome */
+  --surface-1:   255 255 255;    /* neutral white tint for low-alpha chrome */
+  --ink:         240 240 240;    /* body copy, white */
+  --ink-high:    255 255 255;    /* headings — pure white */
+  --ink-muted:   156 156 156;    /* secondary grey — flammini #9c9c9c */
+  --ink-subtle:  118 118 118;    /* tertiary — flammini #767676 */
+  --accent:      189 255 0;      /* flammini lime #bdff00 */
+  --accent-bright: 208 255 74;   /* brighter lime */
+  --accent-dark: 150 205 0;      /* deeper lime */
+  --accent-ink:  0 0 0;          /* black text on lime fills */
+  --line:        255 255 255;    /* neutral white low-alpha rules */
+  --line-strong: 255 255 255;
+  --grid:        255 255 255;
+  --scheme: dark;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* flammini light — clean white paper with lime-green accent */
+  --bg:          250 250 250;    /* near-white paper */
+  --bg-raised:   244 244 244;    /* slightly deeper */
+  --bg-elevated: 255 255 255;    /* lifted card */
+  --surface-1:   0 0 0;          /* neutral ink for low-alpha chrome */
+  --ink:         40 42 44;       /* body copy */
+  --ink-high:    10 10 10;       /* headings, near-black */
+  --ink-muted:   100 102 105;    /* secondary */
+  --ink-subtle:  150 152 155;    /* tertiary */
+  --accent:      122 165 0;      /* darker lime, AA-safe on white */
+  --accent-bright: 150 200 0;    /* bright lime highlight */
+  --accent-dark: 96 130 0;       /* deep olive-lime */
+  --accent-ink:  255 255 255;    /* readable on lime fills */
+  --line:        0 0 0;          /* neutral ink for low-alpha rules */
+  --line-strong: 0 0 0;
+  --grid:        0 0 0;
+  --scheme: light;
+  color-scheme: light;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   2. FONTS  →  src/app/layout.tsx  (flammini uses "Sora" for everything)
+
+     import { Sora, JetBrains_Mono } from 'next/font/google'
+     const sans    = Sora({ subsets:['latin'], display:'swap',
+                            weight:['400','500','600','700'], variable:'--font-sans' })
+     const display = Sora({ subsets:['latin'], display:'swap',
+                            weight:['500','600','700','800'], variable:'--font-display' })
+     const mono    = JetBrains_Mono({ subsets:['latin'], display:'swap',
+                            weight:['400','500'], variable:'--font-mono' })
+
+     viewport.themeColor: dark '#050506', light '#fafafa'
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   3. HERO + CRYSTAL CSS  →  src/app/globals.css
+
+   The crystal reuses the existing gem animations (gemFloat/gemTurn/gemGlow/
+   gemGlint). Its size is HEIGHT-based so the whole hero fits one viewport.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* crystal sizing (replace the .hero-gem width/aspect lines) */
+.hero-gem {
+  height: clamp(270px, 47vh, 500px);
+  width: auto;
+  aspect-ratio: 240 / 320;
+  /* keep: position relative; display block; pointer-events none;
+     animation: gemFloat 8s ...; filter: drop-shadow(0 30px 70px ...); */
+}
+/* .gem-body transform-origin must match the 240×320 viewBox centre: */
+.gem-body { transform-origin: 120px 160px; }
+/* glint sweep distance for the taller crystal: */
+/* @keyframes gemGlint { 0%{transform:translateX(0)} 100%{transform:translateX(360px)} } */
+
+/* big bottom headline */
+.hero-headline {
+  font-size: clamp(2.1rem, 6.2vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+/* lime floor-glow at the bottom centre */
+.hero-floor-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -16%;
+  width: 80vw;
+  height: 46vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 60% at 50% 100%,
+    rgb(var(--accent) / 0.32) 0%,
+    rgb(var(--accent) / 0.12) 34%,
+    transparent 70%);
+  filter: blur(36px);
+  pointer-events: none;
+  animation: floorGlow 7s ease-in-out infinite;
+}
+@keyframes floorGlow {
+  0%, 100% { opacity: 0.78; transform: translateX(-50%) scaleX(1); }
+  50%      { opacity: 1;    transform: translateX(-50%) scaleX(1.08); }
+}
+
+/* scroll-cue chevrons under the crystal */
+.hero-chevrons { animation: chevronPulse 2.4s ease-in-out infinite; }
+@keyframes chevronPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(5px); opacity: 1; }
+}
+
+/* On-load entrance (NOT scroll-gated — the hero content sits below the fold,
+   so an intersection reveal would never fire). */
+.hero-rise {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: heroRise 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-rise.hr-crystal {
+  transform: translateY(0) scale(0.94);
+  animation-name: heroRiseScale;
+  animation-duration: 1.1s;
+}
+.hr-1 { animation-delay: 0.06s; }
+.hr-2 { animation-delay: 0.18s; }
+.hr-3 { animation-delay: 0.3s; }
+@keyframes heroRise      { to { opacity: 1; transform: translateY(0); } }
+@keyframes heroRiseScale { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* Add to the @media (prefers-reduced-motion: reduce) block:
+     .hero-floor-glow, .hero-chevrons { animation: none; }
+     .hero-rise { animation: none; opacity: 1; transform: none; }
+     .ambient-blob, .ambient-grid { animation: none; }
+     .hero-gem, .gem-body, .gem-glint, .hero-gem-glow { animation: none; }
+*/
+
+/* ─────────────────────────────────────────────────────────────────────────
+   4. AMBIENT BACKGROUND  →  src/components/AmbientBackground.tsx
+
+   export default function AmbientBackground() {
+     return (
+       <div className="ambient-bg" aria-hidden="true">
+         <div className="ambient-glow" />
+         <div className="ambient-grid" />
+         <div className="ambient-blob ambient-blob--a" />
+         <div className="ambient-blob ambient-blob--b" />
+         <div className="ambient-blob ambient-blob--c" />
+       </div>
+     )
+   }
+
+   (The lime .ambient-blob / .ambient-grid / ambientA-C keyframes already live
+   in globals.css. The noon LineWaves component is unused in this set.)
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────────────────────
+   5. COMPONENTS / LAYOUT
+
+   ── src/components/HeroGem.tsx — the flammini crystal ───────────────────
+   Tall faceted gem, viewBox "0 0 240 320":
+     • lower pavilion polygon  (24,150)(216,150)(120,300)  → url(#gem-pav) dark
+     • bright lime wings       (120,20)(24,150)(78,150) + mirror → url(#gem-wingL/R)
+     • dark inner core         (120,20)(162,150)(120,168)(78,150) → url(#gem-core)
+                               + url(#gem-dots) pattern (clipped to core)
+     • central visor           ellipse cx120 cy152 rx72 ry27 → url(#gem-visor)
+                               + focus reticle (corner brackets + centre dot)
+     • bright edge strokes (accent-bright) on the outer outline + crown lines
+     • dim pavilion facet lines (accent @ 0.22)
+     • glossy white highlight down the left wing → url(#gem-gloss)
+     • sweeping glint rect (class "gem-glint", clipped to the diamond outline)
+   Gradients are token-driven (accent / accent-bright / accent-dark) so the gem
+   re-tints automatically with the palette; the glass fills are literal darks
+   (#04060a … #1d2b14).
+
+   ── src/components/sections/Hero.tsx — centered-crystal layout ───────────
+   <section id="home" class="scene-3d relative flex min-h-[100svh] flex-col overflow-hidden">
+     bg: par-10 bg-grid (opacity-40), par-16 aurora-blob--glow, .hero-floor-glow
+     centre: container flex flex-1 items-center justify-center
+             → <div class="hero-rise hr-crystal parallax par-6 flex flex-col items-center">
+                 <HeroGem/> + .hero-chevrons (ChevronsDown)
+     bottom: container pb-7 sm:pb-9
+             → CTAs (hero-rise hr-1): "Let's work together" + "View work" (#snapshot)
+             → <h1 class="hero-rise hr-2 hero-headline">Engineering quality at the
+                <span class="accent-text">speed of AI</span></h1>
+             → meta row (hero-rise hr-3, grid sm:grid-cols-3, border-t):
+                 "Akash Simon" · "QA Lead & GenAI Automation Engineer" · "Open to senior roles"
+   Imports ONLY: ArrowUpRight, ChevronsDown (lucide) + HeroGem. No useReveal.
+
+   ── src/components/sections/Snapshot.tsx — relocated QA console + stats ──
+   Holds the former hero right-column 3D console (Tilt3D "hero-stage" with
+   stage-orb / rings / test rows / coverage bar / AI + pass badges) plus the
+   intro paragraph and the 4 animated stats (StatItem + useCounter). Rendered
+   right after <Hero/> in page.tsx (id="snapshot"; the hero "View work" CTA
+   links to it).
+
+   ── src/app/page.tsx ────────────────────────────────────────────────────
+   <main> order: Hero, Snapshot, About, Experience, Skills, ToolMarquee,
+   Certifications, Contact. (Snapshot added between Hero and About.)
+   ───────────────────────────────────────────────────────────────────────── */

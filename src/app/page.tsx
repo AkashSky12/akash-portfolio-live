@@ -8,13 +8,15 @@ import Certifications from '@/components/sections/Certifications'
 import Contact from '@/components/sections/Contact'
 import Footer from '@/components/sections/Footer'
 import MotionEffects from '@/components/MotionEffects'
+import AmbientBackground from '@/components/AmbientBackground'
 
 export default function Home() {
   return (
     <>
       <MotionEffects />
+      <AmbientBackground />
       <Navbar />
-      <main id="main">
+      <main id="main" className="relative z-10">
         <Hero />
         <About />
         <Experience />
@@ -23,7 +25,9 @@ export default function Home() {
         <Certifications />
         <Contact />
       </main>
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </>
   )
 }

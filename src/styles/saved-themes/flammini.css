@@ -1,0 +1,72 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SAVED THEME — "Flammini" (flammini.design-inspired black + lime + white)
+   ────────────────────────────────────────────────────────────────────────
+   A backup of the flammini.design-inspired theme: pure-black canvas, pure
+   white text, signature lime-green accent (#bdff00), and neutral greys
+   (#9c9c9c / #767676). Pairs with the Sora typeface (loaded in layout.tsx).
+
+   TO APPLY / RESTORE:
+   1. Copy the two :root blocks below over the matching
+      `:root, :root[data-theme='dark']` and `:root[data-theme='light']`
+      blocks near the top of `src/app/globals.css`.
+   2. Ensure the fonts in `src/app/layout.tsx` import `Sora` and assign it to
+      both `--font-sans` and `--font-display` (see notes at bottom).
+
+   (This file is a backup only — it is NOT imported anywhere.)
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root,
+:root[data-theme='dark'] {
+  /* flammini.design — pure-black canvas, lime-green glow, white text */
+  --bg:          5 5 6;          /* near-pure black */
+  --bg-raised:   13 14 13;       /* lifted panel */
+  --bg-elevated: 20 22 20;       /* card / elevated chrome */
+  --surface-1:   255 255 255;    /* neutral white tint for low-alpha chrome */
+  --ink:         240 240 240;    /* body copy, white */
+  --ink-high:    255 255 255;    /* headings — pure white */
+  --ink-muted:   156 156 156;    /* secondary grey — flammini #9c9c9c */
+  --ink-subtle:  118 118 118;    /* tertiary — flammini #767676 */
+  --accent:      189 255 0;      /* flammini lime #bdff00 */
+  --accent-bright: 208 255 74;   /* brighter lime */
+  --accent-dark: 150 205 0;      /* deeper lime */
+  --accent-ink:  0 0 0;          /* black text on lime fills */
+  --line:        255 255 255;    /* neutral white low-alpha rules */
+  --line-strong: 255 255 255;
+  --grid:        255 255 255;
+  --scheme: dark;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* flammini light — clean white paper with lime-green accent */
+  --bg:          250 250 250;    /* near-white paper */
+  --bg-raised:   244 244 244;    /* slightly deeper */
+  --bg-elevated: 255 255 255;    /* lifted card */
+  --surface-1:   0 0 0;          /* neutral ink for low-alpha chrome */
+  --ink:         40 42 44;       /* body copy */
+  --ink-high:    10 10 10;       /* headings, near-black */
+  --ink-muted:   100 102 105;    /* secondary */
+  --ink-subtle:  150 152 155;    /* tertiary */
+  --accent:      122 165 0;      /* darker lime, AA-safe on white */
+  --accent-bright: 150 200 0;    /* bright lime highlight */
+  --accent-dark: 96 130 0;       /* deep olive-lime */
+  --accent-ink:  255 255 255;    /* readable on lime fills */
+  --line:        0 0 0;          /* neutral ink for low-alpha rules */
+  --line-strong: 0 0 0;
+  --grid:        0 0 0;
+  --scheme: light;
+  color-scheme: light;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   FONTS (layout.tsx) — flammini uses "Sora" for everything:
+
+     import { Sora, JetBrains_Mono } from 'next/font/google'
+     const sans    = Sora({ subsets:['latin'], display:'swap',
+                            weight:['400','500','600','700'], variable:'--font-sans' })
+     const display = Sora({ subsets:['latin'], display:'swap',
+                            weight:['500','600','700','800'], variable:'--font-display' })
+
+   Heading letter-spacing is relaxed (.heading-xl -0.02em, .heading-lg -0.015em)
+   to match Sora's normal tracking.
+   ──────────────────────────────────────────────────────────────────────── */

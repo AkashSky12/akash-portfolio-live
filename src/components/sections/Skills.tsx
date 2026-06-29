@@ -99,12 +99,12 @@ export default function Skills() {
 
         <div ref={gridRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {groups.map(({ Icon, title, tags }, i) => (
-            <div key={title} className={`reveal-scale stagger-${i + 1} ${gv} glass-card p-6`}>
+            <div key={title} className={`group reveal-scale stagger-${i + 1} ${gv} glass-card p-6`}>
               <div className="mb-5 flex items-center gap-3">
-                <div className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent">
+                <div className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent transition-colors duration-300 group-hover:border-accent/45 group-hover:bg-accent/[0.16]">
                   <Icon size={16} strokeWidth={2} />
                 </div>
-                <p className="font-display text-[13px] font-bold uppercase tracking-[0.1em] text-ink-high">
+                <p className="font-display text-[13px] font-bold uppercase tracking-[0.1em] text-ink-high transition-colors duration-300 group-hover:text-accent">
                   {title}
                 </p>
               </div>

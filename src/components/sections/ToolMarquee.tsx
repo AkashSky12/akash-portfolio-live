@@ -2,14 +2,17 @@
 import Image from 'next/image'
 import { useReveal } from '@/lib/useReveal'
 
-// Brand SVGs from jsdelivr simple-icons CDN — vector, so crisp at any resolution (true 4K).
+// Original brand-colored SVGs. Most come from the simple-icons CDN (auto brand color);
+// a few use devicon's full-color originals where simple-icons lacks the icon or renders
+// it pure-white (invisible on the light theme). All vector — crisp at any resolution (4K).
+const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
 const tools = [
-  { name: 'Playwright', slug: 'playwright', color: '2EAD33' },
+  { name: 'Playwright', slug: 'playwright', color: '2EAD33', src: `${DEVICON}/playwright/playwright-original.svg` },
   { name: 'Selenium', slug: 'selenium', color: '43B02A' },
   { name: 'Cypress', slug: 'cypress', color: '69D3A7' },
   { name: 'Appium', slug: 'appium', color: 'EE376C' },
   { name: 'Python', slug: 'python', color: '3776AB' },
-  { name: 'Java', slug: 'openjdk', color: 'FFFFFF' },
+  { name: 'Java', slug: 'openjdk', color: 'FFFFFF', src: `${DEVICON}/java/java-original.svg` },
   { name: 'GitHub Actions', slug: 'githubactions', color: '2088FF' },
   { name: 'Jenkins', slug: 'jenkins', color: 'D24939' },
   { name: 'Postman', slug: 'postman', color: 'FF6C37' },
@@ -22,17 +25,16 @@ const tools = [
   { name: 'Swagger', slug: 'swagger', color: '85EA2D' },
 ]
 
-function Logo({ name, slug, color }: { name: string; slug: string; color: string }) {
+function Logo({ name, slug, color, src }: { name: string; slug: string; color: string; src?: string }) {
   return (
     <div className="group flex shrink-0 flex-col items-center gap-2.5 px-7">
       <Image
-        src={`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`}
+        src={src ?? `https://cdn.simpleicons.org/${slug}/${color}`}
         alt={name}
         width={40}
         height={40}
         unoptimized
-        className="h-10 w-10 opacity-55 grayscale transition-all duration-300 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0"
-        style={{ filter: 'invert(0.85)' }}
+        className="h-10 w-10 opacity-85 drop-shadow-[0_0_1px_rgba(0,0,0,0.28)] transition-all duration-300 group-hover:scale-110 group-hover:opacity-100"
       />
       <span className="text-[11px] font-medium tracking-wide text-ink-subtle transition-colors group-hover:text-accent">
         {name}

@@ -1,4 +1,5 @@
 'use client'
+import { ArrowUpRight } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 
 type Bullet = { bold?: string; rest: string }
@@ -127,14 +128,14 @@ export default function Experience() {
           />
           <ol>
           {experiences.map((exp, i) => (
-            <li key={exp.role + exp.company} className={`reveal-left stagger-${i + 1} ${lv} relative pl-10 pb-14 last:pb-0`}>
+            <li key={exp.role + exp.company} className={`group reveal-left stagger-${i + 1} ${lv} relative pl-10 pb-14 last:pb-0`}>
               {/* Dot */}
               <span
                 aria-hidden
-                className={`absolute left-0 top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full border-2 ${
+                className={`absolute left-0 top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full border-2 transition-all duration-300 group-hover:scale-125 ${
                   exp.current
-                    ? 'border-accent bg-accent shadow-[0_0_0_4px_rgba(62,224,184,0.18)]'
-                    : 'border-accent/60 bg-bg'
+                    ? 'border-accent bg-accent shadow-[0_0_0_4px_rgb(var(--accent)/0.18)]'
+                    : 'border-accent/60 bg-bg group-hover:border-accent group-hover:shadow-[0_0_0_5px_rgb(var(--accent)/0.18)]'
                 }`}
               />
 
@@ -149,8 +150,14 @@ export default function Experience() {
                 )}
               </div>
 
-              <h3 className="mt-2 font-display text-[1.2rem] font-bold leading-tight text-ink-high sm:text-[1.35rem]">
+              <h3 className="mt-2 inline-flex items-center gap-2 font-display text-[1.2rem] font-bold leading-tight text-ink-high transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
                 {exp.role}
+                <ArrowUpRight
+                  size={18}
+                  strokeWidth={2}
+                  aria-hidden
+                  className="-translate-x-2 text-accent opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                />
               </h3>
               <p className="mt-1 text-[13.5px] text-ink-muted">
                 <span className="text-ink">{exp.company}</span>

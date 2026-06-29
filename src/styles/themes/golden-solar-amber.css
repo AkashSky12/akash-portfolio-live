@@ -1,0 +1,53 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SAVED THEME — "Golden Solar Amber" (the site's original look)
+   ════════════════════════════════════════════════════════════════════════
+   Backup taken before applying the noon.ai-inspired neutral-black + gold theme.
+
+   TO RESTORE THIS THEME:
+   Copy the two :root blocks below and paste them over the matching
+   `:root, :root[data-theme='dark']` and `:root[data-theme='light']` blocks
+   near the top of `src/app/globals.css`.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root,
+:root[data-theme='dark'] {
+  /* Golden Dark Orange — deep amber-espresso with warm solar gold */
+  --bg:          24 18 10;        /* dark golden-espresso */
+  --bg-raised:   36 26 12;        /* lifted amber-dark */
+  --bg-elevated: 52 38 18;        /* card / elevated chrome */
+  --surface-1:   255 244 210;     /* warm gold tint for low-alpha chrome */
+  --ink:         235 226 206;     /* body copy on dark */
+  --ink-high:    255 250 238;     /* headings, bright warm cream */
+  --ink-muted:   168 158 132;     /* secondary */
+  --ink-subtle:  112 102 82;      /* tertiary */
+  --accent:      242 168 28;      /* bright amber-gold #f2a81c */
+  --accent-bright: 255 200 68;    /* vivid gold highlight #ffc844 */
+  --accent-dark: 188 110 10;      /* deep amber #bc6e0a */
+  --accent-ink:  18 8 0;          /* readable text on accent fills */
+  --line:        255 240 210;    /* warm low-alpha rules */
+  --line-strong: 255 240 210;
+  --grid:        255 240 210;
+  --scheme: dark;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* Solar Amber — cream paper with deep amber accent */
+  --bg:          243 236 224;    /* warm cream paper */
+  --bg-raised:   235 226 210;    /* slightly deeper sand */
+  --bg-elevated: 248 243 233;    /* lifted card */
+  --surface-1:   28 20 10;       /* espresso ink for low-alpha chrome */
+  --ink:         59 47 31;       /* body copy */
+  --ink-high:    28 20 10;       /* headings, espresso */
+  --ink-muted:   122 106 82;     /* secondary */
+  --ink-subtle:  165 152 129;    /* tertiary */
+  --accent:      188 106 10;      /* bright amber-gold, AA-safe on cream */
+  --accent-bright: 232 152 22;    /* vivid amber highlight */
+  --accent-dark: 140 72 4;        /* deep amber */
+  --accent-ink:  248 243 233;    /* readable on orange fills */
+  --line:        28 20 10;       /* espresso for low-alpha rules */
+  --line-strong: 28 20 10;
+  --grid:        28 20 10;
+  --scheme: light;
+  color-scheme: light;
+}
