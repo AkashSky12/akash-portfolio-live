@@ -248,6 +248,11 @@ h1, h2, h3, h4, h5 {
 
   .section {
     @apply relative py-24 sm:py-28 md:py-32;
+    /* Skip rendering/painting sections while they're far off-screen — big win
+       on lower-end GPUs and long pages. `auto` remembers real size after first
+       paint, so in-page anchors and scroll position stay stable. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
   }
 }
 
@@ -300,7 +305,7 @@ h1, h2, h3, h4, h5 {
     rgb(var(--accent) / 0.11) 0%,
     rgb(var(--accent-bright) / 0.06) 40%,
     transparent 70%);
-  filter: blur(90px);
+  filter: blur(60px);
   opacity: 1;
   animation-delay: -14s;
 }
@@ -535,7 +540,9 @@ h1, h2, h3, h4, h5 {
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
               transform 1s cubic-bezier(0.16, 1, 0.3, 1),
               filter 1s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
+  /* Promote only transform/opacity (cheap). Animating `filter` is one-time;
+     keeping it out of will-change avoids holding a costly blur layer per node. */
+  will-change: transform, opacity;
 }
 .reveal-item  { opacity: 0; transform: translateY(44px);            filter: blur(10px); }
 .reveal-scale { opacity: 0; transform: scale(0.90) translateY(34px); filter: blur(12px); }
@@ -547,6 +554,8 @@ h1, h2, h3, h4, h5 {
   opacity: 1;
   transform: none;
   filter: blur(0);
+  /* Release the composited layer once the entrance has played. */
+  will-change: auto;
 }
 
 .stagger-1 { transition-delay:  60ms; }
