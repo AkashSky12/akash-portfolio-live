@@ -1,16 +1,33 @@
 'use client'
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Linkedin, ArrowUpRight, Send } from 'lucide-react'
+import { Mail, MapPin, Linkedin, ArrowUpRight, Send } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 
-const locations = {
+/** WhatsApp brand glyph (lucide has no WhatsApp icon). */
+function WhatsApp({ size = 20 }: { size?: number | string; strokeWidth?: number | string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413" />
+    </svg>
+  )
+}
+
+type Detail = {
+  Icon: React.ComponentType<{ size?: number | string; strokeWidth?: number | string }>
+  label: string
+  value: string
+  href: string | null
+  brand?: 'whatsapp'
+}
+
+const locations: Record<string, { label: string; flag: string; details: Detail[] }> = {
   IN: {
     label: 'India',
     flag: '🇮🇳',
     details: [
       { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com' },
-      { Icon: Phone, label: 'Phone', value: '+91 81058 44868', href: 'tel:+918105844868' },
-      { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: null as string | null },
+      { Icon: WhatsApp, label: 'WhatsApp', value: '+91 81058 44868', href: 'https://wa.me/918105844868', brand: 'whatsapp' },
+      { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: null },
       { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/' },
     ],
   },
@@ -19,12 +36,12 @@ const locations = {
     flag: '🇲🇾',
     details: [
       { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com' },
-      { Icon: Phone, label: 'Phone', value: '+60 12-747 4204', href: 'tel:+60127474204' },
-      { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: null as string | null },
+      { Icon: WhatsApp, label: 'WhatsApp', value: '+60 12-747 4204', href: 'https://wa.me/60127474204', brand: 'whatsapp' },
+      { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: null },
       { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/' },
     ],
   },
-} as const
+}
 
 type CountryKey = keyof typeof locations
 
@@ -76,7 +93,7 @@ export default function Contact() {
         <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card grid gap-10 p-6 sm:p-8 md:grid-cols-[1fr_1.2fr] md:gap-12`}>
           {/* Details */}
           <div className="space-y-5">
-            <h3 className="font-display text-[14px] font-bold uppercase tracking-[0.1em] text-ink-high">
+            <h3 className="font-display text-[20px] font-bold uppercase tracking-[0.1em] text-ink-high">
               Contact details
             </h3>
 
@@ -104,38 +121,49 @@ export default function Contact() {
             </div>
 
             <ul key={country} className="space-y-4 animate-fade-in">
-              {details.map(({ Icon, label, value, href }) => (
-                <li key={label}>
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg border border-line bg-surface text-accent">
-                      <Icon size={16} strokeWidth={2} />
+              {details.map(({ Icon, label, value, href, brand }) => {
+                const isWhatsApp = brand === 'whatsapp'
+                return (
+                  <li key={label}>
+                    <div className="flex items-center gap-3.5">
+                      <div
+                        className={`grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl border ${
+                          isWhatsApp
+                            ? 'border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366]'
+                            : 'border-line bg-surface text-accent'
+                        }`}
+                      >
+                        <Icon size={22} strokeWidth={2} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                          {label}
+                        </p>
+                        {href ? (
+                          <a
+                            href={href}
+                            target={href.startsWith('http') ? '_blank' : undefined}
+                            rel="noopener noreferrer"
+                            className={`group inline-flex items-center gap-1.5 text-[16px] font-semibold text-ink-high transition-colors sm:text-[17px] ${
+                              isWhatsApp ? 'hover:text-[#25D366]' : 'hover:text-accent'
+                            }`}
+                          >
+                            {value}
+                            {href.startsWith('http') && (
+                              <ArrowUpRight
+                                size={15}
+                                className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                              />
+                            )}
+                          </a>
+                        ) : (
+                          <p className="text-[16px] font-semibold text-ink-high sm:text-[17px]">{value}</p>
+                        )}
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
-                        {label}
-                      </p>
-                      {href ? (
-                        <a
-                          href={href}
-                          target={href.startsWith('http') ? '_blank' : undefined}
-                          rel="noopener noreferrer"
-                          className="group inline-flex items-center gap-1 text-[14px] text-ink-high transition-colors hover:text-accent"
-                        >
-                          {value}
-                          {href.startsWith('http') && (
-                            <ArrowUpRight
-                              size={13}
-                              className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-                            />
-                          )}
-                        </a>
-                      ) : (
-                        <p className="text-[14px] text-ink-high">{value}</p>
-                      )}
-                    </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

@@ -24,14 +24,15 @@ export default function HeroBackdrop() {
             <stop offset="0%" stopColor="rgb(var(--accent-bright))" />
             <stop offset="100%" stopColor="rgb(var(--accent-dark))" />
           </linearGradient>
-          <filter id="hb-blur"><feGaussianBlur stdDeviation="1.2" /></filter>
         </defs>
 
         {/* soft central glow */}
         <rect width="1600" height="900" fill="url(#hb-glow)" />
 
-        {/* test-pipeline network */}
-        <g stroke="url(#hb-line)" strokeWidth="1.1" opacity="0.55" filter="url(#hb-blur)">
+        {/* test-pipeline network — no SVG blur filter: animating stroke-dashoffset
+            under a feGaussianBlur re-rasterizes the whole region every frame and
+            tanks mobile performance. Crisp lines animate on the compositor. */}
+        <g stroke="url(#hb-line)" strokeWidth="1.1" opacity="0.45">
           <line x1="180" y1="220" x2="520" y2="400" className="hb-edge" />
           <line x1="520" y1="400" x2="880" y2="240" className="hb-edge" />
           <line x1="880" y1="240" x2="1240" y2="430" className="hb-edge" />

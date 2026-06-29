@@ -1,0 +1,14 @@
+{
+  "name": "Akash Simon Portfolio",
+  "short_name": "Akash Simon",
+  "description": "GenAI-powered Software Engineer and QA Lead engineering quality at scale.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060607",
+  "theme_color": "#060607",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" }
+  ]
+}

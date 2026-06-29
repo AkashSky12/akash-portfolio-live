@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Favicon options — person using a laptop</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 24px 80px;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #060607; color: #f6f6f7;
+  }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .sub { color: #8a8c93; margin: 0 0 32px; font-size: 14px; }
+  .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .card {
+    border: 1px solid rgba(255,255,255,.10); border-radius: 16px; padding: 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+  }
+  .card h2 { font-size: 15px; margin: 0 0 16px; display: flex; align-items: center; gap: 10px; }
+  .tag { font-size: 11px; font-weight: 700; color: #FFA51F; border: 1px solid rgba(255,165,31,.4);
+         padding: 2px 8px; border-radius: 999px; }
+  .sizes { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+  .size { text-align: center; }
+  .size img { display: block; image-rendering: auto; }
+  .size span { display: block; margin-top: 6px; font-size: 11px; color: #8a8c93; }
+  .bgs { display: flex; gap: 14px; margin-top: 18px; }
+  .chip { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; font-size: 12px; }
+  .chip.dark { background: #060607; border: 1px solid rgba(255,255,255,.12); }
+  .chip.light { background: #fafafb; color: #111; }
+  .tab {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+    background: #1d1d22; border: 1px solid rgba(255,255,255,.1);
+    border-radius: 9px 9px 0 0; padding: 8px 12px; font-size: 12px; color: #cfcfd4; max-width: 240px;
+  }
+  .tab span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  footer { margin-top: 40px; color: #8a8c93; font-size: 13px; }
+  code { background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 5px; }
+</style>
+</head>
+<body>
+  <h1>Favicon options — “person using a laptop” (realistic)</h1>
+  <p class="sub">Each design shown at real favicon sizes (16/32/48px), plus a simulated browser tab. Tell me which option number you want.</p>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>Reply with <code>Option 1</code>, <code>2</code>, <code>3</code>, or <code>4</code> and I’ll wire it into the site (tab icon, Apple touch icon, and Open Graph).</footer>
+
+<script>
+  const options = [
+    { n: 1, name: 'Night Coder', desc: 'Screen-lit face, dark shirt, glowing laptop — cinematic, matches the site' },
+    { n: 2, name: 'Amber Spotlight', desc: 'Warm amber tile, rim-lit silhouette + glowing screen' },
+    { n: 3, name: 'Friendly Color', desc: 'Skin + hair + blue shirt, silver laptop with teal screen — most realistic person' },
+    { n: 4, name: 'Gold Relief', desc: 'Shaded monochrome gold — cleanest at tiny sizes' },
+  ];
+  const grid = document.getElementById('grid');
+  for (const o of options) {
+    const src = `favicons/option-${o.n}.svg?v=2`;
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <h2><span class="tag">Option ${o.n}</span> ${o.name}</h2>
+      <div class="sizes">
+        <div class="size"><img src="${src}" width="16" height="16"><span>16px</span></div>
+        <div class="size"><img src="${src}" width="32" height="32"><span>32px</span></div>
+        <div class="size"><img src="${src}" width="48" height="48"><span>48px</span></div>
+        <div class="size"><img src="${src}" width="96" height="96"><span>96px</span></div>
+      </div>
+      <div class="bgs">
+        <div class="chip dark"><img src="${src}" width="20" height="20"> on dark</div>
+        <div class="chip light"><img src="${src}" width="20" height="20"> on light</div>
+      </div>
+      <div class="tab"><img src="${src}" width="16" height="16"><span>Akash Simon — Portfolio</span></div>
+      <p class="sub" style="margin:14px 0 0">${o.desc}</p>
+    `;
+    grid.appendChild(el);
+  }
+</script>
+</body>
+</html>

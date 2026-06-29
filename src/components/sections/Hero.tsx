@@ -20,7 +20,7 @@ const testRows = [
 ]
 
 function StatItem({ num, suffix, label }: { num: number; suffix: string; label: string }) {
-  const { count, ref } = useCounter(num, 1800)
+  const { count, ref } = useCounter(num, 1000)
   return (
     <div ref={ref}>
       <div className="font-display text-3xl font-extrabold tracking-tightest text-ink-high sm:text-4xl">
@@ -186,7 +186,7 @@ export default function Hero() {
       </div>
 
       {/* Animated scroll hint */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 hidden justify-center sm:flex">
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">
         <div className="flex flex-col items-center gap-2 text-ink-subtle">
           <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
           <ChevronDown size={16} className="animate-bounce-y opacity-60" />

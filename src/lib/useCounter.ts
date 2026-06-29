@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 /** Animates a number from 0 → end when the ref element enters the viewport. */
-export function useCounter(end: number, duration = 1800) {
+export function useCounter(end: number, duration = 1000) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement | null>(null)
   const startedRef = useRef(false)
@@ -35,7 +35,7 @@ export function useCounter(end: number, duration = 1800) {
           setCount(0)
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.2 }
     )
     io.observe(el)
     return () => io.disconnect()

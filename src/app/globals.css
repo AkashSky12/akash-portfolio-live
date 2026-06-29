@@ -935,3 +935,49 @@ h1, h2, h3, h4, h5 {
   .console-row, .stage-bar > i { opacity: 1 !important; width: 98%; }
   .scene-3d { perspective: none; }
 }
+
+/* ── Mobile (touch) performance + motion tuning ──────────────────────────
+   Phones skip the pointer-driven 3D/parallax/cursor effects, and animating
+   `filter: blur()` during scroll-triggered reveals is a major source of jank.
+   Here we drop the blur from entrance transitions (keeping a snappier, livelier
+   slide+fade) and shrink the always-painted background blur radii so scrolling
+   stays smooth. */
+@media (max-width: 768px) {
+  /* Snappier, jank-free reveals — animate only cheap transform/opacity. */
+  .reveal-item,
+  .reveal-scale,
+  .reveal-left {
+    transition-duration: 0.65s;
+    filter: none;
+  }
+  .reveal-item  { transform: translateY(36px); }
+  .reveal-scale { transform: scale(0.92) translateY(28px); }
+  .reveal-left  { transform: translateX(-36px); }
+  .reveal-item.is-visible,
+  .reveal-scale.is-visible,
+  .reveal-left.is-visible { filter: none; }
+
+  /* Tighter stagger so sections feel more alive as they enter. */
+  .stagger-1 { transition-delay:  40ms; }
+  .stagger-2 { transition-delay:  90ms; }
+  .stagger-3 { transition-delay: 140ms; }
+  .stagger-4 { transition-delay: 190ms; }
+  .stagger-5 { transition-delay: 240ms; }
+  .stagger-6 { transition-delay: 290ms; }
+  .stagger-7 { transition-delay: 340ms; }
+  .stagger-8 { transition-delay: 390ms; }
+
+  /* Heavy blurs dominate fill-rate on mobile GPUs — lighten them. */
+  .aurora-blob { filter: blur(40px); animation-duration: 16s; }
+  .aurora-blob--glow { filter: blur(40px); }
+  .ambient-blob { filter: blur(56px); }
+
+  /* Parallax layers never move without a fine pointer, yet each keeps a
+     persistent compositor layer (will-change) in the hero. Flatten them so the
+     hero composites cheaply and scrolls smoothly. */
+  .parallax {
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+}

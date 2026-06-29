@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Person using a laptop">
+  <defs>
+    <radialGradient id="o1bg" cx="50%" cy="36%" r="72%">
+      <stop offset="0" stop-color="#1c1c22"/><stop offset="1" stop-color="#0a0a0d"/>
+    </radialGradient>
+    <linearGradient id="o1skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1c093"/><stop offset="1" stop-color="#cf9162"/>
+    </linearGradient>
+    <linearGradient id="o1shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b4150"/><stop offset="1" stop-color="#232733"/>
+    </linearGradient>
+    <linearGradient id="o1screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff0b8"/><stop offset="1" stop-color="#ffb330"/>
+    </linearGradient>
+    <radialGradient id="o1glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffcf6b" stop-opacity="0.6"/><stop offset="1" stop-color="#ffcf6b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#o1bg)"/>
+  <ellipse cx="32" cy="36" rx="24" ry="17" fill="url(#o1glow)"/>
+  <!-- shoulders / shirt -->
+  <path d="M13 51 C13 39 21 34 32 34 C43 34 51 39 51 51 Z" fill="url(#o1shirt)"/>
+  <!-- neck -->
+  <rect x="28.5" y="29" width="7" height="8" rx="3" fill="#cf9162"/>
+  <!-- hair back -->
+  <path d="M21 23 C21 12 43 12 43 23 C43 27 42 30 40 32 L24 32 C22 30 21 27 21 23Z" fill="#241a13"/>
+  <!-- face -->
+  <path d="M24 22 C24 15.5 40 15.5 40 22 C40 29 36 33.5 32 33.5 C28 33.5 24 29 24 22Z" fill="url(#o1skin)"/>
+  <!-- warm screen light on lower face -->
+  <path d="M25 26 C27 32 37 32 39 26 C38 31 35 34 32 34 C29 34 26 31 25 26Z" fill="#ffd27a" opacity="0.35"/>
+  <!-- hair fringe -->
+  <path d="M23 23 C24 15 40 15 41 23 C38 19.5 35 18.5 32 18.5 C29 18.5 26 19.5 23 23Z" fill="#1d140e"/>
+  <!-- laptop base -->
+  <path d="M15 51 L49 51 L55 57 L9 57 Z" fill="#121317"/>
+  <path d="M16.5 51 L47.5 51 L49 52.4 L15 52.4 Z" fill="#2c2f38"/>
+  <!-- laptop screen -->
+  <rect x="22" y="37" width="20" height="14" rx="2" fill="#0d0e11"/>
+  <rect x="24" y="39" width="16" height="10" rx="1" fill="url(#o1screen)"/>
+  <!-- hands -->
+  <ellipse cx="19.5" cy="50" rx="3.3" ry="2.5" fill="#e0a878"/>
+  <ellipse cx="44.5" cy="50" rx="3.3" ry="2.5" fill="#e0a878"/>
+</svg>

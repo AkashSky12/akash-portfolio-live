@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Person using a laptop">
+  <defs>
+    <linearGradient id="o3bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13131a"/><stop offset="1" stop-color="#0b0b0e"/>
+    </linearGradient>
+    <linearGradient id="o3skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7cda3"/><stop offset="1" stop-color="#e3a877"/>
+    </linearGradient>
+    <linearGradient id="o3shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="o3lap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cdd5e0"/><stop offset="1" stop-color="#9aa6b6"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#o3bg)"/>
+  <ellipse cx="32" cy="52" rx="22" ry="4" fill="#000" opacity="0.35"/>
+  <!-- shoulders -->
+  <path d="M14 50 C14 39 22 34 32 34 C42 34 50 39 50 50 Z" fill="url(#o3shirt)"/>
+  <!-- collar -->
+  <path d="M28 34 L32 39 L36 34 Z" fill="#1d4ed8"/>
+  <!-- neck -->
+  <rect x="28.5" y="29" width="7" height="8" rx="3" fill="#e3a877"/>
+  <!-- hair back -->
+  <path d="M22 22 C22 12 42 12 42 22 C42 26 41 29 39 31 L25 31 C23 29 22 26 22 22Z" fill="#3a2a1c"/>
+  <!-- face -->
+  <path d="M24.5 21.5 C24.5 15 39.5 15 39.5 21.5 C39.5 28 35.5 32.5 32 32.5 C28.5 32.5 24.5 28 24.5 21.5Z" fill="url(#o3skin)"/>
+  <!-- hair fringe -->
+  <path d="M23.5 22.5 C24.5 15 39.5 15 40.5 22.5 C37.5 19 35 18 32 18 C29 18 26.5 19 23.5 22.5Z" fill="#2e2114"/>
+  <!-- eyes -->
+  <circle cx="29" cy="22" r="1.05" fill="#2b2b2b"/>
+  <circle cx="35" cy="22" r="1.05" fill="#2b2b2b"/>
+  <!-- smile -->
+  <path d="M29.5 26 Q32 28 34.5 26" stroke="#a86a3e" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+  <!-- laptop -->
+  <rect x="21" y="37" width="22" height="14" rx="2" fill="#e9eef4"/>
+  <rect x="23" y="39" width="18" height="10" rx="1" fill="#1f9d8b"/>
+  <path d="M14 51 L50 51 L55 56 L9 56 Z" fill="url(#o3lap)"/>
+  <rect x="9" y="55" width="46" height="1.6" rx="0.8" fill="#7e8a99"/>
+  <!-- hands -->
+  <ellipse cx="19" cy="51" rx="3.2" ry="2.4" fill="#f0bd92"/>
+  <ellipse cx="45" cy="51" rx="3.2" ry="2.4" fill="#f0bd92"/>
+</svg>

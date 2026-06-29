@@ -38,6 +38,13 @@ export const viewport: Viewport = {
  */
 const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`
 
+/**
+ * Always start a reload at the top of the page (desktop + mobile). Disables the
+ * browser's scroll-position restoration and resets to top on load when there is
+ * no in-page anchor to honor.
+ */
+const scrollResetScript = `(function(){try{if('scrollRestoration' in history){history.scrollRestoration='manual';}if(!window.location.hash){window.scrollTo(0,0);}window.addEventListener('load',function(){if(!window.location.hash){window.scrollTo(0,0);}});}catch(e){}})();`
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://akashsimon.com'),
   title: 'Akash Simon - Software Engineer — QA Lead & GenAI Automation Engineer',
@@ -57,6 +64,15 @@ export const metadata: Metadata = {
     'GitHub Actions',
   ],
   authors: [{ name: 'Akash Simon', url: 'https://akashsimon.com' }],
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: ['/favicon.svg'],
+  },
   openGraph: {
     title: 'Akash Simon — QA Lead & GenAI Automation Engineer',
     description:
@@ -65,12 +81,21 @@ export const metadata: Metadata = {
     siteName: 'Akash Simon',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Akash Simon — QA Lead & GenAI Automation Engineer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Akash Simon — QA Lead & GenAI Automation Engineer',
     description:
       '9+ years engineering quality at scale. Currently at Domino\'s Pizza Enterprises — 30+ EU storefronts.',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -83,6 +108,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: { canonical: 'https://akashsimon.com' },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -94,6 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: scrollResetScript }} />
       </head>
       <body className="antialiased">
         <a href="#main" className="skip-link">Skip to content</a>

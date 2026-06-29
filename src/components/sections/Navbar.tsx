@@ -55,7 +55,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-bg/80 backdrop-blur-xl border-b border-line'
+          ? 'border-b border-line bg-bg/95 md:bg-bg/80 md:backdrop-blur-xl'
           : 'bg-transparent'
       }`}
     >
@@ -121,14 +121,14 @@ export default function Navbar() {
         className={`md:hidden ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}
       >
         <div
-          className={`fixed inset-0 top-16 bg-bg/95 backdrop-blur-xl transition-opacity duration-300 ${
+          className={`fixed inset-0 top-16 bg-bg/95 transition-opacity duration-300 ${
             open ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
         <div
-          className={`fixed inset-x-0 top-16 origin-top bg-bg-raised/95 backdrop-blur-xl transition-all duration-300 ${
+          className={`fixed inset-x-0 top-16 origin-top bg-bg-raised transition-all duration-300 ${
             open ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
           }`}
         >
