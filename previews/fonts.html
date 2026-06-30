@@ -89,7 +89,7 @@
     letter-spacing: 0.02em;
     white-space: nowrap;
   }
-  .pair-btn:hover { transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+  .pair-btn:hover { transform: translateY(-1px); border-color: var(--accent); }
   .pair-btn[aria-pressed="true"] {
     background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
     font-weight: 600;
@@ -163,10 +163,10 @@
     padding: 12px 22px; border-radius: 999px;
     border: 1px solid var(--line); color: var(--ink-high);
     text-decoration: none; font-weight: 500; font-size: 14px;
-    background: color-mix(in srgb, var(--bg-elev) 50%, transparent);
+    background: rgba(23, 24, 28, 0.5);
     font-family: var(--font-body);
   }
-  .btn-ghost:hover { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
+  .btn-ghost:hover { border-color: rgba(230, 95, 28, 0.6); }
 
   /* Stats */
   .stats {
@@ -246,7 +246,7 @@
     border: 1px solid var(--line);
     transition: border-color .2s, transform .2s;
   }
-  .card:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); transform: translateY(-2px); }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .card .icon {
     width: 44px; height: 44px; border-radius: 12px;
     background: color-mix(in srgb, var(--accent) 18%, transparent);
@@ -286,7 +286,7 @@
       color-mix(in srgb, var(--accent) 18%, transparent),
       color-mix(in srgb, var(--accent-bright) 8%, transparent) 60%,
       transparent);
-    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+    border: 1px solid rgba(var(--accent-rgb), 0.35);
     display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
   }
   .cta-card h3 { font-family: var(--font-display); color: var(--ink-high); font-size: 26px; margin: 0 0 6px; font-weight: 600; letter-spacing: calc(var(--display-tracking) * 0.5); }
