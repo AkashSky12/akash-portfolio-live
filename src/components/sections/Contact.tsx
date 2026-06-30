@@ -13,12 +13,30 @@ function WhatsApp({ size = 20 }: { size?: number | string; strokeWidth?: number 
   )
 }
 
+type Brand = 'whatsapp' | 'email' | 'linkedin'
+
 type Detail = {
   Icon: React.ComponentType<{ size?: number | string; strokeWidth?: number | string }>
   label: string
   value: string
   href: string | null
-  brand?: 'whatsapp'
+  brand?: Brand
+}
+
+/** Footer-matched brand styles: color + glow + hover. */
+const brandStyles: Record<Brand, { wrap: string; hoverText: string }> = {
+  email: {
+    wrap: 'border-[#EA4335]/40 bg-[#EA4335]/[0.08] text-[#EA4335] shadow-[0_0_18px_rgba(234,67,53,0.55)] group-hover/icon:scale-110 group-hover/icon:border-[#EA4335] group-hover/icon:bg-[#EA4335]/20 group-hover/icon:shadow-[0_0_45px_rgba(234,67,53,0.95),0_0_75px_rgba(234,67,53,0.55)]',
+    hoverText: 'hover:text-[#EA4335]',
+  },
+  linkedin: {
+    wrap: 'border-[#0A66C2]/40 bg-[#0A66C2]/[0.08] text-[#0A66C2] shadow-[0_0_18px_rgba(59,130,246,0.6)] group-hover/icon:scale-110 group-hover/icon:border-[#0A66C2] group-hover/icon:bg-[#0A66C2]/20 group-hover/icon:shadow-[0_0_45px_rgba(59,130,246,0.95),0_0_75px_rgba(59,130,246,0.55)]',
+    hoverText: 'hover:text-[#0A66C2]',
+  },
+  whatsapp: {
+    wrap: 'border-[#25D366]/40 bg-[#25D366]/[0.08] text-[#25D366] shadow-[0_0_18px_rgba(37,211,102,0.55)] group-hover/icon:scale-110 group-hover/icon:border-[#25D366] group-hover/icon:bg-[#25D366]/20 group-hover/icon:shadow-[0_0_45px_rgba(37,211,102,0.95),0_0_75px_rgba(37,211,102,0.55)]',
+    hoverText: 'hover:text-[#25D366]',
+  },
 }
 
 const locations: Record<string, { label: string; flag: string; details: Detail[] }> = {
@@ -26,20 +44,20 @@ const locations: Record<string, { label: string; flag: string; details: Detail[]
     label: 'India',
     flag: '🇮🇳',
     details: [
-      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com' },
+      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com', brand: 'email' },
       { Icon: WhatsApp, label: 'WhatsApp', value: '+91 81058 44868', href: 'https://wa.me/918105844868', brand: 'whatsapp' },
       { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: null },
-      { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/' },
+      { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/', brand: 'linkedin' },
     ],
   },
   MY: {
     label: 'Malaysia',
     flag: '🇲🇾',
     details: [
-      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com' },
+      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com', brand: 'email' },
       { Icon: WhatsApp, label: 'WhatsApp', value: '+60 12-747 4204', href: 'https://wa.me/60127474204', brand: 'whatsapp' },
       { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: null },
-      { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/' },
+      { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/', brand: 'linkedin' },
     ],
   },
 }
@@ -82,7 +100,7 @@ export default function Contact() {
       <SectionFX variant="code" />
       <div className="container">
         <div ref={headerRef}>
-          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Get In Touch</p>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-3`}>Get In Touch</p>
           <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-5 text-ink-high`}>
             Let&apos;s build something{' '}
             <span className="accent-text">exceptional</span>.
@@ -125,15 +143,13 @@ export default function Contact() {
 
             <ul key={country} className="space-y-4 animate-fade-in">
               {details.map(({ Icon, label, value, href, brand }) => {
-                const isWhatsApp = brand === 'whatsapp'
+                const style = brand ? brandStyles[brand] : null
                 return (
                   <li key={label}>
-                    <div className="flex items-center gap-3.5">
+                    <div className="group/icon flex items-center gap-3.5">
                       <div
-                        className={`grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl border ${
-                          isWhatsApp
-                            ? 'border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366]'
-                            : 'border-line bg-surface text-accent'
+                        className={`grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl border transition-all ${
+                          style ? style.wrap : 'border-line bg-surface text-accent'
                         }`}
                       >
                         <Icon size={22} strokeWidth={2} />
@@ -148,7 +164,7 @@ export default function Contact() {
                             target={href.startsWith('http') ? '_blank' : undefined}
                             rel="noopener noreferrer"
                             className={`group inline-flex items-center gap-1.5 text-[16px] font-semibold text-ink-high transition-colors sm:text-[17px] ${
-                              isWhatsApp ? 'hover:text-[#25D366]' : 'hover:text-accent'
+                              style ? style.hoverText : 'hover:text-accent'
                             }`}
                           >
                             {value}
