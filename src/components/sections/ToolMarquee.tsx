@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useReveal } from '@/lib/useReveal'
+import SectionFX from '@/components/SectionFX'
 
 // Original brand-colored SVGs. Most come from the simple-icons CDN (auto brand color);
 // a few use devicon's full-color originals where simple-icons lacks the icon or renders
@@ -50,6 +51,7 @@ export default function ToolMarquee() {
 
   return (
     <section className="relative overflow-hidden py-16 sm:py-20">
+      <SectionFX variant="tunnel" />
       <div className="container">
         <p className={`reveal-item stagger-1 ${v} mb-10 text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-ink-subtle`}>
           Daily-driven tooling

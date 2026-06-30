@@ -1,6 +1,7 @@
 'use client'
 import { BadgeCheck, BrainCircuit, ClipboardList, GraduationCap } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
+import SectionFX from '@/components/SectionFX'
 
 const certs = [
   {
@@ -37,6 +38,7 @@ export default function Certifications() {
 
   return (
     <section id="certs" className="section">
+      <SectionFX variant="cubes" />
       <div className="container">
         <div ref={headerRef}>
           <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Credentials</p>

@@ -1,6 +1,7 @@
 'use client'
 import { Trophy, Star, Award } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
+import SectionFX from '@/components/SectionFX'
 
 const awards = [
   {
@@ -31,6 +32,8 @@ export default function About() {
 
   return (
     <section id="about" className="section">
+      <SectionFX variant="grid" />
+      <SectionFX variant="helix" />
       <div className="container">
         <div ref={headerRef}>
           <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Who I Am</p>

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Mail, MapPin, Linkedin, ArrowUpRight, Send } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
+import SectionFX from '@/components/SectionFX'
 
 /** WhatsApp brand glyph (lucide has no WhatsApp icon). */
 function WhatsApp({ size = 20 }: { size?: number | string; strokeWidth?: number | string }) {
@@ -77,6 +78,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section">
+      <SectionFX variant="beams" />
+      <SectionFX variant="code" />
       <div className="container">
         <div ref={headerRef}>
           <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Get In Touch</p>

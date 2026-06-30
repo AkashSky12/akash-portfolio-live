@@ -18,8 +18,8 @@ export default function Home() {
       <Navbar />
       <main id="main" className="relative z-10">
         <Hero />
-        <About />
         <Experience />
+        <About />
         <Skills />
         <ToolMarquee />
         <Certifications />

@@ -1,6 +1,7 @@
 'use client'
 import { ArrowUpRight } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
+import SectionFX from '@/components/SectionFX'
 
 type Bullet = { bold?: string; rest: string }
 type Job = {
@@ -108,6 +109,9 @@ export default function Experience() {
 
   return (
     <section id="experience" className="section">
+      <SectionFX variant="code" />
+      <SectionFX variant="orbits" />
+      <SectionFX variant="helix" />
       <div className="container">
         <div ref={headerRef}>
           <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Career</p>

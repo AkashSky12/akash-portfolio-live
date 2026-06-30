@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { Linkedin, Mail, ArrowUp } from 'lucide-react'
+import SectionFX from '@/components/SectionFX'
 
 /** WhatsApp brand glyph (lucide has no WhatsApp icon). */
 function WhatsApp({ size = 16 }: { size?: number | string }) {
@@ -88,7 +89,8 @@ function WhatsAppPicker() {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line py-10">
+    <footer className="relative overflow-hidden border-t border-line py-10">
+      <SectionFX variant="starfield" />
       <div className="container flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div>
           <p className="font-display text-[15px] font-extrabold text-ink-high">

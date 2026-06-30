@@ -8,6 +8,7 @@ import {
   ClipboardCheck,
 } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
+import SectionFX from '@/components/SectionFX'
 
 const groups = [
   {
@@ -85,6 +86,8 @@ export default function Skills() {
 
   return (
     <section id="skills" className="section">
+      <SectionFX variant="particles" />
+      <SectionFX variant="waves" />
       <div className="container">
         <div ref={headerRef}>
           <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Tech Stack</p>
