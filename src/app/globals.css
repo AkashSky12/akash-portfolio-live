@@ -153,6 +153,7 @@ h1, h2, h3, h4, h5 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 24px rgb(var(--accent) / 0.65));
   }
 

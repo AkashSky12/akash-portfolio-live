@@ -35,7 +35,7 @@ function Logo({ name, slug, color, src }: { name: string; slug: string; color: s
         width={72}
         height={72}
         unoptimized
-        className="h-18 w-18 opacity-100 drop-shadow-[0_0_12px_rgba(255,165,31,0.45)] transition-all duration-300 group-hover:scale-115 group-hover:drop-shadow-[0_0_24px_rgba(255,165,31,0.8)]"
+        className="h-[72px] w-[72px] object-contain opacity-100 drop-shadow-[0_0_12px_rgba(255,165,31,0.45)] transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_24px_rgba(255,165,31,0.8)]"
       />
       <span className="text-[13px] font-semibold tracking-wide text-ink-subtle transition-colors group-hover:text-accent">
         {name}
