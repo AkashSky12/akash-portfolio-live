@@ -28,16 +28,16 @@ const tools = [
 
 function Logo({ name, slug, color, src }: { name: string; slug: string; color: string; src?: string }) {
   return (
-    <div className="group flex shrink-0 flex-col items-center gap-2.5 px-7">
+    <div className="group flex shrink-0 flex-col items-center gap-3 px-3">
       <Image
         src={src ?? `https://cdn.simpleicons.org/${slug}/${color}`}
         alt={name}
-        width={40}
-        height={40}
+        width={72}
+        height={72}
         unoptimized
-        className="h-10 w-10 opacity-85 drop-shadow-[0_0_1px_rgba(0,0,0,0.28)] transition-all duration-300 group-hover:scale-110 group-hover:opacity-100"
+        className="h-18 w-18 opacity-100 drop-shadow-[0_0_12px_rgba(255,165,31,0.45)] transition-all duration-300 group-hover:scale-115 group-hover:drop-shadow-[0_0_24px_rgba(255,165,31,0.8)]"
       />
-      <span className="text-[11px] font-medium tracking-wide text-ink-subtle transition-colors group-hover:text-accent">
+      <span className="text-[13px] font-semibold tracking-wide text-ink-subtle transition-colors group-hover:text-accent">
         {name}
       </span>
     </div>
@@ -50,19 +50,19 @@ export default function ToolMarquee() {
   const row = [...tools, ...tools]
 
   return (
-    <section className="relative overflow-hidden py-16 sm:py-20">
+    <section className="relative overflow-hidden py-[60px]">
       <SectionFX variant="tunnel" />
       <div className="container">
-        <p className={`reveal-item stagger-1 ${v} mb-10 text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-ink-subtle`}>
+        <p className={`reveal-item stagger-1 ${v} mb-7 text-center text-[26px] font-black uppercase tracking-[0.3em] text-ink-subtle`}>
           Daily-driven tooling
         </p>
       </div>
 
-      <div ref={ref} className={`reveal-item stagger-2 ${v} relative`}>
+      <div ref={ref} className={`reveal-item stagger-2 ${v} relative py-3`}>
         {/* edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-bg to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-bg to-transparent" />
-        <div className="marquee flex w-max items-start gap-2">
+        <div className="marquee flex w-max items-start gap-3">
           {row.map((t, i) => (
             <Logo key={`${t.slug}-${i}`} {...t} />
           ))}

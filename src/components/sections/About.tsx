@@ -46,9 +46,9 @@ export default function About() {
           </p>
         </div>
 
-        <div ref={bodyRef} className="grid gap-12 md:grid-cols-[1.1fr_1fr] md:gap-16">
+        <div ref={bodyRef}>
           {/* Bio */}
-          <div className={`reveal-item stagger-1 ${bv} space-y-5 text-[15.5px] leading-[1.75] text-ink`}>
+          <div className={`reveal-item stagger-1 ${bv} mb-16 max-w-3xl space-y-5 text-[15.5px] leading-[1.75] text-ink`}>
             <p>
               I&apos;m a{' '}
               <span className="font-medium text-accent">
@@ -83,10 +83,10 @@ export default function About() {
 
           {/* Awards */}
           <div>
-            <p className={`reveal-item stagger-2 ${bv} mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-muted`}>
+            <p className={`reveal-item stagger-2 ${bv} mb-5 text-[40px] font-bold uppercase tracking-[0.1em] text-ink-muted`}>
               Awards &amp; Recognition
             </p>
-            <ul className="space-y-3">
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {awards.map(({ Icon, title, org, desc }, i) => (
                 <li key={title} className={`reveal-scale stagger-${i + 3} ${bv} glass-card p-5`}>
                   <div className="flex items-start gap-4">

@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5 {
 
 @layer components {
   .eyebrow {
-    @apply inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-accent;
+    @apply inline-block text-[40px] font-black uppercase tracking-[0.16em] text-accent;
   }
 
   .heading-xl {
@@ -153,7 +153,7 @@ h1, h2, h3, h4, h5 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 0 18px rgb(var(--accent) / 0.50));
+    filter: drop-shadow(0 0 24px rgb(var(--accent) / 0.65));
   }
 
   /* Theme-aware low-tint surface used by cards/inputs/icon buttons. */
@@ -247,7 +247,7 @@ h1, h2, h3, h4, h5 {
   .btn-ghost:active { transform: scale(0.97); }
 
   .section {
-    @apply relative py-24 sm:py-28 md:py-32;
+    @apply relative py-[60px];
     /* Skip rendering/painting sections while they're far off-screen — big win
        on lower-end GPUs and long pages. `auto` remembers real size after first
        paint, so in-page anchors and scroll position stay stable. */
@@ -411,7 +411,7 @@ h1, h2, h3, h4, h5 {
   aspect-ratio: 240 / 320;
   pointer-events: none;
   animation: gemFloat 8s ease-in-out infinite;
-  filter: drop-shadow(0 30px 70px rgb(var(--accent) / 0.4));
+  filter: drop-shadow(0 30px 90px rgb(var(--accent) / 0.55));
 }
 .hero-gem svg { position: relative; width: 100%; height: 100%; overflow: visible; }
 .hero-gem-glow {
@@ -1180,7 +1180,7 @@ h1, h2, h3, h4, h5 {
 }
 /* In the career section the orbits sit on the right, so anchor its helix to
    the left to keep the two depth motifs balanced. */
-#experience .fx-helix { right: auto; left: 8%; }
+#experience .fx-helix { right: auto; left: 9%; }
 
 /* ── Variant: waves — an undulating perspective wire-plane ────────────────── */
 .fx-waves {

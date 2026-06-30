@@ -50,9 +50,9 @@ function WhatsAppPicker() {
         aria-label="Chat on WhatsApp"
         aria-haspopup="menu"
         {...{ 'aria-expanded': open }}
-        className="grid h-10 w-10 place-items-center rounded-full border border-[#25D366]/30 bg-[#25D366]/[0.08] text-[#25D366] transition-all hover:border-[#25D366]/50 hover:bg-[#25D366]/15"
+        className="grid h-14 w-14 place-items-center rounded-full border border-[#25D366]/40 bg-[#25D366]/[0.08] text-[#25D366] shadow-[0_0_18px_rgba(37,211,102,0.55)] transition-all hover:scale-110 hover:border-[#25D366] hover:bg-[#25D366]/20 hover:shadow-[0_0_45px_rgba(37,211,102,0.95),0_0_75px_rgba(37,211,102,0.55)]"
       >
-        <WhatsApp size={16} />
+        <WhatsApp size={24} />
       </button>
 
       {open && (
@@ -108,23 +108,23 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#0A66C2]/30 bg-[#0A66C2]/[0.08] text-[#0A66C2] transition-all hover:border-[#0A66C2]/50 hover:bg-[#0A66C2]/15"
+            className="grid h-14 w-14 place-items-center rounded-full border border-[#0A66C2]/40 bg-[#0A66C2]/[0.08] text-[#0A66C2] shadow-[0_0_18px_rgba(59,130,246,0.6)] transition-all hover:scale-110 hover:border-[#0A66C2] hover:bg-[#0A66C2]/20 hover:shadow-[0_0_45px_rgba(59,130,246,0.95),0_0_75px_rgba(59,130,246,0.55)]"
           >
-            <Linkedin size={16} strokeWidth={2} />
+            <Linkedin size={24} strokeWidth={2} />
           </a>
           <a
             href="mailto:akash.simon@outlook.com"
             aria-label="Email"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#EA4335]/30 bg-[#EA4335]/[0.08] text-[#EA4335] transition-all hover:border-[#EA4335]/50 hover:bg-[#EA4335]/15"
+            className="grid h-14 w-14 place-items-center rounded-full border border-[#EA4335]/40 bg-[#EA4335]/[0.08] text-[#EA4335] shadow-[0_0_18px_rgba(234,67,53,0.55)] transition-all hover:scale-110 hover:border-[#EA4335] hover:bg-[#EA4335]/20 hover:shadow-[0_0_45px_rgba(234,67,53,0.95),0_0_75px_rgba(234,67,53,0.55)]"
           >
-            <Mail size={16} strokeWidth={2} />
+            <Mail size={24} strokeWidth={2} />
           </a>
           <a
             href="#home"
             aria-label="Back to top"
-            className="grid h-10 w-10 place-items-center rounded-full border border-accent/30 bg-accent/[0.08] text-accent transition-all hover:border-accent/50 hover:bg-accent/15"
+            className="grid h-14 w-14 place-items-center rounded-full border border-accent/40 bg-accent/[0.08] text-accent shadow-[0_0_18px_rgba(255,165,31,0.55)] transition-all hover:scale-110 hover:border-accent hover:bg-accent/20 hover:shadow-[0_0_45px_rgba(255,165,31,0.95),0_0_75px_rgba(255,165,31,0.55)]"
           >
-            <ArrowUp size={16} strokeWidth={2} />
+            <ArrowUp size={24} strokeWidth={2} />
           </a>
         </div>
       </div>

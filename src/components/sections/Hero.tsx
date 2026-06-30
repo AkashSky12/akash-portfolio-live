@@ -1,22 +1,14 @@
 'use client'
-import { ArrowUpRight, Sparkles, ChevronDown, Bot, CheckCircle2, Activity } from 'lucide-react'
+import { ArrowUpRight, Sparkles, ChevronDown } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 import { useCounter } from '@/lib/useCounter'
 import HeroBackdrop from '@/components/HeroBackdrop'
-import Tilt3D from '@/components/Tilt3D'
 
 const stats = [
   { num: 9,  suffix: '+', label: 'Years in QA' },
   { num: 30, suffix: '+', label: 'EU Storefronts' },
   { num: 40, suffix: '%', label: 'Authoring Cut' },
   { num: 12, suffix: '+', label: 'Engineers Led' },
-]
-
-const testRows = [
-  { name: 'checkout.flow.spec.ts', status: 'pass' },
-  { name: 'i18n-pricing.spec.ts', status: 'pass' },
-  { name: 'visual-diff.storefront', status: 'pass' },
-  { name: 'genai-agent.eval', status: 'run' },
 ]
 
 function StatItem({ num, suffix, label }: { num: number; suffix: string; label: string }) {
@@ -31,61 +23,6 @@ function StatItem({ num, suffix, label }: { num: number; suffix: string; label: 
         {label}
       </div>
     </div>
-  )
-}
-
-/** Floating, pointer-tilted QA console — the 3D centrepiece of the hero. */
-function HeroStage() {
-  return (
-    <Tilt3D className="hero-stage" max={14} lift={16} glare={false}>
-      <div className="stage-orb" />
-      <div className="stage-ring" />
-      <div className="stage-ring stage-ring--2" />
-
-      <div className="stage-panel">
-        {/* title bar */}
-        <div className="flex items-center gap-2.5">
-          <span className="stage-dot" />
-          <span className="stage-dot" />
-          <span className="stage-dot stage-dot--live" />
-          <span className="ml-1.5 font-mono text-[11px] text-ink-muted">qa-agent ▸ live</span>
-          <Activity size={13} className="ml-auto animate-pulse text-accent" />
-        </div>
-
-        {/* test rows */}
-        <div className="mt-4 space-y-2">
-          {testRows.map((t) => (
-            <div key={t.name} className="console-row flex items-center gap-2.5">
-              {t.status === 'pass' ? (
-                <CheckCircle2 size={14} className="shrink-0 text-accent" />
-              ) : (
-                <span className="console-spin shrink-0" />
-              )}
-              <span className="font-mono text-[11.5px] text-ink">{t.name}</span>
-              <span
-                className={`ml-auto font-mono text-[10px] uppercase tracking-wider ${
-                  t.status === 'pass' ? 'text-accent' : 'text-ink-subtle'
-                }`}
-              >
-                {t.status === 'pass' ? 'pass' : 'run'}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* coverage bar */}
-        <div className="mt-5">
-          <div className="mb-1.5 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-ink-muted">
-            <span>Coverage</span>
-            <span className="text-accent">98%</span>
-          </div>
-          <div className="stage-bar"><i /></div>
-        </div>
-      </div>
-
-      <span className="stage-badge stage-badge--ai"><Bot size={13} /> AI Agent</span>
-      <span className="stage-badge stage-badge--pass"><CheckCircle2 size={13} /> 99.9% pass</span>
-    </Tilt3D>
   )
 }
 
@@ -120,12 +57,8 @@ export default function Hero() {
       </div>
 
       <div className="container relative">
-        <div
-          ref={ref}
-          className="grid items-center gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10"
-        >
-          {/* ── Left: copy ─────────────────────────────────────────────── */}
-          <div className="max-w-2xl">
+        <div ref={ref}>
+          <div className="mx-auto max-w-3xl">
             {/* Eyebrow — stagger 1 */}
             <div className={`reveal-item stagger-1 ${v} mb-8 flex items-center gap-2`}>
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1.5">
@@ -176,11 +109,6 @@ export default function Hero() {
                 <StatItem key={s.label} {...s} />
               ))}
             </div>
-          </div>
-
-          {/* ── Right: 3D stage ────────────────────────────────────────── */}
-          <div className={`reveal-scale stagger-4 ${v} hidden lg:block`}>
-            <HeroStage />
           </div>
         </div>
       </div>
