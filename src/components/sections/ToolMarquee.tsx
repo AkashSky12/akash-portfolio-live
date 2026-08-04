@@ -8,27 +8,33 @@ import SectionFX from '@/components/SectionFX'
 // it pure-white (invisible on the light theme). All vector — crisp at any resolution (4K).
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
 const tools = [
-  { name: 'Playwright', slug: 'playwright', color: '2EAD33', src: `${DEVICON}/playwright/playwright-original.svg` },
-  { name: 'Selenium', slug: 'selenium', color: '43B02A' },
-  { name: 'Cypress', slug: 'cypress', color: '69D3A7' },
-  { name: 'Appium', slug: 'appium', color: 'EE376C' },
-  { name: 'Python', slug: 'python', color: '3776AB' },
-  { name: 'Java', slug: 'openjdk', color: 'FFFFFF', src: `${DEVICON}/java/java-original.svg` },
-  { name: 'GitHub Actions', slug: 'githubactions', color: '2088FF' },
-  { name: 'Jenkins', slug: 'jenkins', color: 'D24939' },
-  { name: 'Postman', slug: 'postman', color: 'FF6C37' },
-  { name: 'Jira', slug: 'jira', color: '0052CC' },
-  { name: 'Docker', slug: 'docker', color: '2496ED' },
-  { name: 'JMeter', slug: 'apachejmeter', color: 'D22128' },
-  { name: 'PostgreSQL', slug: 'postgresql', color: '4169E1' },
-  { name: 'MySQL', slug: 'mysql', color: '4479A1' },
-  { name: 'Cucumber', slug: 'cucumber', color: '23D96C' },
-  { name: 'Swagger', slug: 'swagger', color: '85EA2D' },
+  { name: 'Playwright', slug: 'playwright', color: '2EAD33', src: `${DEVICON}/playwright/playwright-original.svg`, url: 'https://playwright.dev/' },
+  { name: 'Selenium', slug: 'selenium', color: '43B02A', url: 'https://www.selenium.dev/' },
+  { name: 'Cypress', slug: 'cypress', color: '69D3A7', url: 'https://www.cypress.io/' },
+  { name: 'Appium', slug: 'appium', color: 'EE376C', url: 'https://appium.io/' },
+  { name: 'Python', slug: 'python', color: '3776AB', url: 'https://www.python.org/' },
+  { name: 'Java', slug: 'openjdk', color: 'FFFFFF', src: `${DEVICON}/java/java-original.svg`, url: 'https://openjdk.org/' },
+  { name: 'GitHub Actions', slug: 'githubactions', color: '2088FF', url: 'https://github.com/features/actions' },
+  { name: 'Jenkins', slug: 'jenkins', color: 'D24939', url: 'https://www.jenkins.io/' },
+  { name: 'Postman', slug: 'postman', color: 'FF6C37', url: 'https://www.postman.com/' },
+  { name: 'Jira', slug: 'jira', color: '0052CC', url: 'https://www.atlassian.com/software/jira' },
+  { name: 'Docker', slug: 'docker', color: '2496ED', url: 'https://www.docker.com/' },
+  { name: 'JMeter', slug: 'apachejmeter', color: 'D22128', url: 'https://jmeter.apache.org/' },
+  { name: 'PostgreSQL', slug: 'postgresql', color: '4169E1', url: 'https://www.postgresql.org/' },
+  { name: 'MySQL', slug: 'mysql', color: '4479A1', url: 'https://www.mysql.com/' },
+  { name: 'Cucumber', slug: 'cucumber', color: '23D96C', url: 'https://cucumber.io/' },
+  { name: 'Swagger', slug: 'swagger', color: '85EA2D', url: 'https://swagger.io/' },
 ]
 
-function Logo({ name, slug, color, src }: { name: string; slug: string; color: string; src?: string }) {
+function Logo({ name, slug, color, src, url }: { name: string; slug: string; color: string; src?: string; url: string }) {
   return (
-    <div className="group flex shrink-0 flex-col items-center gap-3 px-3">
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex shrink-0 flex-col items-center gap-3 px-3 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+      aria-label={`Visit ${name} official website`}
+    >
       <Image
         src={src ?? `https://cdn.simpleicons.org/${slug}/${color}`}
         alt={name}
@@ -40,7 +46,7 @@ function Logo({ name, slug, color, src }: { name: string; slug: string; color: s
       <span className="text-[13px] font-semibold tracking-wide text-ink-subtle transition-colors group-hover:text-accent">
         {name}
       </span>
-    </div>
+    </a>
   )
 }
 
@@ -51,9 +57,9 @@ export default function ToolMarquee() {
 
   return (
     <section className="relative overflow-hidden py-[60px]">
-      <SectionFX variant="code" />
+      <SectionFX variant="starfield" />
       <div className="container">
-        <p className={`reveal-item stagger-1 ${v} mb-7 text-center text-[26px] font-black uppercase tracking-[0.3em] text-ink-subtle`}>
+        <p className={`reveal-item stagger-1 ${v} mb-7 text-center text-[26px] font-black uppercase tracking-[0.3em] text-accent`}>
           Daily-driven tooling
         </p>
       </div>

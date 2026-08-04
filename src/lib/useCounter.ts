@@ -6,6 +6,7 @@ export function useCounter(end: number, duration = 1000) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement | null>(null)
   const startedRef = useRef(false)
+  const rafRef = useRef(0)
 
   useEffect(() => {
     const el = ref.current
@@ -25,12 +26,13 @@ export function useCounter(end: number, duration = 1000) {
             // ease-out cubic
             const eased = 1 - Math.pow(1 - progress, 3)
             setCount(Math.floor(eased * end))
-            if (progress < 1) requestAnimationFrame(step)
+            if (progress < 1) rafRef.current = requestAnimationFrame(step)
             else setCount(end)
           }
-          requestAnimationFrame(step)
+          rafRef.current = requestAnimationFrame(step)
         } else if (!entry.isIntersecting) {
           // Reset so it replays next time it scrolls into view
+          if (rafRef.current) cancelAnimationFrame(rafRef.current)
           startedRef.current = false
           setCount(0)
         }
@@ -38,7 +40,10 @@ export function useCounter(end: number, duration = 1000) {
       { threshold: 0.2 }
     )
     io.observe(el)
-    return () => io.disconnect()
+    return () => {
+      io.disconnect()
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
   }, [end, duration])
 
   return { count, ref }

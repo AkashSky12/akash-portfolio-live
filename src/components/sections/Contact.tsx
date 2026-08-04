@@ -35,7 +35,7 @@ const brandStyles: Record<Brand, { wrap: string; hoverText: string }> = {
   },
   github: {
     wrap: 'border-[#f0f6fc]/35 bg-[#f0f6fc]/[0.06] text-[#f0f6fc] shadow-[0_0_18px_rgba(240,246,252,0.5)] group-hover/icon:scale-110 group-hover/icon:border-[#f0f6fc] group-hover/icon:bg-[#f0f6fc]/18 group-hover/icon:shadow-[0_0_45px_rgba(240,246,252,0.9),0_0_75px_rgba(240,246,252,0.45)]',
-    hoverText: 'hover:text-[#f0f6fc]',
+    hoverText: 'hover:text-[#71797E]',
   },
   whatsapp: {
     wrap: 'border-[#25D366]/40 bg-[#25D366]/[0.08] text-[#25D366] shadow-[0_0_18px_rgba(37,211,102,0.55)] group-hover/icon:scale-110 group-hover/icon:border-[#25D366] group-hover/icon:bg-[#25D366]/20 group-hover/icon:shadow-[0_0_45px_rgba(37,211,102,0.95),0_0_75px_rgba(37,211,102,0.55)]',
@@ -124,12 +124,12 @@ export default function Contact() {
         <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card grid gap-12 p-8 sm:p-12 md:grid-cols-[1fr_1.2fr] md:gap-16`}>
           {/* Details */}
           <div className="space-y-7">
-            <h3 className="glow-blink font-display text-[32px] font-bold uppercase tracking-[0.1em] text-ink-high">
+            <h3 className="glow-blink font-display text-[22px] font-bold uppercase tracking-[0.1em] text-ink-high sm:text-[28px] md:text-[32px]">
               Contact details
             </h3>
 
             {/* Country toggle */}
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {(Object.keys(locations) as CountryKey[]).map((key) => {
                 const active = country === key
                 return (
@@ -138,13 +138,13 @@ export default function Contact() {
                     type="button"
                     onClick={() => setCountry(key)}
                     {...{ 'aria-pressed': active }}
-                    className={`inline-flex items-center gap-3 rounded-full border px-8 py-4 text-[18px] font-semibold transition-all ${
+                    className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[14px] font-semibold transition-all sm:gap-3 sm:px-8 sm:py-4 sm:text-[18px] ${
                       active
                         ? 'border-accent/50 bg-accent/[0.12] text-accent'
                         : 'border-line bg-surface text-ink-muted hover:border-accent/30 hover:text-ink-high'
                     }`}
                   >
-                    <span className="text-3xl leading-none">{locations[key].flag}</span>
+                    <span className="text-2xl leading-none sm:text-3xl">{locations[key].flag}</span>
                     {locations[key].label}
                   </button>
                 )
@@ -156,13 +156,13 @@ export default function Contact() {
                 const style = brand ? brandStyles[brand] : null
                 return (
                   <li key={label}>
-                    <div className="group/icon flex items-center gap-4">
+                    <div className="group/icon flex items-center gap-3 sm:gap-4">
                       <div
-                        className={`grid h-14 w-14 flex-shrink-0 place-items-center rounded-xl border transition-all ${
+                        className={`grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl border transition-all sm:h-14 sm:w-14 ${
                           style ? style.wrap : 'border-line bg-surface text-accent'
                         }`}
                       >
-                        <Icon size={26} strokeWidth={2} />
+                        <Icon size={24} strokeWidth={2} />
                       </div>
                       <div className="min-w-0">
                         <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
@@ -173,7 +173,7 @@ export default function Contact() {
                             href={href}
                             target={href.startsWith('http') ? '_blank' : undefined}
                             rel="noopener noreferrer"
-                            className={`group inline-flex items-center gap-1.5 text-[18px] font-semibold text-ink-high transition-colors sm:text-[19px] ${
+                            className={`group inline-flex items-center gap-1.5 break-all text-[14.5px] font-semibold text-ink-high transition-colors sm:text-[18px] md:text-[19px] ${
                               style ? style.hoverText : 'hover:text-accent'
                             }`}
                           >
@@ -186,7 +186,7 @@ export default function Contact() {
                             )}
                           </a>
                         ) : (
-                          <p className="text-[18px] font-semibold text-ink-high sm:text-[19px]">{value}</p>
+                          <p className="break-all text-[14.5px] font-semibold text-ink-high sm:text-[18px] md:text-[19px]">{value}</p>
                         )}
                       </div>
                     </div>

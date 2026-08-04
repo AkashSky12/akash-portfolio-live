@@ -194,11 +194,78 @@ const experiences: Job[] = [
   },
 ]
 
+function TimelineItem({ exp }: { exp: Job }) {
+  // Each company reveals on its own as it scrolls into view.
+  const { ref, visible } = useReveal<HTMLLIElement>({ threshold: 0, rootMargin: '0px 0px -12% 0px' })
+  return (
+    <li
+      ref={ref}
+      className={`group reveal-left stagger-1 ${visible ? 'is-visible' : ''} relative pl-10 pb-14 last:pb-0`}
+    >
+      {/* Dot */}
+      <span
+        aria-hidden
+        className={`absolute left-0 top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full border-2 transition-all duration-300 group-hover:scale-125 ${
+          exp.current
+            ? 'border-accent bg-accent shadow-[0_0_0_4px_rgb(var(--accent)/0.18)]'
+            : 'border-accent/60 bg-bg group-hover:border-accent group-hover:shadow-[0_0_0_5px_rgb(var(--accent)/0.18)]'
+        }`}
+      />
+
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
+          {exp.period}
+        </span>
+        {exp.current && (
+          <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+            Now
+          </span>
+        )}
+      </div>
+
+      <h3 className="mt-2 inline-flex items-center gap-2 font-display text-[1.2rem] font-bold leading-tight text-ink-high transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
+        {exp.role}
+        <ArrowUpRight
+          size={18}
+          strokeWidth={2}
+          aria-hidden
+          className="-translate-x-2 text-accent opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+        />
+      </h3>
+      <p className="mt-1 text-[13.5px] text-ink-muted">
+        <span className="text-ink">{exp.company}</span>
+        <span className="text-ink-subtle"> · {exp.location}</span>
+      </p>
+      {exp.tag && (
+        <p className="mt-1 text-[12px] text-accent/90">{exp.tag}</p>
+      )}
+
+      <ul className="mt-4 space-y-2.5">
+        {exp.bullets.map((b, j) => (
+          <li
+            key={j}
+            className="relative pl-5 text-[14px] leading-relaxed text-ink"
+          >
+            <span
+              aria-hidden
+              className="absolute left-0 top-[10px] h-1 w-1 rounded-full bg-accent/70"
+            />
+            {b.bold && (
+              <strong className="font-semibold text-ink-high">
+                {b.bold}
+              </strong>
+            )}
+            <span className="text-ink-muted">{b.rest}</span>
+          </li>
+        ))}
+      </ul>
+    </li>
+  )
+}
+
 export default function Experience() {
   const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>()
-  const { ref: listRef, visible: listVisible } = useReveal<HTMLDivElement>({ threshold: 0.03 })
   const hv = headerVisible ? 'is-visible' : ''
-  const lv = listVisible ? 'is-visible' : ''
 
   return (
     <section id="experience" className="section">
@@ -216,73 +283,15 @@ export default function Experience() {
           </p>
         </div>
 
-        <div ref={listRef} className="relative mx-auto max-w-3xl">
+        <div className="relative mx-auto max-w-3xl">
           {/* Timeline line */}
           <span
             aria-hidden
             className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/40 via-line to-transparent"
           />
           <ol>
-          {experiences.map((exp, i) => (
-            <li key={exp.role + exp.company} className={`group reveal-left stagger-${i + 1} ${lv} relative pl-10 pb-14 last:pb-0`}>
-              {/* Dot */}
-              <span
-                aria-hidden
-                className={`absolute left-0 top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full border-2 transition-all duration-300 group-hover:scale-125 ${
-                  exp.current
-                    ? 'border-accent bg-accent shadow-[0_0_0_4px_rgb(var(--accent)/0.18)]'
-                    : 'border-accent/60 bg-bg group-hover:border-accent group-hover:shadow-[0_0_0_5px_rgb(var(--accent)/0.18)]'
-                }`}
-              />
-
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-accent">
-                  {exp.period}
-                </span>
-                {exp.current && (
-                  <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
-                    Now
-                  </span>
-                )}
-              </div>
-
-              <h3 className="mt-2 inline-flex items-center gap-2 font-display text-[1.2rem] font-bold leading-tight text-ink-high transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
-                {exp.role}
-                <ArrowUpRight
-                  size={18}
-                  strokeWidth={2}
-                  aria-hidden
-                  className="-translate-x-2 text-accent opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                />
-              </h3>
-              <p className="mt-1 text-[13.5px] text-ink-muted">
-                <span className="text-ink">{exp.company}</span>
-                <span className="text-ink-subtle"> · {exp.location}</span>
-              </p>
-              {exp.tag && (
-                <p className="mt-1 text-[12px] text-accent/90">{exp.tag}</p>
-              )}
-
-              <ul className="mt-4 space-y-2.5">
-                {exp.bullets.map((b, j) => (
-                  <li
-                    key={j}
-                    className="relative pl-5 text-[14px] leading-relaxed text-ink"
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-[10px] h-1 w-1 rounded-full bg-accent/70"
-                    />
-                    {b.bold && (
-                      <strong className="font-semibold text-ink-high">
-                        {b.bold}
-                      </strong>
-                    )}
-                    <span className="text-ink-muted">{b.rest}</span>
-                  </li>
-                ))}
-              </ul>
-            </li>
+          {experiences.map((exp) => (
+            <TimelineItem key={exp.role + exp.company} exp={exp} />
           ))}
           </ol>
         </div>
