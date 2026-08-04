@@ -1,221 +1,155 @@
 # Akash Simon — Portfolio Website
 
-A premium, production-ready personal portfolio built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
+A static-export personal portfolio built with Next.js 16, TypeScript, Tailwind CSS, and Lucide icons.
 
----
+## Overview
 
-## 🚀 Quick Start
+This site is a single-page portfolio assembled in [src/app/page.tsx](/Users/akash/Sky/akash-portfolio-live/src/app/page.tsx) with the following sections:
+
+- Hero
+- Experience
+- About
+- Skills
+- Tool marquee
+- Certifications
+- Contact
+- Footer
+
+The app includes:
+
+- Static export via `output: 'export'` in [next.config.js](/Users/akash/Sky/akash-portfolio-live/next.config.js)
+- Theme persistence with dark and light modes in [src/components/ThemeToggle.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/ThemeToggle.tsx)
+- SEO metadata, Open Graph, Twitter card, and manifest wiring in [src/app/layout.tsx](/Users/akash/Sky/akash-portfolio-live/src/app/layout.tsx)
+- Motion and reveal effects implemented with custom components and CSS rather than Framer Motion
+- Contact actions for email, WhatsApp, and LinkedIn in [src/components/sections/Contact.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Contact.tsx) and [src/components/sections/Footer.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Footer.tsx)
+
+## Local Development
+
+### Requirements
+
+- Node.js `24+`
+- npm `11+`
+
+### Start the dev server
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Run development server
 npm run dev
-# → Open http://localhost:3000
+```
 
-# 3. Build for production
+Open `http://localhost:3000`.
+
+### See changes live while editing
+
+Use `npm run dev` during development. Next.js watches your files and refreshes the page when you save changes in files such as [src/components/sections/Contact.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Contact.tsx).
+
+Typical workflow:
+
+```bash
+npm run dev
+```
+
+- Keep the dev server running
+- Edit a component under `src/`
+- Save the file
+- Refresh happens automatically in the browser in most cases
+
+If you want to view the app inside VS Code, open `http://localhost:3000` in the integrated browser while the dev server is running.
+
+### Build and preview the production export
+
+This repo is configured for static export, so `npm run build` writes the deployable site to `out/`.
+
+```bash
 npm run build
-
-# 4. Preview production build locally
-npx serve out
+python3 -m http.server 3000 -d out
 ```
 
----
+Open `http://127.0.0.1:3000`.
 
-## 📁 Project Structure
+This preview flow was verified locally in the VS Code integrated browser.
 
-```
-akash-portfolio/
+## Project Structure
+
+```text
+.
+├── .github/workflows/deploy.yml
+├── public/
+├── previews/
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx        # Root layout + SEO metadata
-│   │   ├── page.tsx          # Main page (assembles all sections)
-│   │   └── globals.css       # Global styles + Tailwind
-│   └── components/
-│       └── sections/
-│           ├── Navbar.tsx
-│           ├── Hero.tsx
-│           ├── About.tsx
-│           ├── Experience.tsx
-│           ├── Skills.tsx
-│           ├── Certifications.tsx
-│           ├── Contact.tsx
-│           └── Footer.tsx
-├── public/
-│   ├── robots.txt
-│   └── sitemap.xml
-├── .github/
-│   └── workflows/
-│       └── deploy.yml        # Auto-deploy to GitHub Pages
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── AmbientBackground.tsx
+│   │   ├── MotionEffects.tsx
+│   │   ├── ThemeToggle.tsx
+│   │   └── sections/
+│   └── lib/
 ├── next.config.js
-├── tailwind.config.js
-├── tsconfig.json
-└── package.json
+├── package.json
+└── tailwind.config.js
 ```
 
----
+## Deployment
 
-## 🌐 Deployment
+### GitHub Pages
 
-### Option A — GitHub Pages (Free, Recommended)
+The repository already includes a Pages workflow at [deploy.yml](/Users/akash/Sky/akash-portfolio-live/.github/workflows/deploy.yml). It installs dependencies, runs `npm run build`, and uploads the generated `out/` directory.
 
-#### Step 1: Create GitHub Repository
+Important: the workflow currently triggers on pushes to `main`, while this repository is presently on `master`. Either:
 
-```bash
-# Initialize git in your project folder
-cd akash-portfolio
-git init
-git add .
-git commit -m "feat: initial portfolio commit"
-```
+- rename the branch to `main`, or
+- update the workflow trigger to `master`
 
-#### Step 2: Create repo on GitHub
+Before using GitHub Pages, make sure repository settings use GitHub Actions as the Pages source.
 
-Go to https://github.com/new and create a repo named `akash-simon-portfolio` (or `akashsimon.com`).
+### Other static hosts
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/akash-simon-portfolio.git
-git branch -M main
-git push -u origin main
-```
+Because the output is plain static files in `out/`, the site can also be deployed to any static host that serves that directory as the web root.
 
-#### Step 3: Enable GitHub Pages
+## Content and Customization
 
-1. Go to your repo → **Settings** → **Pages**
-2. Under "Source", select **GitHub Actions**
-3. The `.github/workflows/deploy.yml` workflow will auto-build and deploy on every push to `main`
+### Editing portfolio content
 
-#### Step 4: Connect Custom Domain (akashsimon.com)
+Most content lives directly in the section components under `src/components/sections/`.
 
-1. In GitHub Pages settings, add `akashsimon.com` as your custom domain
-2. GitHub will add a `CNAME` file automatically
+- Hero and top-level narrative: [src/components/sections/Hero.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Hero.tsx)
+- Experience: [src/components/sections/Experience.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Experience.tsx)
+- About: [src/components/sections/About.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/About.tsx)
+- Skills: [src/components/sections/Skills.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Skills.tsx)
+- Certifications: [src/components/sections/Certifications.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Certifications.tsx)
+- Contact details and form behavior: [src/components/sections/Contact.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Contact.tsx)
 
-**DNS Configuration** (at your domain registrar — Namecheap, GoDaddy, Cloudflare, etc.):
+### Contact form behavior
 
-```
-Type    Host    Value                   TTL
-A       @       185.199.108.153         Auto
-A       @       185.199.109.153         Auto
-A       @       185.199.110.153         Auto
-A       @       185.199.111.153         Auto
-CNAME   www     YOUR_USERNAME.github.io  Auto
-```
+The current contact form does not submit to a backend. It opens the visitor's default mail client with the entered subject and message prefilled.
 
-> DNS changes propagate within 24–48 hours. GitHub will auto-provision SSL via Let's Encrypt.
+If you want server-backed submissions, replace the current `handleSubmit` flow in [src/components/sections/Contact.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/sections/Contact.tsx) with your preferred provider or API endpoint.
 
-#### Step 5: Enforce HTTPS + WWW redirect
+### Theme and styling
 
-In GitHub Pages settings:
-- ✅ Enforce HTTPS
-- The www → non-www redirect is handled automatically by GitHub
+- Global theme tokens and component styling live in [src/app/globals.css](/Users/akash/Sky/akash-portfolio-live/src/app/globals.css)
+- Theme switching is handled by [src/components/ThemeToggle.tsx](/Users/akash/Sky/akash-portfolio-live/src/components/ThemeToggle.tsx)
+- Archived theme variants are stored under [src/styles/saved-themes](/Users/akash/Sky/akash-portfolio-live/src/styles/saved-themes)
 
----
+## SEO and Assets
 
-### Option B — Vercel (Fastest, Zero Config)
+- Metadata, canonical URL, robots directives, and social cards are defined in [src/app/layout.tsx](/Users/akash/Sky/akash-portfolio-live/src/app/layout.tsx)
+- Static public assets live in [public](/Users/akash/Sky/akash-portfolio-live/public)
+- The generated export includes `robots.txt`, `sitemap.xml`, and `site.webmanifest`
 
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy
-vercel
-
-# Follow prompts — select your GitHub account
-# Vercel auto-detects Next.js and deploys instantly
-```
-
-Then in Vercel dashboard:
-1. Go to your project → **Settings** → **Domains**
-2. Add `akashsimon.com`
-3. Follow Vercel's DNS instructions (similar to above, or use Vercel nameservers for automatic SSL)
-
----
-
-## 🔧 Customisation
-
-### Updating Content
-
-All content is in the component files under `src/components/sections/`. Edit the data arrays directly — no CMS needed.
-
-### Contact Form
-
-The contact form currently logs to console. To make it functional:
-
-**Option 1 — Formspree (free tier available)**
-```bash
-# 1. Sign up at formspree.io
-# 2. Create a form and get your endpoint
-# 3. In Contact.tsx, update the form action:
-```
-```tsx
-<form action="https://formspree.io/f/YOUR_ID" method="POST">
-```
-
-**Option 2 — EmailJS**
-```bash
-npm install emailjs-com
-```
-
-### Adding Profile Photo
-
-1. Add your photo to `/public/profile.jpg`
-2. In `Hero.tsx`, add an `<Image>` component from `next/image`:
-```tsx
-import Image from 'next/image'
-<Image src="/profile.jpg" alt="Akash Simon" width={120} height={120} className="rounded-full" />
-```
-
----
-
-## ⚡ Performance
-
-- **Static export** (`output: 'export'`) — pure HTML/CSS/JS, CDN-ready
-- **Framer Motion** animations only on viewport enter (no layout thrash)
-- **Google Fonts** loaded via `@import` — can be swapped to `next/font` for zero-CLS
-- Images use `unoptimized: true` for static export compatibility
-
-To run Lighthouse:
-```bash
-npm run build
-npx serve out &
-npx lighthouse http://localhost:3000 --view
-```
-
----
-
-## ♿ Accessibility
-
-- Semantic HTML5 landmarks (`<nav>`, `<section>`, `<main>`, `<footer>`)
-- All interactive elements are keyboard-navigable
-- Color contrast: teal `#00d4aa` on navy `#0a0f1e` = **4.7:1** (WCAG AA)
-- Focus rings preserved on inputs
-- `aria-label` on icon-only links
-
----
-
-## 📊 SEO
-
-- Full Open Graph + Twitter Card metadata in `layout.tsx`
-- `robots.txt` allows all crawlers
-- `sitemap.xml` at `/sitemap.xml`
-- Semantic heading hierarchy (h1 → h2 → h3)
-- Canonical URL set to `https://akashsimon.com`
-
----
-
-## 🛠 Tech Stack
+## Tech Stack
 
 | Tool | Version | Purpose |
 |------|---------|---------|
-| Next.js | 14.x | Framework + static export |
+| Next.js | 16.x | App framework and static export |
+| React | 18.x | UI runtime |
 | TypeScript | 5.x | Type safety |
-| Tailwind CSS | 3.x | Utility-first styling |
-| Framer Motion | 11.x | Scroll animations |
-| Lucide React | latest | Icons |
+| Tailwind CSS | 3.x | Styling |
+| Lucide React | 0.400.x | Icons |
 
----
+## License
 
-## 📝 License
-
-Personal use. All content © Akash Simon.
+Personal use. All content copyright Akash Simon.

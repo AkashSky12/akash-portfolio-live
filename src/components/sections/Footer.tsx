@@ -108,7 +108,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="grid h-14 w-14 place-items-center rounded-full border border-[#0A66C2]/40 bg-[#0A66C2]/[0.08] text-[#0A66C2] shadow-[0_0_18px_rgba(59,130,246,0.6)] transition-all hover:scale-110 hover:border-[#0A66C2] hover:bg-[#0A66C2]/20 hover:shadow-[0_0_45px_rgba(59,130,246,0.95),0_0_75px_rgba(59,130,246,0.55)]"
+            className="grid h-14 w-14 place-items-center rounded-full border border-[#0A66C2]/40 bg-[#0A66C2]/[0.08] text-[#0A66C2] shadow-[0_0_18px_rgba(59,130,246,0.6)] transition-all hover:scale-110 hover:border-[#0A66C2] hover:bg-[#0A66C2]/25 hover:shadow-[0_0_65px_rgba(59,130,246,1),0_0_110px_rgba(59,130,246,0.75),0_0_150px_rgba(59,130,246,0.45)]"
           >
             <Linkedin size={24} strokeWidth={2} />
           </a>

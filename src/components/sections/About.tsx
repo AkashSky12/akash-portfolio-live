@@ -1,26 +1,32 @@
 'use client'
-import { Trophy, Star, Award } from 'lucide-react'
+import { Trophy, Star, Award, BadgeCheck } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 import SectionFX from '@/components/SectionFX'
 
 const awards = [
   {
-    Icon: Trophy,
+    Icon: Star,
     title: 'Best Sprinter',
     org: "Domino's Pizza Enterprises · 2024",
-    desc: '300+ automated test cases in 3 sprints, enabling on-time release across 12+ EU storefronts.',
+    desc: 'Cross platform application release and UAT co-ordination, enabling on-time release across 12+ Markets',
+  },
+   {
+    Icon: BadgeCheck,
+    title: 'Best Team Player',
+    org: "Solve.Care · 2023",
+    desc: '300+ automated test cases in 3 sprints, meeting the project deadline on-time',
   },
   {
-    Icon: Star,
+    Icon: Trophy,
     title: 'Best Employee',
     org: 'Quinta Systems PVT LTD · 2021',
-    desc: 'Established the first structured QA function in company history — pioneering blockchain + healthcare device testing.',
+    desc: 'Established the best structured QA functioning practices across platforms',
   },
   {
     Icon: Award,
     title: 'Client Appreciation',
     org: 'Quinta Systems PVT LTD · 2019',
-    desc: 'Personally recognised for sole ownership of CI/CD pipeline and delivery under a compressed 6-week deadline.',
+    desc: 'Personally recognized for sole ownership of End-to-End automation  under a compressed 6-week deadline.',
   },
 ]
 
@@ -32,7 +38,8 @@ export default function About() {
 
   return (
     <section id="about" className="section">
-      <SectionFX variant="grid" />
+      <SectionFX variant="orbits" />
+      <SectionFX variant="starfield" />
       <SectionFX variant="helix" />
       <div className="container">
         <div ref={headerRef}>
@@ -52,27 +59,28 @@ export default function About() {
             <p>
               I&apos;m a{' '}
               <span className="font-medium text-accent">
-                GenAI-powered QA Lead
+                QA Lead &amp; GenAI Automation Engineer
               </span>{' '}
-              with 9+ years of enterprise test automation, European regulatory
-              compliance, and distributed team leadership.
+              with nearly 10 years across manual and automation testing for web
+              and mobile applications.
             </p>
             <p>
-              At{' '}
-              <span className="font-medium text-ink-high">
-                Domino&apos;s Pizza Enterprises
-              </span>
-              , I pioneered GenAI QA agent infrastructure from the ground up —
-              cutting manual test-authoring by ~40% per sprint while enforcing
-              WCAG 2.1 AA, EN 301 549, and GDPR-aligned data governance across
-              30+ country storefronts.
+              I specialize in end-to-end UI testing, API and contract testing,
+              test planning, requirements elicitation, and full test-cycle
+              ownership within Agile delivery. I own end-to-end test architecture
+              using{' '}
+              <span className="font-medium text-ink-high">Playwright (Python)</span> and{' '}
+              <span className="font-medium text-ink-high">Selenium (Java)</span>, and
+              integrate AI-augmented and GenAI workflows to modernize quality
+              practices in high-growth, high-stakes environments.
             </p>
             <p>
-              Before that, at{' '}
-              <span className="font-medium text-ink-high">Solve.Care</span>, I
-              built a 10-engineer QA function from scratch in blockchain
-              healthcare — delivering IEC 62304-compliant testing on a live
-              patient-facing platform with near-zero defect escape rate.
+              I&apos;ve delivered quality programs across{' '}
+              <span className="font-medium text-ink-high">blockchain healthcare</span>,
+              enterprise software, and food-tech — with hands-on strength in
+              defect management, independent verification, and shift-left quality
+              strategy. Recognized with a Siemens client appreciation award and
+              three internal excellence awards.
             </p>
             <p className="text-ink-muted">
               I&apos;m now open to senior QA architect, automation lead, or

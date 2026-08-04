@@ -20,27 +20,36 @@ const experiences: Job[] = [
     role: 'Software Quality Engineer',
     company: "Domino's Pizza Enterprises Limited",
     location: 'Kuala Lumpur, Malaysia',
-    tag: 'European Market QA · 30+ Country Storefronts',
+    tag: 'E-Commerce · Retail Tech',
     current: true,
     bullets: [
       {
-        bold: 'Pioneered GenAI QA agent infrastructure from zero',
-        rest: ' — custom AI agents automating test case generation, synthetic data creation, and exploratory workflows, cutting manual test-authoring by ~40% per sprint.',
+        bold: 'Pioneered GenAI-powered QA agent infrastructure from zero',
+        rest: ' — built custom agents for test case generation, synthetic data creation, and exploratory workflows; reduced manual test authoring effort by ~40% per sprint.',
       },
       {
-        bold: 'Architected a Playwright (Python) automation framework',
-        rest: ' for 30+ EU country storefronts, achieving ~85% regression coverage and reducing release validation cycle time by 30%.',
+        bold: 'Engineered accessibility automation with Axe-core in Playwright',
+        rest: ' — enforced WCAG 2.1 AA across European web properties and surfaced accessibility violations directly in CI as first-class defects.',
       },
       {
-        bold: 'Engineered automated accessibility testing via Axe-core',
-        rest: ' — enforcing WCAG 2.1 AA and EN 301 549 compliance; violations surface as first-class defects in the CI pipeline.',
+        bold: 'Built and maintained GitHub Actions CI/CD pipelines',
+        rest: ' to trigger automated test suites on pull requests and release branches, accelerating developer feedback and reducing manual execution overhead.',
       },
       {
-        bold: 'Built GitHub Actions CI/CD pipelines',
-        rest: ' on every PR — saving 8+ hours/week in manual execution and enforcing zero-defect gates before deployment.',
+        bold: 'Led end-to-end AI-augmented quality strategy',
+        rest: ' as the primary automation engineer, defining quality gates, aligning QA milestones to business releases, and coordinating cross-functional product-engineering delivery.',
       },
       {
-        rest: 'Established European Quality Systems documentation, GDPR-aligned test data governance, and regulatory compliance standards.',
+        bold: 'Managed QA coordination and release quality for 12+ customer-facing platforms',
+        rest: ' across ANZ, APAC, and EU regions, ensuring consistent multi-region deployments and stable customer experience.',
+      },
+      {
+        bold: 'Established global Quality Systems documentation and compliance standards',
+        rest: ' and delivered executive-level QA reporting to senior program stakeholders across European markets.',
+      },
+      {
+        bold: 'Drove performance and operational quality improvements',
+        rest: ' by implementing Grafana K6 monitoring, strengthening production-readiness checks, and coaching teams on quality best practices.',
       },
     ],
   },
@@ -52,20 +61,44 @@ const experiences: Job[] = [
     tag: 'Blockchain Healthcare Platform',
     bullets: [
       {
-        bold: 'Built a full Selenium (Java) + TestNG framework from zero',
-        rest: ', with automated reporting pipelines integrated with TestRail and Jira — saving 3+ hours of manual reporting per sprint.',
+        bold: 'Built a Selenium (Java) + TestNG automation framework from the ground up',
+        rest: ', integrating TestRail and Jira reporting to replace manual status tracking with real-time quality visibility for stakeholders.',
       },
       {
-        bold: 'Managed a cross-functional QA team of 10 engineers across 3 geographies',
-        rest: ', owning sprint planning, defect triage, acceptance criteria, and release sign-off.',
+        bold: 'Led requirement elicitation in product and build grooming sessions',
+        rest: ', translating specifications into structured test plans, traceable acceptance criteria, and sprint-ready QA deliverables.',
       },
       {
-        bold: 'Delivered blockchain API contract testing and healthcare device interoperability testing',
-        rest: ' — validating IEC 62304 compliance and clinical data integrity on a live patient-facing platform.',
+        bold: 'Automated functional and regression coverage across priority tickets',
+        rest: ', improved suite reliability through targeted debugging, and accelerated pre-release validation cycles.',
       },
       {
-        bold: 'Reduced defect escape rate to near-zero',
-        rest: ' across 6 production releases via shift-left BDD coverage and mandatory pre-build acceptance criteria sign-off.',
+        bold: 'Delivered blockchain API contract testing and healthcare device interoperability validation',
+        rest: ' (BMI, heart rate, ECG), strengthening data integrity and release confidence for a live patient-facing platform.',
+      },
+      {
+        bold: 'Managed and mentored a cross-functional QA team of 10 across 3 locations',
+        rest: ', directing Agile test execution, defect triage, and release readiness with engineering and business teams.',
+      },
+      {
+        bold: 'Presented automation demos and release-readiness reports before production deployments',
+        rest: ', improving stakeholder alignment and enabling predictable, quality-driven go-live decisions.',
+      },
+      {
+        bold: 'Defined organization-wide automation strategy, QA standards, and tooling best practices',
+        rest: ', strengthening Agile quality workflows and delivery consistency across concurrent sprints.',
+      },
+      {
+        bold: 'Improved test management maturity using TestRail and Jira',
+        rest: ', standardizing traceability from requirements to execution results and accelerating defect lifecycle reporting.',
+      },
+      {
+        bold: 'Conducted release-focused stakeholder walkthroughs',
+        rest: ', demonstrating acceptance-criteria coverage and increasing confidence in production readiness decisions.',
+      },
+      {
+        bold: 'Strengthened team capability through hands-on mentoring and process coaching',
+        rest: ', enabling consistent QA execution across distributed contributors and mixed seniority levels.',
       },
     ],
   },
@@ -77,14 +110,52 @@ const experiences: Job[] = [
     tag: 'Enterprise Software & Client Services · incl. Siemens',
     bullets: [
       {
-        bold: 'Architected a hybrid Selenium + TestNG + Appium framework from scratch',
-        rest: ' — web, Android, and iOS coverage for 5+ enterprise clients, reducing regression run time by ~35%.',
+        bold: 'Architected a hybrid Selenium (Java) + TestNG + Appium automation framework from scratch',
+        rest: ' — delivered end-to-end web, Android, and iOS coverage across concurrent enterprise client projects, including Siemens.',
       },
       {
-        rest: 'Delivered full-stack QA coverage: API (Postman, REST Assured), data validation (MySQL, PostgreSQL), Jenkins CI/CD — zero critical defect escapes across all client releases.',
+        bold: 'Delivered a high-complexity Siemens engagement under compressed timelines',
+        rest: ' with full ownership of CI/CD quality gates, deployment validation, and post-launch sign-off; recognized with a Client Appreciation Award.',
       },
       {
-        rest: 'Authored comprehensive Test Strategies, Plans, Scenarios, and Cases — full requirements traceability across 10+ concurrent enterprise engagements.',
+        bold: 'Authored and owned test strategy artifacts',
+        rest: ' (test strategy, plans, scenarios, and test cases) from business and functional requirements, improving traceability and quality-focused execution across multiple projects.',
+      },
+      {
+        bold: 'Delivered full-stack QA across UI, API, and data layers',
+        rest: ' using Postman, Swagger, REST Assured, MySQL, and PostgreSQL, strengthening end-to-end validation before release.',
+      },
+      {
+        bold: 'Integrated Jenkins and Git-driven automation execution pipelines',
+        rest: ', standardizing build-level test reporting, logging, and release-quality visibility.',
+      },
+      {
+        bold: 'Served as Scrum Master for QA delivery',
+        rest: ', facilitating sprint ceremonies, backlog refinement, and cross-team coordination across SDLC/STLC workflows.',
+      },
+      {
+        bold: 'Drove defect lifecycle quality with development teams',
+        rest: ' through root cause analysis, requirement and design inconsistency resolution, and severity-based prioritization.',
+      },
+      {
+        bold: 'Led training for in-house and offshore QA engineers',
+        rest: ' on automation frameworks, testing standards, and execution practices, improving onboarding speed and consistency across distributed teams.',
+      },
+      {
+        bold: 'Analyzed test results, quality metrics, and performance trends',
+        rest: ', creating Jira-based reporting that improved defect visibility and accelerated risk-based release decisions.',
+      },
+      {
+        bold: 'Owned end-to-end QA execution across the SDLC and STLC',
+        rest: ', delivering quality outcomes under aggressive enterprise timelines through structured planning and execution control.',
+      },
+      {
+        bold: 'Coordinated API validation with developers and business analysts',
+        rest: ' using Postman, Swagger, and REST Assured, ensuring contract alignment and reducing integration issues before production.',
+      },
+      {
+        bold: 'Supported client-facing delivery through project demos and release walkthroughs',
+        rest: ', translating technical test outcomes into clear business-facing quality updates for stakeholders.',
       },
     ],
   },
@@ -93,9 +164,31 @@ const experiences: Job[] = [
     role: 'Application Support Engineer',
     company: 'Pole To Win International',
     location: 'Bangalore, India',
+    tag: 'Rockstar Game Testing',
     bullets: [
       {
-        rest: 'Executed structured manual and regression testing across multiple game platforms; maintained TestRail repositories with full traceability to functional specs.',
+        bold: 'Executed structured manual testing across multiple gaming platforms',
+        rest: ', validating gameplay, UI behavior, and platform compatibility to support launch-ready quality standards.',
+      },
+      {
+        bold: 'Performed regression, smoke, and exploratory test cycles under tight release timelines',
+        rest: ', identifying critical pre-launch defects and accelerating severity-based triage.',
+      },
+      {
+        bold: 'Authored clear, reproducible defect reports with detailed evidence',
+        rest: ', improving collaboration with developers and reducing issue turnaround time.',
+      },
+      {
+        bold: 'Designed and maintained TestRail test repositories',
+        rest: ', mapping test coverage to functional requirements and improving traceability across concurrent game titles.',
+      },
+      {
+        bold: 'Standardized manual test case design and execution practices',
+        rest: ' in a product-driven game testing environment, reducing regression coverage gaps and increasing release confidence.',
+      },
+      {
+        bold: 'Coordinated with QA leads and engineering teams on high-impact issue prioritization',
+        rest: ', helping ensure stable builds and consistent player experience at release.',
       },
     ],
   },
@@ -109,8 +202,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="section">
-      <SectionFX variant="code" />
-      <SectionFX variant="orbits" />
+      <SectionFX variant="particles" />
       <SectionFX variant="helix" />
       <div className="container">
         <div ref={headerRef}>

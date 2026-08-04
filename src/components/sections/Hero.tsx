@@ -5,10 +5,10 @@ import { useCounter } from '@/lib/useCounter'
 import HeroBackdrop from '@/components/HeroBackdrop'
 
 const stats = [
-  { num: 9,  suffix: '+', label: 'Years in QA' },
-  { num: 30, suffix: '+', label: 'EU Storefronts' },
+  { num: 10, suffix: '+', label: 'Years in QA' },
+  { num: 12, suffix: '+', label: 'Market Regions' },
   { num: 40, suffix: '%', label: 'Authoring Cut' },
-  { num: 12, suffix: '+', label: 'Engineers Led' },
+  { num: 10, suffix: '+', label: 'Engineers Led' },
 ]
 
 function StatItem({ num, suffix, label }: { num: number; suffix: string; label: string }) {
@@ -81,11 +81,8 @@ export default function Hero() {
             {/* Subtitle — stagger 3 */}
             <p className={`reveal-item stagger-3 ${v} text-pretty mb-10 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg`}>
               I&apos;m{' '}
-              <span className="text-ink-high font-semibold">Akash Simon</span> — a QA Lead &amp;
-              GenAI Automation Engineer with 9+ years building test infrastructure
-              that ships. Currently architecting GenAI QA agents across{' '}
-              <span className="text-ink-high font-semibold">30+ EU storefronts</span> at
-              Domino&apos;s Pizza Enterprises.
+              <span className="text-ink-high font-semibold">Akash Simon </span> a QA Lead &amp;
+              GenAI Automation Engineer with nearly 10 years of experience in automation architecture, API testing, and Agile quality delivery. I manage end-to-end test frameworks using Playwright (Python), Selenium (Java), API testing, and Appium, leveraging GenAI to modernize testing.
             </p>
 
             {/* CTAs — stagger 4 */}

@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Mail, MapPin, Linkedin, ArrowUpRight, Send } from 'lucide-react'
+import { Mail, MapPin, Linkedin, Github, ArrowUpRight, Send } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 import SectionFX from '@/components/SectionFX'
 
@@ -13,7 +13,7 @@ function WhatsApp({ size = 20 }: { size?: number | string; strokeWidth?: number 
   )
 }
 
-type Brand = 'whatsapp' | 'email' | 'linkedin'
+type Brand = 'whatsapp' | 'email' | 'linkedin' | 'github' | 'location'
 
 type Detail = {
   Icon: React.ComponentType<{ size?: number | string; strokeWidth?: number | string }>
@@ -30,12 +30,20 @@ const brandStyles: Record<Brand, { wrap: string; hoverText: string }> = {
     hoverText: 'hover:text-[#EA4335]',
   },
   linkedin: {
-    wrap: 'border-[#0A66C2]/40 bg-[#0A66C2]/[0.08] text-[#0A66C2] shadow-[0_0_18px_rgba(59,130,246,0.6)] group-hover/icon:scale-110 group-hover/icon:border-[#0A66C2] group-hover/icon:bg-[#0A66C2]/20 group-hover/icon:shadow-[0_0_45px_rgba(59,130,246,0.95),0_0_75px_rgba(59,130,246,0.55)]',
+    wrap: 'border-[#0A66C2]/40 bg-[#0A66C2]/[0.08] text-[#0A66C2] shadow-[0_0_18px_rgba(59,130,246,0.6)] group-hover/icon:scale-110 group-hover/icon:border-[#0A66C2] group-hover/icon:bg-[#0A66C2]/25 group-hover/icon:shadow-[0_0_65px_rgba(59,130,246,1),0_0_110px_rgba(59,130,246,0.75),0_0_150px_rgba(59,130,246,0.45)]',
     hoverText: 'hover:text-[#0A66C2]',
+  },
+  github: {
+    wrap: 'border-[#f0f6fc]/35 bg-[#f0f6fc]/[0.06] text-[#f0f6fc] shadow-[0_0_18px_rgba(240,246,252,0.5)] group-hover/icon:scale-110 group-hover/icon:border-[#f0f6fc] group-hover/icon:bg-[#f0f6fc]/18 group-hover/icon:shadow-[0_0_45px_rgba(240,246,252,0.9),0_0_75px_rgba(240,246,252,0.45)]',
+    hoverText: 'hover:text-[#f0f6fc]',
   },
   whatsapp: {
     wrap: 'border-[#25D366]/40 bg-[#25D366]/[0.08] text-[#25D366] shadow-[0_0_18px_rgba(37,211,102,0.55)] group-hover/icon:scale-110 group-hover/icon:border-[#25D366] group-hover/icon:bg-[#25D366]/20 group-hover/icon:shadow-[0_0_45px_rgba(37,211,102,0.95),0_0_75px_rgba(37,211,102,0.55)]',
     hoverText: 'hover:text-[#25D366]',
+  },
+  location: {
+    wrap: 'border-accent/40 bg-accent/[0.08] text-accent shadow-[0_0_18px_rgba(255,165,31,0.55)] group-hover/icon:scale-110 group-hover/icon:border-accent group-hover/icon:bg-accent/20 group-hover/icon:shadow-[0_0_45px_rgba(255,165,31,0.95),0_0_75px_rgba(255,165,31,0.55)]',
+    hoverText: 'hover:text-accent',
   },
 }
 
@@ -46,8 +54,9 @@ const locations: Record<string, { label: string; flag: string; details: Detail[]
     details: [
       { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com', brand: 'email' },
       { Icon: WhatsApp, label: 'WhatsApp', value: '+91 81058 44868', href: 'https://wa.me/918105844868', brand: 'whatsapp' },
-      { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: null },
+      { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: 'https://www.google.com/maps/search/?api=1&query=Bangalore%2C+India', brand: 'location' },
       { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/', brand: 'linkedin' },
+      { Icon: Github, label: 'GitHub', value: 'github.com/Akash-Pilot', href: 'https://github.com/Akash-Pilot/', brand: 'github' },
     ],
   },
   MY: {
@@ -56,8 +65,9 @@ const locations: Record<string, { label: string; flag: string; details: Detail[]
     details: [
       { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com', brand: 'email' },
       { Icon: WhatsApp, label: 'WhatsApp', value: '+60 12-747 4204', href: 'https://wa.me/60127474204', brand: 'whatsapp' },
-      { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: null },
+      { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: 'https://www.google.com/maps/search/?api=1&query=Kuala+Lumpur%2C+Malaysia', brand: 'location' },
       { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/', brand: 'linkedin' },
+      { Icon: Github, label: 'GitHub', value: 'github.com/Akash-Pilot', href: 'https://github.com/Akash-Pilot/', brand: 'github' },
     ],
   },
 }
@@ -97,7 +107,7 @@ export default function Contact() {
   return (
     <section id="contact" className="section">
       <SectionFX variant="beams" />
-      <SectionFX variant="code" />
+      <SectionFX variant="tunnel" />
       <div className="container">
         <div ref={headerRef}>
           <p className={`reveal-item stagger-1 ${hv} eyebrow mb-3`}>Get In Touch</p>
@@ -111,15 +121,15 @@ export default function Contact() {
           </p>
         </div>
 
-        <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card grid gap-10 p-6 sm:p-8 md:grid-cols-[1fr_1.2fr] md:gap-12`}>
+        <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card grid gap-12 p-8 sm:p-12 md:grid-cols-[1fr_1.2fr] md:gap-16`}>
           {/* Details */}
-          <div className="space-y-5">
-            <h3 className="font-display text-[20px] font-bold uppercase tracking-[0.1em] text-ink-high">
+          <div className="space-y-7">
+            <h3 className="glow-blink font-display text-[32px] font-bold uppercase tracking-[0.1em] text-ink-high">
               Contact details
             </h3>
 
             {/* Country toggle */}
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               {(Object.keys(locations) as CountryKey[]).map((key) => {
                 const active = country === key
                 return (
@@ -128,34 +138,34 @@ export default function Contact() {
                     type="button"
                     onClick={() => setCountry(key)}
                     {...{ 'aria-pressed': active }}
-                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-semibold transition-all ${
+                    className={`inline-flex items-center gap-3 rounded-full border px-8 py-4 text-[18px] font-semibold transition-all ${
                       active
                         ? 'border-accent/50 bg-accent/[0.12] text-accent'
                         : 'border-line bg-surface text-ink-muted hover:border-accent/30 hover:text-ink-high'
                     }`}
                   >
-                    <span className="text-base leading-none">{locations[key].flag}</span>
+                    <span className="text-3xl leading-none">{locations[key].flag}</span>
                     {locations[key].label}
                   </button>
                 )
               })}
             </div>
 
-            <ul key={country} className="space-y-4 animate-fade-in">
+            <ul key={country} className="space-y-5 animate-fade-in">
               {details.map(({ Icon, label, value, href, brand }) => {
                 const style = brand ? brandStyles[brand] : null
                 return (
                   <li key={label}>
-                    <div className="group/icon flex items-center gap-3.5">
+                    <div className="group/icon flex items-center gap-4">
                       <div
-                        className={`grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl border transition-all ${
+                        className={`grid h-14 w-14 flex-shrink-0 place-items-center rounded-xl border transition-all ${
                           style ? style.wrap : 'border-line bg-surface text-accent'
                         }`}
                       >
-                        <Icon size={22} strokeWidth={2} />
+                        <Icon size={26} strokeWidth={2} />
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-muted">
                           {label}
                         </p>
                         {href ? (
@@ -163,20 +173,20 @@ export default function Contact() {
                             href={href}
                             target={href.startsWith('http') ? '_blank' : undefined}
                             rel="noopener noreferrer"
-                            className={`group inline-flex items-center gap-1.5 text-[16px] font-semibold text-ink-high transition-colors sm:text-[17px] ${
+                            className={`group inline-flex items-center gap-1.5 text-[18px] font-semibold text-ink-high transition-colors sm:text-[19px] ${
                               style ? style.hoverText : 'hover:text-accent'
                             }`}
                           >
                             {value}
                             {href.startsWith('http') && (
                               <ArrowUpRight
-                                size={15}
+                                size={17}
                                 className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
                               />
                             )}
                           </a>
                         ) : (
-                          <p className="text-[16px] font-semibold text-ink-high sm:text-[17px]">{value}</p>
+                          <p className="text-[18px] font-semibold text-ink-high sm:text-[19px]">{value}</p>
                         )}
                       </div>
                     </div>

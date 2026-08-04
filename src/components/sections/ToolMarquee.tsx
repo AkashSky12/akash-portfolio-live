@@ -51,7 +51,7 @@ export default function ToolMarquee() {
 
   return (
     <section className="relative overflow-hidden py-[60px]">
-      <SectionFX variant="tunnel" />
+      <SectionFX variant="code" />
       <div className="container">
         <p className={`reveal-item stagger-1 ${v} mb-7 text-center text-[26px] font-black uppercase tracking-[0.3em] text-ink-subtle`}>
           Daily-driven tooling

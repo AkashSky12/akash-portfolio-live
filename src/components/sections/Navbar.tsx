@@ -65,9 +65,10 @@ export default function Navbar() {
       >
         <a
           href="#home"
-          className="font-display text-[18px] font-extrabold tracking-tight text-ink-high"
+          className="flex-shrink-0 whitespace-nowrap font-display text-[15px] font-extrabold tracking-tight text-ink-high sm:text-[16px] md:text-[18px]"
         >
-          GEN AI Engineer<span className="text-accent"></span>
+          <span className="sm:hidden">GenAI QA Engineer</span>
+          <span className="hidden sm:inline">GenAI QA Engineer</span>
         </a>
 
         {/* Desktop nav */}

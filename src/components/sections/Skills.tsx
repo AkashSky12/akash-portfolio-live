@@ -6,9 +6,22 @@ import {
   GitBranch,
   Webhook,
   ClipboardCheck,
+  Database,
+  Layers3,
 } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 import SectionFX from '@/components/SectionFX'
+
+const domains = [
+  'E-Commerce',
+  'Omnichannel Retail Tech',
+  'Blockchain Healthcare',
+  'Medical Device Integration',
+  'Supply Chain Management',
+  'WIP Enterprise Software',
+  'Enterprise Software & Client Services',
+  'Game Testing',
+]
 
 const groups = [
   {
@@ -17,11 +30,11 @@ const groups = [
     tags: [
       'Playwright (Python)',
       'Selenium (Java)',
-      'Appium',
+      'Appium (Android/iOS)',
       'WebDriverIO',
       'REST Assured',
       'TestNG',
-      'Cucumber BDD',
+      'Cucumber (BDD)',
       'Maven',
     ],
   },
@@ -29,16 +42,20 @@ const groups = [
     Icon: Bot,
     title: 'AI & GenAI',
     tags: [
-      'GenAI QA Agents',
+      'Custom GenAI QA Agent',
       'AI-Driven Automation',
-      'Prompt Engineering',
-      'Synthetic Data Generation',
+      'Prompt Engineering for QA',
     ],
   },
   {
     Icon: ShieldCheck,
-    title: 'Accessibility & Compliance',
-    tags: ['Axe-core', 'WCAG 2.1 AA', 'EN 301 549', 'EAA', 'GDPR', 'IEC 62304'],
+    title: 'Accessibility',
+    tags: [
+      'Axe-core',
+      'WCAG 2.1 AA Compliance',
+      'Playwright-Axe Integration',
+      'Accessibility Defect Tracking in CI Pipelines',
+    ],
   },
   {
     Icon: GitBranch,
@@ -47,7 +64,8 @@ const groups = [
       'GitHub Actions',
       'Jenkins',
       'Git',
-      'Pipeline Management',
+      'CI/CD Pipeline Integration',
+      'Build Pipeline Management',
       'Deployment Oversight',
     ],
   },
@@ -58,22 +76,31 @@ const groups = [
       'Postman',
       'Swagger',
       'REST Automation',
-      'Blockchain API',
-      'Smart Contract Testing',
+      'Blockchain API / Smart Contract Testing',
       'API Contract Testing',
     ],
   },
   {
     Icon: ClipboardCheck,
-    title: 'Management & Quality',
+    title: 'Test Management',
     tags: [
       'Jira',
       'TestRail',
-      'Shift-Left Strategy',
-      'JMeter',
+      'Test Strategy & Planning',
+      'Shift-Left Testing',
+      'SDLC / STLC',
+      'Defect Management',
+      'Risk Assessment',
+    ],
+  },
+  {
+    Icon: Database,
+    title: 'Databases',
+    tags: [
       'MySQL',
       'PostgreSQL',
-      'Risk Assessment',
+      'Data Validation',
+      'Front-End / Back-End Integrity Testing',
     ],
   },
 ]
@@ -81,22 +108,25 @@ const groups = [
 export default function Skills() {
   const { ref: headerRef, visible: headerVisible } = useReveal<HTMLDivElement>()
   const { ref: gridRef, visible: gridVisible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
+  const { ref: domainsRef, visible: domainsVisible } = useReveal<HTMLDivElement>({ threshold: 0.05 })
   const hv = headerVisible ? 'is-visible' : ''
   const gv = gridVisible ? 'is-visible' : ''
+  const dv = domainsVisible ? 'is-visible' : ''
 
   return (
     <section id="skills" className="section">
-      <SectionFX variant="particles" />
+      <SectionFX variant="code" />
       <SectionFX variant="waves" />
       <div className="container">
         <div ref={headerRef}>
-          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Tech Stack</p>
+          <p className={`reveal-item stagger-1 ${hv} eyebrow mb-4`}>Skills &amp; Technology</p>
           <h2 className={`reveal-item stagger-2 ${hv} heading-lg text-balance mb-5 text-ink-high`}>
             A battle-tested toolkit.
           </h2>
-          <p className={`reveal-item stagger-3 ${hv} text-pretty mb-14 max-w-2xl text-[15px] leading-relaxed text-ink-muted`}>
-            Spanning automation, AI, accessibility, CI/CD, and enterprise QA
-            leadership.
+          <p className={`reveal-item stagger-3 ${hv} text-pretty mb-10 max-w-2xl text-[15px] leading-relaxed text-ink-muted`}>
+            Core competencies spanning test automation architecture,
+            AI-augmented QA, accessibility, API and contract testing, CI/CD, and
+            cross-functional QA leadership.
           </p>
         </div>
 
@@ -120,6 +150,24 @@ export default function Skills() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div ref={domainsRef} className={`reveal-scale stagger-4 ${dv} glass-card mt-10 p-6`}>
+          <div className="mb-4 flex items-center gap-3">
+            <div className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent">
+              <Layers3 size={16} strokeWidth={2} />
+            </div>
+            <p className="font-display text-[13px] font-bold uppercase tracking-[0.1em] text-ink-high">
+              Domains
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {domains.map((domain) => (
+              <span key={domain} className="chip">
+                {domain}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
