@@ -43,7 +43,7 @@ const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var
  * browser's scroll-position restoration and resets to top on load when there is
  * no in-page anchor to honor.
  */
-const scrollResetScript = `(function(){try{if('scrollRestoration' in history){history.scrollRestoration='manual';}if(!window.location.hash){window.scrollTo(0,0);}window.addEventListener('load',function(){if(!window.location.hash){window.scrollTo(0,0);}});}catch(e){}})();`
+const scrollResetScript = `(function(){try{if('scrollRestoration' in history){history.scrollRestoration='manual';}var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};var isReload=nav.type==='reload'||nav.type==='back_forward'||(performance.navigation&&(performance.navigation.type===1||performance.navigation.type===2));function toTop(){if(isReload&&window.location.hash){history.replaceState(null,'',window.location.pathname+window.location.search);}try{window.scrollTo({top:0,left:0,behavior:'instant'});}catch(e){window.scrollTo(0,0);}}if(isReload||!window.location.hash){toTop();window.addEventListener('DOMContentLoaded',toTop);window.addEventListener('load',toTop);}window.addEventListener('pageshow',function(){if(isReload||!window.location.hash){toTop();}});}catch(e){}})();`
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://akashsimon.com'),

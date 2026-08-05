@@ -86,15 +86,15 @@ export default function Hero() {
             </p>
 
             {/* CTAs — stagger 4 */}
-            <div className={`reveal-item stagger-4 ${v} mb-16 flex flex-wrap items-center gap-3 sm:gap-4`}>
-              <a href="#contact" className="btn-primary group">
+            <div className={`reveal-item stagger-4 ${v} mb-16 flex flex-nowrap items-center gap-3 sm:gap-4`}>
+              <a href="#contact" className="btn-primary group flex-1 whitespace-nowrap px-4 text-[13px] sm:flex-none sm:px-6 sm:text-sm">
                 Let&apos;s work together
                 <ArrowUpRight
                   size={16}
                   className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
               </a>
-              <a href="#experience" className="btn-ghost">
+              <a href="#experience" className="btn-ghost flex-1 whitespace-nowrap px-4 text-[13px] sm:flex-none sm:px-6 sm:text-sm">
                 <Sparkles size={15} />
                 View experience
               </a>
