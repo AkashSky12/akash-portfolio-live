@@ -50,7 +50,7 @@ const brandStyles: Record<Brand, { wrap: string; hoverText: string }> = {
 const locations: Record<string, { label: string; flag: string; details: Detail[] }> = {
   IN: {
     label: 'India',
-    flag: '🇮🇳',
+    flag: 'in',
     details: [
       { Icon: Mail, label: 'Email', value: 'akash.simon@outlook.com', href: 'mailto:akash.simon@outlook.com', brand: 'email' },
       { Icon: WhatsApp, label: 'WhatsApp', value: '+91-8105844868', href: 'https://wa.me/918105844868', brand: 'whatsapp' },
@@ -61,7 +61,7 @@ const locations: Record<string, { label: string; flag: string; details: Detail[]
   },
   MY: {
     label: 'Malaysia',
-    flag: '🇲🇾',
+    flag: 'my',
     details: [
       { Icon: Mail, label: 'Email', value: 'akash.simon@outlook.com', href: 'mailto:akash.simon@outlook.com', brand: 'email' },
       { Icon: WhatsApp, label: 'WhatsApp', value: '+60-127474204', href: 'https://wa.me/60127474204', brand: 'whatsapp' },
@@ -143,7 +143,14 @@ export default function Contact() {
                       : 'border-line bg-surface text-ink-muted hover:border-accent/30 hover:text-ink-high'
                   }`}
                 >
-                  <span className="text-2xl leading-none sm:text-3xl">{locations[key].flag}</span>
+                  <img
+                    src={`https://flagcdn.com/w40/${locations[key].flag}.png`}
+                    srcSet={`https://flagcdn.com/w80/${locations[key].flag}.png 2x`}
+                    alt={locations[key].label}
+                    width={28}
+                    height={21}
+                    className="h-5 w-7 rounded-sm object-cover sm:h-6 sm:w-9"
+                  />
                   {locations[key].label}
                 </button>
               )

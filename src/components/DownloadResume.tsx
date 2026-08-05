@@ -6,8 +6,8 @@ import { trackResumeDownload } from '@/lib/analytics'
 type Country = 'IN' | 'MY'
 
 const RESUME_FILES: Record<Country, { url: string; filename: string; label: string; flag: string }> = {
-  IN: { url: '/resume/Akash_CV.pdf', filename: 'Akash_CV.pdf', label: 'India', flag: '🇮🇳' },
-  MY: { url: '/resume/Akash_Simon_CV.pdf', filename: 'Akash_Simon_CV.pdf', label: 'Malaysia', flag: '🇲🇾' },
+  IN: { url: '/resume/Akash_CV.pdf', filename: 'Akash_CV.pdf', label: 'India', flag: 'in' },
+  MY: { url: '/resume/Akash_Simon_CV.pdf', filename: 'Akash_Simon_CV.pdf', label: 'Malaysia', flag: 'my' },
 }
 
 type Heart = { id: number; x: number; delay: number; scale: number; emoji: string }
@@ -170,7 +170,14 @@ export default function DownloadResume({
                 onClick={() => download(key)}
                 className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-[14px] font-semibold text-ink-high shadow-sm backdrop-blur-md transition-all hover:border-accent/50 hover:bg-accent/[0.15] hover:text-accent"
               >
-                <span className="text-xl leading-none">{RESUME_FILES[key].flag}</span>
+                <img
+                  src={`https://flagcdn.com/w40/${RESUME_FILES[key].flag}.png`}
+                  srcSet={`https://flagcdn.com/w80/${RESUME_FILES[key].flag}.png 2x`}
+                  alt={RESUME_FILES[key].label}
+                  width={28}
+                  height={21}
+                  className="h-4 w-6 rounded-sm object-cover"
+                />
                 {RESUME_FILES[key].label}
               </button>
             ))}
