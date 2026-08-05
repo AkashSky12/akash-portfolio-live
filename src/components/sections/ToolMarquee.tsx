@@ -66,9 +66,9 @@ export default function ToolMarquee() {
       </div>
 
       <div ref={ref} className={`reveal-item stagger-2 ${v} relative py-3`}>
-        {/* edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-bg to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-bg to-transparent" />
+        {/* edge fades — narrower on small screens so icons aren't hidden */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-bg to-transparent sm:w-20 lg:w-32" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-bg to-transparent sm:w-20 lg:w-32" />
         <div className="marquee flex w-max items-start gap-3">
           {row.map((t, i) => (
             <Logo key={`${t.slug}-${i}`} {...t} />

@@ -143,8 +143,13 @@ export default function DownloadResume({
       {/* Country picker — choose which resume to download */}
       {showPicker && (
         <span
-          className={`glass-card no-tilt absolute z-[70] ${popoverPos} w-[min(280px,calc(100vw-2rem))] bg-bg-raised/40 p-5 text-center backdrop-blur-2xl backdrop-saturate-150`}
+          className={`no-tilt absolute z-[70] ${popoverPos} w-[min(280px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-white/15 bg-bg-raised/25 p-5 text-center shadow-[0_24px_70px_-20px_rgba(0,0,0,0.7)] ring-1 ring-inset ring-white/10 backdrop-blur-2xl backdrop-saturate-150`}
         >
+          {/* top highlight sheen */}
+          <span
+            className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"
+            aria-hidden="true"
+          />
           <button
             type="button"
             aria-label="Dismiss"
@@ -163,7 +168,7 @@ export default function DownloadResume({
                 key={key}
                 type="button"
                 onClick={() => download(key)}
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-line bg-surface/40 px-5 py-2.5 text-[14px] font-semibold text-ink-high transition-all hover:border-accent/40 hover:bg-accent/[0.12] hover:text-accent"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.06] px-5 py-2.5 text-[14px] font-semibold text-ink-high shadow-sm backdrop-blur-md transition-all hover:border-accent/50 hover:bg-accent/[0.15] hover:text-accent"
               >
                 <span className="text-xl leading-none">{RESUME_FILES[key].flag}</span>
                 {RESUME_FILES[key].label}
