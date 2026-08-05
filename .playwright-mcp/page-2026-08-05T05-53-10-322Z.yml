@@ -1,0 +1,3463 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - navigation "Primary" [ref=e4]:
+      - link "GenAI QA Engineer" [ref=e5] [cursor=pointer]:
+        - /url: "#home"
+      - list [ref=e725]:
+        - listitem [ref=e726]:
+          - link "Experience" [ref=e727] [cursor=pointer]:
+            - /url: "#experience"
+        - listitem [ref=e728]:
+          - link "About" [ref=e729] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=e730]:
+          - link "Skills" [ref=e731] [cursor=pointer]:
+            - /url: "#skills"
+        - listitem [ref=e732]:
+          - link "Credentials" [ref=e733] [cursor=pointer]:
+            - /url: "#certs"
+        - listitem [ref=e734]:
+          - link "Contact" [ref=e735] [cursor=pointer]:
+            - /url: "#contact"
+      - generic [ref=e736]:
+        - button "Switch to dark theme" [pressed] [ref=e737] [cursor=pointer]
+        - link "Hire Me" [ref=e745] [cursor=pointer]:
+          - /url: "#contact"
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: Available for senior roles
+        - heading "Engineering quality at the speed of AI." [level=1] [ref=e28]
+        - paragraph [ref=e29]: I'm Akash Simon a QA Lead & GenAI Automation Engineer with nearly 10 years of experience in automation architecture, API testing, and Agile quality delivery. I manage end-to-end test frameworks using Playwright (Python), Selenium (Java), API testing, and Appium, leveraging GenAI to modernize testing.
+        - generic [ref=e30]:
+          - link "Let's work together" [ref=e31] [cursor=pointer]:
+            - /url: "#contact"
+          - link "View experience" [ref=e35] [cursor=pointer]:
+            - /url: "#experience"
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - generic [ref=e40]: 0+
+            - generic [ref=e41]: Years in QA
+          - generic [ref=e42]:
+            - generic [ref=e43]: 0+
+            - generic [ref=e44]: Market Regions
+          - generic [ref=e45]:
+            - generic [ref=e46]: 0%
+            - generic [ref=e47]: Authoring Cut
+          - generic [ref=e48]:
+            - generic [ref=e49]: 0+
+            - generic [ref=e50]: Engineers Led
+      - generic: Scroll
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Career
+        - heading "A track record of shipping quality at scale." [level=2] [ref=e55]
+        - paragraph [ref=e56]: Nine years of progressive QA leadership across food-tech, blockchain healthcare, and enterprise software.
+      - list [ref=e59]:
+        - listitem [ref=e60]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: Aug 2023 — Present
+            - generic [ref=e64]: Now
+          - heading "Software Quality Engineer" [level=3] [ref=e65]
+          - paragraph [ref=e69]:
+            - text: Domino's Pizza Enterprises Limited
+            - generic [ref=e70]: · Kuala Lumpur, Malaysia
+          - paragraph [ref=e71]: E-Commerce · Retail Tech
+          - list [ref=e72]:
+            - listitem [ref=e73]:
+              - strong [ref=e75]: Pioneered GenAI-powered QA agent infrastructure from zero
+              - text: — built custom agents for test case generation, synthetic data creation, and exploratory workflows; reduced manual test authoring effort by ~40% per sprint.
+            - listitem [ref=e76]:
+              - strong [ref=e78]: Engineered accessibility automation with Axe-core in Playwright
+              - text: — enforced WCAG 2.1 AA across European web properties and surfaced accessibility violations directly in CI as first-class defects.
+            - listitem [ref=e79]:
+              - strong [ref=e81]: Built and maintained GitHub Actions CI/CD pipelines
+              - text: to trigger automated test suites on pull requests and release branches, accelerating developer feedback and reducing manual execution overhead.
+            - listitem [ref=e82]:
+              - strong [ref=e84]: Led end-to-end AI-augmented quality strategy
+              - text: as the primary automation engineer, defining quality gates, aligning QA milestones to business releases, and coordinating cross-functional product-engineering delivery.
+            - listitem [ref=e85]:
+              - strong [ref=e87]: Managed QA coordination and release quality for 12+ customer-facing platforms
+              - text: across ANZ, APAC, and EU regions, ensuring consistent multi-region deployments and stable customer experience.
+            - listitem [ref=e88]:
+              - strong [ref=e90]: Established global Quality Systems documentation and compliance standards
+              - text: and delivered executive-level QA reporting to senior program stakeholders across European markets.
+            - listitem [ref=e91]:
+              - strong [ref=e93]: Drove performance and operational quality improvements
+              - text: by implementing Grafana K6 monitoring, strengthening production-readiness checks, and coaching teams on quality best practices.
+        - listitem [ref=e94]:
+          - generic [ref=e96]: Apr 2022 — Aug 2023
+          - heading "Senior Automation QA Engineer" [level=3] [ref=e98]
+          - paragraph [ref=e102]:
+            - text: Solve.Care
+            - generic [ref=e103]: · Bangalore, India
+          - paragraph [ref=e104]: Blockchain Healthcare Platform
+          - list [ref=e105]:
+            - listitem [ref=e106]:
+              - strong [ref=e108]: Built a Selenium (Java) + TestNG automation framework from the ground up
+              - text: ", integrating TestRail and Jira reporting to replace manual status tracking with real-time quality visibility for stakeholders."
+            - listitem [ref=e109]:
+              - strong [ref=e111]: Led requirement elicitation in product and build grooming sessions
+              - text: ", translating specifications into structured test plans, traceable acceptance criteria, and sprint-ready QA deliverables."
+            - listitem [ref=e112]:
+              - strong [ref=e114]: Automated functional and regression coverage across priority tickets
+              - text: ", improved suite reliability through targeted debugging, and accelerated pre-release validation cycles."
+            - listitem [ref=e115]:
+              - strong [ref=e117]: Delivered blockchain API contract testing and healthcare device interoperability validation
+              - text: (BMI, heart rate, ECG), strengthening data integrity and release confidence for a live patient-facing platform.
+            - listitem [ref=e118]:
+              - strong [ref=e120]: Managed and mentored a cross-functional QA team of 10 across 3 locations
+              - text: ", directing Agile test execution, defect triage, and release readiness with engineering and business teams."
+            - listitem [ref=e121]:
+              - strong [ref=e123]: Presented automation demos and release-readiness reports before production deployments
+              - text: ", improving stakeholder alignment and enabling predictable, quality-driven go-live decisions."
+            - listitem [ref=e124]:
+              - strong [ref=e126]: Defined organization-wide automation strategy, QA standards, and tooling best practices
+              - text: ", strengthening Agile quality workflows and delivery consistency across concurrent sprints."
+            - listitem [ref=e127]:
+              - strong [ref=e129]: Improved test management maturity using TestRail and Jira
+              - text: ", standardizing traceability from requirements to execution results and accelerating defect lifecycle reporting."
+            - listitem [ref=e130]:
+              - strong [ref=e132]: Conducted release-focused stakeholder walkthroughs
+              - text: ", demonstrating acceptance-criteria coverage and increasing confidence in production readiness decisions."
+            - listitem [ref=e133]:
+              - strong [ref=e135]: Strengthened team capability through hands-on mentoring and process coaching
+              - text: ", enabling consistent QA execution across distributed contributors and mixed seniority levels."
+        - listitem [ref=e136]:
+          - generic [ref=e138]: Oct 2017 — Mar 2022
+          - heading "Senior Test Engineer" [level=3] [ref=e140]
+          - paragraph [ref=e144]:
+            - text: Quinta Systems Pvt. Ltd.
+            - generic [ref=e145]: · Bangalore, India
+          - paragraph [ref=e146]: Enterprise Software & Client Services · incl. Siemens
+          - list [ref=e147]:
+            - listitem [ref=e148]:
+              - strong [ref=e150]: Architected a hybrid Selenium (Java) + TestNG + Appium automation framework from scratch
+              - text: — delivered end-to-end web, Android, and iOS coverage across concurrent enterprise client projects, including Siemens.
+            - listitem [ref=e151]:
+              - strong [ref=e153]: Delivered a high-complexity Siemens engagement under compressed timelines
+              - text: with full ownership of CI/CD quality gates, deployment validation, and post-launch sign-off; recognized with a Client Appreciation Award.
+            - listitem [ref=e154]:
+              - strong [ref=e156]: Authored and owned test strategy artifacts
+              - text: (test strategy, plans, scenarios, and test cases) from business and functional requirements, improving traceability and quality-focused execution across multiple projects.
+            - listitem [ref=e157]:
+              - strong [ref=e159]: Delivered full-stack QA across UI, API, and data layers
+              - text: using Postman, Swagger, REST Assured, MySQL, and PostgreSQL, strengthening end-to-end validation before release.
+            - listitem [ref=e160]:
+              - strong [ref=e162]: Integrated Jenkins and Git-driven automation execution pipelines
+              - text: ", standardizing build-level test reporting, logging, and release-quality visibility."
+            - listitem [ref=e163]:
+              - strong [ref=e165]: Served as Scrum Master for QA delivery
+              - text: ", facilitating sprint ceremonies, backlog refinement, and cross-team coordination across SDLC/STLC workflows."
+            - listitem [ref=e166]:
+              - strong [ref=e168]: Drove defect lifecycle quality with development teams
+              - text: through root cause analysis, requirement and design inconsistency resolution, and severity-based prioritization.
+            - listitem [ref=e169]:
+              - strong [ref=e171]: Led training for in-house and offshore QA engineers
+              - text: on automation frameworks, testing standards, and execution practices, improving onboarding speed and consistency across distributed teams.
+            - listitem [ref=e172]:
+              - strong [ref=e174]: Analyzed test results, quality metrics, and performance trends
+              - text: ", creating Jira-based reporting that improved defect visibility and accelerated risk-based release decisions."
+            - listitem [ref=e175]:
+              - strong [ref=e177]: Owned end-to-end QA execution across the SDLC and STLC
+              - text: ", delivering quality outcomes under aggressive enterprise timelines through structured planning and execution control."
+            - listitem [ref=e178]:
+              - strong [ref=e180]: Coordinated API validation with developers and business analysts
+              - text: using Postman, Swagger, and REST Assured, ensuring contract alignment and reducing integration issues before production.
+            - listitem [ref=e181]:
+              - strong [ref=e183]: Supported client-facing delivery through project demos and release walkthroughs
+              - text: ", translating technical test outcomes into clear business-facing quality updates for stakeholders."
+        - listitem [ref=e184]:
+          - generic [ref=e186]: Feb 2017 — Sep 2017
+          - heading "Application Support Engineer" [level=3] [ref=e188]
+          - paragraph [ref=e192]:
+            - text: Pole To Win International
+            - generic [ref=e193]: · Bangalore, India
+          - paragraph [ref=e194]: Rockstar Game Testing
+          - list [ref=e195]:
+            - listitem [ref=e196]:
+              - strong [ref=e198]: Executed structured manual testing across multiple gaming platforms
+              - text: ", validating gameplay, UI behavior, and platform compatibility to support launch-ready quality standards."
+            - listitem [ref=e199]:
+              - strong [ref=e201]: Performed regression, smoke, and exploratory test cycles under tight release timelines
+              - text: ", identifying critical pre-launch defects and accelerating severity-based triage."
+            - listitem [ref=e202]:
+              - strong [ref=e204]: Authored clear, reproducible defect reports with detailed evidence
+              - text: ", improving collaboration with developers and reducing issue turnaround time."
+            - listitem [ref=e205]:
+              - strong [ref=e207]: Designed and maintained TestRail test repositories
+              - text: ", mapping test coverage to functional requirements and improving traceability across concurrent game titles."
+            - listitem [ref=e208]:
+              - strong [ref=e210]: Standardized manual test case design and execution practices
+              - text: in a product-driven game testing environment, reducing regression coverage gaps and increasing release confidence.
+            - listitem [ref=e211]:
+              - strong [ref=e213]: Coordinated with QA leads and engineering teams on high-impact issue prioritization
+              - text: ", helping ensure stable builds and consistent player experience at release."
+    - generic [ref=e215]:
+      - generic [ref=e216]:
+        - paragraph [ref=e217]: Who I Am
+        - heading "Quality as a competitive advantage." [level=2] [ref=e218]
+        - paragraph [ref=e219]: I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens.
+      - generic [ref=e221]:
+        - paragraph [ref=e222]: I'm a QA Lead & GenAI Automation Engineer with nearly 10 years across manual and automation testing for web and mobile applications.
+        - paragraph [ref=e223]: I specialize in end-to-end UI testing, API and contract testing, test planning, requirements elicitation, and full test-cycle ownership within Agile delivery. I own end-to-end test architecture using Playwright (Python) and Selenium (Java), and integrate AI-augmented and GenAI workflows to modernize quality practices in high-growth, high-stakes environments.
+        - paragraph [ref=e224]: I've delivered quality programs across blockchain healthcare, enterprise software, and food-tech — with hands-on strength in defect management, independent verification, and shift-left quality strategy. Recognized with a Siemens client appreciation award and three internal excellence awards.
+        - paragraph [ref=e225]: I'm now open to senior QA architect, automation lead, or AI-augmented testing roles at companies where quality engineering drives product velocity.
+    - generic [ref=e226]:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+          - generic:
+            - generic:
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+          - generic:
+            - generic:
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+          - generic:
+            - generic:
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+          - generic:
+            - generic:
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+          - generic:
+            - generic:
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+          - generic:
+            - generic:
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+          - generic:
+            - generic:
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+          - generic:
+            - generic:
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+          - generic:
+            - generic:
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+          - generic:
+            - generic:
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+          - generic:
+            - generic:
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+          - generic:
+            - generic:
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+          - generic:
+            - generic:
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+          - generic:
+            - generic:
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+          - generic:
+            - generic:
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+          - generic:
+            - generic:
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+          - generic:
+            - generic:
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+              - generic: ヤ
+              - generic: "0"
+              - generic: ">"
+              - generic: "["
+              - generic: )
+              - generic: "*"
+              - generic: ":"
+              - generic: $
+              - generic: A
+              - generic: D
+              - generic: "0"
+              - generic: "0"
+              - generic: サ
+              - generic: ハ
+              - generic: ラ
+              - generic: "1"
+              - generic: "{"
+              - generic: "]"
+              - generic: =
+              - generic: /
+              - generic: "!"
+              - generic: "%"
+              - generic: B
+              - generic: E
+              - generic: "1"
+              - generic: ア
+              - generic: タ
+              - generic: マ
+              - generic: ワ
+              - generic: <
+              - generic: "}"
+              - generic: (
+              - generic: +
+              - generic: ;
+              - generic: "#"
+              - generic: "&"
+              - generic: C
+              - generic: F
+              - generic: "1"
+              - generic: カ
+              - generic: ナ
+      - generic [ref=e227]:
+        - generic [ref=e228]:
+          - paragraph [ref=e229]: Skills & Technology
+          - heading "A battle-tested toolkit." [level=2] [ref=e230]
+          - paragraph [ref=e231]: Core competencies spanning test automation architecture, AI-augmented QA, accessibility, API and contract testing, CI/CD, and cross-functional QA leadership.
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - paragraph [ref=e247]: Automation
+            - generic [ref=e248]:
+              - generic [ref=e249]: Playwright (Python)
+              - generic [ref=e250]: Selenium (Java)
+              - generic [ref=e251]: Appium (Android/iOS)
+              - generic [ref=e252]: WebDriverIO
+              - generic [ref=e253]: REST Assured
+              - generic [ref=e254]: TestNG
+              - generic [ref=e255]: Cucumber (BDD)
+              - generic [ref=e256]: Maven
+          - generic [ref=e257]:
+            - paragraph [ref=e263]: AI & GenAI
+            - generic [ref=e264]:
+              - generic [ref=e265]: Custom GenAI QA Agent
+              - generic [ref=e266]: AI-Driven Automation
+              - generic [ref=e267]: Prompt Engineering for QA
+          - generic [ref=e268]:
+            - paragraph [ref=e274]: Accessibility
+            - generic [ref=e275]:
+              - generic [ref=e276]: Axe-core
+              - generic [ref=e277]: WCAG 2.1 AA Compliance
+              - generic [ref=e278]: Playwright-Axe Integration
+              - generic [ref=e279]: Accessibility Defect Tracking in CI Pipelines
+          - generic [ref=e280]:
+            - paragraph [ref=e287]: CI/CD & DevOps
+            - generic [ref=e288]:
+              - generic [ref=e289]: GitHub Actions
+              - generic [ref=e290]: Jenkins
+              - generic [ref=e291]: Git
+              - generic [ref=e292]: CI/CD Pipeline Integration
+              - generic [ref=e293]: Build Pipeline Management
+              - generic [ref=e294]: Deployment Oversight
+          - generic [ref=e295]:
+            - paragraph [ref=e302]: API & Integration
+            - generic [ref=e303]:
+              - generic [ref=e304]: Postman
+              - generic [ref=e305]: Swagger
+              - generic [ref=e306]: REST Automation
+              - generic [ref=e307]: Blockchain API / Smart Contract Testing
+              - generic [ref=e308]: API Contract Testing
+          - generic [ref=e309]:
+            - paragraph [ref=e316]: Test Management
+            - generic [ref=e317]:
+              - generic [ref=e318]: Jira
+              - generic [ref=e319]: TestRail
+              - generic [ref=e320]: Test Strategy & Planning
+              - generic [ref=e321]: Shift-Left Testing
+              - generic [ref=e322]: SDLC / STLC
+              - generic [ref=e323]: Defect Management
+              - generic [ref=e324]: Risk Assessment
+          - generic [ref=e325]:
+            - paragraph [ref=e332]: Databases
+            - generic [ref=e333]:
+              - generic [ref=e334]: MySQL
+              - generic [ref=e335]: PostgreSQL
+              - generic [ref=e336]: Data Validation
+              - generic [ref=e337]: Front-End / Back-End Integrity Testing
+        - generic [ref=e338]:
+          - paragraph [ref=e345]: Domains
+          - generic [ref=e346]:
+            - generic [ref=e347]: E-Commerce
+            - generic [ref=e348]: Omnichannel Retail Tech
+            - generic [ref=e349]: Blockchain Healthcare
+            - generic [ref=e350]: Medical Device Integration
+            - generic [ref=e351]: Supply Chain Management
+            - generic [ref=e352]: WIP Enterprise Software
+            - generic [ref=e353]: Enterprise Software & Client Services
+            - generic [ref=e354]: Game Testing
+        - generic [ref=e355]:
+          - paragraph [ref=e356]: Awards & Recognition
+          - list [ref=e357]:
+            - listitem [ref=e358]:
+              - generic [ref=e363]:
+                - paragraph [ref=e364]: Best Sprinter
+                - paragraph [ref=e365]: Domino's Pizza Enterprises · 2024
+                - paragraph [ref=e366]: Cross platform application release and UAT co-ordination, enabling on-time release across 12+ Markets
+            - listitem [ref=e367]:
+              - generic [ref=e373]:
+                - paragraph [ref=e374]: Best Team Player
+                - paragraph [ref=e375]: Solve.Care · 2023
+                - paragraph [ref=e376]: 300+ automated test cases in 3 sprints, meeting the project deadline on-time
+            - listitem [ref=e377]:
+              - generic [ref=e386]:
+                - paragraph [ref=e387]: Best Employee
+                - paragraph [ref=e388]: Quinta Systems PVT LTD · 2021
+                - paragraph [ref=e389]: Established the best structured QA functioning practices across platforms
+            - listitem [ref=e390]:
+              - generic [ref=e396]:
+                - paragraph [ref=e397]: Client Appreciation
+                - paragraph [ref=e398]: Quinta Systems PVT LTD · 2019
+                - paragraph [ref=e399]: Personally recognized for sole ownership of End-to-End automation under a compressed 6-week deadline.
+    - generic [ref=e400]:
+      - paragraph [ref=e402]: Daily-driven tooling
+      - generic [ref=e404]:
+        - link "Visit Playwright official website" [ref=e405] [cursor=pointer]:
+          - /url: https://playwright.dev/
+          - img "Playwright" [ref=e406]
+          - generic [ref=e407]: Playwright
+        - link "Visit Selenium official website" [ref=e408] [cursor=pointer]:
+          - /url: https://www.selenium.dev/
+          - img "Selenium" [ref=e409]
+          - generic [ref=e410]: Selenium
+        - link "Visit Cypress official website" [ref=e411] [cursor=pointer]:
+          - /url: https://www.cypress.io/
+          - img "Cypress" [ref=e412]
+          - generic [ref=e413]: Cypress
+        - link "Visit Appium official website" [ref=e414] [cursor=pointer]:
+          - /url: https://appium.io/
+          - img "Appium" [ref=e415]
+          - generic [ref=e416]: Appium
+        - link "Visit Python official website" [ref=e417] [cursor=pointer]:
+          - /url: https://www.python.org/
+          - img "Python" [ref=e418]
+          - generic [ref=e419]: Python
+        - link "Visit Java official website" [ref=e420] [cursor=pointer]:
+          - /url: https://openjdk.org/
+          - img "Java" [ref=e421]
+          - generic [ref=e422]: Java
+        - link "Visit GitHub Actions official website" [ref=e423] [cursor=pointer]:
+          - /url: https://github.com/features/actions
+          - img "GitHub Actions" [ref=e424]
+          - generic [ref=e425]: GitHub Actions
+        - link "Visit Jenkins official website" [ref=e426] [cursor=pointer]:
+          - /url: https://www.jenkins.io/
+          - img "Jenkins" [ref=e427]
+          - generic [ref=e428]: Jenkins
+        - link "Visit Postman official website" [ref=e429] [cursor=pointer]:
+          - /url: https://www.postman.com/
+          - img "Postman" [ref=e430]
+          - generic [ref=e431]: Postman
+        - link "Visit Jira official website" [ref=e432] [cursor=pointer]:
+          - /url: https://www.atlassian.com/software/jira
+          - img "Jira" [ref=e433]
+          - generic [ref=e434]: Jira
+        - link "Visit Docker official website" [ref=e435] [cursor=pointer]:
+          - /url: https://www.docker.com/
+          - img "Docker" [ref=e436]
+          - generic [ref=e437]: Docker
+        - link "Visit JMeter official website" [ref=e438] [cursor=pointer]:
+          - /url: https://jmeter.apache.org/
+          - img "JMeter" [ref=e439]
+          - generic [ref=e440]: JMeter
+        - link "Visit PostgreSQL official website" [ref=e441] [cursor=pointer]:
+          - /url: https://www.postgresql.org/
+          - img "PostgreSQL" [ref=e442]
+          - generic [ref=e443]: PostgreSQL
+        - link "Visit MySQL official website" [ref=e444] [cursor=pointer]:
+          - /url: https://www.mysql.com/
+          - img "MySQL" [ref=e445]
+          - generic [ref=e446]: MySQL
+        - link "Visit Cucumber official website" [ref=e447] [cursor=pointer]:
+          - /url: https://cucumber.io/
+          - img "Cucumber" [ref=e448]
+          - generic [ref=e449]: Cucumber
+        - link "Visit Swagger official website" [ref=e450] [cursor=pointer]:
+          - /url: https://swagger.io/
+          - img "Swagger" [ref=e451]
+          - generic [ref=e452]: Swagger
+        - link "Visit Playwright official website" [ref=e453] [cursor=pointer]:
+          - /url: https://playwright.dev/
+          - img "Playwright" [ref=e454]
+          - generic [ref=e455]: Playwright
+        - link "Visit Selenium official website" [ref=e456] [cursor=pointer]:
+          - /url: https://www.selenium.dev/
+          - img "Selenium" [ref=e457]
+          - generic [ref=e458]: Selenium
+        - link "Visit Cypress official website" [ref=e459] [cursor=pointer]:
+          - /url: https://www.cypress.io/
+          - img "Cypress" [ref=e460]
+          - generic [ref=e461]: Cypress
+        - link "Visit Appium official website" [ref=e462] [cursor=pointer]:
+          - /url: https://appium.io/
+          - img "Appium" [ref=e463]
+          - generic [ref=e464]: Appium
+        - link "Visit Python official website" [ref=e465] [cursor=pointer]:
+          - /url: https://www.python.org/
+          - img "Python" [ref=e466]
+          - generic [ref=e467]: Python
+        - link "Visit Java official website" [ref=e468] [cursor=pointer]:
+          - /url: https://openjdk.org/
+          - img "Java" [ref=e469]
+          - generic [ref=e470]: Java
+        - link "Visit GitHub Actions official website" [ref=e471] [cursor=pointer]:
+          - /url: https://github.com/features/actions
+          - img "GitHub Actions" [ref=e472]
+          - generic [ref=e473]: GitHub Actions
+        - link "Visit Jenkins official website" [ref=e474] [cursor=pointer]:
+          - /url: https://www.jenkins.io/
+          - img "Jenkins" [ref=e475]
+          - generic [ref=e476]: Jenkins
+        - link "Visit Postman official website" [ref=e477] [cursor=pointer]:
+          - /url: https://www.postman.com/
+          - img "Postman" [ref=e478]
+          - generic [ref=e479]: Postman
+        - link "Visit Jira official website" [ref=e480] [cursor=pointer]:
+          - /url: https://www.atlassian.com/software/jira
+          - img "Jira" [ref=e481]
+          - generic [ref=e482]: Jira
+        - link "Visit Docker official website" [ref=e483] [cursor=pointer]:
+          - /url: https://www.docker.com/
+          - img "Docker" [ref=e484]
+          - generic [ref=e485]: Docker
+        - link "Visit JMeter official website" [ref=e486] [cursor=pointer]:
+          - /url: https://jmeter.apache.org/
+          - img "JMeter" [ref=e487]
+          - generic [ref=e488]: JMeter
+        - link "Visit PostgreSQL official website" [ref=e489] [cursor=pointer]:
+          - /url: https://www.postgresql.org/
+          - img "PostgreSQL" [ref=e490]
+          - generic [ref=e491]: PostgreSQL
+        - link "Visit MySQL official website" [ref=e492] [cursor=pointer]:
+          - /url: https://www.mysql.com/
+          - img "MySQL" [ref=e493]
+          - generic [ref=e494]: MySQL
+        - link "Visit Cucumber official website" [ref=e495] [cursor=pointer]:
+          - /url: https://cucumber.io/
+          - img "Cucumber" [ref=e496]
+          - generic [ref=e497]: Cucumber
+        - link "Visit Swagger official website" [ref=e498] [cursor=pointer]:
+          - /url: https://swagger.io/
+          - img "Swagger" [ref=e499]
+          - generic [ref=e500]: Swagger
+    - generic [ref=e502]:
+      - generic [ref=e503]:
+        - paragraph [ref=e504]: Credentials
+        - heading "Certifications & education." [level=2] [ref=e505]
+      - generic [ref=e506]:
+        - heading "Education" [level=3] [ref=e507]
+        - generic [ref=e721]:
+          - paragraph [ref=e722]: B.E. Computer Science Engineering
+          - paragraph [ref=e723]: Visvesvaraya Technological University
+          - generic [ref=e724]: Graduated
+      - generic [ref=e518]:
+        - generic [ref=e524]:
+          - paragraph [ref=e525]: ISTQB Foundation Level
+          - paragraph [ref=e526]: ISTQB / UKITB
+          - generic [ref=e527]: Certified
+        - generic [ref=e542]:
+          - paragraph [ref=e543]: AI Fundamentals Certification
+          - paragraph [ref=e544]: Applied GenAI Workflows & Principles
+          - generic [ref=e545]: Certified
+        - generic [ref=e551]:
+          - paragraph [ref=e552]: ISTQB Advanced — Test Manager
+          - paragraph [ref=e553]: ISTQB
+          - generic [ref=e554]: In Progress
+    - generic [ref=e555]:
+      - generic [ref=e556]:
+        - generic [ref=e557]:
+          - paragraph [ref=e558]: Get In Touch
+          - heading "Let's build something exceptional." [level=2] [ref=e559]
+          - paragraph [ref=e560]: Open to senior QA architect, automation lead, or AI-augmented testing roles globally. I respond within 24 hours.
+        - generic [ref=e561]:
+          - heading "Contact details" [level=3] [ref=e562]
+          - generic [ref=e563]:
+            - button "🇮🇳 India" [ref=e564] [cursor=pointer]:
+              - generic [ref=e565]: 🇮🇳
+              - text: India
+            - button "🇲🇾 Malaysia" [pressed] [ref=e566] [cursor=pointer]:
+              - generic [ref=e567]: 🇲🇾
+              - text: Malaysia
+          - generic [ref=e568]:
+            - list [ref=e570]:
+              - listitem [ref=e571]:
+                - generic [ref=e577]:
+                  - paragraph [ref=e578]: Email
+                  - link "akash.mosey99@gmail.com" [ref=e579] [cursor=pointer]:
+                    - /url: mailto:akash.mosey99@gmail.com
+              - listitem [ref=e580]:
+                - generic [ref=e585]:
+                  - paragraph [ref=e586]: WhatsApp
+                  - link "+60 12-747 4204" [ref=e587] [cursor=pointer]:
+                    - /url: https://wa.me/60127474204
+              - listitem [ref=e591]:
+                - generic [ref=e597]:
+                  - paragraph [ref=e598]: Location
+                  - link "Kuala Lumpur, Malaysia" [ref=e599] [cursor=pointer]:
+                    - /url: https://www.google.com/maps/search/?api=1&query=Kuala+Lumpur%2C+Malaysia
+              - listitem [ref=e603]:
+                - generic [ref=e610]:
+                  - paragraph [ref=e611]: LinkedIn
+                  - link "linkedin.com/in/akash-simon" [ref=e612] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/akash-simon/
+              - listitem [ref=e616]:
+                - generic [ref=e622]:
+                  - paragraph [ref=e623]: GitHub
+                  - link "github.com/Akash-Pilot" [ref=e624] [cursor=pointer]:
+                    - /url: https://github.com/Akash-Pilot/
+            - generic [ref=e628]:
+              - heading "Send a message" [level=3] [ref=e629]
+              - generic [ref=e630]:
+                - textbox "Your name" [ref=e631]
+                - textbox "Your email" [ref=e632]
+              - textbox "Subject" [ref=e633]
+              - textbox "Message" [ref=e634]:
+                - /placeholder: Tell me about the opportunity...
+              - button "Send message" [ref=e635] [cursor=pointer]
+              - paragraph [ref=e639]:
+                - text: Prefer direct?
+                - link "akash.simon@outlook.com" [ref=e640] [cursor=pointer]:
+                  - /url: mailto:akash.simon@outlook.com
+      - link "Let’s talk — send me an email" [ref=e641] [cursor=pointer]:
+        - /url: mailto:akash.mosey99@gmail.com?subject=Let%E2%80%99s%20talk
+        - generic [ref=e642]:
+          - generic [ref=e643]:
+            - generic [ref=e644]: Let’s talk
+            - generic [ref=e648]: Let’s talk
+            - generic [ref=e652]: Let’s talk
+            - generic [ref=e656]: Let’s talk
+            - generic [ref=e660]: Let’s talk
+          - generic [ref=e664]:
+            - generic [ref=e665]: Let’s talk
+            - generic [ref=e669]: Let’s talk
+            - generic [ref=e673]: Let’s talk
+            - generic [ref=e677]: Let’s talk
+            - generic [ref=e681]: Let’s talk
+  - contentinfo [ref=e686]:
+    - generic [ref=e687]:
+      - generic [ref=e688]:
+        - paragraph [ref=e689]: Assured Quality
+        - paragraph [ref=e690]: © 2026 Akash Simon · Built with precision, deployed with confidence.
+      - generic [ref=e691]:
+        - button "Chat on WhatsApp" [ref=e693] [cursor=pointer]
+        - link "LinkedIn" [ref=e696] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/akash-simon/
+        - link "Email" [ref=e701] [cursor=pointer]:
+          - /url: mailto:akash.simon@outlook.com
+        - link "Back to top" [ref=e705] [cursor=pointer]:
+          - /url: "#home"
+  - button "Open Next.js Dev Tools" [ref=e713] [cursor=pointer]
+  - alert [ref=e717]

@@ -2,8 +2,10 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle'
+import DownloadResume from '@/components/DownloadResume'
 
 const links = [
+  { href: '#home', label: 'Home' },
   { href: '#experience', label: 'Experience' },
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
@@ -68,12 +70,12 @@ export default function Navbar() {
           className="flex-shrink-0 whitespace-nowrap font-display text-[15px] font-extrabold tracking-tight text-ink-high sm:text-[16px] md:text-[18px]"
         >
           <span className="sm:hidden">GenAI QA Engineer</span>
-          <span className="hidden sm:inline">GenAI QA Engineer</span>
+          <span className="hidden sm:inline">GenAI QA</span>
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — Home is omitted here (the logo is the home link); it appears in the mobile menu */}
         <ul className="hidden items-center gap-1 md:flex">
-          {links.map((l) => {
+          {links.filter((l) => l.href !== '#home').map((l) => {
             const isActive = active === l.href
             return (
               <li key={l.href}>
@@ -95,14 +97,16 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
-          <a href="#contact" className="btn-primary !py-2 !px-5 text-[13px]">
-            Hire Me
-          </a>
+          <DownloadResume className="btn-primary whitespace-nowrap !py-2 !px-5 text-[13px]" />
         </div>
 
         {/* Mobile toggle */}
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
+          <DownloadResume
+            iconOnly
+            className="h-10 w-10 rounded-full border border-line bg-surface text-ink-high"
+          />
           <button
             type="button"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -129,7 +133,7 @@ export default function Navbar() {
           aria-hidden="true"
         />
         <div
-          className={`fixed inset-x-0 top-16 origin-top bg-bg-raised transition-all duration-300 ${
+          className={`fixed inset-x-0 top-16 max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto overscroll-contain bg-bg-raised transition-all duration-300 ${
             open ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
           }`}
         >
@@ -151,13 +155,11 @@ export default function Navbar() {
               </li>
             ))}
             <li className="mt-2">
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
+              <DownloadResume
                 className="btn-primary w-full"
-              >
-                Hire Me
-              </a>
+                fullWidth
+                onDownload={() => setOpen(false)}
+              />
             </li>
           </ul>
         </div>

@@ -9,12 +9,15 @@ import Contact from '@/components/sections/Contact'
 import Footer from '@/components/sections/Footer'
 import MotionEffects from '@/components/MotionEffects'
 import AmbientBackground from '@/components/AmbientBackground'
+import ChatBubble from '@/components/ChatBubble'
+import VisitTracker from '@/components/VisitTracker'
 
 export default function Home() {
   return (
     <>
       <MotionEffects />
       <AmbientBackground />
+      <VisitTracker />
       <Navbar />
       <main id="main" className="relative z-10">
         <Hero />
@@ -28,6 +31,7 @@ export default function Home() {
       <div className="relative z-10">
         <Footer />
       </div>
+      <ChatBubble />
     </>
   )
 }

@@ -6,7 +6,7 @@ import HeroBackdrop from '@/components/HeroBackdrop'
 
 const stats = [
   { num: 10, suffix: '+', label: 'Years in QA' },
-  { num: 12, suffix: '+', label: 'Market Regions' },
+  { num: 12, suffix: '+', label: 'Country/Regions' },
   { num: 40, suffix: '%', label: 'Authoring Cut' },
   { num: 10, suffix: '+', label: 'Engineers Led' },
 ]
@@ -74,8 +74,8 @@ export default function Hero() {
 
             {/* Headline — stagger 2 */}
             <h1 className={`reveal-item stagger-2 ${v} heading-xl text-balance mb-6 text-ink-high`}>
-              Engineering quality at the{' '}
-              <span className="accent-text">speed of AI</span>.
+              Building Reliable Software Through Automation & AI.{' '} <br />
+              <span className="accent-text">Where AI Meets Software Testing.</span>
             </h1>
 
             {/* Subtitle — stagger 3 */}

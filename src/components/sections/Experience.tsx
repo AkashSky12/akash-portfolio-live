@@ -268,7 +268,7 @@ export default function Experience() {
   const hv = headerVisible ? 'is-visible' : ''
 
   return (
-    <section id="experience" className="section">
+    <section id="experience" className="section scroll-mt-16">
       <SectionFX variant="particles" />
       <SectionFX variant="helix" />
       <div className="container">

@@ -27,6 +27,7 @@ const tools = [
 ]
 
 function Logo({ name, slug, color, src, url }: { name: string; slug: string; color: string; src?: string; url: string }) {
+  const iconSrc = src ?? `https://cdn.simpleicons.org/${slug}`
   return (
     <a
       href={url}
@@ -36,7 +37,7 @@ function Logo({ name, slug, color, src, url }: { name: string; slug: string; col
       aria-label={`Visit ${name} official website`}
     >
       <Image
-        src={src ?? `https://cdn.simpleicons.org/${slug}/${color}`}
+        src={iconSrc}
         alt={name}
         width={72}
         height={72}
@@ -56,7 +57,7 @@ export default function ToolMarquee() {
   const row = [...tools, ...tools]
 
   return (
-    <section className="relative overflow-hidden py-[60px]">
+    <section className="section overflow-hidden">
       <SectionFX variant="starfield" />
       <div className="container">
         <p className={`reveal-item stagger-1 ${v} mb-7 text-center text-[26px] font-black uppercase tracking-[0.3em] text-accent`}>

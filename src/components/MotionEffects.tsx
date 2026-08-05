@@ -62,7 +62,7 @@ export default function MotionEffects() {
     // ── Global card 3D tilt ──────────────────────────────────────────────
     const cardCleanups: Array<() => void> = []
     if (enable3D) {
-      const cards = document.querySelectorAll<HTMLElement>('.glass-card')
+      const cards = document.querySelectorAll<HTMLElement>('.glass-card:not(.no-tilt)')
       cards.forEach((card) => {
         card.classList.add('card-3d')
         let cRaf = 0

@@ -215,6 +215,45 @@ h1, h2, h3, h4, h5 {
     @apply border-accent bg-accent/15 text-accent;
   }
 
+  /* "In Progress" credential badge — amber, readable in both themes. */
+  .status-progress {
+    background-color: rgb(245 158 11 / 0.12);
+    color: rgb(252 211 77);
+    box-shadow: inset 0 0 0 1px rgb(251 191 36 / 0.25);
+  }
+  :root[data-theme='light'] .status-progress {
+    background-color: rgb(217 119 6 / 0.12);
+    color: rgb(180 83 9);
+    box-shadow: inset 0 0 0 1px rgb(217 119 6 / 0.4);
+  }
+
+  /* GitHub brand icon — matches LinkedIn glow pattern; light glyph on dark theme, ink glyph on light theme. */
+  .brand-github-icon {
+    border: 1px solid rgb(240 246 252 / 0.4);
+    background-color: rgb(240 246 252 / 0.08);
+    color: rgb(240 246 252);
+    box-shadow: 0 0 18px rgba(240, 246, 252, 0.6);
+    transition: all 0.3s ease;
+  }
+  .group\/icon:hover .brand-github-icon {
+    transform: scale(1.1);
+    border-color: rgb(240 246 252);
+    background-color: rgb(240 246 252 / 0.25);
+    box-shadow: 0 0 65px rgba(240, 246, 252, 1), 0 0 110px rgba(240, 246, 252, 0.75), 0 0 150px rgba(240, 246, 252, 0.45);
+  }
+  :root[data-theme='light'] .brand-github-icon {
+    border-color: rgb(36 41 47 / 0.4);
+    background-color: rgb(36 41 47 / 0.08);
+    color: rgb(36 41 47);
+    box-shadow: 0 0 18px rgb(36 41 47 / 0.6);
+  }
+  :root[data-theme='light'] .group\/icon:hover .brand-github-icon {
+    transform: scale(1.1);
+    border-color: rgb(36 41 47);
+    background-color: rgb(36 41 47 / 0.25);
+    box-shadow: 0 0 65px rgb(36 41 47 / 1), 0 0 110px rgb(36 41 47 / 0.75), 0 0 150px rgb(36 41 47 / 0.45);
+  }
+
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all;
     position: relative;
@@ -257,7 +296,7 @@ h1, h2, h3, h4, h5 {
   .btn-ghost:active { transform: scale(0.97); }
 
   .section {
-    @apply relative py-[60px];
+    @apply relative py-16 sm:py-20 lg:py-24;
     /* Skip rendering/painting sections while they're far off-screen — big win
        on lower-end GPUs and long pages. `auto` remembers real size after first
        paint, so in-page anchors and scroll position stay stable. */
@@ -568,6 +607,18 @@ h1, h2, h3, h4, h5 {
 @keyframes btn-shine {
   0%        { left: -100%; }
   20%, 100% { left: 150%; }
+}
+
+/* Floating emoji burst for the Download Resume button (bursts downward) */
+.heart-pop {
+  transform: translate(-50%, 0) scale(var(--hs, 1));
+  animation: heart-pop 1.4s ease-out forwards;
+  will-change: transform, opacity;
+}
+@keyframes heart-pop {
+  0%   { transform: translate(-50%, 0) scale(0.2); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--hx, 0px)), 70px) scale(var(--hs, 1)); opacity: 0; }
 }
 
 .sun-halo {

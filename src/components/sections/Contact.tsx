@@ -34,8 +34,8 @@ const brandStyles: Record<Brand, { wrap: string; hoverText: string }> = {
     hoverText: 'hover:text-[#0A66C2]',
   },
   github: {
-    wrap: 'border-[#f0f6fc]/35 bg-[#f0f6fc]/[0.06] text-[#f0f6fc] shadow-[0_0_18px_rgba(240,246,252,0.5)] group-hover/icon:scale-110 group-hover/icon:border-[#f0f6fc] group-hover/icon:bg-[#f0f6fc]/18 group-hover/icon:shadow-[0_0_45px_rgba(240,246,252,0.9),0_0_75px_rgba(240,246,252,0.45)]',
-    hoverText: 'hover:text-[#71797E]',
+    wrap: 'brand-github-icon',
+    hoverText: 'hover:text-[#687277]',
   },
   whatsapp: {
     wrap: 'border-[#25D366]/40 bg-[#25D366]/[0.08] text-[#25D366] shadow-[0_0_18px_rgba(37,211,102,0.55)] group-hover/icon:scale-110 group-hover/icon:border-[#25D366] group-hover/icon:bg-[#25D366]/20 group-hover/icon:shadow-[0_0_45px_rgba(37,211,102,0.95),0_0_75px_rgba(37,211,102,0.55)]',
@@ -52,8 +52,8 @@ const locations: Record<string, { label: string; flag: string; details: Detail[]
     label: 'India',
     flag: '🇮🇳',
     details: [
-      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com', brand: 'email' },
-      { Icon: WhatsApp, label: 'WhatsApp', value: '+91 81058 44868', href: 'https://wa.me/918105844868', brand: 'whatsapp' },
+      { Icon: Mail, label: 'Email', value: 'akash.simon@outlook.com', href: 'mailto:akash.simon@outlook.com', brand: 'email' },
+      { Icon: WhatsApp, label: 'WhatsApp', value: '+91-8105844868', href: 'https://wa.me/918105844868', brand: 'whatsapp' },
       { Icon: MapPin, label: 'Location', value: 'Bangalore, India', href: 'https://www.google.com/maps/search/?api=1&query=Bangalore%2C+India', brand: 'location' },
       { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/', brand: 'linkedin' },
       { Icon: Github, label: 'GitHub', value: 'github.com/Akash-Pilot', href: 'https://github.com/Akash-Pilot/', brand: 'github' },
@@ -63,8 +63,8 @@ const locations: Record<string, { label: string; flag: string; details: Detail[]
     label: 'Malaysia',
     flag: '🇲🇾',
     details: [
-      { Icon: Mail, label: 'Email', value: 'akash.mosey99@gmail.com', href: 'mailto:akash.mosey99@gmail.com', brand: 'email' },
-      { Icon: WhatsApp, label: 'WhatsApp', value: '+60 12-747 4204', href: 'https://wa.me/60127474204', brand: 'whatsapp' },
+      { Icon: Mail, label: 'Email', value: 'akash.simon@outlook.com', href: 'mailto:akash.simon@outlook.com', brand: 'email' },
+      { Icon: WhatsApp, label: 'WhatsApp', value: '+60-127474204', href: 'https://wa.me/60127474204', brand: 'whatsapp' },
       { Icon: MapPin, label: 'Location', value: 'Kuala Lumpur, Malaysia', href: 'https://www.google.com/maps/search/?api=1&query=Kuala+Lumpur%2C+Malaysia', brand: 'location' },
       { Icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/akash-simon', href: 'https://www.linkedin.com/in/akash-simon/', brand: 'linkedin' },
       { Icon: Github, label: 'GitHub', value: 'github.com/Akash-Pilot', href: 'https://github.com/Akash-Pilot/', brand: 'github' },
@@ -96,7 +96,7 @@ export default function Contact() {
     const body = encodeURIComponent(
       `${message}\n\n— ${name}\n${email}`
     )
-    window.location.href = `mailto:akash.mosey99@gmail.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:akash.simon@outlook.com?subject=${encodeURIComponent(
       subject
     )}&body=${body}`
 
@@ -105,7 +105,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section scroll-mt-16">
       <SectionFX variant="beams" />
       <SectionFX variant="tunnel" />
       <div className="container">
@@ -121,36 +121,38 @@ export default function Contact() {
           </p>
         </div>
 
-        <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card grid gap-12 p-8 sm:p-12 md:grid-cols-[1fr_1.2fr] md:gap-16`}>
+        <div ref={cardRef} className={`reveal-scale stagger-1 ${cv} glass-card no-tilt p-6 sm:p-10 md:p-12`}>
+          {/* Section header */}
+          <h3 className="glow-blink text-center font-display text-[26px] font-bold uppercase tracking-[0.1em] text-ink-high sm:text-[34px] md:text-[45px]">
+            Contact details
+          </h3>
+
+          {/* Country toggle */}
+          <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {(Object.keys(locations) as CountryKey[]).map((key) => {
+              const active = country === key
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setCountry(key)}
+                  {...{ 'aria-pressed': active }}
+                  className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[14px] font-semibold transition-all sm:gap-3 sm:px-8 sm:py-4 sm:text-[18px] ${
+                    active
+                      ? 'border-accent/50 bg-accent/[0.12] text-accent'
+                      : 'border-line bg-surface text-ink-muted hover:border-accent/30 hover:text-ink-high'
+                  }`}
+                >
+                  <span className="text-2xl leading-none sm:text-3xl">{locations[key].flag}</span>
+                  {locations[key].label}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="mt-8 grid gap-10 md:grid-cols-2 md:gap-16">
           {/* Details */}
           <div className="space-y-7">
-            <h3 className="glow-blink font-display text-[22px] font-bold uppercase tracking-[0.1em] text-ink-high sm:text-[28px] md:text-[32px]">
-              Contact details
-            </h3>
-
-            {/* Country toggle */}
-            <div className="flex flex-wrap gap-2 sm:gap-3">
-              {(Object.keys(locations) as CountryKey[]).map((key) => {
-                const active = country === key
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => setCountry(key)}
-                    {...{ 'aria-pressed': active }}
-                    className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[14px] font-semibold transition-all sm:gap-3 sm:px-8 sm:py-4 sm:text-[18px] ${
-                      active
-                        ? 'border-accent/50 bg-accent/[0.12] text-accent'
-                        : 'border-line bg-surface text-ink-muted hover:border-accent/30 hover:text-ink-high'
-                    }`}
-                  >
-                    <span className="text-2xl leading-none sm:text-3xl">{locations[key].flag}</span>
-                    {locations[key].label}
-                  </button>
-                )
-              })}
-            </div>
-
             <ul key={country} className="space-y-5 animate-fade-in">
               {details.map(({ Icon, label, value, href, brand }) => {
                 const style = brand ? brandStyles[brand] : null
@@ -232,12 +234,13 @@ export default function Contact() {
               </a>
             </p>
           </form>
+          </div>
         </div>
       </div>
 
       {/* Flammini-style oversized scrolling “Let’s talk” CTA */}
       <a
-        href="mailto:akash.mosey99@gmail.com?subject=Let%E2%80%99s%20talk"
+        href="mailto:akash.simon@outlook.com?subject=Let%E2%80%99s%20talk"
         aria-label="Let’s talk — send me an email"
         className="cta-ticker mt-16 sm:mt-24"
       >
