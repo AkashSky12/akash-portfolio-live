@@ -44,7 +44,7 @@ export default function Certifications() {
         </div>
 
         <div ref={eduRef} className="mb-10">
-          <h3 className="mb-4 font-display text-[13px] font-bold uppercase tracking-[0.16em] text-ink-muted">
+          <h3 className="mb-4 font-display text-[16px] font-bold uppercase tracking-[0.16em] text-ink-muted">
             Education
           </h3>
           <div className={`reveal-scale stagger-1 ${ev} glass-card flex items-start gap-4 p-6`}>

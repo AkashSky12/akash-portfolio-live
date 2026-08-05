@@ -12,6 +12,7 @@ import {
   Star,
   Award,
   BadgeCheck,
+  GraduationCap,
 } from 'lucide-react'
 import { useReveal } from '@/lib/useReveal'
 import SectionFX from '@/components/SectionFX'
@@ -185,21 +186,21 @@ export default function Skills() {
           ))}
         </div>
 
-        <div ref={domainsRef} className={`reveal-scale stagger-4 ${dv} glass-card mt-10 p-6`}>
-          <div className="mb-4 flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent">
-              <Layers3 size={16} strokeWidth={2} />
+        <div ref={domainsRef} className="mt-6">
+          <h3 className="mb-4 font-display text-[16px] font-bold uppercase tracking-[0.16em] text-ink-muted">
+            Domains
+          </h3>
+          <div className={`reveal-scale stagger-1 ${dv} glass-card flex items-start gap-4 p-6`}>
+            <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
+              <GraduationCap size={20} strokeWidth={2} />
             </div>
-            <p className="font-display text-[13px] font-bold uppercase tracking-[0.1em] text-ink-high">
-              Domains
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1.5">
             {domains.map((domain) => (
               <span key={domain} className="chip">
                 {domain}
               </span>
             ))}
+          </div>
           </div>
         </div>
 
