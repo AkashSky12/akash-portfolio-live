@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Akash Simon — QA Lead &amp; GenAI Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#0a7cff;--ink:#0f1115;--mut:#5d636c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#e9ecf0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:radial-gradient(100% 80% at 50% 35%,#ffffff 0%,#eef0f3 45%,#d7dbe1 100%) fixed;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+#track{height:1500vh}
+#css,#gl{position:fixed!important;inset:0}
+#css{z-index:0}
+#gl{z-index:1;pointer-events:none}
+
+.ov{position:fixed;z-index:3}
+.hero-ov{left:6vw;top:50%;transform:translateY(-50%);max-width:min(450px,36vw)}
+.eb{display:inline-flex;align-items:center;gap:8px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.eb i{width:7px;height:7px;border-radius:50%;background:#16a34a}
+.hero-ov h1{font-size:clamp(28px,min(4.4vw,8.5vh),66px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:18px 0 16px}
+.hero-ov h1 span{color:var(--acc)}
+.hero-ov p{color:var(--mut);font-size:clamp(14px,2.2vh,17px);line-height:1.6}
+.hero-ov p b{color:var(--ink);font-weight:600}
+.hint{margin-top:26px;display:flex;align-items:center;gap:10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--mut)}
+.hint i{width:22px;height:34px;border:1.5px solid #a9aeb6;border-radius:12px;position:relative}
+.hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--acc);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+.end-ov{right:6vw;top:50%;transform:translateY(-50%);max-width:min(400px,34vw)}
+.end-ov h2{font-size:clamp(28px,min(3.8vw,7.5vh),56px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:16px 0 14px}
+.end-ov h2 span{color:var(--acc)}
+.end-ov p{color:var(--mut);line-height:1.6;margin-bottom:22px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:600;font-size:15px;background:#0f1115;color:#fff}
+.btn.g{background:rgba(255,255,255,.7);color:var(--ink);border:1px solid rgba(0,0,0,.1)}
+.btn.a{background:var(--acc);color:#fff}
+.chap{position:fixed;z-index:3;left:50%;bottom:28px;transform:translateX(-50%);font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#30343b;background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.06);padding:9px 14px;border-radius:999px;opacity:0;transition:opacity .4s;white-space:nowrap}
+@media(max-height:520px){.hint{display:none}.hero-ov h1,.end-ov h2{margin:10px 0 8px}.end-ov p{margin-bottom:12px;font-size:13px}.btn{padding:9px 13px;font-size:13px}.end-ov .eb{display:none}.chap{bottom:12px}}
+@media(max-aspect-ratio:1/1){
+  .hero-ov,.end-ov{left:6vw;right:6vw;top:76px;transform:none;max-width:none}
+  .hero-ov h1{font-size:clamp(28px,8.4vw,42px);margin:12px 0 10px}.end-ov h2{font-size:clamp(26px,7.6vw,38px);margin:12px 0 10px}
+  .hero-ov p,.end-ov p{font-size:14px}.end-ov p{margin-bottom:14px}.hint{margin-top:14px}
+}
+.top{position:fixed;z-index:4;inset:16px 20px auto;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:700 12px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#4aa3ff,#0a5fd6)}
+.where{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.07)}
+.bar{position:fixed;z-index:4;left:0;bottom:0;height:2px;background:var(--acc);width:0}
+.noscr{position:fixed;inset:0;display:grid;place-items:center;color:var(--mut)}
+
+/* ===== the site on the laptop screen ===== */
+.scr{position:relative;overflow:hidden;background:#fbfbfc;color:#0f1013;font:15px/1.55 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;container-type:inline-size;-webkit-font-smoothing:antialiased}
+.mbar{position:absolute;inset:0 0 auto;height:26px;display:flex;align-items:center;gap:18px;padding:0 16px;font-size:12.5px;font-weight:500;color:#1d1d1f;background:#e9e9ed;z-index:6}
+.mbar b{font-weight:700}
+.mbar .r{margin-left:auto}
+.brw{position:absolute;top:26px;left:0;right:0;height:46px;display:flex;align-items:center;gap:16px;padding:0 16px;background:#f3f3f6;border-bottom:1px solid #dcdce1;z-index:6}
+.tl{display:flex;gap:8px}.tl i{display:block;width:12px;height:12px;border-radius:50%;background:#ff5f57}.tl i:nth-child(2){background:#febc2e}.tl i:nth-child(3){background:#28c840}
+.url{flex:1;max-width:420px;margin:0 auto;height:30px;border-radius:8px;background:#e5e5ea;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;color:#2c2c30}
+.brw .sp{width:60px}
+.vp{position:absolute;top:72px;left:0;right:0;bottom:0;overflow:hidden}
+.snav{position:absolute;inset:0 0 auto;height:56px;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:#fbfbfc;border-bottom:1px solid #ececf0}
+.snav .lg{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.snav .lg i{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 11px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#4aa3ff,#0a5fd6)}
+.snav nav{display:flex;gap:4px}
+.snav nav button{padding:7px 11px;border-radius:8px;font-size:14px;font-weight:500;color:#4a4d55}
+.snav nav button.on{background:#eef1f6;color:#0f1013}
+.snav .cta{padding:9px 14px;border-radius:9px;background:#0f1013;color:#fff;font-size:14px;font-weight:600}
+.site{position:relative;padding-top:56px;will-change:transform}
+.sec{padding:56px 44px;max-width:1120px;margin:0 auto}
+.k{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.h2{font-size:38px;line-height:1.05;letter-spacing:-.04em;font-weight:800;margin:10px 0 26px;max-width:680px}
+.rv{opacity:0;transform:perspective(900px) translateY(34px) rotateX(18deg);transform-origin:50% 100%;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:44px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid #e6e6ea;font-size:13px;font-weight:500;color:#3a3d44}
+.chip i{width:7px;height:7px;border-radius:50%;background:#16a34a}
+.hero h1{font-size:58px;line-height:1;letter-spacing:-.05em;font-weight:800;margin:18px 0 16px}
+.hero h1 span{color:var(--acc)}
+.hero p.l{font-size:17px;color:#4a4d55;max-width:520px}
+.hero .b{display:flex;gap:10px;margin-top:24px}
+.hero .b a,.hero .b button{padding:12px 18px;border-radius:11px;font-weight:600;font-size:15px}
+.hero .b .p{background:#0f1013;color:#fff}
+.hero .b .s{background:#fff;border:1px solid #e1e1e6}
+.run{border-radius:18px;background:#0f1115;color:#d7dae0;padding:18px;font:13px/1.5 'JetBrains Mono',monospace}
+.run .rh{display:flex;align-items:center;gap:8px;color:#8b909a;padding-bottom:12px;border-bottom:1px solid #22252c}
+.run .rh .ps{margin-left:auto;font-size:11px;font-weight:600;color:#34d399;background:rgba(52,211,153,.12);padding:3px 8px;border-radius:6px}
+.run ul{list-style:none;padding:10px 0 0}
+.run li{display:flex;align-items:center;gap:10px;padding:5px 0}
+.run li i{width:15px;height:15px;border-radius:50%;background:#34d399;display:grid;place-items:center;font-style:normal;font-size:10px;color:#0f1115;font-weight:800}
+.run li span{margin-left:auto;color:#6c717b}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.st{padding:20px;border-radius:16px;background:#fff;border:1px solid #ececf0}
+.st b{display:block;font-size:34px;font-weight:800;letter-spacing:-.04em}
+.st span{font-size:13px;color:#6a6d75}
+.alt{background:#f3f4f7}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wc{padding:22px;border-radius:18px;background:#fff;border:1px solid #e8e8ec;display:flex;flex-direction:column;gap:8px}
+.wc .t{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7a7d85}
+.wc h3{font-size:20px;letter-spacing:-.025em;line-height:1.2}
+.wc p{color:#5a5d65;font-size:14px}
+.wc .m{margin-top:auto;padding-top:12px;border-top:1px solid #efeff2;display:flex;align-items:baseline;gap:10px}
+.wc .m b{font-size:26px;font-weight:800;letter-spacing:-.04em;color:var(--acc)}
+.wc .m span{font-size:13px;color:#7a7d85}
+.ct{border-radius:24px;background:#0f1013;color:#fff;padding:40px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.ct h2{font-size:42px;letter-spacing:-.045em;line-height:1.02;font-weight:800;margin:10px 0 12px}
+.ct h2 span{color:#5eaeff}
+.ct .k{color:#5eaeff}
+.ct p{color:#9ca1a9}
+.seg{display:inline-flex;padding:4px;border-radius:10px;background:#1c1e23;margin-bottom:12px}
+.seg button{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:#9ca1a9}
+.seg button.on{background:#fff;color:#0f1013}
+.lk{display:grid;gap:8px}
+.lk a{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-radius:12px;background:#1a1c21;border:1px solid #272a31;font-weight:600;font-size:15px}
+.lk a span{color:#6c717b;font-size:13px;font-weight:500}
+.lk a.p{background:var(--acc);border-color:var(--acc)}
+.lk a.p span{color:#d6e8ff}
+.ft{display:flex;justify-content:space-between;padding:24px 44px 36px;max-width:1120px;margin:0 auto;color:#8a8d95;font-size:13px}
+.glare{position:absolute;inset:0;pointer-events:none;z-index:8;background:linear-gradient(118deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.03) 28%,rgba(255,255,255,0) 42%)}
+.off{position:absolute;inset:0;z-index:9;background:#000;pointer-events:none}
+@container (max-width:980px){
+  .sec{padding:44px 30px}.snav{padding:0 22px}.snav nav button{padding:7px 8px}
+  .hero{grid-template-columns:1fr;padding-top:30px}.run{display:none}
+  .hero h1{font-size:48px}.h2{font-size:32px}
+  .ct{grid-template-columns:1fr;padding:30px}.ct h2{font-size:34px}
+}
+
+/* ===== labels that float beside each exploded layer ===== */
+.lab{width:560px;padding:26px 28px;border-radius:24px;background:rgba(255,255,255,.97);color:#0f1115;font:15px/1.5 Inter,system-ui,sans-serif;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);-webkit-font-smoothing:antialiased;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.lab .lk2{display:flex;align-items:center;gap:10px;font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.lab .lk2 b{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:#0f1115;color:#fff;font-size:12px;letter-spacing:0}
+.lab h3{font-size:30px;line-height:1.08;letter-spacing:-.04em;font-weight:800;margin:10px 0 16px}
+.lab .row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid #eceef2}
+.lab .row div b{display:block;font-size:16px;letter-spacing:-.01em}
+.lab .row div span{font-size:13px;color:#6a6f78}
+.lab .row em{font-style:normal;font-weight:800;font-size:22px;letter-spacing:-.03em;color:var(--acc);white-space:nowrap}
+.lab .row .y{font:600 12px 'JetBrains Mono',monospace;color:#7a7f88;white-space:nowrap}
+.lab .chips{display:flex;flex-wrap:wrap;gap:6px}
+.lab .chips span{font:500 12.5px 'JetBrains Mono',monospace;padding:6px 10px;border-radius:8px;background:#f0f2f6;color:#2b2f36}
+.lab .chips span.h{background:#0f1115;color:#fff}
+.lab .aw{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lab .aw div{padding:14px;border-radius:14px;background:#0f1115;color:#fff}
+.lab .aw i{font:600 11px 'JetBrains Mono',monospace;font-style:normal;color:#5eaeff}
+.lab .aw b{display:block;font-size:15px;margin:3px 0 1px}
+.lab .aw span{font-size:12px;color:#9ca1a9}
+.fl{font:15px/1.55 Inter,system-ui,sans-serif;color:#0f1013;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="track"></div>
+
+<div class="top"><a class="brand" href="#" data-top><i>AS</i>Akash Simon</a><span class="where" id="where">Intro</span></div>
+<div class="bar" id="bar"></div>
+<div class="chap" id="chap"></div>
+
+<div class="ov hero-ov" id="heroOv">
+  <span class="eb"><i></i>Available for senior roles</span>
+  <h1>Quality is built <span>layer by layer.</span></h1>
+  <p>I'm <b>Akash Simon</b> — QA Lead &amp; GenAI Automation Engineer. Scroll to open the laptop, then take it apart.</p>
+  <div class="hint"><i></i>SCROLL TO OPEN</div>
+</div>
+<div class="ov end-ov" id="endOv">
+  <span class="eb"><i></i>Kuala Lumpur · open to relocation</span>
+  <h2>Let's build something <span>reliable.</span></h2>
+  <p>Senior QA architect, automation lead or AI-augmented testing roles — anywhere in the world.</p>
+  <div class="btns"><a class="btn a" href="mailto:akash.simon@outlook.com">Email me</a><a class="btn g" href="https://www.linkedin.com/in/akash-simon/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn g" href="../resume/Akash_Simon_CV.pdf" download>Résumé</a></div>
+</div>
+
+<div class="scr" id="scr">
+  <div class="mbar"><b>Safari</b><span>File</span><span>Edit</span><span>View</span><span class="r" id="clk">9:41</span></div>
+  <div class="brw"><div class="tl"><i></i><i></i><i></i></div><div class="url">🔒 akashsimon.dev</div><span class="sp"></span></div>
+  <div class="vp" id="vp">
+    <div class="site" id="site">
+      <section class="sec" id="s-top">
+        <div class="hero">
+          <div>
+            <span class="chip rv"><i></i>QA Lead &amp; GenAI Automation Engineer</span>
+            <h1 class="rv">Quality as a <span>competitive advantage.</span></h1>
+            <p class="l rv">I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens.</p>
+            <div class="b rv"><button class="p" data-go="work">See my work</button><a class="s" href="../resume/Akash_Simon_CV.pdf" download>Download CV</a></div>
+          </div>
+          <div class="run rv">
+            <div class="rh">● CI · main · run #2418<span class="ps">PASSED</span></div>
+            <ul><li><i>✓</i>checkout.spec.py<span>48 · 52s</span></li><li><i>✓</i>a11y-wcag21aa.spec.py<span>31 · 40s</span></li><li><i>✓</i>orders.api.contract<span>64 · 18s</span></li></ul>
+          </div>
+        </div>
+        <div class="stats rv" id="stats"><div class="st"><b>10+</b><span>Years in QA</span></div><div class="st"><b>12+</b><span>Countries / regions</span></div><div class="st"><b>~40%</b><span>Less test authoring</span></div><div class="st"><b>10+</b><span>Engineers led</span></div></div>
+      </section>
+      <div class="alt"><section class="sec" id="s-work">
+        <span class="k rv">Selected work</span><h2 class="h2 rv">Quality systems, built like products.</h2>
+        <div class="work" id="work"></div>
+      </section></div>
+      <section class="sec" id="s-contact">
+        <div class="ct rv">
+          <div><span class="k">Contact</span><h2>Let's build something <span>reliable.</span></h2><p>Open to senior QA architect, automation lead and AI-augmented testing roles globally.</p></div>
+          <div><div class="seg" id="seg"><button class="on" data-c="MY">Malaysia</button><button data-c="IN">India</button></div><div class="lk" id="lk"></div></div>
+        </div>
+      </section>
+      <div class="ft"><span>© 2026 Akash Simon</span><span>Kuala Lumpur · Bangalore</span></div>
+    </div>
+    <div class="snav"><span class="lg"><i>AS</i>Akash Simon</span><nav id="snav"><button data-go="work">Work</button><button data-go="layers">Inside</button><button data-go="contact">Contact</button></nav><button class="cta" data-go="contact">Hire me</button></div>
+  </div>
+  <div class="glare"></div>
+  <div class="off" id="off"></div>
+</div>
+
+<div class="lab" id="lab0"><div class="lk2"><b>1</b>Top case · what users touch</div><h3>Selected work</h3><div id="labWork"></div></div>
+<div class="lab" id="lab1"><div class="lk2"><b>2</b>Logic board · the engine</div><h3>A battle-tested toolkit</h3><div class="chips" id="labSkills"></div></div>
+<div class="lab" id="lab2"><div class="lk2"><b>3</b>Battery · what powers it</div><h3>Nearly a decade of quality engineering</h3><div id="labExp"></div></div>
+<div class="lab" id="lab3"><div class="lk2"><b>4</b>Bottom case · the foundation</div><h3>Recognition</h3><div class="aw" id="labAw"></div></div>
+<noscript><div class="noscr">This preview needs JavaScript.</div></noscript>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = t => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+const rng = (p, a, b) => ss(clamp((p - a) / (b - a)));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const MOBILE = matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600;
+
+/* ---------- content ---------- */
+const WORK = [
+  ["GenAI · Domino's", 'GenAI QA agent infrastructure, from zero.', 'Agents for test case generation, synthetic data and exploratory workflows across 12+ markets.', '~40%', 'less authoring per sprint'],
+  ["Accessibility · Domino's EU", 'WCAG 2.1 AA, enforced in CI.', 'Axe-core inside Playwright — violations raised as first-class CI defects, not afterthoughts.', 'AA', 'WCAG 2.1 in every pipeline'],
+  ['Framework · Quinta / Siemens', 'One framework for web, Android & iOS.', 'Selenium (Java) + TestNG + Appium with CI/CD quality gates and shared page objects.', '6 wks', 'sole E2E ownership · award'],
+  ['Healthcare · Solve.Care', 'Automation for a live patient platform.', 'Blockchain API contract testing plus BMI, heart-rate and ECG data validation.', '300+', 'tests in 3 sprints']
+];
+$('#work').innerHTML = WORK.map(w => `<article class="wc rv"><span class="t">${esc(w[0])}</span><h3>${esc(w[1])}</h3><p>${esc(w[2])}</p><div class="m"><b>${esc(w[3])}</b><span>${esc(w[4])}</span></div></article>`).join('');
+$('#labWork').innerHTML = WORK.map(w => `<div class="row"><div><b>${esc(w[1])}</b><span>${esc(w[0])}</span></div><em>${esc(w[3])}</em></div>`).join('');
+$('#labSkills').innerHTML = ['Playwright', 'Selenium', 'Appium', 'WebDriverIO', 'REST Assured', 'TestNG', 'Cucumber', 'GenAI QA agents', 'Prompt engineering', 'Axe-core', 'WCAG 2.1 AA', 'GitHub Actions', 'Jenkins', 'Postman', 'Swagger', 'PostgreSQL', 'Jira', 'TestRail', 'Shift-left']
+  .map((s, i) => `<span class="${i < 3 || i === 7 ? 'h' : ''}">${esc(s)}</span>`).join('');
+$('#labExp').innerHTML = [
+  ['2023 — now', 'Software Quality Engineer', "Domino's Pizza Enterprises · Kuala Lumpur"],
+  ['2022', 'Senior Automation QA Engineer', 'Solve.Care · Bangalore · led a QA team of 10'],
+  ['2017', 'Senior Test Engineer', 'Quinta Systems · Siemens engagement · Scrum Master'],
+  ['2017', 'Application Support Engineer', 'Pole To Win International · Rockstar titles']
+].map(r => `<div class="row"><div><b>${esc(r[1])}</b><span>${esc(r[2])}</span></div><span class="y">${esc(r[0])}</span></div>`).join('');
+$('#labAw').innerHTML = [["'25", 'Best Sprinter', "Domino's"], ["'23", 'Best Team Player', 'Solve.Care'], ["'21", 'Best Employee', 'Quinta Systems'], ["'20", 'Client Appreciation', 'Siemens']]
+  .map(a => `<div><i>${a[0]}</i><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
+const contacts = {
+  MY: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+60 12 747 4204', 'https://wa.me/60127474204'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']],
+  IN: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+91 81058 44868', 'https://wa.me/918105844868'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']]
+};
+const renderLinks = c => { $('#lk').innerHTML = contacts[c].map(([k, v, h], i) => `<a class="${i ? '' : 'p'}" href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(k)}<span>${esc(v)} ↗</span></a>`).join(''); };
+renderLinks('MY');
+$$('#seg button').forEach(b => b.addEventListener('click', () => { $$('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderLinks(b.dataset.c); }));
+$('#clk').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+/* ---------- renderers ---------- */
+const gl = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+gl.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+gl.setClearColor(0x000000, 0);
+gl.outputColorSpace = THREE.SRGBColorSpace;
+gl.toneMapping = THREE.AgXToneMapping ?? THREE.ACESFilmicToneMapping;
+gl.toneMappingExposure = 1.1;
+gl.shadowMap.enabled = true;
+gl.shadowMap.type = THREE.PCFSoftShadowMap;
+gl.domElement.id = 'gl';
+const css = new CSS3DRenderer();
+css.domElement.id = 'css';
+document.body.append(css.domElement, gl.domElement);
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(gl).fromScene(new RoomEnvironment(), 0.03).texture;
+const cam = new THREE.PerspectiveCamera(30, 1, 0.8, 900);
+const key = new THREE.DirectionalLight(0xffffff, 2.6);
+key.position.set(-30, 70, 40);
+key.castShadow = true;
+key.shadow.mapSize.set(MOBILE ? 1024 : 2048, MOBILE ? 1024 : 2048);
+Object.assign(key.shadow.camera, { left: -40, right: 40, top: 40, bottom: -40, near: 20, far: 170 });
+key.shadow.camera.updateProjectionMatrix();
+key.shadow.bias = -0.0003;
+key.shadow.normalBias = 0.02;
+scene.add(key, new THREE.HemisphereLight(0xffffff, 0xd9dde3, 0.5));
+
+/* ---------- materials & helpers ---------- */
+const spaceBlack = new THREE.MeshPhysicalMaterial({ color: 0x2b2d31, metalness: 1, roughness: 0.34, clearcoat: 0.2, clearcoatRoughness: 0.3, envMapIntensity: 0.9 });
+const shellIn = new THREE.MeshStandardMaterial({ color: 0x3a3d43, metalness: 0.9, roughness: 0.5 });
+const matte = new THREE.MeshStandardMaterial({ color: 0x0b0c0e, metalness: 0.1, roughness: 0.65 });
+const keyMat = new THREE.MeshStandardMaterial({ color: 0x0c0d10, roughness: 0.55, metalness: 0.05 });
+const glass = new THREE.MeshPhysicalMaterial({ color: 0x050506, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03 });
+const copper = new THREE.MeshPhysicalMaterial({ color: 0xc8794a, metalness: 1, roughness: 0.25 });
+const steel = new THREE.MeshPhysicalMaterial({ color: 0xc9ccd1, metalness: 1, roughness: 0.18 });
+const hole = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, blending: THREE.NoBlending });
+const rrShape = (w, h, r) => {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+};
+const rr = (w, h, r) => new THREE.ShapeGeometry(rrShape(w, h, r), 8);
+const mesh = (geo, mat, x = 0, y = 0, z = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; return m; };
+const flat = (geo, mat, x, y, z) => { const m = new THREE.Mesh(geo, mat); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.receiveShadow = true; return m; };
+const canvasTex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+
+/* ---------- laptop, built as separable layers (units ≈ cm) ---------- */
+const W = 31.2, D = 21.6, LD = 21.0, LT = 0.5, SW = 29.6, SH = SW / 1.6, CHIN = 1.45;
+const laptop = new THREE.Group();
+scene.add(laptop);
+const layers = [];
+const layer = (y0) => { const g = new THREE.Group(); g.position.y = y0; g.userData.y0 = y0; laptop.add(g); layers.push(g); return g; };
+
+// 0 · bottom case: a tray that hides everything inside when assembled
+const L0 = layer(0.12);
+{
+  L0.add(mesh(new RoundedBoxGeometry(W, 0.72, D, 5, 0.32), spaceBlack, 0, 0.36, 0));
+  L0.add(flat(rr(W - 1.2, D - 1.2, 0.5), shellIn, 0, 0.725, 0));
+  for (const [x, z] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) L0.add(mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.12, 20), matte, x * (W / 2 - 2.4), -0.06, z * (D / 2 - 2)));
+  const vents = canvasTex(1024, 64, (x, w, h) => { x.fillStyle = '#000'; x.fillRect(0, 0, w, h); x.fillStyle = '#fff'; for (let i = 0; i < 70; i++) x.fillRect(20 + i * 14, 16, 8, 32); });
+  const vent = flat(new THREE.PlaneGeometry(22, 0.8), new THREE.MeshBasicMaterial({ color: 0x000000, alphaMap: vents, transparent: true }), 0, 0.726, -D / 2 + 1.6);
+  L0.add(vent);
+}
+// 1 · battery cells
+const L1 = layer(0.36);
+{
+  const cellTex = canvasTex(512, 640, (x, w, h) => {
+    x.fillStyle = '#16171a'; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#d7dbe2'; x.font = '600 40px Inter, Arial'; x.fillText('Li-ion · 72.4 Wh', 40, 90);
+    x.font = '400 28px Inter, Arial'; x.fillStyle = '#8b9099'; x.fillText('QA-certified · 1000 cycles', 40, 140);
+    x.strokeStyle = '#3a3d44'; x.lineWidth = 4; x.strokeRect(30, 190, w - 60, h - 230);
+    x.fillStyle = '#0a7cff'; x.fillRect(40, h - 80, 120, 14);
+  });
+  const cellMat = new THREE.MeshPhysicalMaterial({ map: cellTex, roughness: 0.35, clearcoat: 0.6 });
+  const side = new THREE.MeshPhysicalMaterial({ color: 0x16171a, roughness: 0.4, clearcoat: 0.5 });
+  for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) {
+    const cell = mesh(new RoundedBoxGeometry(8.4, 0.42, 4.6, 2, 0.12), [side, side, cellMat, side, side, side], (c - 1) * 8.9, 0.21, 2.4 + r * 4.9);
+    L1.add(cell);
+  }
+}
+// 2 · logic board, SoC, memory, fans and heat pipe
+const L2 = layer(0.2);
+{
+  const pcbTex = canvasTex(1024, 512, (x, w, h) => {
+    x.fillStyle = '#0f2a22'; x.fillRect(0, 0, w, h);
+    let seed = 5; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    x.lineWidth = 2;
+    for (let i = 0; i < 260; i++) {
+      x.strokeStyle = rnd() > 0.7 ? 'rgba(212,175,90,.55)' : 'rgba(90,170,140,.35)';
+      let px = rnd() * w, py = rnd() * h;
+      x.beginPath(); x.moveTo(px, py);
+      for (let s = 0; s < 3; s++) { if (rnd() > 0.5) px += (rnd() - 0.5) * 160; else py += (rnd() - 0.5) * 120; x.lineTo(px, py); }
+      x.stroke();
+    }
+    for (let i = 0; i < 120; i++) { x.fillStyle = 'rgba(212,175,90,.8)'; x.beginPath(); x.arc(rnd() * w, rnd() * h, 3, 0, 7); x.fill(); }
+  });
+  L2.add(mesh(new RoundedBoxGeometry(20, 0.16, 8.2, 2, 0.06), [matte, matte, new THREE.MeshPhysicalMaterial({ map: pcbTex, roughness: 0.45, clearcoat: 0.6 }), matte, matte, matte], 0, 0.08, -4.6));
+  L2.add(mesh(new RoundedBoxGeometry(3.4, 0.3, 3.4, 2, 0.1), steel, 0, 0.3, -4.6));
+  for (let i = 0; i < 4; i++) L2.add(mesh(new RoundedBoxGeometry(1.6, 0.18, 1.0, 1, 0.04), matte, -6 + i * 1.9 + (i > 1 ? 9 : 0), 0.24, -2.4));
+  for (let i = 0; i < 6; i++) L2.add(mesh(new THREE.BoxGeometry(0.6, 0.14, 0.4), new THREE.MeshPhysicalMaterial({ color: 0xbfa36a, metalness: 1, roughness: 0.3 }), -8 + i * 0.9, 0.23, -7.6));
+  const fanTex = canvasTex(256, 256, (x, w) => {
+    x.fillStyle = '#111'; x.fillRect(0, 0, w, w);
+    x.translate(w / 2, w / 2); x.fillStyle = '#2a2c31';
+    for (let i = 0; i < 31; i++) { x.rotate(Math.PI * 2 / 31); x.beginPath(); x.moveTo(20, 0); x.quadraticCurveTo(70, 18, 118, 6); x.lineTo(118, 0); x.quadraticCurveTo(70, 8, 20, -4); x.fill(); }
+    x.fillStyle = '#3a3d43'; x.beginPath(); x.arc(0, 0, 26, 0, 7); x.fill();
+  });
+  for (const sx of [-1, 1]) {
+    const ring = mesh(new THREE.CylinderGeometry(3.1, 3.1, 0.55, 48, 1, true), shellIn, sx * 12.4, 0.28, -5.6);
+    ring.material = shellIn.clone(); ring.material.side = THREE.DoubleSide;
+    L2.add(ring);
+    const blades = flat(new THREE.CircleGeometry(3.0, 48), new THREE.MeshStandardMaterial({ map: fanTex, roughness: 0.6 }), sx * 12.4, 0.5, -5.6);
+    blades.userData.spin = sx;
+    L2.add(blades);
+    const pipe = mesh(new THREE.CylinderGeometry(0.28, 0.28, 10.5, 16), copper, sx * 5.6, 0.34, -5.2);
+    pipe.rotation.z = Math.PI / 2;
+    L2.add(pipe);
+  }
+  L2.add(mesh(new RoundedBoxGeometry(4.2, 0.2, 4.2, 2, 0.1), copper, 0, 0.48, -4.6));
+}
+// 3 · top case: deck, keyboard, trackpad
+const L3 = layer(0.84);
+const TOPY = 0.2;
+{
+  L3.add(mesh(new RoundedBoxGeometry(W, 0.2, D, 4, 0.09), spaceBlack, 0, 0.1, 0));
+  const WELL_Z = -D / 2 + 1.3 + 5.5;
+  L3.add(flat(rr(27.4, 11.0, 0.4), matte, 0, TOPY + 0.002, WELL_Z));
+  const rows = [
+    [0.85, [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1], ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', '⏻']],
+    [1.55, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.6], ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'delete']],
+    [1.55, [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1], ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\']],
+    [1.55, [1.8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.8], ['caps lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'return']],
+    [1.55, [2.3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.3], ['shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'shift']],
+    [1.55, [1, 1, 1.2, 1.4, 4.5, 1.4, 1.1, 1, 1, 1], ['fn', 'control', 'option', 'command', '', 'command', 'option', '◀', '▲▼', '▶']]
+  ];
+  const n = rows.reduce((a, r) => a + r[1].length, 0);
+  const keys = new THREE.InstancedMesh(new RoundedBoxGeometry(1, 0.14, 1, 2, 0.06), keyMat, n);
+  const m = new THREE.Matrix4(), g = 0.2, KW = 26.8, z0 = WELL_Z - 5.5 + 0.55, labels = [];
+  let i = 0, z = z0;
+  for (const [h, ks, names] of rows) {
+    const sc = (KW - g * (ks.length - 1)) / ks.reduce((a, b) => a + b, 0);
+    let x = -KW / 2;
+    ks.forEach((k, j) => {
+      const w = k * sc;
+      m.makeScale(w, 1, h).setPosition(x + w / 2, TOPY - 0.02, z + h / 2);
+      keys.setMatrixAt(i++, m);
+      labels.push([x + w / 2, z + h / 2, h, names[j]]);
+      x += w + g;
+    });
+    z += h + g;
+  }
+  keys.castShadow = true;
+  L3.add(keys);
+  const depth = z - z0, cw = 2048, ch = Math.round(cw * depth / KW), px = cw / KW;
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  for (const [lx, lz, h, t] of labels) {
+    if (!t) continue;
+    const big = t.length === 1 || /^[▲▼◀▶⏻]+$/.test(t);
+    x.font = `${big ? 500 : 400} ${Math.round((big ? 0.42 : 0.24) * px)}px Inter, Arial, sans-serif`;
+    x.fillText(t, (lx + KW / 2) * px, (lz - z0) * px + (big ? 0 : h * px * 0.22));
+  }
+  L3.add(flat(new THREE.PlaneGeometry(KW, depth), new THREE.MeshBasicMaterial({ alphaMap: new THREE.CanvasTexture(c), transparent: true, depthWrite: false, color: 0xc4c7cc }), 0, TOPY + 0.056, z0 + depth / 2));
+  L3.add(flat(rr(13.8, 8.6, 0.55), new THREE.MeshPhysicalMaterial({ color: 0x3a3c41, metalness: 0.5, roughness: 0.35 }), 0, TOPY + 0.003, D / 2 - 1.1 - 4.3));
+}
+// 4 · display lid, hinged to the back of the top case
+const LID = layer(0.84);
+const lid = new THREE.Group();
+lid.position.set(0, TOPY + 0.06, -D / 2 + 0.36);
+LID.add(lid);
+const SCR_Y = CHIN + SH / 2;
+let holeMesh;
+{
+  const shell = mesh(new RoundedBoxGeometry(W, LD, LT, 5, 0.24), spaceBlack, 0, LD / 2, -LT / 2);
+  lid.add(shell);
+  lid.add(mesh(rr(W - 0.16, LD - 0.16, 0.6), glass, 0, LD / 2, 0.004));
+  holeMesh = new THREE.Mesh(new THREE.PlaneGeometry(SW, SH), hole);
+  holeMesh.position.set(0, SCR_Y, 0.008);
+  lid.add(holeMesh);
+  const notch = new THREE.Mesh(rr(4.4, 1.3, 0.32), glass);
+  notch.position.set(0, SCR_Y + SH / 2, 0.012);
+  lid.add(notch);
+  const logoTex = canvasTex(512, 512, (x) => {
+    x.fillStyle = '#000'; x.fillRect(0, 0, 512, 512); x.strokeStyle = x.fillStyle = '#fff'; x.lineWidth = 22;
+    x.beginPath(); x.arc(256, 256, 200, 0, Math.PI * 2); x.stroke();
+    x.font = '800 190px Inter, Arial'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('AS', 256, 268);
+  });
+  const logo = new THREE.Mesh(new THREE.PlaneGeometry(4.4, 4.4), new THREE.MeshPhysicalMaterial({ color: 0x8a8e96, metalness: 1, roughness: 0.08, alphaMap: logoTex, transparent: true }));
+  logo.rotation.set(0, Math.PI, Math.PI);
+  logo.position.set(0, LD / 2, -LT - 0.004);
+  lid.add(logo);
+}
+const scrEl = $('#scr');
+const cssObj = new CSS3DObject(scrEl);
+cssObj.position.set(0, SCR_Y, 0.008);
+lid.add(cssObj);
+
+/* ---------- floor ---------- */
+{
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(300, 300), new THREE.ShadowMaterial({ opacity: 0.22 }));
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  scene.add(ground);
+  const blob = flat(new THREE.PlaneGeometry(W * 1.4, D * 1.5), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, map: canvasTex(128, 128, (x) => { const g = x.createRadialGradient(64, 64, 4, 64, 64, 64); g.addColorStop(0, 'rgba(20,24,32,.5)'); g.addColorStop(1, 'rgba(20,24,32,0)'); x.fillStyle = g; x.fillRect(0, 0, 128, 128); }) }), 0, 0.02, 0);
+  laptop.add(blob);
+}
+
+/* ---------- labels beside each layer ---------- */
+const labels = [0, 1, 2, 3].map(i => {
+  const el = $('#lab' + i);
+  const o = new CSS3DObject(el);
+  const hm = new THREE.Mesh(new THREE.BufferGeometry(), hole);
+  const g = new THREE.Group();
+  g.add(hm, o);
+  g.visible = o.visible = false;
+  scene.add(g);
+  return { el, o, hm, g };
+});
+const LAYER_OF = [L3, L2, L1, L0];
+
+/* ---------- scroll choreography ---------- */
+// v = camera view, y = in-screen scroll anchor, ex = explode amount, lab = which layer label is shown
+const K = [
+  { p: 0.00, v: 'hero', y: 'top', ex: 0 },
+  { p: 0.04, v: 'hero', y: 'top', ex: 0 },
+  { p: 0.11, v: 'open', y: 'top', ex: 0 },
+  { p: 0.17, v: 'fill', y: 'top', ex: 0 },
+  { p: 0.22, v: 'fill', y: 'stats', ex: 0 },
+  { p: 0.27, v: 'fill', y: 'work', ex: 0 },
+  { p: 0.31, v: 'fill', y: 'work', ex: 0 },
+  { p: 0.38, v: 'xwide', y: 'work', ex: 1 },
+  { p: 0.42, v: 'xwide2', y: 'work', ex: 1 },
+  { p: 0.47, v: 'x0', y: 'work', ex: 1, lab: 0 },
+  { p: 0.51, v: 'x0', y: 'work', ex: 1, lab: 0 },
+  { p: 0.56, v: 'x1', y: 'work', ex: 1, lab: 1 },
+  { p: 0.60, v: 'x1', y: 'work', ex: 1, lab: 1 },
+  { p: 0.65, v: 'x2', y: 'work', ex: 1, lab: 2 },
+  { p: 0.69, v: 'x2', y: 'work', ex: 1, lab: 2 },
+  { p: 0.74, v: 'x3', y: 'work', ex: 1, lab: 3 },
+  { p: 0.78, v: 'x3', y: 'work', ex: 1, lab: 3 },
+  { p: 0.83, v: 'open', y: 'contact', ex: 0 },
+  { p: 0.87, v: 'fill', y: 'contact', ex: 0 },
+  { p: 0.90, v: 'fill', y: 'contact', ex: 0 },
+  { p: 0.97, v: 'end', y: 'contact', ex: 0 },
+  { p: 1.00, v: 'end', y: 'contact', ex: 0 }
+];
+const CHAPTERS = { x0: '01 · Top case — selected work', x1: '02 · Logic board — toolkit', x2: '03 · Battery — experience', x3: '04 · Bottom case — recognition' };
+const EXPLODE = [0, 5, 10, 18.5, 24];
+const OPEN = -0.33, CLOSED = Math.PI / 2;
+const VIEWS = {}, Y = {};
+let elW = 1280, elH = 800, S = 1, innerMax = 1;
+const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+const orbit = (t, dist, az, el) => V(t.x + dist * Math.cos(el) * Math.sin(az), t.y + dist * Math.sin(el), t.z + dist * Math.cos(el) * Math.cos(az));
+const fit = (w, h) => {
+  const f = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  return Math.max(h / 2 / f, w / 2 / (f * cam.aspect));
+};
+const offIn = el => { let x = 0, y = 0; while (el && el.id !== 'site') { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x, y }; };
+
+function pose(ex, lidT) {
+  layers.forEach((g, i) => { g.position.y = g.userData.y0 + EXPLODE[i] * ex; g.rotation.y = (i - 2) * 0.05 * ex; });
+  lid.rotation.x = CLOSED + (OPEN - CLOSED) * lidT;
+}
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  cam.aspect = w / h;
+  cam.updateProjectionMatrix();
+  gl.setSize(w, h);
+  css.setSize(w, h);
+  elW = Math.round(clamp(w, 760, 1440));
+  elH = Math.round(elW / 1.6);
+  S = SW / elW;
+  scrEl.style.width = elW + 'px';
+  scrEl.style.height = elH + 'px';
+  cssObj.scale.setScalar(S);
+  const wide = cam.aspect > 1;
+
+  laptop.rotation.set(0, 0, 0);
+  pose(0, 1);
+  laptop.updateMatrixWorld(true);
+  const sc = holeMesh.getWorldPosition(V());
+  const sn = V(0, 0, 1).applyQuaternion(holeMesh.getWorldQuaternion(new THREE.Quaternion()));
+  const baseEl = Math.asin(sn.y);
+  const v = (lidT, yaw, tgt, pos) => ({ lid: lidT, yaw, tgt, pos });
+  const t0 = wide ? V(-12, 3, 0) : V(0, 9, 0);
+  const t3 = wide ? V(14, 9, 0) : V(0, 15, 0);
+  const xt = V(0, 18, 0);
+
+  // label placement beside each exploded layer (alternating sides on wide screens)
+  pose(1, 1);
+  laptop.updateMatrixWorld(true);
+  const LS = wide ? 0.04 : 0.03;
+  const ELS = [0.42, 0.26, 0.3, 0.34];
+  labels.forEach((L, i) => {
+    const ly = LAYER_OF[i].getWorldPosition(V()).y;
+    const side = i % 2 ? -1 : 1;
+    L.pos = wide ? V(side * 33, ly + 2.5, 3) : V(0, ly + 8, 14);
+    L.side = side;
+    L.g.scale.setScalar(LS);
+    L.w ||= L.el.offsetWidth; L.h ||= L.el.offsetHeight;
+    L.hm.geometry.dispose();
+    L.hm.geometry = rr(L.w, L.h, 24);
+    const mid = wide ? V(side * 16, ly + 1.5, 0) : V(0, ly + 5, 6);
+    VIEWS['x' + i] = v(1, 0, mid, orbit(mid, wide ? fit(86, 46) : fit(34, 56), side * 0.42, ELS[i]));
+  });
+  pose(0, 1);
+
+  Object.assign(VIEWS, {
+    hero: v(0, -0.6, t0, orbit(t0, wide ? fit(64, 34) : fit(44, 70), 0, 0.52)),
+    open: v(1, 0, V(0, 9, -1), orbit(V(0, 9, -1), fit(42, 34), 0, 0.2)),
+    fill: v(1, 0, sc, sc.clone().addScaledVector(sn, fit(SW, SH))),
+    xwide: v(1, 0, xt, orbit(xt, wide ? fit(80, 56) : fit(42, 76), -0.55, 0.5)),
+    xwide2: v(1, 0, xt, orbit(xt, wide ? fit(80, 56) : fit(42, 76), 0.1, 0.42)),
+    end: v(1, 0.5, t3, orbit(t3, wide ? fit(80, 34) : fit(44, 74), 0, 0.2))
+  });
+
+  innerMax = Math.max(1, $('#site').offsetHeight - $('#vp').clientHeight);
+  const vh = elH - 72, at = y => clamp(Math.round(y), 0, innerMax);
+  Object.assign(Y, {
+    top: 0,
+    stats: at(offIn($('#stats')).y + $('#stats').offsetHeight - vh + 30),
+    work: at(offIn($('#s-work')).y - 56),
+    contact: at(offIn($('#s-contact')).y - 56)
+  });
+}
+
+const siteEl = $('#site'), offEl = $('#off'), rvEls = $$('#scr .rv'), navBtns = $$('#snav button');
+const heroOv = $('#heroOv'), endOv = $('#endOv'), where = $('#where'), bar = $('#bar'), topEl = $('.top'), chap = $('#chap');
+const showOv = (el, o) => { el.style.opacity = o; el.style.visibility = o < 0.02 ? 'hidden' : 'visible'; el.style.pointerEvents = o > 0.6 ? 'auto' : 'none'; };
+const target = () => clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight));
+let p = target(), mx = 0, my = 0, smx = 0, smy = 0, last = performance.now(), lastWhere = '', lastSec = '', lastChap = '';
+addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; } }, { passive: true });
+const fans = [];
+L2.traverse(o => { if (o.userData.spin) fans.push(o); });
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  p += (target() - p) * Math.min(1, dt * 7);
+  smx += (mx - smx) * Math.min(1, dt * 4); smy += (my - smy) * Math.min(1, dt * 4);
+
+  let k = 0;
+  while (k < K.length - 2 && p >= K[k + 1].p) k++;
+  const A = K[k], B = K[k + 1], t = ss(clamp((p - A.p) / (B.p - A.p)));
+  const va = VIEWS[A.v], vb = VIEWS[B.v];
+  const pos = va.pos.clone().lerp(vb.pos, t), tgt = va.tgt.clone().lerp(vb.tgt, t);
+  const lidT = lerp(va.lid, vb.lid, t), ex = lerp(A.ex, B.ex, t);
+  const y = lerp(Y[A.y], Y[B.y], t);
+
+  pose(ex, lidT);
+  const fill = rng(p, 0.14, 0.17) * (1 - rng(p, 0.31, 0.34)) + rng(p, 0.85, 0.87) * (1 - rng(p, 0.9, 0.93));
+  const idle = 1 - rng(p, 0, 0.11);
+  laptop.rotation.y = lerp(va.yaw, vb.yaw, t) + Math.sin(now / 2600) * 0.06 * idle + smx * 0.1 * (1 - fill);
+  laptop.position.y = Math.sin(now / 1900) * 0.3 * idle;
+  pos.x += smx * 2 * (1 - fill);
+  pos.y -= smy * 1.2 * (1 - fill);
+  cam.position.copy(pos);
+  cam.lookAt(tgt);
+  for (const f of fans) f.rotation.z += dt * 9 * f.userData.spin * (0.2 + ex);
+
+  offEl.style.opacity = (1 - rng(p, 0.07, 0.12)).toFixed(3);
+  siteEl.style.transform = `translate3d(0,${-y.toFixed(1)}px,0)`;
+  if (lidT > 0.9) for (const el of rvEls) if (!el.classList.contains('in') && el._top < y + (elH - 72) * 0.92) el.classList.add('in');
+
+  labels.forEach((L, i) => {
+    const a = lerp(A.lab === i ? 1 : 0, B.lab === i ? 1 : 0, t);
+    const on = a > 0.01;
+    if (L.g.visible !== on) L.g.visible = L.o.visible = on;
+    if (!on) return;
+    L.el.style.opacity = a.toFixed(3);
+    L.g.position.copy(L.pos).add(V(L.side * (1 - a) * 6, 0, 0));
+    L.g.quaternion.copy(cam.quaternion);
+  });
+  const ch = A.v === B.v ? CHAPTERS[A.v] || '' : '';
+  if (ch !== lastChap) { if (ch) chap.textContent = ch; chap.style.opacity = ch ? 1 : 0; lastChap = ch; }
+
+  const sec = p > 0.34 && p < 0.82 ? 'layers' : y >= Y.contact - 200 ? 'contact' : y >= Y.work - 200 ? 'work' : 'top';
+  if (sec !== lastSec) { navBtns.forEach(b => b.classList.toggle('on', b.dataset.go === sec)); lastSec = sec; }
+  const label = p < 0.14 ? 'Intro' : p > 0.93 ? 'Say hello' : { top: 'About', work: 'Selected work', layers: 'Inside the build', contact: 'Contact' }[sec];
+  if (label !== lastWhere) { where.textContent = label; lastWhere = label; }
+
+  showOv(heroOv, 1 - rng(p, 0.015, 0.06));
+  showOv(endOv, rng(p, 0.93, 0.975));
+  topEl.style.opacity = (1 - fill).toFixed(3);
+  topEl.style.visibility = fill > 0.98 ? 'hidden' : 'visible';
+  where.style.opacity = (1 - rng(p, 0.93, 0.975)).toFixed(3);
+  bar.style.width = (p * 100).toFixed(2) + '%';
+
+  gl.render(scene, cam);
+  css.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+
+const JUMP = { work: 0.27, layers: 0.47, contact: 0.88 };
+$$('#scr [data-go]').forEach(b => b.addEventListener('click', () => scrollTo({ top: JUMP[b.dataset.go] * (document.documentElement.scrollHeight - innerHeight), behavior: 'smooth' })));
+$('[data-top]').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+
+const measure = () => { layout(); for (const el of rvEls) el._top = offIn(el).y; };
+measure();
+let rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(measure, 120); });
+document.fonts?.ready.then(measure);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

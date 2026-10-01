@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Akash Simon — QA Lead &amp; GenAI Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#0f766e;--ok:#16a34a;--bad:#dc2626;--ink:#1a1714;--mut:#6b6259}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#efe9e0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f7f2ea 0%,#ece4d8 60%,#e2d8ca 100%) fixed;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+#track{height:1600vh}
+#css,#gl{position:fixed!important;inset:0}
+#css{z-index:0}
+#gl{z-index:1;pointer-events:none}
+
+.ov{position:fixed;z-index:3}
+.hero-ov{left:6vw;top:50%;transform:translateY(-50%);max-width:min(450px,36vw);padding:26px 28px;border-radius:24px;background:rgba(250,246,240,.72);box-shadow:0 20px 60px -30px rgba(60,40,20,.35)}
+.eb{display:inline-flex;align-items:center;gap:8px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.eb i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.hero-ov h1{font-size:clamp(28px,min(4.2vw,8vh),62px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:16px 0 14px}
+.hero-ov h1 span{color:var(--acc)}
+.hero-ov p{color:var(--mut);font-size:clamp(14px,2.2vh,17px);line-height:1.6}
+.hero-ov p b{color:var(--ink);font-weight:600}
+.hint{margin-top:22px;display:flex;align-items:center;gap:10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--mut)}
+.hint i{width:22px;height:34px;border:1.5px solid #b3a796;border-radius:12px;position:relative}
+.hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--acc);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+.end-ov{right:6vw;top:50%;transform:translateY(-50%);max-width:min(400px,34vw);padding:26px 28px;border-radius:24px;background:rgba(250,246,240,.8);box-shadow:0 20px 60px -30px rgba(60,40,20,.35)}
+.end-ov h2{font-size:clamp(28px,min(3.6vw,7vh),52px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:14px 0 12px}
+.end-ov h2 span{color:var(--acc)}
+.end-ov p{color:var(--mut);line-height:1.6;margin-bottom:20px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 17px;border-radius:12px;font-weight:600;font-size:15px;background:#1a1714;color:#fff}
+.btn.g{background:#fff;color:var(--ink);border:1px solid rgba(0,0,0,.1)}
+.btn.a{background:var(--acc);color:#fff}
+.chap{position:fixed;z-index:3;left:50%;bottom:28px;transform:translateX(-50%);font:600 12px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#2a2520;background:rgba(255,252,247,.88);border:1px solid rgba(0,0,0,.06);padding:9px 14px;border-radius:999px;opacity:0;transition:opacity .4s;white-space:nowrap}
+.chap b{color:var(--acc)}
+@media(max-height:520px){.hint{display:none}.hero-ov,.end-ov{padding:16px 18px}.hero-ov h1,.end-ov h2{margin:8px 0 6px}.end-ov p{margin-bottom:10px;font-size:13px}.btn{padding:8px 12px;font-size:13px}.end-ov .eb{display:none}.chap{bottom:12px}}
+@media(max-aspect-ratio:1/1){
+  .hero-ov,.end-ov{left:5vw;right:5vw;top:70px;transform:none;max-width:none;padding:18px 20px}
+  .hero-ov h1{font-size:clamp(26px,8vw,40px);margin:10px 0 8px}.end-ov h2{font-size:clamp(24px,7.4vw,36px);margin:10px 0 8px}
+  .hero-ov p,.end-ov p{font-size:14px}.end-ov p{margin-bottom:12px}.hint{margin-top:12px}
+  .chap{font-size:10px;letter-spacing:.05em}
+}
+.top{position:fixed;z-index:4;inset:16px 20px auto;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:700 12px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#14b8a6,#0f766e)}
+.where{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:7px 12px;border-radius:999px;background:rgba(255,252,247,.85);border:1px solid rgba(0,0,0,.06)}
+.bar{position:fixed;z-index:4;left:0;bottom:0;height:2px;background:var(--acc);width:0}
+.loading{position:fixed;z-index:5;right:20px;bottom:18px;font:500 11px 'JetBrains Mono',monospace;color:var(--mut);letter-spacing:.1em}
+.noscr{position:fixed;inset:0;display:grid;place-items:center;color:var(--mut)}
+
+/* ===== light IDE on the laptop ===== */
+.ide{position:relative;overflow:hidden;width:1280px;height:800px;background:#ffffff;color:#1f2328;font:14px/1.5 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.tt{height:34px;display:flex;align-items:center;gap:12px;padding:0 14px;background:#f3f3f5;border-bottom:1px solid #e3e3e8;font-size:12.5px;color:#666b73}
+.tt .tl{display:flex;gap:7px}.tt .tl i{display:block;width:12px;height:12px;border-radius:50%;background:#ff5f57}.tt .tl i:nth-child(2){background:#febc2e}.tt .tl i:nth-child(3){background:#28c840}
+.tt .ttl{flex:1;text-align:center}
+.body{position:absolute;top:34px;bottom:24px;left:0;right:0;display:grid;grid-template-columns:46px 210px 1fr 360px}
+.act{background:#f3f3f5;border-right:1px solid #e3e3e8;display:flex;flex-direction:column;align-items:center;gap:18px;padding-top:14px;color:#9097a0;font-size:18px}
+.act b{color:#1f2328}
+.exp{background:#f8f8fa;border-right:1px solid #e3e3e8;padding:10px 0;font-size:13px}
+.exp h6{font:600 11px Inter;letter-spacing:.1em;color:#8b919c;padding:0 14px 8px}
+.exp div{padding:3px 14px;color:#3d434b;white-space:nowrap}
+.exp div.d{color:#8b919c}
+.exp div.on{background:#e4f2f0;color:#0f766e;font-weight:600}
+.exp div.bad{color:var(--bad)}
+.ed{position:relative;display:flex;flex-direction:column;min-width:0}
+.tabs{height:36px;display:flex;background:#f3f3f5;border-bottom:1px solid #e3e3e8;font-size:12.5px}
+.tabs span{display:flex;align-items:center;padding:0 16px;color:#7b818a;border-right:1px solid #e3e3e8}
+.tabs span.on{background:#fff;color:#1f2328;box-shadow:inset 0 2px 0 var(--acc)}
+.code{flex:1;padding:12px 0;font:14px/1.8 'JetBrains Mono',monospace;overflow:hidden}
+.ln{display:flex;padding-right:18px;white-space:pre}
+.ln i{display:inline-block;width:52px;text-align:right;padding-right:18px;color:#a3a9b2;font-style:normal}
+.kw{color:#cf222e}.fn{color:#8250df}.st{color:#0a3069}.at{color:#953800}.tg{color:#116329}.cm{color:#6e7781}
+.ln.hl{background:#ffebe9;box-shadow:inset 3px 0 0 var(--bad)}
+.ln.fx{background:#dafbe1;box-shadow:inset 3px 0 0 var(--ok)}
+.ln .tag{margin-left:14px;font:600 11px Inter;padding:2px 7px;border-radius:5px;align-self:center}
+.ln.hl .tag{background:var(--bad);color:#fff}
+.ln.fx .tag{background:var(--ok);color:#fff}
+.add{display:none}.ide.s3 .add,.ide.s4 .add{display:inline}
+.term{height:210px;border-top:1px solid #e3e3e8;background:#fafafb;font:13px/1.7 'JetBrains Mono',monospace;padding:8px 18px;color:#3d434b}
+.term .th{display:flex;gap:18px;font:600 11px Inter;letter-spacing:.08em;color:#8b919c;margin-bottom:6px}
+.term .th b{color:#1f2328;border-bottom:1px solid var(--acc)}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.dim{color:#8b919c}.ai2{color:#7c3aed}
+.ai{background:#fbfaf7;border-left:1px solid #e3e3e8;display:flex;flex-direction:column}
+.ai .ah{height:36px;display:flex;align-items:center;gap:9px;padding:0 14px;border-bottom:1px solid #e3e3e8;font-weight:600;font-size:13px}
+.ai .ah i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#14b8a6,#7c3aed);display:grid;place-items:center;font-style:normal;font-size:11px;color:#fff}
+.msgs{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;font-size:13.5px;overflow:hidden}
+.msg{padding:11px 13px;border-radius:12px;background:#fff;border:1px solid #ebe7df;line-height:1.5}
+.msg.me{align-self:flex-end;background:#e4f2f0;border-color:#cde7e3;max-width:88%}
+.msg b{color:#1a1714}
+.msg code{font:12px 'JetBrains Mono',monospace;background:#f3f1ec;padding:1px 5px;border-radius:4px;color:#953800}
+.prog{height:6px;border-radius:6px;background:#eee9e0;overflow:hidden;margin-top:8px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#14b8a6,#7c3aed);animation:pr 2.4s ease-in-out infinite}
+@keyframes pr{0%{width:5%}60%{width:85%}100%{width:100%}}
+.diff{margin-top:8px;font:12px/1.6 'JetBrains Mono',monospace;border-radius:8px;overflow:hidden;background:#f6f8fa;border:1px solid #e3e3e8}
+.diff div{padding:2px 8px;white-space:pre}
+.diff .m{background:#ffebe9;color:#82071e}
+.diff .p{background:#dafbe1;color:#116329}
+.sbar{position:absolute;left:0;right:0;bottom:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 12px;background:#0f766e;color:#fff;font-size:12px}
+.sbar.bad{background:#b42318}.sbar.ok{background:#15803d}
+.only{display:none}
+.ide.s1 .on1,.ide.s2 .on2,.ide.s3 .on3{display:block}
+.ide.s1 .on12,.ide.s2 .on12{display:block}
+.ide.s2 .on23,.ide.s3 .on23{display:block}
+.ide.s1 .on123,.ide.s2 .on123,.ide.s3 .on123{display:block}
+.web{position:absolute;inset:34px 0 0;background:#fbfaf7;color:#1a1714;transform:translateY(100%);transition:transform .8s cubic-bezier(.22,1,.36,1);z-index:7}
+.ide.s4 .web{transform:none}
+.brw{height:44px;display:flex;align-items:center;gap:14px;padding:0 16px;background:#f3f1ec;border-bottom:1px solid #e3ddd2}
+.brw .url{flex:1;max-width:420px;margin:0 auto;height:28px;border-radius:8px;background:#e8e3da;display:flex;align-items:center;justify-content:center;font-size:13px;color:#3d3730}
+.wvp{position:absolute;top:44px;left:0;right:0;bottom:0;overflow:hidden}
+.site{position:relative;will-change:transform}
+.sec{padding:46px 70px;max-width:1180px;margin:0 auto}
+.k{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.h2{font-size:40px;line-height:1.05;letter-spacing:-.04em;font-weight:800;margin:8px 0 22px;max-width:700px}
+.hero h1{font-size:60px;line-height:1;letter-spacing:-.05em;font-weight:800;margin:14px 0 14px;max-width:860px}
+.hero h1 span{color:var(--acc)}
+.hero p{font-size:18px;color:#5b534a;max-width:640px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.stats div{padding:20px;border-radius:16px;background:#fff;border:1px solid #ebe5da}
+.stats b{display:block;font-size:34px;font-weight:800;letter-spacing:-.04em}
+.stats span{font-size:13px;color:#6b6259}
+.alt{background:#f3eee6}
+.tlx{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid #ebe5da}
+.row .y{font:600 12px 'JetBrains Mono',monospace;color:#857b70;padding-top:3px}
+.row h4{font-size:18px;letter-spacing:-.02em}
+.row h4 em{font-style:normal;font:700 10px 'JetBrains Mono',monospace;color:#fff;background:var(--acc);padding:3px 6px;border-radius:5px;margin-left:8px;vertical-align:2px}
+.row small{display:block;color:#6b6259;font-size:13.5px}
+.row p{color:#4a443d;font-size:13.5px;margin-top:2px}
+.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grp{padding:16px;border-radius:14px;background:#fff;border:1px solid #ebe5da}
+.grp b{display:block;font-size:14px;margin-bottom:10px}
+.grp div{display:flex;flex-wrap:wrap;gap:6px}
+.grp span{font-size:12.5px;padding:5px 9px;border-radius:7px;background:#f3eee6;color:#3d3730}
+.ct{border-radius:22px;background:#1a1714;color:#fff;padding:38px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.ct h2{font-size:42px;letter-spacing:-.045em;line-height:1.02;font-weight:800;margin:8px 0 10px}
+.ct h2 span{color:#5eead4}
+.ct .k{color:#5eead4}
+.ct p{color:#b3aaa0}
+.seg{display:inline-flex;padding:4px;border-radius:10px;background:#2a2622;margin-bottom:12px}
+.seg button{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:#b3aaa0}
+.seg button.on{background:#fff;color:#1a1714}
+.lk{display:grid;gap:8px}
+.lk a{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-radius:12px;background:#24201c;border:1px solid #35302a;font-weight:600;font-size:14.5px}
+.lk a span{color:#8f867c;font-size:12.5px;font-weight:500}
+.lk a.p{background:var(--acc);border-color:var(--acc)}
+.lk a.p span{color:#ccfbf1}
+.glare{position:absolute;inset:0;pointer-events:none;z-index:9;background:linear-gradient(115deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,0) 32%)}
+
+/* ===== things pinned to the cork board ===== */
+.note{width:230px;height:230px;padding:22px;font:700 30px/1.05 Caveat,cursive;color:#3b2f1e;background:#fde68a;box-shadow:inset 0 -18px 30px -18px rgba(120,80,0,.25);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.note b{display:block;font:800 64px/1 Inter;letter-spacing:-.05em;color:#1a1714;margin-bottom:10px}
+.note.pk{background:#fbcfe8}.note.bl{background:#bae6fd}.note.gr{background:#bbf7d0}
+.idx{width:380px;padding:22px 24px;background:#fffdf8;color:#1a1714;font:14px/1.5 Inter,sans-serif;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);backface-visibility:hidden;-webkit-backface-visibility:hidden;background-image:repeating-linear-gradient(#fffdf8 0 27px,#dbeafe 27px 28px);background-position:0 54px}
+.idx .t{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#b91c1c}
+.idx h3{font-size:21px;letter-spacing:-.025em;line-height:1.2;margin:6px 0 8px}
+.idx .m{display:flex;align-items:baseline;gap:10px}
+.idx .m b{font-size:30px;font-weight:800;letter-spacing:-.04em;color:var(--acc)}
+.idx .m span{font-size:13px;color:#6b6259}
+.aw{width:260px;padding:16px 18px;border-radius:6px;background:#1a1714;color:#fff;font:14px/1.4 Inter,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.aw i{font:600 12px 'JetBrains Mono',monospace;font-style:normal;color:#5eead4}
+.aw b{display:block;font-size:18px;margin:4px 0 1px}
+.aw span{font-size:12.5px;color:#b3aaa0}
+.catch{width:480px;padding:20px 22px;border-radius:20px;background:rgba(255,253,248,.97);color:#1a1714;font:14px/1.5 Inter,sans-serif;box-shadow:inset 0 0 0 2px rgba(22,163,74,.6);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.catch .h{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
+.catch h3{font-size:22px;letter-spacing:-.03em;line-height:1.2;margin:8px 0 6px}
+.catch p{color:#5b534a}
+.catch code{font:12.5px 'JetBrains Mono',monospace;background:#f3eee6;padding:1px 6px;border-radius:4px}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="track"></div>
+
+<div class="top"><a class="brand" href="#" data-top><i>AS</i>Akash Simon</a><span class="where" id="where">Intro</span></div>
+<div class="bar" id="bar"></div>
+<div class="chap" id="chap"></div>
+<div class="loading" id="loading">loading developer…</div>
+
+<div class="ov hero-ov" id="heroOv">
+  <span class="eb"><i></i>Available for senior roles</span>
+  <h1>Morning coffee, <span>zero bugs shipped.</span></h1>
+  <p>I'm <b>Akash Simon</b> — QA Lead &amp; GenAI Automation Engineer. Scroll to watch an AI test agent catch an accessibility bug before a single customer does.</p>
+  <div class="hint"><i></i>SCROLL TO WATCH</div>
+</div>
+<div class="ov end-ov" id="endOv">
+  <span class="eb"><i></i>14 / 14 passing · axe clean</span>
+  <h2>Let's build software people <span>can trust.</span></h2>
+  <p>Senior QA architect, automation lead or AI-augmented testing roles — anywhere in the world.</p>
+  <div class="btns"><a class="btn a" href="mailto:akash.simon@outlook.com">Email me</a><a class="btn g" href="https://www.linkedin.com/in/akash-simon/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn g" href="../resume/Akash_Simon_CV.pdf" download>Résumé</a></div>
+</div>
+
+<div class="ide" id="ide">
+  <div class="tt"><div class="tl"><i></i><i></i><i></i></div><span class="ttl">PayButton.tsx — storefront</span><span>⎇ feat/checkout-v2</span></div>
+  <div class="body">
+    <div class="act"><b>⧉</b><span>⌕</span><span>⑂</span><span>▷</span><span>✦</span></div>
+    <div class="exp">
+      <h6>EXPLORER</h6>
+      <div class="d">▾ storefront</div>
+      <div class="d" style="padding-left:28px">▾ checkout</div>
+      <div class="on" style="padding-left:44px">PayButton.tsx</div>
+      <div style="padding-left:44px">CartSummary.tsx</div>
+      <div style="padding-left:44px">usePayment.ts</div>
+      <div class="d" style="padding-left:28px">▾ tests</div>
+      <div style="padding-left:44px" id="specFile">a11y.checkout.spec.ts</div>
+      <div style="padding-left:44px">checkout.flow.spec.ts</div>
+      <div class="d" style="padding-left:28px">▸ ai-agents</div>
+    </div>
+    <div class="ed">
+      <div class="tabs"><span class="on">PayButton.tsx</span><span>a11y.checkout.spec.ts</span></div>
+      <div class="code">
+        <div class="ln"><i>8</i><span class="kw">import</span> { LockIcon } <span class="kw">from</span> <span class="st">'@/icons'</span>;</div>
+        <div class="ln"><i>9</i></div>
+        <div class="ln"><i>10</i><span class="cm">// Primary call to action on the checkout page</span></div>
+        <div class="ln"><i>11</i><span class="kw">export function</span> <span class="fn">PayButton</span>({ total, onPay }: Props) {</div>
+        <div class="ln"><i>12</i>  <span class="kw">return</span> (</div>
+        <div class="ln" id="bugLine"><i>13</i>    &lt;<span class="tg">button</span> <span class="at">className</span>=<span class="st">"pay"</span><span class="add"> <span class="at">aria-label</span>={<span class="st">`Pay ${total}`</span>}</span> <span class="at">onClick</span>={onPay}&gt;<span class="tag" id="bugTag">AI: no accessible name</span></div>
+        <div class="ln"><i>14</i>      &lt;<span class="tg">LockIcon</span> /&gt;</div>
+        <div class="ln"><i>15</i>    &lt;/<span class="tg">button</span>&gt;</div>
+        <div class="ln"><i>16</i>  );</div>
+        <div class="ln"><i>17</i>}</div>
+      </div>
+      <div class="term">
+        <div class="th"><b>TERMINAL</b><span>PROBLEMS</span><span>OUTPUT</span></div>
+        <div><span class="dim">$</span> npx playwright test a11y.checkout</div>
+        <div class="only on123"><span class="ai2">✦ AI agent generated 14 tests from story CHK-212</span></div>
+        <div class="only on1"><span class="dim">  running keyboard, focus-order and screen-reader checks…</span></div>
+        <div class="only on2"><span class="bad">✗ 1 axe violation · button-name (critical)</span></div>
+        <div class="only on2"><span class="bad">  &lt;button class="pay"&gt; has no accessible name · WCAG 4.1.2</span></div>
+        <div class="only on3"><span class="ok">✓ 14 passed · 0 axe violations · WCAG 2.1 AA</span></div>
+        <div class="only on3"><span class="dim">  added to CI quality gate · checkout-v2</span></div>
+      </div>
+    </div>
+    <div class="ai">
+      <div class="ah"><i>✦</i>AI test agent</div>
+      <div class="msgs">
+        <div class="msg me only on123">Write accessibility and checkout tests for story <code>CHK-212</code> and run them.</div>
+        <div class="msg only on1"><b>On it.</b> Generated 14 Playwright tests — keyboard paths, focus order, screen-reader names, colour contrast. Running now…<div class="prog"><i></i></div></div>
+        <div class="msg only on23"><b>Caught one.</b> The Pay button only contains an icon, so a screen reader announces just "button". Blind customers can't tell what it does.
+          <div class="diff"><div class="m">- &lt;button className="pay" onClick={onPay}&gt;</div><div class="p">+ &lt;button className="pay" aria-label={`Pay ${total}`} …&gt;</div></div></div>
+        <div class="msg me only on3">Apply it and keep the test in CI.</div>
+        <div class="msg only on3"><b>Done.</b> 14 / 14 green, axe clean, and the check now blocks merges on checkout-v2.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sbar" id="sbar"><span>⎇ feat/checkout-v2</span><span id="sbarTxt">Ready</span><span style="margin-left:auto">TypeScript React</span></div>
+  <div class="web">
+    <div class="brw"><span style="font:600 12px Inter;color:#a39886">● ● ●</span><div class="url">🔒 akashsimon.dev</div><span style="width:40px"></span></div>
+    <div class="wvp" id="wvp">
+      <div class="site" id="site">
+        <section class="sec hero" id="w-top">
+          <span class="k">QA Lead &amp; GenAI Automation Engineer</span>
+          <h1>Quality as a <span>competitive advantage.</span></h1>
+          <p>I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens.</p>
+          <div class="stats"><div><b>10+</b><span>Years in QA</span></div><div><b>12+</b><span>Countries / regions</span></div><div><b>~40%</b><span>Less test authoring</span></div><div><b>10+</b><span>Engineers led</span></div></div>
+        </section>
+        <div class="alt"><section class="sec" id="w-exp"><span class="k">Experience</span><h2 class="h2">Nearly a decade of quality engineering.</h2><div class="tlx" id="exp"></div></section></div>
+        <section class="sec" id="w-skills"><span class="k">Toolkit</span><h2 class="h2">A battle-tested toolkit.</h2><div class="sk" id="sk"></div></section>
+        <section class="sec" id="w-contact">
+          <div class="ct">
+            <div><span class="k">Contact</span><h2>Let's build software people <span>can trust.</span></h2><p>Open to senior QA architect, automation lead and AI-augmented testing roles globally.</p></div>
+            <div><div class="seg" id="seg"><button class="on" data-c="MY">Malaysia</button><button data-c="IN">India</button></div><div class="lk" id="lk"></div></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="glare"></div>
+</div>
+
+<div class="catch" id="catchCard"><div class="h">✓ Caught by the AI test agent</div><h3>The Pay button had no accessible name</h3><p>Screen readers announced only “button”. Fixed with <code>aria-label</code>, covered by an axe check in CI — <b>WCAG 4.1.2</b>.</p></div>
+<div id="pins"></div>
+<noscript><div class="noscr">This preview needs JavaScript.</div></noscript>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = t => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const MOBILE = matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600;
+
+/* ---------- content ---------- */
+const NOTES = [['10+', 'years in QA', ''], ['12+', 'countries & regions', 'pk'], ['~40%', 'less test authoring', 'bl'], ['10+', 'engineers led', 'gr']];
+const WORK = [
+  ["GenAI · Domino's", 'GenAI QA agent infrastructure, from zero.', '~40%', 'less authoring / sprint'],
+  ["Accessibility · Domino's EU", 'WCAG 2.1 AA, enforced in CI.', 'AA', 'in every pipeline'],
+  ['Framework · Quinta / Siemens', 'One framework for web, Android & iOS.', '6 wks', 'sole E2E ownership'],
+  ['Healthcare · Solve.Care', 'Automation for a live patient platform.', '300+', 'tests in 3 sprints']
+];
+const AWARDS = [["'25", 'Best Sprinter', "Domino's"], ["'23", 'Best Team Player', 'Solve.Care'], ["'21", 'Best Employee', 'Quinta Systems'], ["'20", 'Client Appreciation', 'Siemens']];
+$('#pins').innerHTML =
+  NOTES.map(n => `<div class="note pin ${n[2]}"><b>${esc(n[0])}</b>${esc(n[1])}</div>`).join('') +
+  WORK.map(w => `<div class="idx pin"><div class="t">${esc(w[0])}</div><h3>${esc(w[1])}</h3><div class="m"><b>${esc(w[2])}</b><span>${esc(w[3])}</span></div></div>`).join('') +
+  AWARDS.map(a => `<div class="aw pin"><i>${a[0]}</i><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
+$('#exp').innerHTML = [
+  ['2023 — now', 'Software Quality Engineer', "Domino's Pizza Enterprises · Kuala Lumpur", 'GenAI QA agents · Axe-core WCAG 2.1 AA · GitHub Actions · 12+ platforms', 1],
+  ['2022', 'Senior Automation QA Engineer', 'Solve.Care · Bangalore', 'Selenium + TestNG framework · blockchain API testing · led a QA team of 10'],
+  ['2017', 'Senior Test Engineer', 'Quinta Systems · Bangalore', 'Hybrid web + mobile framework · Siemens engagement · Scrum Master'],
+  ['2017', 'Application Support Engineer', 'Pole To Win International', 'Structured testing for Rockstar titles · TestRail repositories']
+].map(r => `<div class="row"><span class="y">${r[0]}</span><div><h4>${esc(r[1])}${r[4] ? '<em>NOW</em>' : ''}</h4><small>${esc(r[2])}</small><p>${esc(r[3])}</p></div></div>`).join('');
+$('#sk').innerHTML = [
+  ['Automation', ['Playwright', 'Selenium', 'Appium', 'WebDriverIO', 'REST Assured', 'TestNG', 'Cucumber']],
+  ['AI & GenAI', ['GenAI QA agents', 'AI-driven automation', 'Prompt engineering']],
+  ['Accessibility', ['Axe-core', 'WCAG 2.1 AA']],
+  ['CI/CD', ['GitHub Actions', 'Jenkins', 'Git']],
+  ['API & Data', ['Postman', 'Swagger', 'MySQL', 'PostgreSQL']],
+  ['Management', ['Jira', 'TestRail', 'Shift-left', 'Risk-based testing']]
+].map(([t, x]) => `<div class="grp"><b>${esc(t)}</b><div>${x.map(s => `<span>${esc(s)}</span>`).join('')}</div></div>`).join('');
+const contacts = {
+  MY: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+60 12 747 4204', 'https://wa.me/60127474204'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']],
+  IN: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+91 81058 44868', 'https://wa.me/918105844868'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']]
+};
+const renderLinks = c => { $('#lk').innerHTML = contacts[c].map(([k, v, h], i) => `<a class="${i ? '' : 'p'}" href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(k)}<span>${esc(v)} ↗</span></a>`).join(''); };
+renderLinks('MY');
+$$('#seg button').forEach(b => b.addEventListener('click', () => { $$('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderLinks(b.dataset.c); }));
+
+/* ---------- renderers ---------- */
+const gl = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+gl.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+gl.setClearColor(0x000000, 0);
+gl.outputColorSpace = THREE.SRGBColorSpace;
+gl.toneMapping = THREE.AgXToneMapping ?? THREE.ACESFilmicToneMapping;
+gl.toneMappingExposure = 1.15;
+gl.shadowMap.enabled = true;
+gl.shadowMap.type = THREE.PCFSoftShadowMap;
+gl.domElement.id = 'gl';
+const css = new CSS3DRenderer();
+css.domElement.id = 'css';
+document.body.append(css.domElement, gl.domElement);
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(gl).fromScene(new RoomEnvironment(), 0.03).texture;
+const cam = new THREE.PerspectiveCamera(32, 1, 4, 3000);
+
+/* ---------- helpers ---------- */
+const hole = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, blending: THREE.NoBlending });
+const rrShape = (w, h, r) => {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+};
+const rr = (w, h, r) => new THREE.ShapeGeometry(rrShape(w, h, r), 8);
+const mesh = (geo, mat, x = 0, y = 0, z = 0, cast = true) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = cast; m.receiveShadow = true; return m; };
+const tex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+const grain = (base, dark, light, seed0, lines = 1100) => (x, w, h) => {
+  x.fillStyle = base; x.fillRect(0, 0, w, h);
+  let seed = seed0; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < lines; i++) {
+    const y = rnd() * h, a = rnd() * 0.1, d = rnd() > 0.4;
+    x.strokeStyle = d ? `rgba(${dark},${a})` : `rgba(${light},${a})`;
+    x.lineWidth = 1 + rnd() * 3;
+    x.beginPath(); x.moveTo(0, y);
+    for (let px = 0; px <= w; px += 128) x.lineTo(px, y + Math.sin(px / 260 + i) * 7 + (rnd() - 0.5) * 3);
+    x.stroke();
+  }
+};
+
+/* ---------- sunlit room (units ≈ cm, floor y = 0, desk faces -z, wall at z = -70) ---------- */
+const WALL_Z = -70, WIN = { x0: -170, x1: -40, y0: 85, y1: 215 };
+const plaster = new THREE.MeshStandardMaterial({ color: 0xf1ebe1, roughness: 0.95 });
+{
+  const ft = tex(2048, 1024, grain('#c9a77e', '120,80,40', '255,235,200', 3, 1400));
+  ft.wrapS = ft.wrapT = THREE.RepeatWrapping; ft.repeat.set(3, 3);
+  const floor = mesh(new THREE.PlaneGeometry(900, 900), new THREE.MeshPhysicalMaterial({ map: ft, roughness: 0.5, clearcoat: 0.35, clearcoatRoughness: 0.3 }), 0, 0, 0, false);
+  floor.rotation.x = -Math.PI / 2;
+  scene.add(floor);
+  const rug = mesh(rr(230, 170, 4), new THREE.MeshStandardMaterial({ color: 0xd8cfc0, roughness: 1 }), 0, 0.3, 30, false);
+  rug.rotation.x = -Math.PI / 2;
+  scene.add(rug);
+  // back wall with a real window opening, so sunlight paints the window shape into the room
+  const T = 8, H = 290;
+  const piece = (x0, x1, y0, y1) => scene.add(mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, T), plaster, (x0 + x1) / 2, (y0 + y1) / 2, WALL_Z - T / 2));
+  piece(-440, WIN.x0, 0, H); piece(WIN.x1, 340, 0, H); piece(WIN.x0, WIN.x1, 0, WIN.y0); piece(WIN.x0, WIN.x1, WIN.y1, H);
+  const frameM = new THREE.MeshStandardMaterial({ color: 0xfaf8f4, roughness: 0.5 });
+  const cx = (WIN.x0 + WIN.x1) / 2, cy = (WIN.y0 + WIN.y1) / 2, ww = WIN.x1 - WIN.x0, wh = WIN.y1 - WIN.y0;
+  for (const [w, h, x, y] of [[ww, 5, cx, WIN.y1 - 2.5], [ww, 5, cx, WIN.y0 + 2.5], [5, wh, WIN.x0 + 2.5, cy], [5, wh, WIN.x1 - 2.5, cy], [3, wh, cx, cy], [ww, 3, cx, cy]])
+    scene.add(mesh(new THREE.BoxGeometry(w, h, 6), frameM, x, y, WALL_Z - 3));
+  scene.add(mesh(new THREE.BoxGeometry(ww + 16, 4, 18), frameM, cx, WIN.y0 - 2, WALL_Z + 4));
+  const sky = tex(1024, 1024, (x, w, h) => {
+    const g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#9cc8f0'); g.addColorStop(0.65, '#d9ecfa'); g.addColorStop(1, '#f6efe0');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    let seed = 4; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 70; i++) { x.fillStyle = `rgba(${60 + rnd() * 40},${110 + rnd() * 50},${60 + rnd() * 30},.55)`; x.beginPath(); x.arc(rnd() * w, h * 0.72 + rnd() * h * 0.3, 40 + rnd() * 90, 0, 7); x.fill(); }
+  });
+  scene.add(mesh(new THREE.PlaneGeometry(420, 320), new THREE.MeshBasicMaterial({ map: sky }), cx, 150, WALL_Z - 120, false));
+  const side = mesh(new THREE.PlaneGeometry(700, H), plaster, 200, H / 2, 150, false);
+  side.rotation.y = -Math.PI / 2;
+  scene.add(side);
+  const left = mesh(new THREE.PlaneGeometry(700, H), plaster, -440, H / 2, 150, false);
+  left.rotation.y = Math.PI / 2;
+  scene.add(left);
+  scene.add(mesh(new THREE.BoxGeometry(780, 10, 2), new THREE.MeshStandardMaterial({ color: 0xfaf8f4, roughness: 0.6 }), -50, 5, WALL_Z + 1, false));
+}
+
+/* ---------- cork board with pinned notes ---------- */
+const BOARD = { x: 62, y: 150, w: 170, h: 116 };
+{
+  const cork = tex(1024, 700, (x, w, h) => {
+    x.fillStyle = '#b98a5a'; x.fillRect(0, 0, w, h);
+    let seed = 21; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 9000; i++) { x.fillStyle = rnd() > 0.5 ? `rgba(90,55,25,${rnd() * 0.35})` : `rgba(230,190,140,${rnd() * 0.35})`; x.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 3, 1 + rnd() * 3); }
+  });
+  scene.add(mesh(new THREE.BoxGeometry(BOARD.w, BOARD.h, 1.5), new THREE.MeshStandardMaterial({ map: cork, roughness: 0.95 }), BOARD.x, BOARD.y, WALL_Z + 0.8, false));
+  const fm = new THREE.MeshStandardMaterial({ color: 0xc8a37a, roughness: 0.6 });
+  for (const [w, h, x, y] of [[BOARD.w + 6, 3, BOARD.x, BOARD.y + BOARD.h / 2 + 1.5], [BOARD.w + 6, 3, BOARD.x, BOARD.y - BOARD.h / 2 - 1.5], [3, BOARD.h, BOARD.x - BOARD.w / 2 - 1.5, BOARD.y], [3, BOARD.h, BOARD.x + BOARD.w / 2 + 1.5, BOARD.y]])
+    scene.add(mesh(new THREE.BoxGeometry(w, h, 3), fm, x, y, WALL_Z + 1.5));
+}
+
+/* ---------- desk, laptop and props ---------- */
+const DESK_Y = 74;
+{
+  const top = new THREE.MeshPhysicalMaterial({ map: tex(2048, 1024, grain('#d6b48a', '120,80,40', '255,236,205', 11)), roughness: 0.45, clearcoat: 0.3, clearcoatRoughness: 0.4 });
+  const white = new THREE.MeshStandardMaterial({ color: 0xf4f1ec, roughness: 0.5 });
+  scene.add(mesh(new RoundedBoxGeometry(160, 3.4, 75, 3, 0.8), [white, white, top, white, white, white], 0, DESK_Y - 1.7, -24));
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) scene.add(mesh(new THREE.BoxGeometry(4, DESK_Y - 3.4, 4), white, sx * 74, (DESK_Y - 3.4) / 2, -24 + sz * 32));
+}
+const alu = new THREE.MeshPhysicalMaterial({ color: 0xd3d6db, metalness: 1, roughness: 0.3, clearcoat: 0.15 });
+const matte = new THREE.MeshStandardMaterial({ color: 0x0b0c0e, roughness: 0.65 });
+const glass = new THREE.MeshPhysicalMaterial({ color: 0x050506, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03 });
+const LW = 31.2, LDp = 21.6, SW = 29.6, SH = SW / 1.6, LIDH = 21, CHIN = 1.45;
+const lapBase = new THREE.Group();
+lapBase.position.set(0, DESK_Y, -6);
+scene.add(lapBase);
+const lid = new THREE.Group();
+lid.position.set(0, 1.08, -LDp / 2 + 0.36);
+lid.rotation.x = -0.33;
+lapBase.add(lid);
+let scrHole;
+{
+  lapBase.add(mesh(new RoundedBoxGeometry(LW, 0.9, LDp, 5, 0.38), alu, 0, 0.57, 0));
+  const well = mesh(rr(27.4, 11, 0.4), matte, 0, 1.025, -LDp / 2 + 6.8, false);
+  well.rotation.x = -Math.PI / 2;
+  lapBase.add(well);
+  const keys = new THREE.InstancedMesh(new RoundedBoxGeometry(1, 0.14, 1, 2, 0.06), new THREE.MeshStandardMaterial({ color: 0x111215, roughness: 0.55 }), 6 * 14);
+  const m = new THREE.Matrix4();
+  let i = 0;
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 14; c++) { m.makeScale(1.7, 1, r ? 1.55 : 0.85).setPosition(-12.3 + c * 1.9, 1.0, -LDp / 2 + 1.9 + (r ? 0.6 + r * 1.75 : 0)); keys.setMatrixAt(i++, m); }
+  keys.castShadow = true;
+  lapBase.add(keys);
+  const pad = mesh(rr(13.8, 8.6, 0.55), new THREE.MeshPhysicalMaterial({ color: 0xc9ccd1, metalness: 0.55, roughness: 0.4 }), 0, 1.03, LDp / 2 - 5.4, false);
+  pad.rotation.x = -Math.PI / 2;
+  lapBase.add(pad);
+  lid.add(mesh(new RoundedBoxGeometry(LW, LIDH, 0.5, 5, 0.24), alu, 0, LIDH / 2, -0.25));
+  lid.add(mesh(rr(LW - 0.16, LIDH - 0.16, 0.6), glass, 0, LIDH / 2, 0.004, false));
+  scrHole = mesh(new THREE.PlaneGeometry(SW, SH), hole, 0, CHIN + SH / 2, 0.01, false);
+  lid.add(scrHole);
+  lid.add(mesh(rr(4.4, 1.3, 0.32), glass, 0, CHIN + SH, 0.014, false));
+}
+{ // props: mug of coffee, plant, notebook, headphones
+  const ceramic = new THREE.MeshPhysicalMaterial({ color: 0x2f4a46, roughness: 0.3, clearcoat: 0.8, side: THREE.DoubleSide });
+  scene.add(mesh(new THREE.CylinderGeometry(4, 3.8, 9.5, 48, 1, true), ceramic, 30, DESK_Y + 4.75, -2));
+  const coffee = mesh(new THREE.CircleGeometry(3.9, 40), new THREE.MeshPhysicalMaterial({ color: 0x6b4226, roughness: 0.15, clearcoat: 1 }), 30, DESK_Y + 8, -2, false);
+  coffee.rotation.x = -Math.PI / 2;
+  scene.add(coffee);
+  const handle = mesh(new THREE.TorusGeometry(2.3, 0.55, 16, 40, Math.PI), ceramic, 33.9, DESK_Y + 4.9, -2);
+  handle.rotation.z = -Math.PI / 2;
+  scene.add(handle);
+  scene.add(mesh(new THREE.CylinderGeometry(9, 7, 16, 40), new THREE.MeshPhysicalMaterial({ color: 0xe9e2d6, roughness: 0.6 }), -58, DESK_Y + 8, -44));
+  const leafM = new THREE.MeshStandardMaterial({ color: 0x2f6b3e, roughness: 0.55, side: THREE.DoubleSide });
+  for (let i = 0; i < 11; i++) {
+    const leaf = mesh(new THREE.SphereGeometry(1, 20, 12), leafM, -58 + Math.sin(i * 1.9) * 6, DESK_Y + 26 + (i % 4) * 5, -44 + Math.cos(i * 1.9) * 6);
+    leaf.scale.set(6, 0.6, 10);
+    leaf.rotation.set(0.6 * Math.cos(i * 2.3), i * 0.9, 0.6 * Math.sin(i * 1.7));
+    scene.add(leaf);
+  }
+  const book = mesh(new RoundedBoxGeometry(15, 1.4, 21, 2, 0.3), new THREE.MeshStandardMaterial({ color: 0x0f766e, roughness: 0.75 }), -34, DESK_Y + 0.7, -4);
+  book.rotation.y = 0.25;
+  scene.add(book);
+  const hp = mesh(new THREE.TorusGeometry(8, 1.1, 16, 48, Math.PI), new THREE.MeshStandardMaterial({ color: 0x2a2725, roughness: 0.6 }), 52, DESK_Y + 1.2, -18);
+  hp.rotation.x = -Math.PI / 2;
+  scene.add(hp);
+  for (const sx of [-1, 1]) scene.add(mesh(new THREE.CylinderGeometry(4, 4, 3, 32), new THREE.MeshStandardMaterial({ color: 0x2a2725, roughness: 0.6 }), 52 + sx * 8, DESK_Y + 1.5, -18));
+}
+
+/* ---------- chair ---------- */
+const SEAT = new THREE.Vector3(0, 50, 46);
+const chairMats = [new THREE.MeshStandardMaterial({ color: 0xcfc6b8, roughness: 0.95 }), new THREE.MeshPhysicalMaterial({ color: 0x8a8f96, metalness: 0.9, roughness: 0.3 }), new THREE.MeshStandardMaterial({ color: 0x2a2725, roughness: 0.5 })];
+{
+  const [fabric, steel, wheel] = chairMats;
+  const chair = new THREE.Group();
+  chair.position.set(SEAT.x, 0, SEAT.z + 4);
+  scene.add(chair);
+  chair.add(mesh(new RoundedBoxGeometry(50, 8, 48, 4, 3.5), fabric, 0, SEAT.y - 4, 0));
+  const back = mesh(new RoundedBoxGeometry(46, 58, 7, 4, 3.2), fabric, 0, SEAT.y + 34, 22);
+  back.rotation.x = -0.12;
+  chair.add(back);
+  chair.add(mesh(new THREE.CylinderGeometry(2.4, 2.4, SEAT.y - 16, 20), steel, 0, (SEAT.y - 16) / 2 + 8, 2));
+  for (let i = 0; i < 5; i++) {
+    const a = i / 5 * Math.PI * 2;
+    const leg = mesh(new RoundedBoxGeometry(32, 2.6, 4.4, 2, 1), steel, Math.cos(a) * 16, 8, 2 + Math.sin(a) * 16);
+    leg.rotation.y = -a;
+    chair.add(leg);
+    chair.add(mesh(new THREE.SphereGeometry(3, 16, 12), wheel, Math.cos(a) * 31, 3, 2 + Math.sin(a) * 31));
+  }
+  for (const sx of [-1, 1]) {
+    chair.add(mesh(new RoundedBoxGeometry(4, 20, 4, 2, 1.2), steel, sx * 26, SEAT.y + 8, 6));
+    chair.add(mesh(new RoundedBoxGeometry(7, 3, 26, 2, 1.4), fabric, sx * 26, SEAT.y + 18, 2));
+  }
+}
+
+/* ---------- the developer (rigged character, posed by aiming bones) ---------- */
+let person = null;
+const bones = {}, rest = new Map(), AIM = [], personMats = [];
+let lastFade = 1;
+function fadeOccluders(o) {
+  if (Math.abs(o - lastFade) < 0.005) return;
+  lastFade = o;
+  for (const m of [...personMats, ...chairMats]) { m.opacity = o; m.transparent = o < 0.999; m.depthWrite = o > 0.5; }
+  if (person) person.visible = o > 0.01;
+}
+const _a = new THREE.Vector3(), _b = new THREE.Vector3(), _q = new THREE.Quaternion(), _pq = new THREE.Quaternion(), _bq = new THREE.Quaternion();
+function aim(bone, child, dir) {
+  bone.getWorldPosition(_a);
+  child.getWorldPosition(_b);
+  _q.setFromUnitVectors(_b.sub(_a).normalize(), dir);
+  bone.getWorldQuaternion(_bq).premultiply(_q);
+  bone.parent.getWorldQuaternion(_pq);
+  bone.quaternion.copy(_pq.invert().multiply(_bq));
+  bone.updateMatrixWorld(true);
+}
+new GLTFLoader().load('models/xbot.glb', g => {
+  person = g.scene;
+  person.traverse(o => {
+    if (o.isBone) { bones[o.name.replace(/^mixamorig:?/, '')] = o; rest.set(o, o.quaternion.clone()); }
+    if (o.isMesh) {
+      o.castShadow = o.receiveShadow = true;
+      o.frustumCulled = false;
+      o.material = /Joint/i.test(o.material.name) ? new THREE.MeshPhysicalMaterial({ color: 0x4a423b, metalness: 0.2, roughness: 0.5 })
+        : new THREE.MeshPhysicalMaterial({ color: 0xd8cdbd, roughness: 0.75, sheen: 0.8, sheenRoughness: 0.5, sheenColor: new THREE.Color(0xfff4e6) });
+      personMats.push(o.material);
+    }
+  });
+  person.updateMatrixWorld(true);
+  const headY = bones.HeadTop_End.getWorldPosition(new THREE.Vector3()).y, toeY = bones.LeftToe_End.getWorldPosition(new THREE.Vector3()).y;
+  person.scale.setScalar(178 / (headY - toeY));
+  person.rotation.y = Math.PI;
+  scene.add(person);
+  person.updateMatrixWorld(true);
+  const hips = bones.Hips.getWorldPosition(new THREE.Vector3());
+  person.position.set(SEAT.x - hips.x, SEAT.y + 9 - hips.y, SEAT.z + 2 - hips.z);
+  for (const [b, c] of [['Spine', 'Spine1'], ['Spine1', 'Spine2'], ['Spine2', 'Neck'], ['Neck', 'Head'], ['Head', 'HeadTop_End'],
+    ['LeftUpLeg', 'LeftLeg'], ['LeftLeg', 'LeftFoot'], ['LeftFoot', 'LeftToeBase'], ['RightUpLeg', 'RightLeg'], ['RightLeg', 'RightFoot'], ['RightFoot', 'RightToeBase'],
+    ['LeftArm', 'LeftForeArm'], ['LeftForeArm', 'LeftHand'], ['LeftHand', 'LeftHandMiddle1'], ['RightArm', 'RightForeArm'], ['RightForeArm', 'RightHand'], ['RightHand', 'RightHandMiddle1']])
+    if (bones[b] && bones[c]) AIM.push([b, bones[b], bones[c]]);
+  $('#loading').remove();
+}, undefined, () => { $('#loading').textContent = 'model unavailable'; });
+
+const F = new THREE.Vector3(0, 0, -1), U = new THREE.Vector3(0, 1, 0), R = new THREE.Vector3(1, 0, 0);
+const dv = (f, u, r) => new THREE.Vector3().addScaledVector(F, f).addScaledVector(U, u).addScaledVector(R, r).normalize();
+const TYPE = {
+  Spine: dv(0.14, 1, 0), Spine1: dv(0.16, 1, 0), Spine2: dv(0.2, 1, 0), Neck: dv(0.4, 1, 0), Head: dv(0.5, 1, 0),
+  LeftUpLeg: dv(1, -0.06, -0.12), LeftLeg: dv(0.12, -1, -0.02), LeftFoot: dv(1, -0.5, -0.05),
+  RightUpLeg: dv(1, -0.06, 0.12), RightLeg: dv(0.12, -1, 0.02), RightFoot: dv(1, -0.5, 0.05),
+  LeftArm: dv(0.42, -0.85, -0.12), LeftForeArm: dv(1, -0.12, 0.32), LeftHand: dv(1, -0.35, 0.12),
+  RightArm: dv(0.42, -0.85, 0.12), RightForeArm: dv(1, -0.12, -0.32), RightHand: dv(1, -0.35, -0.12)
+};
+// turned toward the cork board, pointing at it
+const LOOK = { ...TYPE, Neck: dv(0.4, 1, 0.35), Head: dv(0.45, 0.8, 0.6), Spine2: dv(0.15, 1, 0.1), RightArm: dv(0.6, 0.15, 0.6), RightForeArm: dv(0.75, 0.35, 0.55), RightHand: dv(0.7, 0.3, 0.6) };
+const RELAX = {
+  ...TYPE,
+  Spine: dv(-0.22, 1, 0), Spine1: dv(-0.2, 1, 0), Spine2: dv(-0.15, 1, 0), Neck: dv(0.05, 1, 0), Head: dv(0.12, 1, 0),
+  LeftUpLeg: dv(1, -0.15, -0.16), LeftLeg: dv(0.5, -1, -0.05), RightUpLeg: dv(1, -0.15, 0.16), RightLeg: dv(0.5, -1, 0.05),
+  LeftArm: dv(0.25, -0.9, -0.25), LeftForeArm: dv(1, 0.1, 0.1), LeftHand: dv(1, 0, 0.1),
+  RightArm: dv(0.3, -0.2, 0.9), RightForeArm: dv(0.1, 1, 0.2), RightHand: dv(0, 1, 0.15)
+};
+const _d = new THREE.Vector3();
+function posePerson(now, look, relax) {
+  if (!person) return;
+  for (const [b, q] of rest) b.quaternion.copy(q);
+  person.updateMatrixWorld(true);
+  const typing = (1 - relax) * (1 - look);
+  for (const [name, bone, child] of AIM) {
+    _d.copy(TYPE[name]).lerp(LOOK[name], look).lerp(RELAX[name], relax);
+    if (typing > 0.01) {
+      if (name.endsWith('Hand')) _d.y += Math.sin(now / 75 + (name[0] === 'L' ? 0 : 2)) * 0.12 * typing;
+      if (name === 'Head') _d.x += Math.sin(now / 1900) * 0.07;
+    }
+    if (relax > 0.5 && name === 'RightHand') _d.x += Math.sin(now / 220) * 0.35 * relax;
+    aim(bone, child, _d.normalize());
+  }
+}
+
+/* ---------- the bug, and the AI scanner that catches it ---------- */
+const bug = new THREE.Group();
+{
+  const shellM = new THREE.MeshPhysicalMaterial({ color: 0xd61f1f, roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.05 });
+  const blackM = new THREE.MeshPhysicalMaterial({ color: 0x111111, roughness: 0.3, clearcoat: 0.6 });
+  bug.userData.shell = shellM;
+  const shell = mesh(new THREE.SphereGeometry(1, 40, 24, 0, Math.PI * 2, 0, Math.PI / 2), shellM, 0, 0.3, 0);
+  shell.scale.set(3, 2.2, 3.8);
+  bug.add(shell);
+  bug.add(mesh(new THREE.SphereGeometry(1.5, 24, 16), blackM, 0, 0.8, 3.6));
+  const seam = mesh(new THREE.BoxGeometry(0.15, 0.2, 7.2), blackM, 0, 2.48, 0);
+  bug.add(seam);
+  for (const [x, z] of [[-1.4, 1.4], [1.4, 1.4], [-1.7, -0.9], [1.7, -0.9], [0, -2.4], [-0.9, 0]]) {
+    const spot = mesh(new THREE.SphereGeometry(0.55, 16, 10), blackM, x, 0.3 + Math.sqrt(Math.max(0, 1 - (x / 3) ** 2 - (z / 3.8) ** 2)) * 2.2 - 0.05, z);
+    spot.scale.y = 0.35;
+    bug.add(spot);
+  }
+  bug.userData.legs = [];
+  for (const sx of [-1, 1]) for (const z of [-1.6, 0, 1.6]) {
+    const leg = new THREE.Group();
+    leg.position.set(sx * 2.4, 0.5, z);
+    const seg = mesh(new THREE.CylinderGeometry(0.15, 0.12, 2.6, 8), blackM, sx * 1.1, -0.4, 0);
+    seg.rotation.z = sx * 1.1;
+    leg.add(seg);
+    bug.add(leg);
+    bug.userData.legs.push(leg);
+  }
+  for (const sx of [-1, 1]) { const ant = mesh(new THREE.CylinderGeometry(0.08, 0.08, 2.4, 6), blackM, sx * 0.7, 1.6, 5.2); ant.rotation.set(0.9, 0, -sx * 0.4); bug.add(ant); }
+  bug.visible = false;
+  scene.add(bug);
+}
+const scanner = new THREE.Group();
+const scanLight = new THREE.PointLight(0x2dd4bf, 0, 80, 2);
+{
+  const ringM = new THREE.MeshBasicMaterial({ color: new THREE.Color(0.3, 1.6, 1.4) });
+  scanner.add(mesh(new THREE.TorusGeometry(8, 0.45, 16, 80), ringM, 0, 0, 0, false));
+  scanner.children[0].rotation.x = Math.PI / 2;
+  const beam = mesh(new THREE.CylinderGeometry(8, 8, 1, 48, 1, true), new THREE.MeshBasicMaterial({ color: 0x2dd4bf, transparent: true, opacity: 0.16, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }), 0, 0, 0, false);
+  scanner.userData.beam = beam;
+  scanner.add(beam, scanLight);
+  scanner.visible = false;
+  scene.add(scanner);
+}
+const BUG_PATH = new THREE.CatmullRomCurve3([]);
+
+/* ---------- CSS objects: laptop screen, pinned notes, catch card ---------- */
+const ideEl = $('#ide');
+const ideObj = new CSS3DObject(ideEl);
+ideObj.position.set(0, CHIN + SH / 2, 0.01);
+ideObj.scale.setScalar(SW / 1280);
+lid.add(ideObj);
+const card = (el, scale, parent = scene) => {
+  const o = new CSS3DObject(el);
+  const hm = new THREE.Mesh(new THREE.BufferGeometry(), hole);
+  hm.castShadow = true;
+  const g = new THREE.Group();
+  g.add(hm, o);
+  g.scale.setScalar(scale);
+  g.visible = o.visible = false;
+  parent.add(g);
+  return { el, o, hm, g, scale };
+};
+const catchCard = card($('#catchCard'), 0.075);
+const pins = $$('#pins .pin').map(el => card(el, el.classList.contains('note') ? 0.1 : el.classList.contains('idx') ? 0.088 : 0.1));
+{ // lay the notes out on the board: sticky notes on top, index cards in the middle, awards along the bottom
+  let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const row = (list, y, gap) => {
+    const ws = list.map(c => (c.el.offsetWidth || 300) * c.scale);
+    const total = ws.reduce((a, b) => a + b, 0) + gap * (list.length - 1);
+    let x = BOARD.x - total / 2;
+    list.forEach((c, i) => { c.home = new THREE.Vector3(x + ws[i] / 2, y + (rnd() - 0.5) * 3, WALL_Z + 1.7 + i * 0.02); c.rz = (rnd() - 0.5) * 0.12; x += ws[i] + gap; });
+  };
+  row(pins.slice(0, 4), BOARD.y + 33, 8);
+  row(pins.slice(4, 8), BOARD.y - 2, 4);
+  row(pins.slice(8), BOARD.y - 41, 10);
+  const pinM = new THREE.MeshPhysicalMaterial({ color: 0xdc2626, roughness: 0.25, clearcoat: 1 });
+  for (const c of pins) { const pin = mesh(new THREE.SphereGeometry(1.1, 16, 12), pinM, 0, 0, 0); c.pin = pin; pin.visible = false; scene.add(pin); }
+}
+scene.traverse(o => { if (o.isMesh) [].concat(o.material).forEach(mt => { if ('envMapIntensity' in mt) mt.envMapIntensity = 0.55; }); });
+
+/* ---------- lights: sun through the window, sky fill, warm bounce ---------- */
+scene.add(new THREE.HemisphereLight(0xdcecff, 0xd8c3a5, 1.1));
+const sun = new THREE.DirectionalLight(0xfff0d6, 4.2);
+sun.target.position.set(-40, DESK_Y, -10);
+sun.position.copy(sun.target.position).add(new THREE.Vector3(-0.4, 1, -0.55).normalize().multiplyScalar(420));
+sun.castShadow = true;
+sun.shadow.mapSize.set(MOBILE ? 1024 : 2048, MOBILE ? 1024 : 2048);
+Object.assign(sun.shadow.camera, { left: -260, right: 260, top: 260, bottom: -260, near: 50, far: 900 });
+sun.shadow.camera.updateProjectionMatrix();
+sun.shadow.bias = -0.0004;
+sun.shadow.normalBias = 0.05;
+scene.add(sun, sun.target);
+const bounce = new THREE.DirectionalLight(0xffe2c4, 0.6);
+bounce.position.set(150, 120, 260);
+scene.add(bounce);
+
+/* ---------- scroll choreography ---------- */
+// v = camera view, st = IDE stage, y = portfolio scroll, bug = crawl progress, scan = capture progress, wall = notes pinned, look/relax = body pose
+const K = [
+  { p: 0.00, v: 'hero', st: 0, y: 'top' },
+  { p: 0.04, v: 'hero', st: 0, y: 'top' },
+  { p: 0.12, v: 'over', st: 1, y: 'top' },
+  { p: 0.18, v: 'fill', st: 1, y: 'top' },
+  { p: 0.23, v: 'fill', st: 2, y: 'top' },
+  { p: 0.29, v: 'desk', st: 2, y: 'top', bug: 0.15 },
+  { p: 0.35, v: 'desk2', st: 2, y: 'top', bug: 1 },
+  { p: 0.41, v: 'desk2', st: 2, y: 'top', bug: 1, scan: 1 },
+  { p: 0.45, v: 'desk3', st: 3, y: 'top', bug: 1, scan: 1, caught: 1 },
+  { p: 0.5, v: 'fill', st: 3, y: 'top' },
+  { p: 0.56, v: 'wall', st: 3, y: 'top', wall: 1, look: 1 },
+  { p: 0.64, v: 'wall2', st: 3, y: 'top', wall: 1, look: 1 },
+  { p: 0.69, v: 'fill', st: 4, y: 'top', wall: 1 },
+  { p: 0.74, v: 'fill', st: 4, y: 'exp', wall: 1 },
+  { p: 0.79, v: 'fill', st: 4, y: 'skills', wall: 1 },
+  { p: 0.84, v: 'fill', st: 4, y: 'contact', wall: 1 },
+  { p: 0.88, v: 'fill', st: 4, y: 'contact', wall: 1 },
+  { p: 0.96, v: 'end', st: 4, y: 'contact', wall: 1, relax: 1 },
+  { p: 1.00, v: 'end', st: 4, y: 'contact', wall: 1, relax: 1 }
+];
+const CHAP = [[0.12, 0.2, '<b>01</b> · AI writes 14 tests from the user story'], [0.2, 0.28, '<b>02</b> · One fails — an accessibility bug'], [0.28, 0.44, '<b>03</b> · The bug crawls out — AI scanner catches it'], [0.44, 0.52, '<b>04</b> · Fixed · 14 / 14 green'], [0.53, 0.67, '<b>05</b> · The wall of wins'], [0.68, 0.9, '<b>06</b> · The portfolio']];
+const VIEWS = {}, Y = {};
+let innerMax = 1;
+const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+const orbit = (t, dist, az, el) => V(t.x + dist * Math.cos(el) * Math.sin(az), t.y + dist * Math.sin(el), t.z + dist * Math.cos(el) * Math.cos(az));
+const fit = (w, h) => {
+  const f = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  return Math.max(h / 2 / f, w / 2 / (f * cam.aspect));
+};
+const offIn = el => { let y = 0; while (el && el.id !== 'site') { y += el.offsetTop; el = el.offsetParent; } return y; };
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  cam.aspect = w / h;
+  cam.updateProjectionMatrix();
+  gl.setSize(w, h);
+  css.setSize(w, h);
+  const wide = cam.aspect > 1;
+  scene.updateMatrixWorld(true);
+  const sc = scrHole.getWorldPosition(V());
+  const sn = V(0, 0, 1).applyQuaternion(scrHole.getWorldQuaternion(new THREE.Quaternion()));
+  const scEl = Math.asin(sn.y);
+  const v = (tgt, pos) => ({ tgt, pos });
+  const t0 = wide ? V(-30, 100, -10) : V(0, 132, -10);
+  const tD = V(10, DESK_Y + 8, -2);
+  const tW = V(BOARD.x, BOARD.y, WALL_Z);
+  const t3 = wide ? V(4, 100, 95) : V(0, 128, 50);
+  Object.assign(VIEWS, {
+    hero: v(t0, orbit(t0, wide ? fit(300, 165) : fit(180, 340), 0.55, 0.18)),
+    over: v(V(0, DESK_Y + 10, -10), orbit(V(0, DESK_Y + 10, -10), wide ? fit(70, 40) : fit(50, 90), 0.9, 0.35)),
+    fill: v(sc, sc.clone().addScaledVector(sn, fit(SW, SH))),
+    desk: v(tD, orbit(tD, wide ? fit(70, 40) : fit(44, 80), 0.75, 0.32)),
+    desk2: v(V(16, DESK_Y + 6, 4), orbit(V(16, DESK_Y + 6, 4), wide ? fit(56, 32) : fit(38, 70), 1.0, 0.28)),
+    desk3: v(V(20, DESK_Y + 16, 4), orbit(V(20, DESK_Y + 16, 4), wide ? fit(80, 45) : fit(50, 90), 0.85, 0.2)),
+    wall: v(wide ? tW : V(BOARD.x - 40, BOARD.y, WALL_Z), orbit(wide ? tW : V(BOARD.x - 40, BOARD.y, WALL_Z), wide ? fit(BOARD.w * 1.25, BOARD.h * 1.25) : fit(95, 150), 0.32, 0.04)),
+    wall2: v(wide ? V(BOARD.x + 10, BOARD.y - 6, WALL_Z) : V(BOARD.x + 40, BOARD.y, WALL_Z), orbit(wide ? V(BOARD.x + 10, BOARD.y - 6, WALL_Z) : V(BOARD.x + 40, BOARD.y, WALL_Z), wide ? fit(BOARD.w * 1.05, BOARD.h * 1.05) : fit(95, 150), 0.16, 0.02)),
+    end: v(t3, orbit(t3, wide ? fit(270, 150) : fit(110, 220), wide ? -1.9 : -1.6, 0.14))
+  });
+  catchCard.pos = wide ? V(36, DESK_Y + 38, 2) : V(14, DESK_Y + 42, 8);
+  for (const c of [catchCard, ...pins]) {
+    c.w ||= c.el.offsetWidth; c.h ||= c.el.offsetHeight;
+    c.hm.geometry.dispose();
+    c.hm.geometry = rr(c.w, c.h, c.el.classList.contains('catch') ? 20 : c.el.classList.contains('aw') ? 6 : 1);
+  }
+  // the bug crawls from the middle of the screen, down the bezel, over the keyboard and onto the desk
+  const top = scrHole.localToWorld(V(-4, 2, 0.6)), bottom = lid.localToWorld(V(-2, 0.4, 1));
+  BUG_PATH.points = [top, bottom, V(4, DESK_Y + 1.3, -2), V(12, DESK_Y + 1.3, 7), V(16, DESK_Y + 0.4, 6)];
+  BUG_PATH.updateArcLengths();
+  innerMax = Math.max(1, $('#site').offsetHeight - $('#wvp').clientHeight);
+  const at = y => clamp(Math.round(y), 0, innerMax);
+  Object.assign(Y, { top: 0, exp: at(offIn($('#w-exp'))), skills: at(offIn($('#w-skills'))), contact: at(offIn($('#w-contact'))) });
+}
+
+const siteEl = $('#site'), sbar = $('#sbar'), sbarTxt = $('#sbarTxt'), bugLine = $('#bugLine'), bugTag = $('#bugTag'), specFile = $('#specFile');
+const heroOv = $('#heroOv'), endOv = $('#endOv'), where = $('#where'), bar = $('#bar'), topEl = $('.top'), chap = $('#chap');
+const showOv = (el, o) => { el.style.opacity = o; el.style.visibility = o < 0.02 ? 'hidden' : 'visible'; el.style.pointerEvents = o > 0.6 ? 'auto' : 'none'; };
+const rng = (q, a, b) => ss(clamp((q - a) / (b - a)));
+const target = () => clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight));
+let p = target(), mx = 0, my = 0, smx = 0, smy = 0, last = performance.now(), lastStage = -1, lastWhere = '', lastChap = '';
+addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; } }, { passive: true });
+
+function setStage(s) {
+  ideEl.className = 'ide s' + s;
+  bugLine.className = 'ln' + (s === 2 ? ' hl' : s >= 3 ? ' fx' : '');
+  bugTag.textContent = s >= 3 ? 'fixed · AI' : 'AI: no accessible name';
+  bugTag.style.display = s >= 2 ? '' : 'none';
+  specFile.className = s === 2 ? 'bad' : '';
+  sbar.className = 'sbar' + (s === 2 ? ' bad' : s >= 3 ? ' ok' : '');
+  sbarTxt.textContent = ['Ready', '✦ AI agent running 14 tests', '✗ 1 accessibility violation', '✓ 14 passed · axe clean', '✓ 14 passed · axe clean'][s];
+}
+
+function show(c, a, pos, quat) {
+  const on = a > 0.01;
+  if (c.g.visible !== on) c.g.visible = c.o.visible = on;
+  if (!on) return false;
+  c.el.style.opacity = a.toFixed(3);
+  c.g.position.copy(pos);
+  if (quat) c.g.quaternion.copy(quat);
+  return true;
+}
+const _pinQ = new THREE.Quaternion(), _e = new THREE.Euler(), _t = new THREE.Vector3();
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  p += (target() - p) * Math.min(1, dt * 7);
+  smx += (mx - smx) * Math.min(1, dt * 4); smy += (my - smy) * Math.min(1, dt * 4);
+
+  let k = 0;
+  while (k < K.length - 2 && p >= K[k + 1].p) k++;
+  const A = K[k], B = K[k + 1], t = ss(clamp((p - A.p) / (B.p - A.p)));
+  const pos = VIEWS[A.v].pos.clone().lerp(VIEWS[B.v].pos, t), tgt = VIEWS[A.v].tgt.clone().lerp(VIEWS[B.v].tgt, t);
+  const g = f => lerp(A[f] || 0, B[f] || 0, t);
+  const free = 1 - (A.v === 'fill' && B.v === 'fill' ? 1 : A.v === 'fill' || B.v === 'fill' ? ss(A.v === 'fill' ? 1 - t : t) : 0);
+  pos.x += smx * 6 * free;
+  pos.y -= smy * 4 * free;
+  cam.position.copy(pos);
+  cam.lookAt(tgt);
+
+  const stage = t < 0.5 ? A.st : B.st;
+  if (stage !== lastStage) { setStage(stage); lastStage = stage; }
+  siteEl.style.transform = `translate3d(0,${-lerp(Y[A.y], Y[B.y], t).toFixed(1)}px,0)`;
+  posePerson(now, g('look'), g('relax'));
+  fadeOccluders(clamp(free * 2.5));
+
+  // bug crawl + capture
+  const bp = g('bug'), sc = g('scan'), caught = g('caught');
+  bug.visible = bp > 0.01 && caught < 0.98;
+  if (bug.visible) {
+    const u = clamp(bp);
+    BUG_PATH.getPointAt(u, bug.position);
+    BUG_PATH.getTangentAt(Math.min(0.999, u + 0.001), _t);
+    bug.up.set(0, 1, 0);
+    if (u < 0.35) bug.up.copy(V(0, 0, 1).applyQuaternion(lid.getWorldQuaternion(_pinQ)));
+    bug.lookAt(_t.add(bug.position));
+    const walk = bp < 0.99 && bp > 0.15 ? 1 : 0.15;
+    bug.userData.legs.forEach((l, i) => { l.rotation.x = Math.sin(now / 60 + i * 1.6) * 0.5 * walk; });
+    bug.userData.shell.color.setHSL(lerp(0.0, 0.36, rng(sc, 0.45, 0.8)), 0.8, 0.45);
+    bug.scale.setScalar(1 - rng(caught, 0, 0.9));
+    bug.position.y += rng(sc, 0.75, 1) * 10;
+  }
+  scanner.visible = sc > 0.01 && caught < 0.98;
+  if (scanner.visible) {
+    const bx = bug.position.x, bz = bug.position.z;
+    const hgt = lerp(60, 10, rng(sc, 0, 0.6)) + rng(sc, 0.75, 1) * 10;
+    scanner.position.set(bx, DESK_Y + hgt, bz);
+    scanner.rotation.y = now / 400;
+    const beam = scanner.userData.beam;
+    beam.scale.y = hgt - 0.5;
+    beam.position.y = -(hgt - 0.5) / 2;
+    scanLight.intensity = 900 * rng(sc, 0, 0.3) * (1 - caught);
+    scanner.scale.setScalar(1 - caught * 0.9);
+  }
+  if (show(catchCard, rng(caught, 0.2, 1) * (A.v === 'fill' && B.v === 'fill' ? 0 : 1), catchCard.pos, cam.quaternion)) catchCard.g.position.y += Math.sin(now / 900) * 1;
+
+  // notes get pinned one after another, flying in from the desk
+  const wall = g('wall');
+  pins.forEach((c, i) => {
+    const a = clamp(wall * 1.6 - i * 0.05);
+    const on = show(c, ss(clamp(a * 3)), _t.copy(c.home).add(V(0, 0, (1 - ss(a)) * 40)));
+    if (!on) { c.pin.visible = false; return; }
+    c.g.quaternion.setFromEuler(_e.set((1 - ss(a)) * -0.6, 0, c.rz));
+    c.pin.visible = a > 0.95;
+    c.pin.position.set(c.home.x, c.home.y + c.h * c.scale / 2 - 2.5, WALL_Z + 2.8);
+  });
+
+  let ch = '';
+  for (const [a, b, s] of CHAP) if (p >= a && p < b) ch = s;
+  if (ch !== lastChap) { if (ch) chap.innerHTML = ch; chap.style.opacity = ch ? 1 : 0; lastChap = ch; }
+  const label = p < 0.12 ? 'Intro' : p < 0.52 ? 'Bug hunt' : p < 0.68 ? 'Wall of wins' : p > 0.92 ? 'Say hello' : 'Portfolio';
+  if (label !== lastWhere) { where.textContent = label; lastWhere = label; }
+
+  showOv(heroOv, 1 - rng(p, 0.015, 0.06));
+  showOv(endOv, rng(p, 0.92, 0.97));
+  topEl.style.opacity = free.toFixed(3);
+  topEl.style.visibility = free < 0.02 ? 'hidden' : 'visible';
+  where.style.opacity = (1 - rng(p, 0.92, 0.97)).toFixed(3);
+  bar.style.width = (p * 100).toFixed(2) + '%';
+
+  gl.render(scene, cam);
+  css.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+
+$('[data-top]').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+layout();
+let rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+document.fonts?.ready.then(layout);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

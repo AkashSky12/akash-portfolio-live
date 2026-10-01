@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Akash Simon — The Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--wall:#f2efe9;--paper:#fffdf9;--ink:#141414;--ink2:#55524c;--ink3:#97928a;--red:#e63b2e;--line:rgba(20,20,20,.12);--sans:"Archivo",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{background:var(--wall);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:var(--mono)}
+
+/* fixed 3D world */
+.world{position:fixed;inset:0;perspective:900px;perspective-origin:50% 46%;overflow:hidden;background:radial-gradient(80% 60% at 50% 45%,#fbf9f5 0%,var(--wall) 60%,#e6e1d8 100%)}
+.cam{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.rib{position:absolute;left:50%;top:46%;border:1px solid rgba(20,20,20,.13);transform-style:preserve-3d}
+.rib.r{border-color:rgba(230,59,46,.55)}
+.rail{position:absolute;left:50%;top:46%;width:1px;background:linear-gradient(rgba(20,20,20,.18),rgba(20,20,20,0));transform-origin:top center}
+.ex{position:absolute;left:50%;top:46%;will-change:transform,opacity;backface-visibility:hidden}
+.ex>.f{transform:translate(-50%,-50%)}
+
+/* exhibit styles */
+.plate{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.plate b{color:var(--red);font-weight:500}
+.hero-f{width:min(1100px,90vw);text-align:center}
+.hero-f h1{font-size:clamp(56px,10vw,170px);font-weight:900;letter-spacing:-.055em;line-height:.86;text-transform:uppercase}
+.hero-f h1 em{font-style:normal;color:var(--red)}
+.hero-f p{font-size:clamp(16px,1.5vw,20px);color:var(--ink2);max-width:640px;margin:28px auto 0}
+.hero-f .cue{margin-top:40px;font:500 11px var(--mono);letter-spacing:.3em;color:var(--ink3)}
+.card{background:var(--paper);box-shadow:0 1px 0 rgba(0,0,0,.04),0 40px 80px -40px rgba(40,30,20,.35);padding:clamp(26px,3vw,46px)}
+.quote{width:min(820px,86vw)}
+.quote blockquote{font-size:clamp(28px,3.4vw,50px);font-weight:800;letter-spacing:-.035em;line-height:1.08}
+.quote blockquote em{font-style:normal;color:var(--red)}
+.quote p{margin-top:22px;color:var(--ink2);font-size:16px;max-width:620px;line-height:1.6}
+.stats-f{width:min(980px,90vw);background:var(--red);color:#fff}
+.stats-f .plate{color:rgba(255,255,255,.75)}.stats-f .plate b{color:#fff}
+.stats-f .g{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:10px}
+.stats-f .g div{padding:18px 14px 10px 0;border-top:2px solid rgba(255,255,255,.4)}
+.stats-f .g b{display:block;font-size:clamp(48px,6vw,96px);font-weight:900;letter-spacing:-.06em;line-height:.9}
+.stats-f .g span{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+@media(max-width:700px){.stats-f .g{grid-template-columns:1fr 1fr}}
+.proj{width:min(860px,88vw);display:grid;grid-template-columns:1.3fr 1fr;gap:34px}
+.proj h3{font-size:clamp(26px,3vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.02}
+.proj p{color:var(--ink2);margin-top:16px;font-size:15.5px;line-height:1.6}
+.proj .side{border-left:2px solid var(--ink);padding-left:24px;display:flex;flex-direction:column}
+.proj .m{font-size:clamp(56px,6vw,96px);font-weight:900;letter-spacing:-.06em;line-height:.85;color:var(--red)}
+.proj .ml{font-size:14px;color:var(--ink2);margin-top:8px}
+.proj .tags{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:20px}
+.tag{font:500 11.5px var(--mono);padding:5px 9px;border:1px solid var(--ink);white-space:nowrap}
+@media(max-width:700px){.proj{grid-template-columns:1fr}.proj .side{border-left:0;padding-left:0;border-top:2px solid var(--ink);padding-top:16px}}
+.exp-f{width:min(920px,90vw);background:var(--ink);color:#f2efe9}
+.exp-f .plate{color:#8d887f}
+.exp-f h3{font-size:clamp(28px,3.4vw,48px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.exp-f .row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:16px 0;border-top:1px solid rgba(255,255,255,.14)}
+.exp-f .row:first-of-type{margin-top:22px}
+.exp-f .yr{font:500 12px var(--mono);color:#a29d93;padding-top:3px}
+.exp-f .yr b{display:block;color:var(--red);font-weight:500}
+.exp-f .rl{font-weight:700;font-size:17px;letter-spacing:-.01em}
+.exp-f .co{font-size:14px;color:#c9c4ba}
+.exp-f .hl{font-size:13.5px;color:#a29d93;margin-top:4px}
+@media(max-width:700px){.exp-f .row{grid-template-columns:1fr;gap:4px}.exp-f .hl{display:none}}
+.skills-f{width:min(960px,90vw)}
+.skills-f h3{font-size:clamp(28px,3.4vw,48px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.skills-f .g{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 30px;margin-top:24px}
+.skills-f .g b{display:block;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.skills-f .g b i{font-style:normal;color:var(--red);margin-right:6px}
+.skills-f .g div div{display:flex;flex-wrap:wrap;gap:5px}
+@media(max-width:700px){.skills-f .g{grid-template-columns:1fr}.skills-f .g>div:nth-child(n+5){display:none}}
+.aw-f{width:min(1000px,90vw);display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.aw-f .a{background:var(--paper);padding:22px;box-shadow:0 30px 60px -36px rgba(40,30,20,.4);border-top:4px solid var(--red)}
+.aw-f .a .y{font:500 11px var(--mono);color:var(--ink3)}
+.aw-f .a h4{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:10px 0 4px}
+.aw-f .a small{font:500 11px var(--mono);color:var(--red)}
+.aw-f .a p{font-size:13px;color:var(--ink2);margin-top:10px;line-height:1.5}
+.aw-f .cr{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.aw-f .cr span{font:500 11.5px var(--mono);background:var(--ink);color:#f2efe9;padding:7px 11px}
+.aw-f .cr span i{font-style:normal;color:#ffb3ab}
+@media(max-width:800px){.aw-f{grid-template-columns:1fr 1fr}.aw-f .a p{display:none}}
+.ct-f{width:min(960px,90vw);background:var(--red);color:#fff;text-align:center}
+.ct-f h2{font-size:clamp(48px,8vw,128px);font-weight:900;letter-spacing:-.06em;line-height:.88;text-transform:uppercase}
+.ct-f p{max-width:560px;margin:20px auto 0;opacity:.9}
+.ct-f .links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
+.ct-f .links a{font:500 13px var(--mono);padding:12px 16px;border:1.5px solid #fff;transition:background .3s,color .3s}
+.ct-f .links a:hover{background:#fff;color:var(--red)}
+.ct-f .links a.p{background:#fff;color:var(--red)}
+.ct-f .seg{display:inline-flex;margin-top:26px;border:1.5px solid #fff}
+.ct-f .seg button{padding:8px 16px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.ct-f .seg button.on{background:#fff;color:var(--red)}
+
+/* HUD */
+.hud{position:fixed;z-index:10;pointer-events:none}
+.hud *{pointer-events:auto}
+.top{inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:22px 28px}
+.logo{font-weight:900;letter-spacing:-.04em;font-size:20px;text-transform:uppercase}
+.logo i{font-style:normal;color:var(--red)}
+.top a.cta{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;background:var(--ink);color:#fff}
+.bot{inset:auto 0 0;display:flex;justify-content:space-between;align-items:flex-end;padding:22px 28px}
+.room{font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.room b{display:block;font:900 44px var(--sans);letter-spacing:-.05em;color:var(--ink);line-height:1;margin-bottom:6px}
+.bar{width:220px;height:3px;background:var(--line);margin-top:12px;position:relative}
+.bar i{position:absolute;inset:0;background:var(--red);transform-origin:left;transform:scaleX(0)}
+.map{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.map button{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);display:flex;gap:10px;align-items:center;transition:color .3s}
+.map button i{width:16px;height:2px;background:currentColor;transition:width .4s var(--ease)}
+.map button.on{color:var(--red)}
+.map button.on i{width:34px}
+@media(max-width:800px){.map{display:none}.room b{font-size:32px}.bar{width:140px}}
+</style>
+</head>
+<body>
+<div class="world" id="world"><div class="cam" id="cam"></div></div>
+
+<div class="hud top"><a href="#" class="logo" data-go="0">Akash<i>.</i>Simon</a><a class="cta" href="#" data-go="10">Get in touch</a></div>
+<div class="hud bot">
+  <div class="room"><b id="roomNo">00</b><span id="roomName">Entrance</span><div class="bar"><i id="bar"></i></div></div>
+  <div class="map" id="map"></div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = t => t * t * (3 - 2 * t);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = s => document.querySelector(s);
+
+/* content from the repo's src/components/sections */
+const works = [
+  ['GenAI · Domino\'s','GenAI-powered QA agent infrastructure, built from zero.','Custom agents for test case generation, synthetic data creation and exploratory workflows — integrated into the sprint flow.','~40%','less manual test authoring per sprint',['Playwright (Python)','GenAI agents','Synthetic data']],
+  ['Accessibility · Domino\'s EU','WCAG 2.1 AA, enforced in the CI pipeline.','Axe-core engineered into Playwright so violations surface in CI as first-class defects across European web properties.','AA','WCAG 2.1 compliance in CI',['Axe-core','Playwright','GitHub Actions']],
+  ['Framework · Quinta / Siemens','One hybrid framework for web, Android and iOS.','Selenium (Java), TestNG and Appium architected from scratch — with full ownership of CI/CD quality gates and post-launch sign-off.','6 wks','sole E2E ownership · Client Appreciation Award',['Selenium','TestNG','Appium','Jenkins']],
+  ['Blockchain healthcare · Solve.Care','Automation for a live patient-facing platform.','Selenium + TestNG with TestRail and Jira, blockchain API contract testing and BMI, heart-rate and ECG device validation.','300+','automated test cases in 3 sprints',['TestRail','Jira','API contracts']]
+];
+const jobs = [
+  ['Aug 2023','Present','Software Quality Engineer',"Domino's Pizza Enterprises · Kuala Lumpur",'GenAI QA agents, Axe-core accessibility, GitHub Actions CI/CD, 12+ platforms.'],
+  ['Apr 2022','Aug 2023','Senior Automation QA Engineer','Solve.Care · Bangalore','Selenium + TestNG framework, blockchain API testing, led a QA team of 10.'],
+  ['Oct 2017','Mar 2022','Senior Test Engineer','Quinta Systems · Bangalore','Hybrid web + mobile framework, Siemens engagement, Scrum Master for QA.'],
+  ['Feb 2017','Sep 2017','Application Support Engineer','Pole To Win International · Bangalore','Structured testing for Rockstar titles, TestRail repositories.']
+];
+const skills = [
+  ['Automation',['Playwright (Python)','Selenium (Java)','Appium','WebDriverIO','REST Assured','TestNG','Cucumber']],
+  ['AI & GenAI',['Custom GenAI QA agent','AI-driven automation','Prompt engineering']],
+  ['Accessibility',['Axe-core','WCAG 2.1 AA','Playwright-Axe']],
+  ['CI/CD & DevOps',['GitHub Actions','Jenkins','Git','Pipelines']],
+  ['API & Integration',['Postman','Swagger','Contract testing','Blockchain APIs']],
+  ['Test Management',['Jira','TestRail','Shift-left','Risk assessment']],
+  ['Databases',['MySQL','PostgreSQL','Data validation']]
+];
+const awards = [['2025','Best Sprinter',"Domino's",'Release and UAT coordination across 12+ markets.'],['2023','Best Team Player','Solve.Care','300+ automated tests in 3 sprints.'],['2021','Best Employee','Quinta Systems','Best-structured QA practices across platforms.'],['2020','Client Appreciation','Quinta · Siemens','Sole E2E automation in a 6-week deadline.']];
+const contacts = {
+  MY:[['Email','mailto:akash.simon@outlook.com'],['WhatsApp +60','https://wa.me/60127474204'],['LinkedIn','https://www.linkedin.com/in/akash-simon/'],['GitHub','https://github.com/Akash-Pilot/']],
+  IN:[['Email','mailto:akash.simon@outlook.com'],['WhatsApp +91','https://wa.me/918105844868'],['LinkedIn','https://www.linkedin.com/in/akash-simon/'],['GitHub','https://github.com/Akash-Pilot/']]
+};
+
+/* exhibits: [name, side(-1 left, 0 centre, 1 right), html] */
+const plate = (n, t) => `<div class="plate"><b>Room ${String(n).padStart(2, '0')}</b><span>${t}</span></div>`;
+const ex = [
+  ['Entrance', 0, `<div class="hero-f"><div class="plate" style="justify-content:center"><b>●</b><span>QA Lead &amp; GenAI Automation Engineer · Available for senior roles</span></div><h1>Akash<br><em>Simon</em></h1><p>Building reliable software through automation &amp; AI — nearly 10 years in automation architecture, API testing and Agile quality delivery.</p><div class="cue">SCROLL TO WALK IN ↓</div></div>`],
+  ['Philosophy', -1, `<div class="card quote">${plate(1, 'Philosophy')}<blockquote>“I don't just find bugs — I architect systems that <em>prevent</em> them.”</blockquote><p>And now I build AI agents that redefine how testing happens. Quality programmes across blockchain healthcare, enterprise software and food-tech — with a Siemens client appreciation award and three internal excellence awards.</p></div>`],
+  ['By the numbers', 1, `<div class="card stats-f">${plate(2, 'By the numbers')}<div class="g"><div><b>10+</b><span>Years in QA</span></div><div><b>12+</b><span>Countries / regions</span></div><div><b>40%</b><span>Authoring cut</span></div><div><b>10+</b><span>Engineers led</span></div></div></div>`],
+  ...works.map((w, i) => [`Work 0${i + 1}`, i % 2 ? -1 : 1, `<div class="card proj"><div>${plate(3 + i, esc(w[0]))}<h3>${esc(w[1])}</h3><p>${esc(w[2])}</p></div><div class="side"><div class="m">${esc(w[3])}</div><div class="ml">${esc(w[4])}</div><div class="tags">${w[5].map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div></div>`]),
+  ['Experience', 1, `<div class="card exp-f">${plate(7, 'Experience')}<h3>Nearly a decade of quality engineering.</h3>${jobs.map(j => `<div class="row"><div class="yr"><b>${esc(j[0])}</b>— ${esc(j[1])}</div><div><div class="rl">${esc(j[2])}</div><div class="co">${esc(j[3])}</div><div class="hl">${esc(j[4])}</div></div></div>`).join('')}</div>`],
+  ['Toolkit', -1, `<div class="card skills-f">${plate(8, 'Skills &amp; technology')}<h3>A battle-tested toolkit.</h3><div class="g">${skills.map(([t, tags], i) => `<div><b><i>0${i + 1}</i>${esc(t)}</b><div>${tags.map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div></div>`).join('')}</div></div>`],
+  ['Recognition', 0, `<div class="aw-f">${awards.map(a => `<div class="a"><div class="y">${a[0]}</div><h4>${esc(a[1])}</h4><small>${esc(a[2])}</small><p>${esc(a[3])}</p></div>`).join('')}<div class="cr"><span><i>✓</i> ISTQB Foundation</span><span><i>✓</i> AI Fundamentals</span><span><i>◐</i> ISTQB Advanced — Test Manager</span><span><i>✓</i> B.E. Computer Science · VTU</span></div></div>`],
+  ['Contact', 0, `<div class="card ct-f"><div class="plate" style="justify-content:center"><b style="color:#fff">Exit</b><span style="color:rgba(255,255,255,.8)">Contact</span></div><h2>Let's work<br>together.</h2><p>Open to senior QA architect, automation lead or AI-augmented testing roles globally. I respond within 24 hours.</p><div class="seg" id="seg"><button class="on" data-c="MY">Malaysia</button><button data-c="IN">India</button></div><div class="links" id="links"></div></div>`]
+];
+const N = ex.length, D = 1500;
+
+/* build corridor */
+const cam = $('#cam');
+let ribs = '';
+for (let k = 0; k < N * 3 + 6; k++) {
+  const z = -k * (D / 3) + 700;
+  const red = k % 3 === 0 && k > 0 && k / 3 <= N - 1;
+  ribs += `<div class="rib${red ? ' r' : ''}" data-z="${z}"></div>`;
+}
+const rails = [-1, -.5, 0, .5, 1].map(f => `<div class="rail" data-f="${f}"></div>`).join('');
+cam.innerHTML = ribs + rails + ex.map(([n, s, h], i) => `<div class="ex" data-i="${i}" data-s="${s}" aria-label="${esc(n)}"><div class="f">${h}</div></div>`).join('');
+const exEls = [...cam.querySelectorAll('.ex')], ribEls = [...cam.querySelectorAll('.rib')], railEls = [...cam.querySelectorAll('.rail')];
+
+const layoutTube = () => {
+  const W = innerWidth * 1.15, H = innerHeight * 1.05;
+  ribEls.forEach(r => { r.style.width = W + 'px'; r.style.height = H + 'px'; r.style.transform = `translate(-50%,-50%) translateZ(${r.dataset.z}px)`; });
+  const L = N * D + 2000;
+  railEls.forEach(r => { r.style.height = L + 'px'; r.style.transform = `translate(${+r.dataset.f * W / 2}px, ${H / 2}px) translateZ(700px) rotateX(-90deg)`; });
+};
+layoutTube(); addEventListener('resize', layoutTube);
+
+/* links */
+const renderLinks = c => { $('#links').innerHTML = contacts[c].map(([k, h], i) => `<a class="${i ? '' : 'p'}" href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(k)} ↗</a>`).join(''); };
+renderLinks('MY');
+document.querySelectorAll('#seg button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderLinks(b.dataset.c); }));
+
+/* scroll length + room map */
+const STEP = 1.25;
+const setHeight = () => document.body.style.height = ((N - 1) * STEP + 1) * innerHeight + 'px';
+setHeight(); addEventListener('resize', setHeight);
+const go = i => scrollTo({ top: i * STEP * innerHeight + 2, behavior: 'smooth' });
+$('#map').innerHTML = ex.map(([n], i) => `<button data-go="${i}">${esc(n)}<i></i></button>`).join('');
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); go(+b.dataset.go); }));
+const mapBtns = [...document.querySelectorAll('#map button')];
+
+let mx = 0, my = 0, cmx = 0, cmy = 0, last = -1;
+addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; });
+function frame() {
+  const vw = innerWidth;
+  const raw = scrollY / (innerHeight * STEP), base = Math.floor(raw), fr = raw - base;
+  // dwell in front of each exhibit, then glide to the next
+  const pos = Math.min(N - 1, base + ss(clamp((fr - .35) / .65)));
+  cmx += (mx - cmx) * .06; cmy += (my - cmy) * .06;
+  cam.style.transform = `rotateY(${cmx * 6}deg) rotateX(${-cmy * 4}deg) translateZ(${pos * D}px)`;
+  exEls.forEach((e, i) => {
+    const z = -i * D + pos * D, side = +e.dataset.s, ahead = clamp(-z / D);
+    const x = side * ahead * Math.min(vw * .26, 380);
+    e.style.transform = `translate3d(${x}px,${ahead * -30}px,${-i * D}px) rotateY(${-side * ahead * 22}deg)`;
+    e.style.opacity = z > 0 ? clamp(1 - z / (D * .3)) : clamp(1 + z / (D * 1.15));
+    e.style.visibility = z > D * .3 || z < -D * 1.15 ? 'hidden' : 'visible';
+    e.style.pointerEvents = Math.abs(z) < 250 ? 'auto' : 'none';
+  });
+  const cur = Math.round(pos);
+  if (cur !== last) {
+    last = cur;
+    $('#roomNo').textContent = String(cur).padStart(2, '0');
+    $('#roomName').textContent = ex[cur][0];
+    mapBtns.forEach((b, i) => b.classList.toggle('on', i === cur));
+  }
+  $('#bar').style.transform = `scaleX(${pos / (N - 1)})`;
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); go(Math.min(N - 1, last + 1)); } if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(Math.max(0, last - 1)); } });
+})();
+</script>
+</body>
+</html>

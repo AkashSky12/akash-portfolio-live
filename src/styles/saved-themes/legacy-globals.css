@@ -1,0 +1,1562 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Theme tokens — every color is an "R G B" tuple so Tailwind's
+   alpha modifiers (bg-bg/80, border-line/40 …) continue to work
+   via rgb(var(--xx) / <alpha-value>) in tailwind.config.js.
+   Default = dark. [data-theme="light"] overrides at the end.
+   ───────────────────────────────────────────────────────────── */
+:root,
+:root[data-theme='dark'] {
+  /* noon.ai — neutral pure-black canvas, warm golden glow, off-white text */
+  --bg:          6 6 7;          /* near-pure black, neutral */
+  --bg-raised:   14 14 16;       /* lifted panel */
+  --bg-elevated: 22 22 26;       /* card / elevated chrome */
+  --surface-1:   255 255 255;    /* neutral white tint for low-alpha chrome */
+  --ink:         224 224 228;    /* body copy, soft neutral white */
+  --ink-high:    246 246 247;    /* headings — noon's #f6f6f7 */
+  --ink-muted:   138 140 147;    /* secondary grey */
+  --ink-subtle:  84 86 91;       /* tertiary — noon's #54565b */
+  --accent:      255 165 31;     /* noon golden glow #ffa51f */
+  --accent-bright: 255 209 64;   /* bright yellow-gold #ffd140 */
+  --accent-dark: 224 106 0;      /* deep orange #e06a00 */
+  --accent-ink:  20 12 0;        /* readable text on gold fills */
+  --line:        255 255 255;    /* neutral white low-alpha rules */
+  --line-strong: 255 255 255;
+  --grid:        255 255 255;
+  --scheme: dark;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* noon.ai light — clean neutral paper with golden accent */
+  --bg:          250 250 251;    /* near-white paper */
+  --bg-raised:   244 244 245;    /* slightly deeper */
+  --bg-elevated: 255 255 255;    /* lifted card */
+  --surface-1:   0 0 0;          /* neutral ink for low-alpha chrome */
+  --ink:         60 62 68;       /* body copy */
+  --ink-high:    12 12 14;       /* headings, near-black */
+  --ink-muted:   110 112 120;    /* secondary */
+  --ink-subtle:  150 152 160;    /* tertiary */
+  --accent:      200 120 0;      /* gold, AA-safe on white */
+  --accent-bright: 240 170 20;   /* bright gold highlight */
+  --accent-dark: 150 80 0;       /* deep amber */
+  --accent-ink:  255 255 255;    /* readable on gold fills */
+  --line:        0 0 0;          /* neutral ink for low-alpha rules */
+  --line-strong: 0 0 0;
+  --grid:        0 0 0;
+  --scheme: light;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: rgb(var(--bg));
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-family: var(--font-sans), 'Sora', system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display), 'Sora', system-ui, sans-serif;
+  letter-spacing: -0.025em;
+  color: rgb(var(--ink-high));
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.28);
+  color: rgb(var(--ink-high));
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--surface-1) / 0.08);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--accent) / 0.45);
+  background-clip: padding-box;
+}
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background: rgb(var(--accent));
+  color: rgb(var(--accent-ink));
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+@layer components {
+  .eyebrow {
+    @apply inline-block text-[40px] font-black uppercase tracking-[0.16em] text-accent;
+  }
+
+  .heading-xl {
+    font-size: clamp(2.7rem, 7.4vw, 5.8rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .heading-lg {
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+  }
+
+  /* Progressive enhancement: gracefully ignored where unsupported */
+  @supports (text-wrap: balance) {
+    .text-balance { text-wrap: balance; }
+  }
+  @supports (text-wrap: pretty) {
+    .text-pretty  { text-wrap: pretty; }
+  }
+
+  .accent-text {
+    background: linear-gradient(135deg,
+      rgb(var(--accent-bright)) 0%,
+      rgb(var(--accent)) 40%,
+      rgb(var(--accent-dark)) 70%,
+      rgb(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 24px rgb(var(--accent) / 0.65));
+  }
+
+  /* Theme-aware low-tint surface used by cards/inputs/icon buttons. */
+  .surface-1 {
+    background-color: rgb(var(--surface-1) / 0.04);
+  }
+  .surface-1-hover:hover {
+    background-color: rgb(var(--surface-1) / 0.07);
+  }
+
+  .glass-card {
+    position: relative;
+    background: linear-gradient(180deg,
+      rgb(var(--surface-1) / 0.05) 0%,
+      rgb(var(--surface-1) / 0.02) 100%);
+    border: 1px solid rgb(var(--line) / 0.10);
+    border-radius: 16px;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease,
+                box-shadow 0.4s ease;
+    box-shadow: 0 1px 0 0 rgb(var(--surface-1) / 0.05) inset,
+                0 24px 48px -24px rgb(0 0 0 / 0.5);
+    will-change: transform;
+  }
+  :root[data-theme='light'] .glass-card {
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.6) inset,
+                0 12px 32px -16px rgb(15 23 42 / 0.10);
+  }
+  @media (hover: hover) {
+    .glass-card:hover {
+      border-color: rgb(var(--accent) / 0.42);
+      transform: translateY(-2px);
+      box-shadow: 0 1px 0 0 rgb(var(--surface-1) / 0.05) inset,
+                  0 32px 60px -24px rgb(0 0 0 / 0.6),
+                  0 0 48px -12px rgb(var(--accent) / 0.32);
+    }
+    :root[data-theme='light'] .glass-card:hover {
+      box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.7) inset,
+                  0 18px 42px -20px rgb(15 23 42 / 0.18);
+    }
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-[12px] text-ink-muted transition-colors;
+    border: 1px solid rgb(var(--line) / 0.10);
+    background-color: rgb(var(--surface-1) / 0.04);
+  }
+  .chip:hover {
+    @apply border-accent/40 bg-accent/10 text-accent;
+  }
+
+  .chip--accent {
+    @apply px-3.5 py-1.5 text-[12.5px] font-semibold text-accent;
+    border-color: rgb(var(--accent) / 0.30);
+    background-color: rgb(var(--accent) / 0.08);
+  }
+  .chip--accent:hover {
+    @apply border-accent bg-accent/15 text-accent;
+  }
+
+  /* "In Progress" credential badge — amber, readable in both themes. */
+  .status-progress {
+    background-color: rgb(245 158 11 / 0.12);
+    color: rgb(252 211 77);
+    box-shadow: inset 0 0 0 1px rgb(251 191 36 / 0.25);
+  }
+  :root[data-theme='light'] .status-progress {
+    background-color: rgb(217 119 6 / 0.12);
+    color: rgb(180 83 9);
+    box-shadow: inset 0 0 0 1px rgb(217 119 6 / 0.4);
+  }
+
+  /* GitHub brand icon — matches LinkedIn glow pattern; light glyph on dark theme, ink glyph on light theme. */
+  .brand-github-icon {
+    border: 1px solid rgb(240 246 252 / 0.4);
+    background-color: rgb(240 246 252 / 0.08);
+    color: rgb(240 246 252);
+    box-shadow: 0 0 18px rgba(240, 246, 252, 0.6);
+    transition: all 0.3s ease;
+  }
+  .group\/icon:hover .brand-github-icon {
+    transform: scale(1.1);
+    border-color: rgb(240 246 252);
+    background-color: rgb(240 246 252 / 0.25);
+    box-shadow: 0 0 65px rgba(240, 246, 252, 1), 0 0 110px rgba(240, 246, 252, 0.75), 0 0 150px rgba(240, 246, 252, 0.45);
+  }
+  :root[data-theme='light'] .brand-github-icon {
+    border-color: rgb(36 41 47 / 0.4);
+    background-color: rgb(36 41 47 / 0.08);
+    color: rgb(36 41 47);
+    box-shadow: 0 0 18px rgb(36 41 47 / 0.6);
+  }
+  :root[data-theme='light'] .group\/icon:hover .brand-github-icon {
+    transform: scale(1.1);
+    border-color: rgb(36 41 47);
+    background-color: rgb(36 41 47 / 0.25);
+    box-shadow: 0 0 65px rgb(36 41 47 / 1), 0 0 110px rgb(36 41 47 / 0.75), 0 0 150px rgb(36 41 47 / 0.45);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all;
+    position: relative;
+    overflow: hidden;
+    color: rgb(var(--accent-ink));
+    background: linear-gradient(135deg, rgb(var(--accent-bright)) 0%, rgb(var(--accent)) 55%, rgb(var(--accent-dark)) 100%);
+    box-shadow: 0 8px 28px -8px rgb(var(--accent) / 0.65),
+                0 0 0 1px rgb(var(--accent-bright) / 0.30) inset;
+    min-height: 44px;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.22) 50%, transparent 100%);
+    transform: skewX(-18deg);
+    animation: btn-shine 3.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 44px -8px rgb(var(--accent) / 0.80),
+                0 0 24px -4px rgb(var(--accent-bright) / 0.40),
+                0 0 0 1px rgb(var(--accent-bright) / 0.40) inset;
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ink-high transition-all;
+    border: 1px solid rgb(var(--line) / 0.12);
+    min-height: 44px;
+  }
+  .btn-ghost:hover {
+    @apply text-accent;
+    border-color: rgb(var(--accent) / 0.5);
+    transform: translateY(-2px);
+  }
+  .btn-ghost:active { transform: scale(0.97); }
+
+  .section {
+    @apply relative py-16 sm:py-20 lg:py-24;
+    /* Skip rendering/painting sections while they're far off-screen — big win
+       on lower-end GPUs and long pages. `auto` remembers real size after first
+       paint, so in-page anchors and scroll position stay stable. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgb(var(--grid) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--grid) / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.45;
+  will-change: transform;
+  animation: aurora 22s ease-in-out infinite;
+  contain: layout style;
+}
+:root[data-theme='light'] .aurora-blob { opacity: 0.38; }
+
+.aurora-blob--primary {
+  top: -18%;
+  right: -22%;
+  width: 56vw;
+  height: 56vw;
+  background: radial-gradient(circle at 35% 35%,
+    rgb(var(--accent-bright) / 0.32) 0%,
+    rgb(var(--accent) / 0.22) 38%,
+    transparent 65%);
+}
+
+.aurora-blob--secondary {
+  bottom: -22%;
+  left: -15%;
+  width: 44vw;
+  height: 44vw;
+  background: radial-gradient(circle at 65% 65%, rgb(var(--accent-dark) / 0.36) 0%, transparent 60%);
+  animation-delay: -8s;
+}
+
+.aurora-blob--glow {
+  top: 5%;
+  left: 15%;
+  width: 65vw;
+  height: 45vw;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgb(var(--accent) / 0.11) 0%,
+    rgb(var(--accent-bright) / 0.06) 40%,
+    transparent 70%);
+  filter: blur(60px);
+  opacity: 1;
+  animation-delay: -14s;
+}
+
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(6%, -4%) scale(1.05); }
+  66%      { transform: translate(-4%, 6%) scale(0.97); }
+}
+
+/* ── Site-wide ambient background (noon.ai living canvas) ─────────────────
+   Fixed behind all content: flowing line-waves + a soft warm glow so every
+   section feels alive — not flat black. */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 6%, rgb(var(--accent) / 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 82% 100%, rgb(var(--accent-dark) / 0.07) 0%, transparent 60%);
+}
+
+/* Line-waves — flowing contour field that drifts horizontally on scroll.
+   Per-line --wave-* vars are set from scroll position in LineWaves.tsx. */
+.line-waves {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(ellipse 78% 72% at 50% 44%, #000 28%, transparent 86%);
+  mask-image: radial-gradient(ellipse 78% 72% at 50% 44%, #000 28%, transparent 86%);
+}
+.line-waves svg { display: block; width: 100%; height: 100%; }
+.wave-field {
+  transform-origin: center;
+  animation: wave-bob 15s ease-in-out infinite;
+}
+.wave-a { transform: translateX(var(--wave-a, 0px)); }
+.wave-b { transform: translateX(var(--wave-b, 0px)); }
+.wave-c { transform: translateX(var(--wave-c, 0px)); }
+.wave-d { transform: translateX(var(--wave-d, 0px)); }
+.wave-e { transform: translateX(var(--wave-e, 0px)); }
+/* One compositing layer per speed group — the browser caches each raster and just translates it. */
+.wave-layer { will-change: transform; }
+/* Glowing depth dots riding the contour lines — drift on scroll via the speed class. */
+.wave-dot {
+  fill: rgb(var(--accent));
+  stroke: none;
+  animation: wave-dot-pulse 4.2s ease-in-out infinite;
+}
+@keyframes wave-dot-pulse {
+  0%, 100% { opacity: calc(var(--dot-op, 0.8) * 0.5); }
+  50%      { opacity: var(--dot-op, 0.8); }
+}
+@keyframes wave-bob {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50%      { transform: translateY(-14px) scaleY(1.03); }
+}
+
+/* Neon-style flickering white text glow. */
+.glow-blink {
+  animation: glow-flicker 3s steps(1, end) infinite;
+}
+@keyframes glow-flicker {
+  0%, 100%   { text-shadow: 0 0 22px rgba(255,255,255,0.95), 0 0 46px rgba(255,255,255,0.6), 0 0 78px rgba(255,255,255,0.35); }
+  3%, 7%     { text-shadow: 0 0 6px rgba(255,255,255,0.25); }
+  5%         { text-shadow: 0 0 22px rgba(255,255,255,0.95), 0 0 46px rgba(255,255,255,0.6); }
+  20%        { text-shadow: 0 0 4px rgba(255,255,255,0.15); }
+  22%, 40%   { text-shadow: 0 0 22px rgba(255,255,255,0.95), 0 0 46px rgba(255,255,255,0.6), 0 0 78px rgba(255,255,255,0.35); }
+  42%        { text-shadow: 0 0 6px rgba(255,255,255,0.2); }
+  44%, 62%   { text-shadow: 0 0 22px rgba(255,255,255,0.95), 0 0 46px rgba(255,255,255,0.6); }
+  63%        { text-shadow: 0 0 3px rgba(255,255,255,0.12); }
+  65%, 82%   { text-shadow: 0 0 22px rgba(255,255,255,0.95), 0 0 46px rgba(255,255,255,0.6), 0 0 78px rgba(255,255,255,0.35); }
+  84%        { text-shadow: 0 0 6px rgba(255,255,255,0.2); }
+  86%        { text-shadow: 0 0 22px rgba(255,255,255,0.95), 0 0 46px rgba(255,255,255,0.6); }
+}
+
+/* Drifting lime glow blobs — flammini's living-canvas background */
+.ambient-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+  contain: layout style;
+}
+:root[data-theme='light'] .ambient-blob { opacity: 0.32; }
+.ambient-blob--a {
+  top: -12%;
+  left: -10%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle at 40% 40%,
+    rgb(var(--accent) / 0.30) 0%, rgb(var(--accent) / 0.06) 45%, transparent 70%);
+  animation: ambientA 26s ease-in-out infinite;
+}
+.ambient-blob--b {
+  bottom: -16%;
+  right: -12%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle at 60% 60%,
+    rgb(var(--accent-dark) / 0.26) 0%, rgb(var(--accent-dark) / 0.05) 48%, transparent 72%);
+  animation: ambientB 32s ease-in-out infinite;
+}
+.ambient-blob--c {
+  top: 38%;
+  left: 52%;
+  width: 34vw;
+  height: 34vw;
+  background: radial-gradient(circle at 50% 50%,
+    rgb(var(--accent-bright) / 0.18) 0%, transparent 68%);
+  animation: ambientC 24s ease-in-out infinite;
+}
+
+/* Faint drifting grid overlay */
+.ambient-grid {
+  position: absolute;
+  inset: -2px;
+  background-image:
+    linear-gradient(rgb(var(--grid) / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--grid) / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 88% 80% at 50% 40%, #000 35%, transparent 88%);
+  mask-image: radial-gradient(ellipse 88% 80% at 50% 40%, #000 35%, transparent 88%);
+  animation: ambientGrid 40s linear infinite;
+}
+
+@keyframes ambientA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(6vw, 4vh) scale(1.08); }
+}
+@keyframes ambientB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-5vw, -4vh) scale(1.06); }
+}
+@keyframes ambientC {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50%      { transform: translate(-46%, -54%) scale(1.12); opacity: 1; }
+}
+@keyframes ambientGrid {
+  from { transform: translateY(0); }
+  to   { transform: translateY(64px); }
+}
+
+/* ── Hero gem — glossy faceted lime crystal (flammini signature) ──────────── */
+.hero-gem {
+  position: relative;
+  display: block;
+  height: clamp(270px, 47vh, 500px);
+  width: auto;
+  aspect-ratio: 240 / 320;
+  pointer-events: none;
+  animation: gemFloat 8s ease-in-out infinite;
+  filter: drop-shadow(0 30px 90px rgb(var(--accent) / 0.55));
+}
+.hero-gem svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+.hero-gem-glow {
+  position: absolute;
+  inset: -34%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgb(var(--accent) / 0.5) 0%,
+    rgb(var(--accent) / 0.14) 36%,
+    transparent 68%);
+  filter: blur(48px);
+  animation: gemGlow 6s ease-in-out infinite;
+}
+.gem-body {
+  transform-origin: 120px 160px;
+  animation: gemTurn 10s ease-in-out infinite;
+}
+.gem-glint { animation: gemGlint 5.5s ease-in-out infinite; }
+@keyframes gemFloat {
+  0%, 100% { transform: translateY(0) rotate(-1.6deg); }
+  50%      { transform: translateY(-22px) rotate(1.6deg); }
+}
+@keyframes gemTurn {
+  0%, 100% { transform: scaleX(1); }
+  50%      { transform: scaleX(0.9); }
+}
+@keyframes gemGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.08); }
+}
+@keyframes gemGlint {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(360px); }
+}
+
+/* ── Hero (flammini layout) — big bottom headline, floor glow, chevrons ──── */
+.hero-headline {
+  font-size: clamp(2.1rem, 6.2vw, 5.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+/* On-load entrance (not scroll-gated, so the hero always paints) */
+.hero-rise {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: heroRise 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-rise.hr-crystal {
+  transform: translateY(0) scale(0.94);
+  animation-name: heroRiseScale;
+  animation-duration: 1.1s;
+}
+.hr-1 { animation-delay: 0.06s; }
+.hr-2 { animation-delay: 0.18s; }
+.hr-3 { animation-delay: 0.3s; }
+@keyframes heroRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroRiseScale {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-floor-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -16%;
+  width: 80vw;
+  height: 46vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 60% at 50% 100%,
+    rgb(var(--accent) / 0.32) 0%,
+    rgb(var(--accent) / 0.12) 34%,
+    transparent 70%);
+  filter: blur(36px);
+  pointer-events: none;
+  animation: floorGlow 7s ease-in-out infinite;
+}
+@keyframes floorGlow {
+  0%, 100% { opacity: 0.78; transform: translateX(-50%) scaleX(1); }
+  50%      { opacity: 1;    transform: translateX(-50%) scaleX(1.08); }
+}
+.hero-chevrons {
+  animation: chevronPulse 2.4s ease-in-out infinite;
+}
+@keyframes chevronPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(5px); opacity: 1; }
+}
+
+@keyframes btn-shine {
+  0%        { left: -100%; }
+  20%, 100% { left: 150%; }
+}
+
+/* Floating emoji burst for the Download Resume button (bursts downward) */
+.heart-pop {
+  transform: translate(-50%, 0) scale(var(--hs, 1));
+  animation: heart-pop 1.4s ease-out forwards;
+  will-change: transform, opacity;
+}
+@keyframes heart-pop {
+  0%   { transform: translate(-50%, 0) scale(0.2); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--hx, 0px)), 70px) scale(var(--hs, 1)); opacity: 0; }
+}
+
+.sun-halo {
+  position: absolute;
+  top: -35%;
+  right: -28%;
+  width: 85vw;
+  height: 85vw;
+  background: radial-gradient(circle at 60% 40%,
+    rgb(var(--accent-bright) / 0.12) 0%,
+    rgb(var(--accent) / 0.08) 28%,
+    rgb(var(--accent-dark) / 0.04) 48%,
+    transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Apple-style per-element reveals — cinematic blur-clear + scale ───────── */
+.reveal-item,
+.reveal-scale,
+.reveal-left {
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Promote only transform/opacity (cheap). Animating `filter` is one-time;
+     keeping it out of will-change avoids holding a costly blur layer per node. */
+  will-change: transform, opacity;
+}
+.reveal-item  { opacity: 0; transform: translateY(44px);            filter: blur(10px); }
+.reveal-scale { opacity: 0; transform: scale(0.90) translateY(34px); filter: blur(12px); }
+.reveal-left  { opacity: 0; transform: translateX(-44px);           filter: blur(10px); }
+
+.reveal-item.is-visible,
+.reveal-scale.is-visible,
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  /* Release the composited layer once the entrance has played. */
+  will-change: auto;
+}
+
+.stagger-1 { transition-delay:  60ms; }
+.stagger-2 { transition-delay: 130ms; }
+.stagger-3 { transition-delay: 200ms; }
+.stagger-4 { transition-delay: 280ms; }
+.stagger-5 { transition-delay: 360ms; }
+.stagger-6 { transition-delay: 440ms; }
+.stagger-7 { transition-delay: 520ms; }
+.stagger-8 { transition-delay: 600ms; }
+
+/* ── Scroll progress bar ────────────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg,
+    rgb(var(--accent-dark)),
+    rgb(var(--accent)),
+    rgb(var(--accent-bright)));
+  z-index: 200;
+  transition: width 0.12s linear;
+  box-shadow: 0 0 10px rgb(var(--accent) / 0.7);
+  pointer-events: none;
+}
+
+/* ── Cursor ambient glow ────────────────────────────────────────────────── */
+.cursor-glow {
+  position: fixed;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgb(var(--accent) / 0.06) 0%,
+    transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  will-change: left, top;
+  transition: opacity 0.4s ease;
+}
+:root[data-theme='light'] .cursor-glow {
+  background: radial-gradient(circle,
+    rgb(var(--accent) / 0.04) 0%,
+    transparent 65%);
+}
+
+/* ── Hero backdrop (QA test-pipeline network) ──────────────────── */
+.hero-backdrop { -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, transparent 82%); mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 35%, transparent 82%); }
+.hb-edge { stroke-dasharray: 6 7; animation: hb-flow 6s linear infinite; }
+.hb-edge:nth-child(2) { animation-delay: .6s } .hb-edge:nth-child(3) { animation-delay: 1.1s }
+.hb-edge:nth-child(4) { animation-delay: .9s } .hb-edge:nth-child(5) { animation-delay: 1.4s }
+.hb-edge:nth-child(6) { animation-delay: 1.8s } .hb-edge:nth-child(7) { animation-delay: .4s }
+.hb-node { animation: hb-pulse 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.hb-node:nth-child(2n) { animation-delay: .5s } .hb-node:nth-child(3n) { animation-delay: 1.2s } .hb-node:nth-child(4n) { animation-delay: 1.9s }
+.hb-scan { animation: hb-scan 9s ease-in-out infinite; }
+@keyframes hb-flow { to { stroke-dashoffset: -52; } }
+@keyframes hb-pulse { 0%,100% { opacity:.45; transform:scale(1) } 50% { opacity:1; transform:scale(1.8) } }
+@keyframes hb-scan { 0% { transform:translateX(0) } 50% { transform:translateX(1600px) } 100% { transform:translateX(0) } }
+
+/* ── Logo marquee ─────────────────────────────────────────────── */
+.marquee {
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover { animation-play-state: paused; }
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── "Let's talk" CTA ticker (flammini.design signature) ──────────
+   A full-bleed, infinitely scrolling oversized link. Alternates solid
+   and outlined glyphs; speeds up + turns accent on hover. */
+.cta-ticker {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(1.5rem, 4vw, 3rem) 0;
+  border-top: 1px solid rgb(var(--line) / 0.12);
+  border-bottom: 1px solid rgb(var(--line) / 0.12);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.cta-ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: cta-ticker 26s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+.cta-ticker:hover .cta-ticker-track { animation-duration: 11s; }
+.cta-ticker-group {
+  display: flex;
+  align-items: center;
+}
+.cta-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
+  padding: 0 0.5em;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: rgb(var(--ink-high));
+  transition: color 0.35s ease, -webkit-text-stroke-color 0.35s ease;
+}
+.cta-ticker-item--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.4px rgb(var(--ink-high) / 0.45);
+}
+.cta-ticker:hover .cta-ticker-item { color: rgb(var(--accent)); }
+.cta-ticker:hover .cta-ticker-item--outline {
+  color: transparent;
+  -webkit-text-stroke-color: rgb(var(--accent) / 0.8);
+}
+.cta-ticker-arrow {
+  width: 0.62em;
+  height: 0.62em;
+  flex-shrink: 0;
+  transition: transform 0.35s ease;
+}
+.cta-ticker:hover .cta-ticker-arrow { transform: translate(0.1em, -0.1em); }
+@keyframes cta-ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   3D ENGINE — perspective scenes, pointer tilt, parallax depth, the hero stage
+   Pure compositor transforms (rotate / translateZ / scale). Driven by the
+   --par-x/--par-y root vars (set in MotionEffects) and per-element CSS vars.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* A perspective context. Children with translateZ gain real depth. */
+.scene-3d {
+  perspective: 1500px;
+  perspective-origin: 50% 42%;
+}
+
+/* Pointer-tilt surface (see Tilt3D.tsx). */
+.tilt-3d {
+  --rx: 0deg; --ry: 0deg; --tz: 0px; --sc: 1; --mx: 50%; --my: 50%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform:
+    perspective(1100px)
+    rotateX(var(--rx)) rotateY(var(--ry))
+    translateZ(var(--tz)) scale(var(--sc));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tilt-glare::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx) var(--my),
+    rgb(255 255 255 / 0.18) 0%, transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  mix-blend-mode: soft-light;
+  z-index: 2;
+}
+@media (hover: hover) {
+  .tilt-glare:hover::after { opacity: 1; }
+}
+
+/* Mouse-parallax layer. Set --depth (unitless px factor) per element. */
+.parallax {
+  transform: translate3d(
+    calc(var(--par-x, 0) * var(--depth, 0) * 1px),
+    calc(var(--par-y, 0) * var(--depth, 0) * 1px),
+    0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.par-6  { --depth: 6; }
+.par-10 { --depth: 10; }
+.par-14 { --depth: 14; }
+.par-16 { --depth: 16; }
+.par-22 { --depth: 22; }
+
+/* Global card depth — attached to .glass-card by MotionEffects on fine pointers. */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+/* ── Hero 3D stage ───────────────────────────────────────────────────────── */
+.hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1.04;
+  transform-style: preserve-3d;
+}
+
+.stage-orb {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%,
+    rgb(var(--accent-bright) / 0.55) 0%,
+    rgb(var(--accent) / 0.20) 46%,
+    transparent 70%);
+  filter: blur(38px);
+  animation: stageOrb 9s ease-in-out infinite;
+}
+
+.stage-ring {
+  position: absolute;
+  inset: 2%;
+  border-radius: 50%;
+  border: 1px dashed rgb(var(--accent) / 0.30);
+  animation: stageRing 26s linear infinite;
+}
+.stage-ring--2 {
+  inset: 11%;
+  border-style: solid;
+  border-color: rgb(var(--accent) / 0.16);
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+.stage-ring::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: 50%;
+  width: 8px; height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: rgb(var(--accent-bright));
+  box-shadow: 0 0 14px 2px rgb(var(--accent) / 0.8);
+}
+
+.stage-panel {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%) translateZ(28px);
+  padding: 1rem 1.05rem 1.1rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg,
+    rgb(var(--bg-elevated) / 0.92) 0%,
+    rgb(var(--bg-raised) / 0.92) 100%);
+  border: 1px solid rgb(var(--line) / 0.14);
+  box-shadow:
+    0 1px 0 0 rgb(var(--surface-1) / 0.06) inset,
+    0 40px 80px -30px rgb(0 0 0 / 0.7),
+    0 0 60px -20px rgb(var(--accent) / 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+:root[data-theme='light'] .stage-panel {
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.7) inset,
+    0 30px 60px -28px rgb(15 23 42 / 0.28),
+    0 0 50px -22px rgb(var(--accent) / 0.30);
+}
+
+.stage-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgb(var(--surface-1) / 0.18);
+}
+.stage-dot--live { background: rgb(var(--accent)); box-shadow: 0 0 10px rgb(var(--accent) / 0.9); }
+
+.console-row {
+  opacity: 0;
+  animation: consoleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.console-row:nth-child(1) { animation-delay: 0.5s; }
+.console-row:nth-child(2) { animation-delay: 0.75s; }
+.console-row:nth-child(3) { animation-delay: 1.0s; }
+.console-row:nth-child(4) { animation-delay: 1.25s; }
+
+.console-spin {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgb(var(--accent) / 0.25);
+  border-top-color: rgb(var(--accent));
+  animation: spin 0.8s linear infinite;
+}
+
+.stage-bar {
+  height: 6px; border-radius: 999px;
+  background: rgb(var(--surface-1) / 0.10);
+  overflow: hidden;
+}
+.stage-bar > i {
+  display: block; height: 100%; width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg,
+    rgb(var(--accent-dark)), rgb(var(--accent)), rgb(var(--accent-bright)));
+  animation: stageFill 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+}
+
+.stage-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: rgb(var(--ink-high));
+  background: rgb(var(--bg-elevated) / 0.85);
+  border: 1px solid rgb(var(--accent) / 0.30);
+  box-shadow: 0 18px 36px -16px rgb(0 0 0 / 0.6),
+              0 0 24px -8px rgb(var(--accent) / 0.45);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.stage-badge svg { color: rgb(var(--accent)); }
+.stage-badge--ai {
+  top: 4%; right: -3%;
+  animation: badgeFloatA 6s ease-in-out infinite;
+}
+.stage-badge--pass {
+  bottom: 6%; left: -5%;
+  animation: badgeFloatB 7s ease-in-out infinite;
+}
+
+@keyframes stageOrb {
+  0%, 100% { transform: translateZ(-90px) scale(1); opacity: 0.9; }
+  50%      { transform: translateZ(-90px) scale(1.08); opacity: 1; }
+}
+@keyframes stageRing {
+  from { transform: translateZ(-50px) rotate(0deg); }
+  to   { transform: translateZ(-50px) rotate(360deg); }
+}
+@keyframes badgeFloatA {
+  0%, 100% { transform: translateZ(85px) translateY(0); }
+  50%      { transform: translateZ(85px) translateY(-12px); }
+}
+@keyframes badgeFloatB {
+  0%, 100% { transform: translateZ(65px) translateY(0); }
+  50%      { transform: translateZ(65px) translateY(10px); }
+}
+@keyframes consoleIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes stageFill {
+  from { width: 0; }
+  to   { width: 98%; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SECTION FX — per-section animated 3D backdrops (SectionFX.tsx)
+   Pure compositor transforms, sit behind section content, masked top/bottom
+   so they never fight the copy, paused under prefers-reduced-motion.
+   ════════════════════════════════════════════════════════════════════════ */
+.section-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+}
+/* Lift real section content above its backdrop. The sibling rule also lets a
+   section stack multiple <SectionFX> layers (each stays at z-0) while every
+   real content sibling rises above them. */
+.section > .container { position: relative; z-index: 1; }
+.section-fx ~ *:not(.section-fx) { position: relative; z-index: 1; }
+
+/* ── Variant: grid — receding perspective floor + ceiling ─────────────────── */
+.fx-grid {
+  position: absolute;
+  left: 50%;
+  width: 240%;
+  height: 70%;
+  background-image:
+    linear-gradient(rgb(var(--accent) / 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent) / 0.16) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, #000 0%, transparent 72%);
+  animation: fxGridMove 7s linear infinite;
+}
+.fx-grid--floor {
+  bottom: -8%;
+  transform: translateX(-50%) rotateX(74deg);
+  transform-origin: 50% 100%;
+}
+.fx-grid--ceil {
+  top: -8%;
+  opacity: 0.6;
+  transform: translateX(-50%) rotateX(-74deg);
+  transform-origin: 50% 0%;
+  -webkit-mask-image: radial-gradient(ellipse 55% 90% at 50% 0%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 55% 90% at 50% 0%, #000 0%, transparent 72%);
+}
+@keyframes fxGridMove {
+  from { background-position: 0 0; }
+  to   { background-position: 0 64px; }
+}
+
+/* ── Variant: orbits — concentric rings tilted in 3D ──────────────────────── */
+.fx-orbits {
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  width: clamp(280px, 34vw, 480px);
+  height: clamp(280px, 34vw, 480px);
+  transform: translateY(-50%);
+  transform-style: preserve-3d;
+  opacity: 0.9;
+}
+.fx-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--accent) / 0.22);
+  transform-style: preserve-3d;
+  animation: fxOrbit 20s linear infinite;
+}
+.fx-ring:nth-child(1)::after {
+  content: '';
+  position: absolute;
+  top: -5px; left: 50%;
+  width: 9px; height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: rgb(var(--accent-bright));
+  box-shadow: 0 0 16px 3px rgb(var(--accent) / 0.75);
+}
+.fx-ring:nth-child(2) {
+  inset: 15%;
+  border-color: rgb(var(--accent-bright) / 0.20);
+  animation-duration: 27s;
+  animation-direction: reverse;
+}
+.fx-ring:nth-child(3) {
+  inset: 32%;
+  border-color: rgb(var(--accent) / 0.30);
+  animation-duration: 15s;
+}
+.fx-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: rgb(var(--accent-bright));
+  box-shadow: 0 0 26px 6px rgb(var(--accent) / 0.55);
+  transform: translate(-50%, -50%);
+  animation: fxOrbPulse 5s ease-in-out infinite;
+}
+@keyframes fxOrbit {
+  from { transform: rotateX(64deg) rotateZ(0deg); }
+  to   { transform: rotateX(64deg) rotateZ(360deg); }
+}
+@keyframes fxOrbPulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.25); }
+}
+
+/* ── Variant: particles — floating depth field ────────────────────────────── */
+.fx-particles { position: absolute; inset: 0; transform-style: preserve-3d; }
+.fx-dot {
+  position: absolute;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: rgb(var(--accent) / 0.55);
+  box-shadow: 0 0 14px 2px rgb(var(--accent) / 0.30);
+  animation: fxFloat 10s ease-in-out infinite;
+}
+.fx-dot:nth-child(1)  { top: 18%; left: 8%;  transform: scale(1.4); animation-delay: -0.5s; }
+.fx-dot:nth-child(2)  { top: 64%; left: 14%; transform: scale(0.7); animation-delay: -2.1s; background: rgb(var(--accent-bright) / 0.5); }
+.fx-dot:nth-child(3)  { top: 32%; left: 22%; transform: scale(1.0); animation-delay: -3.6s; }
+.fx-dot:nth-child(4)  { top: 80%; left: 30%; transform: scale(0.6); animation-delay: -1.2s; filter: blur(1px); }
+.fx-dot:nth-child(5)  { top: 12%; left: 40%; transform: scale(1.2); animation-delay: -4.4s; }
+.fx-dot:nth-child(6)  { top: 50%; left: 47%; transform: scale(0.8); animation-delay: -0.9s; background: rgb(var(--accent-bright) / 0.5); }
+.fx-dot:nth-child(7)  { top: 74%; left: 55%; transform: scale(1.1); animation-delay: -2.8s; }
+.fx-dot:nth-child(8)  { top: 24%; left: 60%; transform: scale(0.65); animation-delay: -5.2s; filter: blur(1px); }
+.fx-dot:nth-child(9)  { top: 58%; left: 68%; transform: scale(1.3); animation-delay: -1.7s; }
+.fx-dot:nth-child(10) { top: 16%; left: 76%; transform: scale(0.75); animation-delay: -3.1s; background: rgb(var(--accent-bright) / 0.5); }
+.fx-dot:nth-child(11) { top: 84%; left: 82%; transform: scale(1.0); animation-delay: -4.9s; }
+.fx-dot:nth-child(12) { top: 40%; left: 88%; transform: scale(0.7); animation-delay: -0.3s; filter: blur(1px); }
+.fx-dot:nth-child(13) { top: 68%; left: 92%; transform: scale(1.15); animation-delay: -2.4s; }
+.fx-dot:nth-child(14) { top: 30%; left: 95%; transform: scale(0.6); animation-delay: -5.7s; }
+@keyframes fxFloat {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -26px; }
+}
+
+/* ── Variant: cubes — wireframe cubes spinning in 3D ──────────────────────── */
+.fx-cubes { position: absolute; inset: 0; transform-style: preserve-3d; }
+.fx-cube {
+  position: absolute;
+  width: var(--cs);
+  height: var(--cs);
+  transform-style: preserve-3d;
+  animation: fxSpin 24s linear infinite;
+}
+.fx-cube .cf {
+  position: absolute;
+  width: var(--cs);
+  height: var(--cs);
+  border: 1px solid rgb(var(--accent) / 0.26);
+  background: rgb(var(--accent) / 0.03);
+}
+.cf-front  { transform: translateZ(calc(var(--cs) / 2)); }
+.cf-back   { transform: rotateY(180deg) translateZ(calc(var(--cs) / 2)); }
+.cf-right  { transform: rotateY(90deg)  translateZ(calc(var(--cs) / 2)); }
+.cf-left   { transform: rotateY(-90deg) translateZ(calc(var(--cs) / 2)); }
+.cf-top    { transform: rotateX(90deg)  translateZ(calc(var(--cs) / 2)); }
+.cf-bottom { transform: rotateX(-90deg) translateZ(calc(var(--cs) / 2)); }
+.fx-cube--0 { --cs: 128px; top: 16%; left: 9%;  animation-duration: 28s; }
+.fx-cube--1 { --cs: 88px;  top: 56%; left: 80%; animation-duration: 21s; animation-direction: reverse; }
+.fx-cube--2 { --cs: 64px;  top: 72%; left: 28%; animation-duration: 34s; }
+@keyframes fxSpin {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to   { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* ── Variant: beams — soft sweeping light shafts ──────────────────────────── */
+.fx-beams { position: absolute; inset: -25%; }
+.fx-beam {
+  position: absolute;
+  top: 0;
+  width: 34%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--accent) / 0.10) 50%, transparent 100%);
+  filter: blur(22px);
+  transform: rotate(16deg);
+  animation: fxSweep 13s ease-in-out infinite;
+}
+.fx-beam:nth-child(1) { left: 2%;  animation-delay: 0s; }
+.fx-beam:nth-child(2) { left: 34%; animation-delay: -4.3s; background: linear-gradient(90deg, transparent 0%, rgb(var(--accent-bright) / 0.08) 50%, transparent 100%); }
+.fx-beam:nth-child(3) { left: 66%; animation-delay: -8.6s; }
+@keyframes fxSweep {
+  0%, 100% { transform: translateX(-26%) rotate(16deg); opacity: 0.45; }
+  50%      { transform: translateX(26%)  rotate(16deg); opacity: 1; }
+}
+
+/* ── Variant: tunnel — squares hurtling out of a vanishing point ──────────── */
+.fx-tunnel {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(200px, 26vw, 340px);
+  height: clamp(200px, 26vw, 340px);
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+}
+.fx-tunnel-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1px solid rgb(var(--accent) / 0.22);
+  animation: fxTunnel 7s linear infinite;
+}
+.fx-tunnel-ring:nth-child(1) { animation-delay: 0s; }
+.fx-tunnel-ring:nth-child(2) { animation-delay: -0.875s; }
+.fx-tunnel-ring:nth-child(3) { animation-delay: -1.75s; }
+.fx-tunnel-ring:nth-child(4) { animation-delay: -2.625s; }
+.fx-tunnel-ring:nth-child(5) { animation-delay: -3.5s; }
+.fx-tunnel-ring:nth-child(6) { animation-delay: -4.375s; }
+.fx-tunnel-ring:nth-child(7) { animation-delay: -5.25s; }
+.fx-tunnel-ring:nth-child(8) { animation-delay: -6.125s; }
+@keyframes fxTunnel {
+  0%   { transform: translateZ(-1000px) rotate(0deg);   opacity: 0; }
+  12%  { opacity: 1; }
+  85%  { opacity: 0.85; }
+  100% { transform: translateZ(220px) rotate(60deg);    opacity: 0; }
+}
+
+/* ── Variant: helix — a rotating 3D strand of glowing nodes ───────────────── */
+.fx-helix {
+  position: absolute;
+  top: 50%; right: 9%;
+  width: 90px;
+  height: 78%;
+  transform: translateY(-50%);
+  transform-style: preserve-3d;
+  animation: fxHelixSpin 14s linear infinite;
+}
+.fx-helix-dot {
+  position: absolute;
+  left: 50%;
+  margin-left: -5px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgb(var(--accent) / 0.6);
+  box-shadow: 0 0 12px 2px rgb(var(--accent) / 0.30);
+  transform-style: preserve-3d;
+}
+.fx-helix-dot:nth-child(1)  { top: 0%;  transform: rotateY(0deg)   translateZ(40px); }
+.fx-helix-dot:nth-child(2)  { top: 6%;  transform: rotateY(45deg)  translateZ(40px); }
+.fx-helix-dot:nth-child(3)  { top: 12%; transform: rotateY(90deg)  translateZ(40px); }
+.fx-helix-dot:nth-child(4)  { top: 18%; transform: rotateY(135deg) translateZ(40px); }
+.fx-helix-dot:nth-child(5)  { top: 24%; transform: rotateY(180deg) translateZ(40px); }
+.fx-helix-dot:nth-child(6)  { top: 30%; transform: rotateY(225deg) translateZ(40px); }
+.fx-helix-dot:nth-child(7)  { top: 36%; transform: rotateY(270deg) translateZ(40px); }
+.fx-helix-dot:nth-child(8)  { top: 42%; transform: rotateY(315deg) translateZ(40px); }
+.fx-helix-dot:nth-child(9)  { top: 48%; transform: rotateY(360deg) translateZ(40px); }
+.fx-helix-dot:nth-child(10) { top: 54%; transform: rotateY(405deg) translateZ(40px); }
+.fx-helix-dot:nth-child(11) { top: 60%; transform: rotateY(450deg) translateZ(40px); }
+.fx-helix-dot:nth-child(12) { top: 66%; transform: rotateY(495deg) translateZ(40px); }
+.fx-helix-dot:nth-child(13) { top: 72%; transform: rotateY(540deg) translateZ(40px); }
+.fx-helix-dot:nth-child(14) { top: 78%; transform: rotateY(585deg) translateZ(40px); }
+.fx-helix-dot:nth-child(15) { top: 84%; transform: rotateY(630deg) translateZ(40px); }
+.fx-helix-dot:nth-child(16) { top: 90%; transform: rotateY(675deg) translateZ(40px); }
+.fx-helix-dot:nth-child(even) { background: rgb(var(--accent-bright) / 0.55); }
+@keyframes fxHelixSpin {
+  from { transform: translateY(-50%) rotateY(0deg); }
+  to   { transform: translateY(-50%) rotateY(360deg); }
+}
+/* In the About-US section the orbits sit on the right, so anchor its helix to
+   the left to keep the two depth motifs balanced. */
+/* #about .fx-helix { right: auto; left: 9%; } */
+
+/* ── Variant: waves — an undulating perspective wire-plane ────────────────── */
+.fx-waves {
+  position: absolute;
+  left: -20%; right: -20%;
+  bottom: -6%;
+  height: 82%;
+  transform: rotateX(62deg);
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+  -webkit-mask-image: radial-gradient(ellipse 60% 100% at 50% 100%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 60% 100% at 50% 100%, #000 0%, transparent 72%);
+}
+.fx-wave-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--accent) / 0.30) 50%, transparent 100%);
+  animation: fxWave 6s ease-in-out infinite;
+}
+.fx-wave-line:nth-child(1) { top: 4%;  animation-delay: 0s; }
+.fx-wave-line:nth-child(2) { top: 15%; animation-delay: -0.6s; }
+.fx-wave-line:nth-child(3) { top: 26%; animation-delay: -1.2s; }
+.fx-wave-line:nth-child(4) { top: 37%; animation-delay: -1.8s; }
+.fx-wave-line:nth-child(5) { top: 48%; animation-delay: -2.4s; }
+.fx-wave-line:nth-child(6) { top: 59%; animation-delay: -3.0s; }
+.fx-wave-line:nth-child(7) { top: 70%; animation-delay: -3.6s; }
+.fx-wave-line:nth-child(8) { top: 81%; animation-delay: -4.2s; }
+.fx-wave-line:nth-child(9) { top: 92%; animation-delay: -4.8s; }
+@keyframes fxWave {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(-24px); opacity: 1; }
+}
+
+/* ── Variant: code — Matrix-style vertical glyph rain with depth layers ───── */
+.fx-code {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+}
+.fx-code-col {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 1.4em;
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  line-height: 1;
+  color: rgb(var(--accent) / 0.5);
+}
+.fx-code-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7em;
+  will-change: transform;
+  animation: fxCodeFall linear infinite;
+}
+.fx-code-strip i {
+  font-style: normal;
+  text-shadow: 0 0 6px rgb(var(--accent) / 0.35);
+}
+/* The trailing glyph reads as the bright "head" of each falling stream. */
+.fx-code-strip i:nth-child(7n) { color: rgb(var(--accent-bright)); text-shadow: 0 0 10px rgb(var(--accent) / 0.7); }
+.fx-code-strip i:nth-child(3n) { opacity: 0.55; }
+
+/* 18 columns — spread edge-to-edge, each with its own depth (translateZ),
+   speed and start offset so the rain feels volumetric and fills the section. */
+.fx-code-col:nth-child(1)  { left: 1%;    transform: translateZ(0px);    opacity: 0.7; }
+.fx-code-col:nth-child(2)  { left: 6.5%;  transform: translateZ(-130px); opacity: 0.4; }
+.fx-code-col:nth-child(3)  { left: 12%;   transform: translateZ(-260px); opacity: 0.25; }
+.fx-code-col:nth-child(4)  { left: 17.5%; transform: translateZ(-90px);  opacity: 0.5; }
+.fx-code-col:nth-child(5)  { left: 23%;   transform: translateZ(0px);    opacity: 0.7; }
+.fx-code-col:nth-child(6)  { left: 28.5%; transform: translateZ(-200px); opacity: 0.3; }
+.fx-code-col:nth-child(7)  { left: 34%;   transform: translateZ(-60px);  opacity: 0.55; }
+.fx-code-col:nth-child(8)  { left: 39.5%; transform: translateZ(-280px); opacity: 0.22; }
+.fx-code-col:nth-child(9)  { left: 45%;   transform: translateZ(0px);    opacity: 0.7; }
+.fx-code-col:nth-child(10) { left: 50.5%; transform: translateZ(-150px); opacity: 0.38; }
+.fx-code-col:nth-child(11) { left: 56%;   transform: translateZ(-100px); opacity: 0.48; }
+.fx-code-col:nth-child(12) { left: 61.5%; transform: translateZ(-230px); opacity: 0.28; }
+.fx-code-col:nth-child(13) { left: 67%;   transform: translateZ(0px);    opacity: 0.7; }
+.fx-code-col:nth-child(14) { left: 72.5%; transform: translateZ(-170px); opacity: 0.35; }
+.fx-code-col:nth-child(15) { left: 78%;   transform: translateZ(-70px);  opacity: 0.52; }
+.fx-code-col:nth-child(16) { left: 83.5%; transform: translateZ(-250px); opacity: 0.24; }
+.fx-code-col:nth-child(17) { left: 89%;   transform: translateZ(-110px); opacity: 0.46; }
+.fx-code-col:nth-child(18) { left: 94.5%; transform: translateZ(-200px); opacity: 0.3; }
+.fx-code-col:nth-child(1)  .fx-code-strip { animation-duration: 15s;  animation-delay: -1.0s; }
+.fx-code-col:nth-child(2)  .fx-code-strip { animation-duration: 20s;  animation-delay: -3.2s; }
+.fx-code-col:nth-child(3)  .fx-code-strip { animation-duration: 24s;  animation-delay: -0.4s; }
+.fx-code-col:nth-child(4)  .fx-code-strip { animation-duration: 17s;  animation-delay: -5.1s; }
+.fx-code-col:nth-child(5)  .fx-code-strip { animation-duration: 14s;  animation-delay: -2.3s; }
+.fx-code-col:nth-child(6)  .fx-code-strip { animation-duration: 22s;  animation-delay: -4.6s; }
+.fx-code-col:nth-child(7)  .fx-code-strip { animation-duration: 18s;  animation-delay: -0.9s; }
+.fx-code-col:nth-child(8)  .fx-code-strip { animation-duration: 26s;  animation-delay: -6.0s; }
+.fx-code-col:nth-child(9)  .fx-code-strip { animation-duration: 15s;  animation-delay: -3.7s; }
+.fx-code-col:nth-child(10) .fx-code-strip { animation-duration: 21s;  animation-delay: -1.6s; }
+.fx-code-col:nth-child(11) .fx-code-strip { animation-duration: 16s;  animation-delay: -5.8s; }
+.fx-code-col:nth-child(12) .fx-code-strip { animation-duration: 24s;  animation-delay: -2.7s; }
+.fx-code-col:nth-child(13) .fx-code-strip { animation-duration: 16s;  animation-delay: -4.0s; }
+.fx-code-col:nth-child(14) .fx-code-strip { animation-duration: 23s;  animation-delay: -1.3s; }
+.fx-code-col:nth-child(15) .fx-code-strip { animation-duration: 19s;  animation-delay: -5.4s; }
+.fx-code-col:nth-child(16) .fx-code-strip { animation-duration: 27s;  animation-delay: -0.7s; }
+.fx-code-col:nth-child(17) .fx-code-strip { animation-duration: 17s;  animation-delay: -3.0s; }
+.fx-code-col:nth-child(18) .fx-code-strip { animation-duration: 22s;  animation-delay: -6.3s; }
+@keyframes fxCodeFall {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Variant: ribbons — flowing tilted 3D bands (for the "Let's talk" strip) ─ */
+.section-fx--ribbons,
+.section-fx--starfield {
+  /* These wrap short hosts (the CTA strip / footer) where the top+bottom mask
+     fade would swallow most of the effect, so render them edge-to-edge. */
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.fx-ribbons {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  perspective: 700px;
+}
+.fx-ribbon {
+  position: absolute;
+  left: -15%; right: -15%;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--accent) / 0.42) 50%, transparent 100%);
+  filter: blur(5px);
+  transform-style: preserve-3d;
+  animation: fxRibbon 18s ease-in-out infinite;
+}
+.fx-ribbon:nth-child(1) { top: 10%; height: 30px; animation-duration: 16s; animation-delay: 0s; }
+.fx-ribbon:nth-child(2) { top: 30%; height: 40px; animation-duration: 22s; animation-delay: -2.4s; background: linear-gradient(90deg, transparent 0%, rgb(var(--accent-bright) / 0.36) 50%, transparent 100%); }
+.fx-ribbon:nth-child(3) { top: 48%; height: 34px; animation-duration: 19s; animation-delay: -4.1s; }
+.fx-ribbon:nth-child(4) { top: 66%; height: 44px; animation-duration: 24s; animation-delay: -1.3s; background: linear-gradient(90deg, transparent 0%, rgb(var(--accent-bright) / 0.36) 50%, transparent 100%); }
+.fx-ribbon:nth-child(5) { top: 84%; height: 28px; animation-duration: 20s; animation-delay: -3.6s; }
+@keyframes fxRibbon {
+  0%, 100% { transform: rotateX(52deg) translateX(-12%) rotateZ(-3deg); }
+  50%      { transform: rotateX(52deg) translateX(12%)  rotateZ(3deg); }
+}
+
+/* ── Variant: starfield — points streaming out of a vanishing point ───────── */
+.fx-stars {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.fx-star {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgb(var(--accent-bright));
+  box-shadow: 0 0 12px 2px rgb(var(--accent) / 0.8);
+  animation: fxStar linear infinite;
+}
+.fx-star:nth-child(1)  { top: 44%; left: 48%; animation-duration: 6s;  animation-delay: -0.4s; }
+.fx-star:nth-child(2)  { top: 52%; left: 53%; animation-duration: 7.5s; animation-delay: -2.1s; }
+.fx-star:nth-child(3)  { top: 36%; left: 58%; animation-duration: 9s;  animation-delay: -4.8s; }
+.fx-star:nth-child(4)  { top: 60%; left: 44%; animation-duration: 6.8s; animation-delay: -1.2s; }
+.fx-star:nth-child(5)  { top: 47%; left: 64%; animation-duration: 8.2s; animation-delay: -3.3s; }
+.fx-star:nth-child(6)  { top: 56%; left: 38%; animation-duration: 7s;  animation-delay: -5.5s; }
+.fx-star:nth-child(7)  { top: 32%; left: 50%; animation-duration: 9.5s; animation-delay: -0.9s; }
+.fx-star:nth-child(8)  { top: 64%; left: 60%; animation-duration: 6.4s; animation-delay: -2.7s; }
+.fx-star:nth-child(9)  { top: 42%; left: 34%; animation-duration: 8.8s; animation-delay: -4.2s; }
+.fx-star:nth-child(10) { top: 58%; left: 68%; animation-duration: 7.2s; animation-delay: -1.8s; }
+.fx-star:nth-child(11) { top: 49%; left: 40%; animation-duration: 9.2s; animation-delay: -3.9s; }
+.fx-star:nth-child(12) { top: 38%; left: 70%; animation-duration: 6.6s; animation-delay: -5.1s; }
+.fx-star:nth-child(13) { top: 66%; left: 50%; animation-duration: 8.5s; animation-delay: -0.6s; }
+.fx-star:nth-child(14) { top: 46%; left: 30%; animation-duration: 7.8s; animation-delay: -2.9s; }
+.fx-star:nth-child(15) { top: 54%; left: 72%; animation-duration: 9.8s; animation-delay: -4.5s; }
+.fx-star:nth-child(16) { top: 50%; left: 52%; animation-duration: 6.2s; animation-delay: -1.5s; }
+@keyframes fxStar {
+  0%   { transform: translateZ(-820px) scale(0.2); opacity: 0; }
+  14%  { opacity: 1; }
+  100% { transform: translateZ(220px) scale(1.8);  opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora-blob { animation: none; }
+  .ambient-blob, .ambient-grid { animation: none; }
+  .hero-gem, .gem-body, .gem-glint, .hero-gem-glow { animation: none; }
+  .hero-floor-glow, .hero-chevrons { animation: none; }
+  .hero-rise { animation: none; opacity: 1; transform: none; }
+  .wave-line, .wave-field, .wave-dot { animation: none; }
+  .wave-a, .wave-b, .wave-c, .wave-d, .wave-e { transform: none; }
+  .reveal, .reveal-item, .reveal-scale, .reveal-left { opacity: 1; transform: none; }
+  .marquee { animation: none; }
+  .cta-ticker-track { animation: none; }
+  .hb-edge, .hb-node, .hb-scan { animation: none; }
+  /* Section FX — freeze all motion, keep shapes static. */
+  .fx-grid, .fx-ring, .fx-orb, .fx-cube, .fx-beam, .fx-dot,
+  .fx-tunnel-ring, .fx-helix, .fx-helix-dot, .fx-wave-line,
+  .fx-code-strip, .fx-ribbon, .fx-star { animation: none !important; }
+  /* Flatten all 3D so nothing depends on motion */
+  .tilt-3d, .parallax, .card-3d, .stage-panel,
+  .stage-orb, .stage-ring, .stage-badge { transform: none !important; }
+  .console-row, .stage-bar > i { opacity: 1 !important; width: 98%; }
+  .scene-3d { perspective: none; }
+}
+
+/* ── Mobile (touch) performance + motion tuning ──────────────────────────
+   Phones skip the pointer-driven 3D/parallax/cursor effects, and animating
+   `filter: blur()` during scroll-triggered reveals is a major source of jank.
+   Here we drop the blur from entrance transitions (keeping a snappier, livelier
+   slide+fade) and shrink the always-painted background blur radii so scrolling
+   stays smooth. */
+@media (max-width: 768px) {
+  /* Snappier, jank-free reveals — animate only cheap transform/opacity. */
+  .reveal-item,
+  .reveal-scale,
+  .reveal-left {
+    transition-duration: 0.65s;
+    filter: none;
+  }
+  .reveal-item  { transform: translateY(36px); }
+  .reveal-scale { transform: scale(0.92) translateY(28px); }
+  .reveal-left  { transform: translateX(-36px); }
+  .reveal-item.is-visible,
+  .reveal-scale.is-visible,
+  .reveal-left.is-visible { filter: none; }
+
+  /* Tighter stagger so sections feel more alive as they enter. */
+  .stagger-1 { transition-delay:  40ms; }
+  .stagger-2 { transition-delay:  90ms; }
+  .stagger-3 { transition-delay: 140ms; }
+  .stagger-4 { transition-delay: 190ms; }
+  .stagger-5 { transition-delay: 240ms; }
+  .stagger-6 { transition-delay: 290ms; }
+  .stagger-7 { transition-delay: 340ms; }
+  .stagger-8 { transition-delay: 390ms; }
+
+  /* Heavy blurs dominate fill-rate on mobile GPUs — lighten them. */
+  .aurora-blob { filter: blur(40px); animation-duration: 16s; }
+  .aurora-blob--glow { filter: blur(40px); }
+  .ambient-blob { filter: blur(56px); }
+
+  /* Lighten per-section 3D backdrops so touch scrolling stays smooth. */
+  .section-fx { opacity: 0.5; }
+  /* …but keep the CTA strip + footer effects clearly visible. */
+  .section-fx--ribbons { opacity: 0.7; }
+  .section-fx--starfield { opacity: 0.9; }
+  .fx-beam { filter: blur(14px); }
+  .fx-dot, .fx-helix-dot { box-shadow: none; }
+  .fx-code-strip i { text-shadow: none; }
+
+  /* Parallax layers never move without a fine pointer, yet each keeps a
+     persistent compositor layer (will-change) in the hero. Flatten them so the
+     hero composites cheaply and scrolls smoothly. */
+  .parallax {
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+}

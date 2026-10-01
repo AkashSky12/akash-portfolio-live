@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Akash Simon — QA Lead &amp; GenAI Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#2dd4bf;--ok:#34d399;--bad:#fb7185;--amb:#fbbf24;--ink:#f3f4f6;--mut:#9aa3ad}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#07090c}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:radial-gradient(90% 70% at 50% 30%,#12202a 0%,#0a0f14 55%,#050709 100%) fixed;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+#track{height:1700vh}
+#css,#gl{position:fixed!important;inset:0}
+#css{z-index:0}
+#gl{z-index:1;pointer-events:none}
+
+.ov{position:fixed;z-index:3}
+.hero-ov{left:6vw;top:50%;transform:translateY(-50%);max-width:min(450px,36vw)}
+.eb{display:inline-flex;align-items:center;gap:8px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.eb i{width:7px;height:7px;border-radius:50%;background:var(--amb);box-shadow:0 0 10px var(--amb)}
+.hero-ov h1{font-size:clamp(28px,min(4.4vw,8.5vh),66px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:18px 0 16px;text-shadow:0 2px 30px rgba(0,0,0,.7)}
+.hero-ov h1 span{background:linear-gradient(90deg,#5eead4,#a5b4fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-ov p{color:#bcc4cc;font-size:clamp(14px,2.2vh,17px);line-height:1.6;text-shadow:0 1px 16px rgba(0,0,0,.9)}
+.hero-ov p b{color:var(--ink);font-weight:600}
+.hint{margin-top:26px;display:flex;align-items:center;gap:10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--mut)}
+.hint i{width:22px;height:34px;border:1.5px solid #555a62;border-radius:12px;position:relative}
+.hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--acc);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+.end-ov{right:6vw;top:50%;transform:translateY(-50%);max-width:min(400px,34vw)}
+.end-ov h2{font-size:clamp(28px,min(3.8vw,7.5vh),56px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:16px 0 14px;text-shadow:0 2px 30px rgba(0,0,0,.7)}
+.end-ov h2 span{color:#5eead4}
+.end-ov p{color:#bcc4cc;line-height:1.6;margin-bottom:22px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:600;font-size:15px;background:#f4f5f7;color:#0d0e10}
+.btn.g{background:rgba(255,255,255,.08);color:var(--ink);border:1px solid rgba(255,255,255,.16)}
+.btn.a{background:#0d9488;color:#fff}
+.chap{position:fixed;z-index:3;left:50%;bottom:28px;transform:translateX(-50%);font:600 12px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#dfe5ea;background:rgba(10,14,18,.82);border:1px solid rgba(255,255,255,.1);padding:9px 14px;border-radius:999px;opacity:0;transition:opacity .4s;white-space:nowrap}
+.chap b{color:var(--acc)}
+@media(max-height:520px){.hint{display:none}.hero-ov h1,.end-ov h2{margin:10px 0 8px}.end-ov p{margin-bottom:12px;font-size:13px}.btn{padding:9px 13px;font-size:13px}.end-ov .eb{display:none}.chap{bottom:12px}}
+@media(max-aspect-ratio:1/1){
+  .hero-ov,.end-ov{left:6vw;right:6vw;top:76px;transform:none;max-width:none}
+  .hero-ov h1{font-size:clamp(28px,8.4vw,42px);margin:12px 0 10px}.end-ov h2{font-size:clamp(26px,7.6vw,38px);margin:12px 0 10px}
+  .hero-ov p,.end-ov p{font-size:14px}.end-ov p{margin-bottom:14px}.hint{margin-top:14px}
+  .chap{font-size:10px;letter-spacing:.05em}
+}
+.top{position:fixed;z-index:4;inset:16px 20px auto;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:700 12px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#2dd4bf,#4f46e5)}
+.where{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:7px 12px;border-radius:999px;background:rgba(12,16,20,.75);border:1px solid rgba(255,255,255,.08)}
+.bar{position:fixed;z-index:4;left:0;bottom:0;height:2px;background:var(--acc);width:0}
+.loading{position:fixed;z-index:5;right:20px;bottom:18px;font:500 11px 'JetBrains Mono',monospace;color:var(--mut);letter-spacing:.1em}
+.noscr{position:fixed;inset:0;display:grid;place-items:center;color:var(--mut)}
+
+/* ===== laptop: flaky-test triage in a terminal-first IDE ===== */
+.ide{position:relative;overflow:hidden;width:1280px;height:800px;background:#0f1418;color:#cfd8dc;font:14px/1.5 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.tt{height:34px;display:flex;align-items:center;gap:12px;padding:0 14px;background:#0b0f12;border-bottom:1px solid #1e272d;font-size:12.5px;color:#7f8b93}
+.tt .tl{display:flex;gap:7px}.tt .tl i{display:block;width:12px;height:12px;border-radius:50%;background:#ff5f57}.tt .tl i:nth-child(2){background:#febc2e}.tt .tl i:nth-child(3){background:#28c840}
+.tt .ttl{flex:1;text-align:center}
+.cols{position:absolute;top:34px;bottom:24px;left:0;right:0;display:grid;grid-template-columns:1fr 420px}
+.term{padding:18px 22px;font:14.5px/1.75 'JetBrains Mono',monospace;color:#b7c3ca;overflow:hidden}
+.term .p{color:#5eead4}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.amb{color:var(--amb)}.dim{color:#5d6b73}.vi{color:#a5b4fc}
+.tbl{margin:10px 0;border:1px solid #1e272d;border-radius:10px;overflow:hidden;font-size:13.5px}
+.tbl div{display:grid;grid-template-columns:28px 1fr 140px 120px;gap:10px;padding:6px 12px;border-top:1px solid #172026}
+.tbl div:first-child{border-top:0;background:#121a1f;color:#7f8b93;font-size:12px}
+.side{background:#0b1013;border-left:1px solid #1e272d;display:flex;flex-direction:column}
+.side .ah{height:40px;display:flex;align-items:center;gap:9px;padding:0 16px;border-bottom:1px solid #1e272d;font-weight:600;font-size:13.5px}
+.side .ah i{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,#2dd4bf,#6366f1);display:grid;place-items:center;font-style:normal;font-size:11px;color:#fff}
+.msgs{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;font-size:14px;overflow:hidden}
+.msg{padding:12px 14px;border-radius:12px;background:#131b20;border:1px solid #1e2a31;line-height:1.5}
+.msg.me{align-self:flex-end;background:#16302d;border-color:#1f4a44;max-width:90%}
+.msg b{color:#fff}
+.msg code{font:12.5px 'JetBrains Mono',monospace;background:#0a0f12;padding:1px 5px;border-radius:4px;color:#fbbf24}
+.agents{display:flex;gap:8px;margin-top:10px}
+.agents span{flex:1;padding:8px;border-radius:9px;background:#0a0f12;border:1px solid #1e2a31;font:600 11px 'JetBrains Mono',monospace;color:#5eead4;text-align:center}
+.sbar{position:absolute;left:0;right:0;bottom:0;height:24px;display:flex;align-items:center;gap:18px;padding:0 12px;background:#0d9488;color:#fff;font-size:12px}
+.sbar.bad{background:#be123c}.sbar.ok{background:#047857}
+.only{display:none}
+.ide.s1 .on1,.ide.s2 .on2,.ide.s3 .on3{display:block}
+.ide.s1 .on123,.ide.s2 .on123,.ide.s3 .on123{display:block}
+.ide.s2 .on23,.ide.s3 .on23{display:block}
+.ide.s2 .on2g,.ide.s3 .on3g{display:grid}
+
+/* ===== TV: CI dashboard, then the portfolio ===== */
+.tv{position:relative;overflow:hidden;width:1280px;height:720px;background:#0b1014;color:#e6edf1;font:15px/1.5 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.dash{position:absolute;inset:0;padding:34px 44px}
+.dash h2{font-size:30px;letter-spacing:-.03em;display:flex;align-items:center;gap:14px}
+.dash h2 i{font-style:normal;font:600 13px 'JetBrains Mono',monospace;padding:5px 10px;border-radius:8px;background:#3b1720;color:#fda4af}
+.tv.green .dash h2 i{background:#0d3326;color:#6ee7b7}
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
+.kp div{padding:18px;border-radius:16px;background:#111a20;border:1px solid #1e2a31}
+.kp b{display:block;font-size:38px;letter-spacing:-.04em}
+.kp span{font-size:13px;color:#8796a0}
+.heat{display:grid;grid-template-columns:repeat(24,1fr);gap:5px}
+.heat i{height:22px;border-radius:4px;background:#14532d}
+.heat i.f{background:#be123c;animation:fl 1s steps(2) infinite}
+.tv.green .heat i.f{background:#16a34a;animation:none}
+@keyframes fl{50%{background:#f59e0b}}
+.dash .lg{display:flex;justify-content:space-between;margin-top:16px;font:12.5px 'JetBrains Mono',monospace;color:#8796a0}
+.web{position:absolute;inset:0;background:#fbfbfc;color:#0f1013;transform:translateY(100%);transition:transform .9s cubic-bezier(.22,1,.36,1)}
+.tv.port .web{transform:none}
+.wnav{position:absolute;inset:0 0 auto;height:56px;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fbfbfc;border-bottom:1px solid #ececf0;font-weight:700}
+.wnav i{font-style:normal;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;margin-right:10px;color:#fff;font:700 11px Inter;background:linear-gradient(135deg,#2dd4bf,#4f46e5)}
+.wnav span{font-weight:500;font-size:14px;color:#55585f}
+.wvp{position:absolute;top:56px;left:0;right:0;bottom:0;overflow:hidden}
+.site{position:relative;will-change:transform}
+.sec{padding:44px 64px;max-width:1180px;margin:0 auto}
+.k{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#0d9488}
+.h2{font-size:40px;line-height:1.05;letter-spacing:-.04em;font-weight:800;margin:8px 0 22px;max-width:760px}
+.hero h1{font-size:60px;line-height:1;letter-spacing:-.05em;font-weight:800;margin:14px 0 14px;max-width:860px}
+.hero h1 span{color:#0d9488}
+.hero p{font-size:18px;color:#4a4d55;max-width:640px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.stats div{padding:18px;border-radius:16px;background:#fff;border:1px solid #ececf0}
+.stats b{display:block;font-size:34px;font-weight:800;letter-spacing:-.04em}
+.stats span{font-size:13px;color:#6a6d75}
+.alt{background:#f3f4f6}
+.tlx{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid #ececf0}
+.row .y{font:600 12px 'JetBrains Mono',monospace;color:#7a7d85;padding-top:3px}
+.row h4{font-size:18px;letter-spacing:-.02em}
+.row h4 em{font-style:normal;font:700 10px 'JetBrains Mono',monospace;color:#fff;background:#0d9488;padding:3px 6px;border-radius:5px;margin-left:8px;vertical-align:2px}
+.row small{display:block;color:#6a6d75;font-size:13.5px}
+.row p{color:#4a4d55;font-size:13.5px;margin-top:2px}
+.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grp{padding:16px;border-radius:14px;background:#fff;border:1px solid #ececf0}
+.grp b{display:block;font-size:14px;margin-bottom:10px}
+.grp div{display:flex;flex-wrap:wrap;gap:6px}
+.grp span{font-size:12.5px;padding:5px 9px;border-radius:7px;background:#f2f2f6;color:#30333a}
+.aw{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.aw div{padding:16px;border-radius:14px;background:#0f1013;color:#fff}
+.aw i{font:600 11px 'JetBrains Mono',monospace;font-style:normal;color:#5eead4}
+.aw b{display:block;font-size:15px;margin:4px 0 1px}
+.aw span{font-size:12px;color:#9ca1a9}
+.ct{border-radius:22px;background:#0f1013;color:#fff;padding:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.ct h2{font-size:42px;letter-spacing:-.045em;line-height:1.02;font-weight:800;margin:8px 0 10px}
+.ct h2 span{color:#5eead4}
+.ct .k{color:#5eead4}
+.ct p{color:#9ca1a9}
+.seg{display:inline-flex;padding:4px;border-radius:10px;background:#1c1e23;margin-bottom:12px}
+.seg button{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:#9ca1a9}
+.seg button.on{background:#fff;color:#0f1013}
+.lk{display:grid;gap:8px}
+.lk a{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-radius:12px;background:#1a1c21;border:1px solid #272a31;font-weight:600;font-size:14.5px}
+.lk a span{color:#6c717b;font-size:12.5px;font-weight:500}
+.lk a.p{background:#0d9488;border-color:#0d9488}
+.lk a.p span{color:#ccfbf1}
+.glare{position:absolute;inset:0;pointer-events:none;z-index:9;background:linear-gradient(115deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,0) 30%)}
+
+/* ===== project panels that slide out of the TV ===== */
+.pc{width:420px;padding:22px 24px;border-radius:20px;background:rgba(13,19,23,.96);color:#e6edf1;font:14px/1.5 Inter,system-ui,sans-serif;box-shadow:inset 0 0 0 1px rgba(94,234,212,.35);backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.pc .t{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#5eead4}
+.pc h3{font-size:22px;letter-spacing:-.03em;line-height:1.2;margin:8px 0 6px;color:#fff}
+.pc p{color:#9aa3ad;font-size:14px}
+.pc .m{display:flex;align-items:baseline;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid #1e2a31}
+.pc .m b{font-size:28px;font-weight:800;letter-spacing:-.04em;color:#5eead4}
+.pc .m span{font-size:13px;color:#8796a0}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="track"></div>
+
+<div class="top"><a class="brand" href="#" data-top><i>AS</i>Akash Simon</a><span class="where" id="where">Intro</span></div>
+<div class="bar" id="bar"></div>
+<div class="chap" id="chap"></div>
+<div class="loading" id="loading">loading developer…</div>
+
+<div class="ov hero-ov" id="heroOv">
+  <span class="eb"><i></i>7 flaky tests · 1 couch · 0 panic</span>
+  <h1>Sending AI agents after <span>flaky tests.</span></h1>
+  <p>I'm <b>Akash Simon</b> — QA Lead &amp; GenAI Automation Engineer. Scroll to watch a fleet of AI agents hunt down every flaky test in the suite.</p>
+  <div class="hint"><i></i>SCROLL TO HUNT</div>
+</div>
+<div class="ov end-ov" id="endOv">
+  <span class="eb"><i></i>Suite stable · 720 / 720 green</span>
+  <h2>Let's make your pipeline <span>boringly green.</span></h2>
+  <p>Senior QA architect, automation lead or AI-augmented testing roles — anywhere in the world.</p>
+  <div class="btns"><a class="btn a" href="mailto:akash.simon@outlook.com">Email me</a><a class="btn g" href="https://www.linkedin.com/in/akash-simon/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn g" href="../resume/Akash_Simon_CV.pdf" download>Résumé</a></div>
+</div>
+
+<div class="ide" id="ide">
+  <div class="tt"><div class="tl"><i></i><i></i><i></i></div><span class="ttl">zsh — e2e-suite — flaky-hunt</span><span>⎇ main</span></div>
+  <div class="cols">
+    <div class="term">
+      <div><span class="p">~/e2e-suite ❯</span> ai-agent hunt-flaky --since 7d --runs 40</div>
+      <div class="only on123"><span class="vi">✦ replaying 40 CI runs · 720 tests · 3 agents</span></div>
+      <div class="only on1"><span class="dim">  agent-1 timing analysis… agent-2 network traces… agent-3 DOM diffs…</span></div>
+      <div class="only on23"><span class="amb">⚠ 7 flaky tests found (pass rate 61–94%)</span></div>
+      <div class="tbl only on2g">
+        <div><span>#</span><span>test</span><span>root cause</span><span>fix</span></div>
+        <div><span class="bad">1</span><span>checkout › apply promo</span><span>race · XHR</span><span class="dim">await response</span></div>
+        <div><span class="bad">2</span><span>login › SSO redirect</span><span>hard wait 2s</span><span class="dim">waitForURL</span></div>
+        <div><span class="bad">3</span><span>cart › qty stepper</span><span>animation</span><span class="dim">toHaveValue</span></div>
+        <div><span class="bad">4</span><span>orders › export CSV</span><span>shared state</span><span class="dim">isolate data</span></div>
+        <div><span class="bad">5</span><span>a11y › modal focus</span><span>focus timing</span><span class="dim">toBeFocused</span></div>
+        <div><span class="bad">6</span><span>search › suggestions</span><span>debounce</span><span class="dim">mock clock</span></div>
+        <div><span class="bad">7</span><span>api › rate limit</span><span>retry storm</span><span class="dim">backoff</span></div>
+      </div>
+      <div class="tbl only on3g">
+        <div><span>#</span><span>test</span><span>root cause</span><span>status</span></div>
+        <div><span class="ok">1</span><span>checkout › apply promo</span><span>race · XHR</span><span class="ok">40/40 ✓</span></div>
+        <div><span class="ok">2</span><span>login › SSO redirect</span><span>hard wait 2s</span><span class="ok">40/40 ✓</span></div>
+        <div><span class="ok">3</span><span>cart › qty stepper</span><span>animation</span><span class="ok">40/40 ✓</span></div>
+        <div><span class="ok">4</span><span>orders › export CSV</span><span>shared state</span><span class="ok">40/40 ✓</span></div>
+        <div><span class="ok">5</span><span>a11y › modal focus</span><span>focus timing</span><span class="ok">40/40 ✓</span></div>
+        <div><span class="ok">6</span><span>search › suggestions</span><span>debounce</span><span class="ok">40/40 ✓</span></div>
+        <div><span class="ok">7</span><span>api › rate limit</span><span>retry storm</span><span class="ok">40/40 ✓</span></div>
+      </div>
+      <div class="only on3"><span class="ok">✓ suite stable · 720/720 across 40 reruns · PR #517 opened</span></div>
+    </div>
+    <div class="side">
+      <div class="ah"><i>✦</i>Agent fleet</div>
+      <div class="msgs">
+        <div class="msg me only on123">Hunt every flaky test from the last 7 days and fix the root causes, not the symptoms.</div>
+        <div class="msg only on1"><b>Launching 3 agents.</b> Replaying 40 CI runs with traces, network logs and DOM snapshots.<div class="agents"><span>timing</span><span>network</span><span>DOM</span></div></div>
+        <div class="msg only on23"><b>7 culprits.</b> 3 races, 2 hard waits, 1 shared fixture, 1 retry storm. No <code>retry: 3</code> band-aids — each gets a real fix.</div>
+        <div class="msg only on3"><b>All fixed.</b> 40 reruns, zero flakes. CI time down 11 minutes.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sbar" id="sbar"><span>⎇ main</span><span id="sbarTxt">idle</span><span style="margin-left:auto">e2e-suite · Playwright</span></div>
+  <div class="glare"></div>
+</div>
+
+<div class="tv" id="tv">
+  <div class="dash">
+    <h2>CI health · e2e-suite <i id="tvBadge">7 flaky</i></h2>
+    <div class="kp"><div><b id="kpPass">96.1%</b><span>pass rate · 7 days</span></div><div><b>720</b><span>tests</span></div><div><b id="kpFlaky">7</b><span>flaky</span></div><div><b id="kpTime">31m</b><span>pipeline time</span></div></div>
+    <div class="heat" id="heat"></div>
+    <div class="lg"><span>■ each square = 5 tests · last 40 runs</span><span id="tvFoot">agents: standby</span></div>
+  </div>
+  <div class="web">
+    <div class="wnav"><div><i>AS</i>Akash Simon</div><span>Work · Experience · Skills · Contact</span></div>
+    <div class="wvp" id="wvp">
+      <div class="site" id="site">
+        <section class="sec hero" id="w-top">
+          <span class="k">QA Lead &amp; GenAI Automation Engineer</span>
+          <h1>Quality as a <span>competitive advantage.</span></h1>
+          <p>I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens.</p>
+          <div class="stats"><div><b>10+</b><span>Years in QA</span></div><div><b>12+</b><span>Countries / regions</span></div><div><b>~40%</b><span>Less test authoring</span></div><div><b>10+</b><span>Engineers led</span></div></div>
+        </section>
+        <div class="alt"><section class="sec" id="w-exp"><span class="k">Experience</span><h2 class="h2">Nearly a decade of quality engineering.</h2><div class="tlx" id="exp"></div></section></div>
+        <section class="sec" id="w-skills"><span class="k">Skills &amp; recognition</span><h2 class="h2">A battle-tested toolkit.</h2><div class="sk" id="sk"></div><div class="aw" id="aw"></div></section>
+        <section class="sec" id="w-contact">
+          <div class="ct">
+            <div><span class="k">Contact</span><h2>Let's make your pipeline <span>boringly green.</span></h2><p>Open to senior QA architect, automation lead and AI-augmented testing roles globally.</p></div>
+            <div><div class="seg" id="seg"><button class="on" data-c="MY">Malaysia</button><button data-c="IN">India</button></div><div class="lk" id="lk"></div></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="glare"></div>
+</div>
+
+<div id="panels"></div>
+<noscript><div class="noscr">This preview needs JavaScript.</div></noscript>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = t => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+const rng = (q, a, b) => ss(clamp((q - a) / (b - a)));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const MOBILE = matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600;
+
+/* ---------- content ---------- */
+const FLAKY_HEAT = [7, 19, 30, 44, 58, 66, 81];
+$('#heat').innerHTML = Array.from({ length: 96 }, (_, i) => `<i class="${FLAKY_HEAT.includes(i) ? 'f' : ''}"></i>`).join('');
+$('#panels').innerHTML = [
+  ["GenAI · Domino's", 'GenAI QA agent infrastructure, from zero.', 'Test generation, synthetic data and exploratory agents across 12+ markets.', '~40%', 'less authoring / sprint'],
+  ["Accessibility · Domino's EU", 'WCAG 2.1 AA, enforced in CI.', 'Axe-core inside Playwright, violations raised as first-class defects.', 'AA', 'in every pipeline'],
+  ['Framework · Quinta / Siemens', 'One framework for web, Android & iOS.', 'Selenium (Java) + TestNG + Appium with CI/CD quality gates.', '6 wks', 'sole E2E ownership'],
+  ['Healthcare · Solve.Care', 'Automation for a live patient platform.', 'Blockchain API contract tests plus vital-sign data validation.', '300+', 'tests in 3 sprints']
+].map(w => `<div class="pc"><div class="t">${esc(w[0])}</div><h3>${esc(w[1])}</h3><p>${esc(w[2])}</p><div class="m"><b>${esc(w[3])}</b><span>${esc(w[4])}</span></div></div>`).join('');
+$('#exp').innerHTML = [
+  ['2023 — now', 'Software Quality Engineer', "Domino's Pizza Enterprises · Kuala Lumpur", 'GenAI QA agents · Axe-core WCAG 2.1 AA · GitHub Actions · 12+ platforms', 1],
+  ['2022', 'Senior Automation QA Engineer', 'Solve.Care · Bangalore', 'Selenium + TestNG framework · blockchain API testing · led a QA team of 10'],
+  ['2017', 'Senior Test Engineer', 'Quinta Systems · Bangalore', 'Hybrid web + mobile framework · Siemens engagement · Scrum Master'],
+  ['2017', 'Application Support Engineer', 'Pole To Win International', 'Structured testing for Rockstar titles · TestRail repositories']
+].map(r => `<div class="row"><span class="y">${r[0]}</span><div><h4>${esc(r[1])}${r[4] ? '<em>NOW</em>' : ''}</h4><small>${esc(r[2])}</small><p>${esc(r[3])}</p></div></div>`).join('');
+$('#sk').innerHTML = [
+  ['Automation', ['Playwright', 'Selenium', 'Appium', 'WebDriverIO', 'REST Assured', 'TestNG', 'Cucumber']],
+  ['AI & GenAI', ['GenAI QA agents', 'AI-driven automation', 'Prompt engineering']],
+  ['Accessibility', ['Axe-core', 'WCAG 2.1 AA']],
+  ['CI/CD', ['GitHub Actions', 'Jenkins', 'Git']],
+  ['API & Data', ['Postman', 'Swagger', 'MySQL', 'PostgreSQL']],
+  ['Management', ['Jira', 'TestRail', 'Shift-left', 'Risk-based testing']]
+].map(([t, x]) => `<div class="grp"><b>${esc(t)}</b><div>${x.map(s => `<span>${esc(s)}</span>`).join('')}</div></div>`).join('');
+$('#aw').innerHTML = [["'25", 'Best Sprinter', "Domino's"], ["'23", 'Best Team Player', 'Solve.Care'], ["'21", 'Best Employee', 'Quinta Systems'], ["'20", 'Client Appreciation', 'Siemens']]
+  .map(a => `<div><i>${a[0]}</i><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
+const contacts = {
+  MY: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+60 12 747 4204', 'https://wa.me/60127474204'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']],
+  IN: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+91 81058 44868', 'https://wa.me/918105844868'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']]
+};
+const renderLinks = c => { $('#lk').innerHTML = contacts[c].map(([k, v, h], i) => `<a class="${i ? '' : 'p'}" href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(k)}<span>${esc(v)} ↗</span></a>`).join(''); };
+renderLinks('MY');
+$$('#seg button').forEach(b => b.addEventListener('click', () => { $$('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderLinks(b.dataset.c); }));
+
+/* ---------- renderers ---------- */
+const gl = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+gl.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+gl.setClearColor(0x000000, 0);
+gl.outputColorSpace = THREE.SRGBColorSpace;
+gl.toneMapping = THREE.AgXToneMapping ?? THREE.ACESFilmicToneMapping;
+gl.toneMappingExposure = 1.3;
+gl.shadowMap.enabled = true;
+gl.shadowMap.type = THREE.PCFSoftShadowMap;
+gl.domElement.id = 'gl';
+const css = new CSS3DRenderer();
+css.domElement.id = 'css';
+document.body.append(css.domElement, gl.domElement);
+RectAreaLightUniformsLib.init();
+
+const scene = new THREE.Scene();
+{ // evening living room reflections: TV glow, warm lamp, cool window
+  const pmrem = new THREE.PMREMGenerator(gl), s = new THREE.Scene();
+  const room = new THREE.Mesh(new THREE.BoxGeometry(600, 300, 600), new THREE.MeshBasicMaterial({ color: 0x0b0d10, side: THREE.BackSide }));
+  room.position.y = 120;
+  s.add(room);
+  const panel = (w, h, k, x, y, z, c) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(c).multiplyScalar(k), side: THREE.DoubleSide }));
+    m.position.set(x, y, z); m.lookAt(0, 90, 0); s.add(m);
+  };
+  panel(120, 70, 1.6, 0, 125, -280, 0x9ad7ff);
+  panel(50, 60, 2.4, 220, 140, 120, 0xffc98a);
+  panel(160, 100, 0.9, -280, 140, 0, 0x5a78c8);
+  scene.environment = pmrem.fromScene(s, 0.02).texture;
+}
+const cam = new THREE.PerspectiveCamera(32, 1, 4, 3000);
+
+/* ---------- helpers ---------- */
+const hole = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, blending: THREE.NoBlending });
+const rrShape = (w, h, r) => {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+};
+const rr = (w, h, r) => new THREE.ShapeGeometry(rrShape(w, h, r), 8);
+const mesh = (geo, mat, x = 0, y = 0, z = 0, cast = true) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = cast; m.receiveShadow = true; return m; };
+const tex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+const rand = s0 => { let s = s0; return () => (s = (s * 16807) % 2147483647) / 2147483647; };
+
+/* ---------- living room (units ≈ cm, floor y = 0, TV wall at z = -170, sofa faces -z) ---------- */
+const TV_Z = -170;
+{
+  const ft = tex(2048, 1024, (x, w, h) => {
+    x.fillStyle = '#3a2a1e'; x.fillRect(0, 0, w, h);
+    const r = rand(5);
+    for (let row = 0; row < 16; row++) for (let col = 0; col < 6; col++) {
+      const off = (row % 2) * 170;
+      x.fillStyle = `hsl(25,${28 + r() * 10}%,${16 + r() * 7}%)`;
+      x.fillRect(col * 340 + off - 170, row * 64, 336, 62);
+      for (let g = 0; g < 14; g++) { x.strokeStyle = `rgba(0,0,0,${r() * 0.18})`; x.beginPath(); const yy = row * 64 + r() * 62; x.moveTo(col * 340 + off - 170, yy); x.lineTo(col * 340 + off + 166, yy + (r() - 0.5) * 6); x.stroke(); }
+    }
+  });
+  ft.wrapS = ft.wrapT = THREE.RepeatWrapping; ft.repeat.set(2, 2);
+  const floor = mesh(new THREE.PlaneGeometry(900, 900), new THREE.MeshPhysicalMaterial({ map: ft, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.3 }), 0, 0, 0, false);
+  floor.rotation.x = -Math.PI / 2;
+  scene.add(floor);
+  const rug = mesh(rr(300, 210, 8), new THREE.MeshStandardMaterial({ color: 0x3b4252, roughness: 1 }), 0, 0.4, 0, false);
+  rug.rotation.x = -Math.PI / 2;
+  scene.add(rug);
+  const wallM = new THREE.MeshStandardMaterial({ color: 0x252a31, roughness: 0.95 });
+  scene.add(mesh(new THREE.PlaneGeometry(700, 300), wallM, 0, 150, TV_Z - 2, false));
+  const back = mesh(new THREE.PlaneGeometry(700, 300), wallM, 0, 150, 420, false);
+  back.rotation.y = Math.PI;
+  scene.add(back);
+  for (const sx of [-1, 1]) { const w = mesh(new THREE.PlaneGeometry(600, 300), wallM, sx * 300, 150, 125, false); w.rotation.y = -sx * Math.PI / 2; scene.add(w); }
+  // slatted acoustic panel behind the TV
+  const slat = new THREE.MeshStandardMaterial({ color: 0x5a3f2a, roughness: 0.7 });
+  for (let i = 0; i < 26; i++) scene.add(mesh(new THREE.BoxGeometry(3.2, 220, 2.5), slat, -120 + i * 9.6, 120, TV_Z));
+  // window on the left wall with a night skyline
+  const sky = tex(1024, 640, (x, w, h) => {
+    const g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#0b1430'); g.addColorStop(0.7, '#25325e'); g.addColorStop(1, '#3d3f6e');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    const r = rand(9);
+    for (let i = 0; i < 26; i++) {
+      const bw = 30 + r() * 70, bh = 120 + r() * 360, bx = r() * w;
+      x.fillStyle = `rgb(${8 + r() * 10},${10 + r() * 12},${22 + r() * 16})`; x.fillRect(bx, h - bh, bw, bh);
+      for (let wy = h - bh + 10; wy < h - 6; wy += 14) for (let wx = bx + 5; wx < bx + bw - 6; wx += 11) if (r() > 0.62) { x.fillStyle = r() > 0.3 ? '#ffd28a' : '#9fd0ff'; x.fillRect(wx, wy, 5, 7); }
+    }
+  });
+  const win = mesh(new THREE.PlaneGeometry(170, 110), new THREE.MeshBasicMaterial({ map: sky }), -298, 145, 40, false);
+  win.rotation.y = Math.PI / 2;
+  win.material.color.setScalar(1.3);
+  scene.add(win);
+}
+
+/* ---------- TV, console, coffee table, lamp ---------- */
+const TVW = 122, TVH = TVW * 9 / 16;
+const tvGroup = new THREE.Group();
+tvGroup.position.set(0, 128, TV_Z + 4);
+scene.add(tvGroup);
+const black = new THREE.MeshPhysicalMaterial({ color: 0x0e0f12, metalness: 0.5, roughness: 0.35, clearcoat: 0.4 });
+const glass = new THREE.MeshPhysicalMaterial({ color: 0x040405, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02 });
+tvGroup.add(mesh(new RoundedBoxGeometry(TVW + 1.6, TVH + 1.6, 2.4, 3, 0.4), black, 0, 0, -1.2));
+tvGroup.add(mesh(rr(TVW + 1.4, TVH + 1.4, 0.4), glass, 0, 0, 0.01, false));
+const tvHole = mesh(new THREE.PlaneGeometry(TVW, TVH), hole, 0, 0, 0.08, false);
+tvGroup.add(tvHole);
+const tvLight = new THREE.RectAreaLight(0xbfe6ff, 0, TVW, TVH);
+tvLight.position.z = 0.4;
+tvLight.rotation.y = Math.PI;
+tvGroup.add(tvLight);
+{
+  const oak = new THREE.MeshPhysicalMaterial({ color: 0x6b4a30, roughness: 0.55, clearcoat: 0.3 });
+  scene.add(mesh(new RoundedBoxGeometry(180, 42, 42, 3, 1.2), oak, 0, 21 + 8, TV_Z + 24));
+  for (const sx of [-1, 1]) scene.add(mesh(new THREE.BoxGeometry(3, 8, 3), black, sx * 82, 4, TV_Z + 24));
+  scene.add(mesh(new RoundedBoxGeometry(110, 5, 58, 3, 1.6), oak, 0, 38, -10));
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) scene.add(mesh(new THREE.CylinderGeometry(1.4, 1.2, 36, 12), black, sx * 48, 18, -10 + sz * 22));
+  const ceramic = new THREE.MeshPhysicalMaterial({ color: 0xece6dc, roughness: 0.3, clearcoat: 0.8, side: THREE.DoubleSide });
+  scene.add(mesh(new THREE.CylinderGeometry(4, 3.8, 9.5, 48, 1, true), ceramic, 30, 45.25, -4));
+  const tea = mesh(new THREE.CircleGeometry(3.9, 40), new THREE.MeshPhysicalMaterial({ color: 0x7a4a18, roughness: 0.05, clearcoat: 1 }), 30, 48.6, -4, false);
+  tea.rotation.x = -Math.PI / 2;
+  scene.add(tea);
+  scene.add(mesh(new RoundedBoxGeometry(20, 2.4, 14, 2, 0.5), new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.4 }), -26, 41.7, -14));
+}
+let lampSpot;
+{
+  const g = new THREE.Group();
+  g.position.set(130, 0, 110);
+  scene.add(g);
+  g.add(mesh(new THREE.CylinderGeometry(16, 18, 3, 40), black, 0, 1.5, 0));
+  g.add(mesh(new THREE.CylinderGeometry(1.2, 1.2, 150, 12), black, 0, 76, 0));
+  const shade = mesh(new THREE.CylinderGeometry(18, 24, 30, 48, 1, true), new THREE.MeshStandardMaterial({ color: 0xf2e6d0, roughness: 0.9, side: THREE.DoubleSide, emissive: 0xffc98a, emissiveIntensity: 0.6 }), 0, 158, 0, false);
+  g.add(shade);
+  lampSpot = new THREE.SpotLight(0xffc98a, 30000, 600, 1.1, 0.7, 2);
+  lampSpot.position.set(130, 150, 110);
+  lampSpot.target.position.set(40, 40, 60);
+  lampSpot.castShadow = true;
+  lampSpot.shadow.mapSize.set(MOBILE ? 1024 : 2048, MOBILE ? 1024 : 2048);
+  lampSpot.shadow.bias = -0.0004;
+  lampSpot.shadow.normalBias = 0.05;
+  scene.add(lampSpot, lampSpot.target);
+}
+
+/* ---------- sofa ---------- */
+const SEAT = new THREE.Vector3(0, 44, 70);
+const sofaMats = [new THREE.MeshPhysicalMaterial({ color: 0x5d6b62, roughness: 0.92, sheen: 1, sheenRoughness: 0.6, sheenColor: new THREE.Color(0x9fb3a6) })];
+{
+  const [fab] = sofaMats;
+  const s = new THREE.Group();
+  s.position.set(0, 0, SEAT.z);
+  scene.add(s);
+  s.add(mesh(new RoundedBoxGeometry(220, 26, 90, 4, 5), fab, 0, 18, 6));
+  for (const x of [-52, 52]) s.add(mesh(new RoundedBoxGeometry(102, 14, 66, 4, 6), fab, x, SEAT.y - 7, -4));
+  for (const x of [-52, 52]) { const b = mesh(new RoundedBoxGeometry(100, 46, 18, 4, 8), fab, x, SEAT.y + 22, 38); b.rotation.x = -0.18; s.add(b); }
+  for (const sx of [-1, 1]) s.add(mesh(new RoundedBoxGeometry(18, 62, 90, 4, 7), fab, sx * 112, 31, 6));
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) s.add(mesh(new THREE.CylinderGeometry(1.6, 1.2, 6, 12), black, sx * 100, 3, 6 + sz * 38));
+  const pillow = mesh(new RoundedBoxGeometry(40, 38, 12, 4, 6), new THREE.MeshPhysicalMaterial({ color: 0xc2763f, roughness: 0.9, sheen: 1, sheenColor: new THREE.Color(0xffc49a) }), -78, SEAT.y + 14, 24);
+  pillow.rotation.set(-0.3, 0.3, 0.15);
+  s.add(pillow);
+}
+
+/* ---------- laptop on the developer's lap ---------- */
+const alu = new THREE.MeshPhysicalMaterial({ color: 0x2c2e33, metalness: 1, roughness: 0.32, clearcoat: 0.2 });
+const matte = new THREE.MeshStandardMaterial({ color: 0x0b0c0e, roughness: 0.65 });
+const LW = 31.2, LDp = 21.6, SW = 29.6, SH = SW / 1.6, LIDH = 21, CHIN = 1.45;
+const lap = new THREE.Group();
+lap.position.set(0, 60.5, 40);
+lap.rotation.x = 0.06;
+scene.add(lap);
+const lid = new THREE.Group();
+lid.position.set(0, 1.08, -LDp / 2 + 0.36);
+lid.rotation.x = -0.42;
+lap.add(lid);
+let lapHole;
+{
+  lap.add(mesh(new RoundedBoxGeometry(LW, 0.9, LDp, 5, 0.38), alu, 0, 0.57, 0));
+  const keys = new THREE.InstancedMesh(new RoundedBoxGeometry(1, 0.14, 1, 2, 0.06), new THREE.MeshStandardMaterial({ color: 0x0c0d10, roughness: 0.55 }), 6 * 14);
+  const m = new THREE.Matrix4();
+  let i = 0;
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 14; c++) { m.makeScale(1.7, 1, r ? 1.55 : 0.85).setPosition(-12.3 + c * 1.9, 1.0, -LDp / 2 + 1.9 + (r ? 0.6 + r * 1.75 : 0)); keys.setMatrixAt(i++, m); }
+  keys.castShadow = true;
+  lap.add(keys);
+  lid.add(mesh(new RoundedBoxGeometry(LW, LIDH, 0.5, 5, 0.24), alu, 0, LIDH / 2, -0.25));
+  lid.add(mesh(rr(LW - 0.16, LIDH - 0.16, 0.6), glass, 0, LIDH / 2, 0.004, false));
+  lapHole = mesh(new THREE.PlaneGeometry(SW, SH), hole, 0, CHIN + SH / 2, 0.01, false);
+  lid.add(lapHole);
+}
+const lapLight = new THREE.RectAreaLight(0xa7f3d0, 0, SW, SH);
+lapLight.position.set(0, CHIN + SH / 2, 0.2);
+lapLight.rotation.y = Math.PI;
+lid.add(lapLight);
+
+/* ---------- the developer ---------- */
+let person = null;
+const bones = {}, rest = new Map(), AIM = [], personMats = [];
+let lastFade = 1;
+function fadeOccluders(o) {
+  if (Math.abs(o - lastFade) < 0.005) return;
+  lastFade = o;
+  for (const m of personMats) { m.opacity = o; m.transparent = o < 0.999; m.depthWrite = o > 0.5; }
+  if (person) person.visible = o > 0.01;
+}
+const _a = new THREE.Vector3(), _b = new THREE.Vector3(), _q = new THREE.Quaternion(), _pq = new THREE.Quaternion(), _bq = new THREE.Quaternion();
+function aim(bone, child, dir) {
+  bone.getWorldPosition(_a);
+  child.getWorldPosition(_b);
+  _q.setFromUnitVectors(_b.sub(_a).normalize(), dir);
+  bone.getWorldQuaternion(_bq).premultiply(_q);
+  bone.parent.getWorldQuaternion(_pq);
+  bone.quaternion.copy(_pq.invert().multiply(_bq));
+  bone.updateMatrixWorld(true);
+}
+new GLTFLoader().load('models/xbot.glb', g => {
+  person = g.scene;
+  person.traverse(o => {
+    if (o.isBone) { bones[o.name.replace(/^mixamorig:?/, '')] = o; rest.set(o, o.quaternion.clone()); }
+    if (o.isMesh) {
+      o.castShadow = o.receiveShadow = true;
+      o.frustumCulled = false;
+      o.material = /Joint/i.test(o.material.name) ? new THREE.MeshPhysicalMaterial({ color: 0x1b1d22, metalness: 0.3, roughness: 0.5 })
+        : new THREE.MeshPhysicalMaterial({ color: 0x2f4f4a, roughness: 0.7, sheen: 0.9, sheenRoughness: 0.5, sheenColor: new THREE.Color(0x8fd1c4) });
+      personMats.push(o.material);
+    }
+  });
+  person.updateMatrixWorld(true);
+  const headY = bones.HeadTop_End.getWorldPosition(new THREE.Vector3()).y, toeY = bones.LeftToe_End.getWorldPosition(new THREE.Vector3()).y;
+  person.scale.setScalar(178 / (headY - toeY));
+  person.rotation.y = Math.PI;
+  scene.add(person);
+  person.updateMatrixWorld(true);
+  const hips = bones.Hips.getWorldPosition(new THREE.Vector3());
+  person.position.set(SEAT.x - hips.x, SEAT.y + 9 - hips.y, SEAT.z + 2 - hips.z);
+  for (const [b, c] of [['Spine', 'Spine1'], ['Spine1', 'Spine2'], ['Spine2', 'Neck'], ['Neck', 'Head'], ['Head', 'HeadTop_End'],
+    ['LeftUpLeg', 'LeftLeg'], ['LeftLeg', 'LeftFoot'], ['LeftFoot', 'LeftToeBase'], ['RightUpLeg', 'RightLeg'], ['RightLeg', 'RightFoot'], ['RightFoot', 'RightToeBase'],
+    ['LeftArm', 'LeftForeArm'], ['LeftForeArm', 'LeftHand'], ['LeftHand', 'LeftHandMiddle1'], ['RightArm', 'RightForeArm'], ['RightForeArm', 'RightHand'], ['RightHand', 'RightHandMiddle1']])
+    if (bones[b] && bones[c]) AIM.push([b, bones[b], bones[c]]);
+  $('#loading').remove();
+}, undefined, () => { $('#loading').textContent = 'model unavailable'; });
+
+const F = new THREE.Vector3(0, 0, -1), U = new THREE.Vector3(0, 1, 0), R = new THREE.Vector3(1, 0, 0);
+const dv = (f, u, r) => new THREE.Vector3().addScaledVector(F, f).addScaledVector(U, u).addScaledVector(R, r).normalize();
+// laptop on the lap: reclined spine, head tipped down, forearms angled to the keyboard
+const LAP = {
+  Spine: dv(-0.12, 1, 0), Spine1: dv(-0.05, 1, 0), Spine2: dv(0.06, 1, 0), Neck: dv(0.5, 1, 0), Head: dv(0.7, 1, 0),
+  LeftUpLeg: dv(1, -0.02, -0.1), LeftLeg: dv(0.18, -1, -0.02), LeftFoot: dv(1, -0.5, -0.05),
+  RightUpLeg: dv(1, -0.02, 0.1), RightLeg: dv(0.18, -1, 0.02), RightFoot: dv(1, -0.5, 0.05),
+  LeftArm: dv(0.3, -0.95, -0.14), LeftForeArm: dv(1, -0.6, 0.3), LeftHand: dv(1, -0.6, 0.1),
+  RightArm: dv(0.3, -0.95, 0.14), RightForeArm: dv(1, -0.6, -0.3), RightHand: dv(1, -0.6, -0.1)
+};
+// watching the agents: head up toward the TV
+const WATCH = { ...LAP, Neck: dv(0.15, 1, 0), Head: dv(0.12, 1, 0), Spine2: dv(0, 1, 0) };
+// done: arms stretched along the sofa back
+const RELAX = {
+  ...LAP,
+  Spine: dv(-0.3, 1, 0), Spine1: dv(-0.25, 1, 0), Spine2: dv(-0.2, 1, 0), Neck: dv(0.02, 1, 0), Head: dv(0.08, 1, 0),
+  LeftArm: dv(-0.55, 0.15, -1), LeftForeArm: dv(-0.3, -0.25, -1), LeftHand: dv(0, -0.5, -1),
+  RightArm: dv(-0.55, 0.15, 1), RightForeArm: dv(-0.3, -0.25, 1), RightHand: dv(0, -0.5, 1)
+};
+const _d = new THREE.Vector3();
+function posePerson(now, watch, relax) {
+  if (!person) return;
+  for (const [b, q] of rest) b.quaternion.copy(q);
+  person.updateMatrixWorld(true);
+  const typing = (1 - relax) * (1 - watch);
+  for (const [name, bone, child] of AIM) {
+    _d.copy(LAP[name]).lerp(WATCH[name], watch).lerp(RELAX[name], relax);
+    if (typing > 0.01 && name.endsWith('Hand')) _d.y += Math.sin(now / 80 + (name[0] === 'L' ? 0 : 2)) * 0.12 * typing;
+    if (name === 'Head') _d.x += Math.sin(now / 2100) * 0.06;
+    aim(bone, child, _d.normalize());
+  }
+}
+
+/* ---------- the test matrix: 720 tests as 72 tiles, 7 of them flaky ---------- */
+const COLS = 12, ROWS = 6, CELL = 9, GAP = 2.2;
+const FLAKY = [5, 14, 22, 33, 41, 52, 66];
+const grid = new THREE.Group();
+scene.add(grid);
+const tiles = new THREE.InstancedMesh(new RoundedBoxGeometry(CELL, CELL, 1.4, 2, 0.6), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9, depthWrite: false }), COLS * ROWS);
+{
+  const m = new THREE.Matrix4();
+  for (let i = 0; i < COLS * ROWS; i++) {
+    const c = i % COLS, r = (i / COLS) | 0;
+    m.setPosition((c - (COLS - 1) / 2) * (CELL + GAP), (r - (ROWS - 1) / 2) * (CELL + GAP), (Math.sin(c * 0.7) + Math.cos(r * 1.1)) * 3);
+    tiles.setMatrixAt(i, m);
+    tiles.setColorAt(i, new THREE.Color(0.1, 0.6, 0.35));
+  }
+  grid.add(tiles);
+}
+const gridGlow = new THREE.PointLight(0x5eead4, 0, 200, 2);
+grid.add(gridGlow);
+const orbs = [0, 1, 2].map(i => {
+  const g = new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(2, 24, 16), new THREE.MeshBasicMaterial({ color: new THREE.Color(0.5, 2.2, 1.9) })));
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex(128, 128, (x) => { const gr = x.createRadialGradient(64, 64, 2, 64, 64, 64); gr.addColorStop(0, 'rgba(120,255,230,.9)'); gr.addColorStop(1, 'rgba(120,255,230,0)'); x.fillStyle = gr; x.fillRect(0, 0, 128, 128); }), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  glow.scale.setScalar(16);
+  g.add(glow);
+  if (i === 0) g.add(new THREE.PointLight(0x5eead4, 600, 120, 2));
+  g.visible = false;
+  scene.add(g);
+  return g;
+});
+const GRID_HOME = new THREE.Vector3(0, 118, -80);
+
+/* ---------- CSS: laptop screen, TV, project panels ---------- */
+const ideEl = $('#ide'), tvEl = $('#tv');
+const ideObj = new CSS3DObject(ideEl);
+ideObj.position.set(0, CHIN + SH / 2, 0.01);
+ideObj.scale.setScalar(SW / 1280);
+lid.add(ideObj);
+const tvObj = new CSS3DObject(tvEl);
+tvObj.position.z = 0.08;
+tvObj.scale.setScalar(TVW / 1280);
+tvGroup.add(tvObj);
+const panels = $$('#panels .pc').map(el => {
+  const o = new CSS3DObject(el);
+  const hm = new THREE.Mesh(new THREE.BufferGeometry(), hole);
+  hm.castShadow = true;
+  const g = new THREE.Group();
+  g.add(hm, o);
+  g.scale.setScalar(0.09);
+  g.visible = o.visible = false;
+  scene.add(g);
+  return { el, o, hm, g };
+});
+scene.traverse(o => { if (o.isMesh) [].concat(o.material).forEach(mt => { if ('envMapIntensity' in mt) mt.envMapIntensity = 0.7; }); });
+
+/* ---------- ambient light ---------- */
+scene.add(new THREE.HemisphereLight(0x4f6a9a, 0x1a120c, 0.5));
+const moon = new THREE.DirectionalLight(0x8aa6ff, 0.5);
+moon.position.set(-300, 200, 60);
+scene.add(moon);
+
+/* ---------- scroll choreography ---------- */
+// v = camera view, st = laptop stage, tv = 0 dashboard red · 1 dashboard green · 2 portfolio, y = portfolio scroll,
+// grid = test matrix rises, fix = agents fixing flaky tiles, cards = project panels out, watch/relax = body pose
+const K = [
+  { p: 0.00, v: 'hero', st: 0, tv: 0, y: 'top' },
+  { p: 0.04, v: 'hero', st: 0, tv: 0, y: 'top' },
+  { p: 0.12, v: 'lap', st: 1, tv: 0, y: 'top' },
+  { p: 0.18, v: 'fillL', st: 1, tv: 0, y: 'top' },
+  { p: 0.24, v: 'fillL', st: 2, tv: 0, y: 'top' },
+  { p: 0.31, v: 'grid', st: 2, tv: 0, y: 'top', grid: 1, watch: 1 },
+  { p: 0.36, v: 'fly', st: 2, tv: 0, y: 'top', grid: 1, watch: 1 },
+  { p: 0.45, v: 'fly2', st: 2, tv: 0, y: 'top', grid: 1, fix: 1, watch: 1 },
+  { p: 0.5, v: 'grid', st: 3, tv: 1, y: 'top', grid: 1, fix: 1, watch: 1 },
+  { p: 0.55, v: 'fillT', st: 3, tv: 2, y: 'top', fix: 1 },
+  { p: 0.61, v: 'arc', st: 3, tv: 2, y: 'top', fix: 1, cards: 1, watch: 1 },
+  { p: 0.67, v: 'arc2', st: 3, tv: 2, y: 'top', fix: 1, cards: 1, watch: 1 },
+  { p: 0.72, v: 'fillT', st: 3, tv: 2, y: 'exp', fix: 1 },
+  { p: 0.77, v: 'fillT', st: 3, tv: 2, y: 'skills', fix: 1 },
+  { p: 0.83, v: 'fillT', st: 3, tv: 2, y: 'contact', fix: 1 },
+  { p: 0.87, v: 'fillT', st: 3, tv: 2, y: 'contact', fix: 1 },
+  { p: 0.96, v: 'end', st: 3, tv: 2, y: 'contact', fix: 1, relax: 1 },
+  { p: 1.00, v: 'end', st: 3, tv: 2, y: 'contact', fix: 1, relax: 1 }
+];
+const CHAP = [[0.12, 0.2, '<b>01</b> · Launching the agent fleet'], [0.2, 0.29, '<b>02</b> · 7 flaky tests, 7 root causes'], [0.29, 0.48, '<b>03</b> · Agents hunt through the suite'], [0.48, 0.54, '<b>04</b> · 720 / 720 green'], [0.56, 0.7, '<b>05</b> · What else shipped'], [0.7, 0.9, '<b>06</b> · The portfolio']];
+const VIEWS = {}, Y = {};
+let innerMax = 1, laptopTip;
+const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+const orbit = (t, dist, az, el) => V(t.x + dist * Math.cos(el) * Math.sin(az), t.y + dist * Math.sin(el), t.z + dist * Math.cos(el) * Math.cos(az));
+const fit = (w, h) => {
+  const f = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  return Math.max(h / 2 / f, w / 2 / (f * cam.aspect));
+};
+const offIn = el => { let y = 0; while (el && el.id !== 'site') { y += el.offsetTop; el = el.offsetParent; } return y; };
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  cam.aspect = w / h;
+  cam.updateProjectionMatrix();
+  gl.setSize(w, h);
+  css.setSize(w, h);
+  const wide = cam.aspect > 1;
+  scene.updateMatrixWorld(true);
+  const sl = lapHole.getWorldPosition(V());
+  const sn = V(0, 0, 1).applyQuaternion(lapHole.getWorldQuaternion(new THREE.Quaternion()));
+  const st = tvHole.getWorldPosition(V());
+  laptopTip = sl.clone();
+  const v = (tgt, pos) => ({ tgt, pos });
+  const t0 = wide ? V(-60, 100, -20) : V(0, 140, -20);
+  const tA = V(0, 125, -110);
+  const t3 = wide ? V(0, 92, 150) : V(0, 120, 70);
+  Object.assign(VIEWS, {
+    hero: v(t0, orbit(t0, wide ? fit(300, 170) : fit(140, 230), 0.42, 0.2)),
+    lap: v(sl, orbit(sl, wide ? fit(60, 34) : fit(42, 76), 1.05, 0.45)),
+    fillL: v(sl, sl.clone().addScaledVector(sn, fit(SW, SH))),
+    grid: v(GRID_HOME, orbit(GRID_HOME, wide ? fit(190, 105) : fit(140, 250), 0.22, 0.1)),
+    fly: v(V(-20, 118, -84), orbit(V(-20, 118, -84), wide ? fit(80, 45) : fit(60, 110), -0.55, 0.08)),
+    fly2: v(V(25, 118, -84), orbit(V(25, 118, -84), wide ? fit(80, 45) : fit(60, 110), 0.5, -0.02)),
+    fillT: v(st, st.clone().add(V(0, 0, fit(TVW, TVH)))),
+    arc: v(tA, orbit(tA, wide ? fit(260, 145) : fit(150, 270), 0.12, 0.08)),
+    arc2: v(tA, orbit(tA, wide ? fit(260, 145) : fit(150, 270), -0.18, 0.12)),
+    end: v(t3, orbit(t3, wide ? fit(260, 145) : fit(80, 150), -2.6, 0.16))
+  });
+  panels.forEach((c, i) => {
+    c.w ||= c.el.offsetWidth; c.h ||= c.el.offsetHeight;
+    c.hm.geometry.dispose();
+    c.hm.geometry = rr(c.w, c.h, 20);
+    const n = panels.length, a = (i - (n - 1) / 2);
+    c.home = wide ? V(a * 44, 128 + (i % 2 ? -4 : 4), -112 + Math.abs(a) * 12) : V(a * 0 + (i % 2 ? 14 : -14), 170 - i * 26, -100);
+    c.from = V(a * 24, 128, TV_Z + 8);
+    c.ry = wide ? -a * 0.22 : 0;
+  });
+  innerMax = Math.max(1, $('#site').offsetHeight - $('#wvp').clientHeight);
+  const at = y => clamp(Math.round(y), 0, innerMax);
+  Object.assign(Y, { top: 0, exp: at(offIn($('#w-exp'))), skills: at(offIn($('#w-skills'))), contact: at(offIn($('#w-contact'))) });
+}
+
+const siteEl = $('#site'), sbar = $('#sbar'), sbarTxt = $('#sbarTxt');
+const heroOv = $('#heroOv'), endOv = $('#endOv'), where = $('#where'), bar = $('#bar'), topEl = $('.top'), chap = $('#chap');
+const showOv = (el, o) => { el.style.opacity = o; el.style.visibility = o < 0.02 ? 'hidden' : 'visible'; el.style.pointerEvents = o > 0.6 ? 'auto' : 'none'; };
+const target = () => clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight));
+let p = target(), mx = 0, my = 0, smx = 0, smy = 0, last = performance.now(), lastStage = -1, lastTv = -1, lastWhere = '', lastChap = '';
+addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; } }, { passive: true });
+
+function setStage(s) {
+  ideEl.className = 'ide s' + s;
+  sbar.className = 'sbar' + (s === 2 ? ' bad' : s === 3 ? ' ok' : '');
+  sbarTxt.textContent = ['idle', '✦ 3 agents replaying 40 runs', '⚠ 7 flaky tests found', '✓ suite stable · 720/720'][s];
+}
+function setTv(s) {
+  tvEl.className = 'tv' + (s >= 1 ? ' green' : '') + (s === 2 ? ' port' : '');
+  $('#tvBadge').textContent = s >= 1 ? 'stable' : '7 flaky';
+  $('#kpPass').textContent = s >= 1 ? '100%' : '96.1%';
+  $('#kpFlaky').textContent = s >= 1 ? '0' : '7';
+  $('#kpTime').textContent = s >= 1 ? '20m' : '31m';
+  $('#tvFoot').textContent = s >= 1 ? 'agents: done · PR #517' : 'agents: hunting…';
+}
+
+const _m = new THREE.Matrix4(), _c = new THREE.Color(), _tp = new THREE.Vector3();
+const tilePos = i => { tiles.getMatrixAt(i, _m); return _tp.setFromMatrixPosition(_m).clone().applyMatrix4(grid.matrixWorld); };
+const FIX_AT = FLAKY.map((_, k) => (k + 1) / (FLAKY.length + 1));
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  p += (target() - p) * Math.min(1, dt * 7);
+  smx += (mx - smx) * Math.min(1, dt * 4); smy += (my - smy) * Math.min(1, dt * 4);
+
+  let k = 0;
+  while (k < K.length - 2 && p >= K[k + 1].p) k++;
+  const A = K[k], B = K[k + 1], t = ss(clamp((p - A.p) / (B.p - A.p)));
+  const pos = VIEWS[A.v].pos.clone().lerp(VIEWS[B.v].pos, t), tgt = VIEWS[A.v].tgt.clone().lerp(VIEWS[B.v].tgt, t);
+  const g = f => lerp(A[f] || 0, B[f] || 0, t);
+  const isFill = v => v === 'fillL' || v === 'fillT';
+  const free = 1 - (isFill(A.v) && isFill(B.v) ? 1 : isFill(A.v) || isFill(B.v) ? ss(isFill(A.v) ? 1 - t : t) : 0);
+  pos.x += smx * 6 * free;
+  pos.y -= smy * 4 * free;
+  cam.position.copy(pos);
+  cam.lookAt(tgt);
+
+  const stage = t < 0.5 ? A.st : B.st, tvs = t < 0.5 ? A.tv : B.tv;
+  if (stage !== lastStage) { setStage(stage); lastStage = stage; }
+  if (tvs !== lastTv) { setTv(tvs); lastTv = tvs; }
+  siteEl.style.transform = `translate3d(0,${-lerp(Y[A.y], Y[B.y], t).toFixed(1)}px,0)`;
+  tvLight.intensity = 1.6;
+  lapLight.intensity = 1.4;
+  posePerson(now, g('watch'), g('relax'));
+  // fade the developer only when the camera is looking at the laptop through them
+  fadeOccluders(A.v === 'fillT' || B.v === 'fillT' ? 1 : clamp(free * 2.5));
+
+  // test matrix rises from the coffee table, agents fix flaky tiles one by one
+  const gr = g('grid'), fix = g('fix');
+  grid.visible = gr > 0.01;
+  if (grid.visible) {
+    grid.position.lerpVectors(V(0, 50, -10), GRID_HOME, ss(gr));
+    grid.scale.setScalar(0.15 + 0.85 * ss(gr));
+    grid.rotation.y = Math.sin(now / 4000) * 0.06;
+    tiles.material.opacity = 0.9 * ss(gr);
+    gridGlow.intensity = 300 * gr;
+    for (let i = 0; i < COLS * ROWS; i++) {
+      const fk = FLAKY.indexOf(i);
+      if (fk < 0) _c.setRGB(0.08, 0.55 + 0.1 * Math.sin(now / 900 + i), 0.32);
+      else if (fix >= FIX_AT[fk]) _c.setRGB(0.15, 1.3, 0.75);
+      else _c.setRGB(1.6, Math.sin(now / 120 + i) > 0 ? 0.25 : 0.9, 0.15);
+      tiles.setColorAt(i, _c);
+    }
+    tiles.instanceColor.needsUpdate = true;
+    grid.updateMatrixWorld(true);
+  }
+  orbs.forEach((o, oi) => {
+    const mine = FLAKY.map((cell, kk) => ({ cell, at: FIX_AT[kk] })).filter((_, kk) => kk % 3 === oi);
+    const active = gr > 0.6 && fix > 0.001 && fix < 0.999;
+    o.visible = active;
+    if (!active) return;
+    let from = laptopTip, prevAt = 0, to = null, toAt = 1;
+    for (const m of mine) { if (fix < m.at) { to = tilePos(m.cell); toAt = m.at; break; } from = tilePos(m.cell); prevAt = m.at; }
+    if (!to) { to = laptopTip; toAt = 1; }
+    const u = ss(clamp((fix - prevAt) / Math.max(0.001, toAt - prevAt)));
+    o.position.lerpVectors(from, to, u);
+    o.position.y += Math.sin(u * Math.PI) * 18;
+    o.position.x += Math.sin(now / 300 + oi) * 0.8;
+  });
+
+  // project panels slide out of the TV into an arc
+  const cards = g('cards');
+  panels.forEach((c, i) => {
+    const a = ss(clamp(cards * 1.5 - i * 0.12));
+    const on = a > 0.01;
+    if (c.g.visible !== on) c.g.visible = c.o.visible = on;
+    if (!on) return;
+    c.el.style.opacity = clamp(a * 3).toFixed(3);
+    c.g.position.lerpVectors(c.from, c.home, a);
+    c.g.position.y += Math.sin(now / 900 + i * 1.7) * 1.2 * a;
+    c.g.rotation.set(0, c.ry * a, 0);
+  });
+
+  let ch = '';
+  for (const [a, b, s] of CHAP) if (p >= a && p < b) ch = s;
+  if (ch !== lastChap) { if (ch) chap.innerHTML = ch; chap.style.opacity = ch ? 1 : 0; lastChap = ch; }
+  const label = p < 0.12 ? 'Intro' : p < 0.54 ? 'Flaky hunt' : p < 0.7 ? 'Selected work' : p > 0.92 ? 'Say hello' : 'Portfolio';
+  if (label !== lastWhere) { where.textContent = label; lastWhere = label; }
+
+  showOv(heroOv, 1 - rng(p, 0.015, 0.06));
+  showOv(endOv, rng(p, 0.92, 0.97));
+  topEl.style.opacity = free.toFixed(3);
+  topEl.style.visibility = free < 0.02 ? 'hidden' : 'visible';
+  where.style.opacity = (1 - rng(p, 0.92, 0.97)).toFixed(3);
+  bar.style.width = (p * 100).toFixed(2) + '%';
+
+  gl.render(scene, cam);
+  css.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+
+$('[data-top]').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+layout();
+let rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+document.fonts?.ready.then(layout);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

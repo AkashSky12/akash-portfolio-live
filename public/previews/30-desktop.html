@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Akash Simon — QA Lead &amp; GenAI Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#2f6bff;--ink:#121418;--mut:#5c626b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#e4e0da}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#f1eee9 0%,#e6e1da 55%,#d6d0c7 100%) fixed;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+#track{height:1400vh}
+#css,#gl{position:fixed!important;inset:0}
+#css{z-index:0}
+#gl{z-index:1;pointer-events:none}
+
+.ov{position:fixed;z-index:3}
+.hero-ov{left:6vw;top:50%;transform:translateY(-50%);max-width:min(440px,36vw)}
+.eb{display:inline-flex;align-items:center;gap:8px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.eb i{width:7px;height:7px;border-radius:50%;background:#16a34a;box-shadow:0 0 8px rgba(22,163,74,.6)}
+.hero-ov h1{font-size:clamp(24px,min(4.4vw,8.5vh),66px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:18px 0 16px}
+.hero-ov h1 span{color:var(--acc)}
+.hero-ov p{color:var(--mut);font-size:clamp(13px,2.2vh,17px);line-height:1.6}
+.hero-ov p b{color:var(--ink);font-weight:600}
+.hint{margin-top:26px;display:flex;align-items:center;gap:10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--mut)}
+.hint i{width:22px;height:34px;border:1.5px solid #a9a39a;border-radius:12px;position:relative}
+.hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--acc);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+.end-ov{right:6vw;top:50%;transform:translateY(-50%);max-width:min(400px,34vw)}
+.end-ov h2{font-size:clamp(24px,min(3.8vw,7.5vh),54px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:16px 0 14px}
+.end-ov h2 span{color:var(--acc)}
+.end-ov p{color:var(--mut);line-height:1.6;margin-bottom:22px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:600;font-size:15px;background:#121418;color:#fff}
+.btn.g{background:rgba(255,255,255,.6);color:var(--ink);border:1px solid rgba(0,0,0,.1)}
+.btn.a{background:var(--acc);color:#fff}
+@media(max-height:520px){.hint{display:none}.hero-ov h1,.end-ov h2{margin:10px 0 8px}.end-ov p{margin-bottom:12px;font-size:13px}.btn{padding:9px 13px;font-size:13px}}
+@media(max-aspect-ratio:1/1){
+  .hero-ov,.end-ov{left:6vw;right:6vw;top:84px;transform:none;max-width:none}
+  .hero-ov h1{font-size:40px}.end-ov h2{font-size:34px}
+  .hero-ov p{font-size:15px}
+}
+.top{position:fixed;z-index:4;inset:18px 24px auto;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:700 12px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#5b8cff,#1f4fd8)}
+.where{font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.07)}
+.bar{position:fixed;z-index:4;left:0;bottom:0;height:2px;background:var(--acc);width:0}
+.noscr{position:fixed;inset:0;display:grid;place-items:center;color:var(--mut)}
+
+/* ===== the website that lives inside the desktop screen ===== */
+.scr{position:relative;overflow:hidden;background:#fbfbfc;color:#0f1013;font:15px/1.55 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;container-type:inline-size;-webkit-font-smoothing:antialiased}
+.mbar{position:absolute;inset:0 0 auto;height:26px;display:flex;align-items:center;gap:18px;padding:0 16px;font-size:12.5px;font-weight:500;color:#1d1d1f;background:#e9e9ed;z-index:6}
+.mbar b{font-weight:700}
+.mbar .r{margin-left:auto;display:flex;gap:14px;align-items:center}
+.mbar svg{width:15px;height:15px}
+.brw{position:absolute;top:26px;left:0;right:0;height:48px;display:flex;align-items:center;gap:16px;padding:0 16px;background:#f3f3f6;border-bottom:1px solid #dcdce1;z-index:6}
+.tl{display:flex;gap:8px}.tl i{display:block;width:12px;height:12px;border-radius:50%;background:#ff5f57}.tl i:nth-child(2){background:#febc2e}.tl i:nth-child(3){background:#28c840}
+.arw{display:flex;gap:12px;color:#9a9aa0;font-size:17px}
+.url{flex:1;max-width:440px;margin:0 auto;height:30px;border-radius:8px;background:#e5e5ea;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;color:#2c2c30}
+.url svg{width:11px;height:11px}
+.brw .sp{width:90px}
+.vp{position:absolute;top:74px;left:0;right:0;bottom:0;overflow:hidden}
+.snav{position:absolute;inset:0 0 auto;height:58px;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:#fbfbfc;border-bottom:1px solid #ececf0}
+.snav .lg{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.snav .lg i{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 11px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#5b8cff,#1f4fd8)}
+.snav nav{display:flex;gap:4px}
+.snav nav button{padding:7px 12px;border-radius:8px;font-size:14px;font-weight:500;color:#4a4d55}
+.snav nav button:hover,.snav nav button.on{background:#efeff2;color:#0f1013}
+.snav .cta{padding:9px 14px;border-radius:9px;background:#0f1013;color:#fff;font-size:14px;font-weight:600}
+.site{position:relative;padding-top:58px;will-change:transform}
+.sec{padding:64px 48px;max-width:1120px;margin:0 auto}
+.k{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.h2{font-size:40px;line-height:1.05;letter-spacing:-.04em;font-weight:800;margin:10px 0 30px;max-width:680px}
+.rv{opacity:0;transform:perspective(900px) translateY(34px) rotateX(18deg);transform-origin:50% 100%;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-top:48px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid #e6e6ea;font-size:13px;font-weight:500;color:#3a3d44}
+.chip i{width:7px;height:7px;border-radius:50%;background:#16a34a}
+.hero h1{font-size:62px;line-height:1;letter-spacing:-.05em;font-weight:800;margin:20px 0 18px}
+.hero h1 span{color:var(--acc)}
+.hero p.l{font-size:18px;color:#4a4d55;max-width:520px}
+.hero .b{display:flex;gap:10px;margin-top:26px}
+.hero .b a,.hero .b button{padding:12px 18px;border-radius:11px;font-weight:600;font-size:15px}
+.hero .b .p{background:#0f1013;color:#fff}
+.hero .b .s{background:#fff;border:1px solid #e1e1e6}
+.run{border-radius:18px;background:#0f1115;color:#d7dae0;padding:18px;box-shadow:0 30px 60px -30px rgba(15,16,19,.45);font:13px/1.5 'JetBrains Mono',monospace}
+.run .rh{display:flex;align-items:center;gap:8px;color:#8b909a;padding-bottom:12px;border-bottom:1px solid #22252c}
+.run .rh .ps{margin-left:auto;font-size:11px;font-weight:600;color:#34d399;background:rgba(52,211,153,.12);padding:3px 8px;border-radius:6px}
+.run ul{list-style:none;padding:10px 0}
+.run li{display:flex;align-items:center;gap:10px;padding:5px 0}
+.run li i{width:15px;height:15px;border-radius:50%;background:#34d399;display:grid;place-items:center;font-style:normal;font-size:10px;color:#0f1115;font-weight:800}
+.run li span{margin-left:auto;color:#6c717b}
+.run .rf{display:flex;align-items:center;gap:14px;padding-top:12px;border-top:1px solid #22252c}
+.run .rf b{font:800 28px Inter;color:#fff;letter-spacing:-.03em}
+.run .rf small{color:#8b909a}
+.meter{flex:1;height:6px;border-radius:6px;background:#22252c;overflow:hidden}
+.meter i{display:block;height:100%;width:98.7%;background:linear-gradient(90deg,#34d399,#22c55e)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.st{padding:20px;border-radius:16px;background:#fff;border:1px solid #ececf0}
+.st b{display:block;font-size:34px;font-weight:800;letter-spacing:-.04em}
+.st span{font-size:13px;color:#6a6d75}
+.fl{font:15px/1.55 Inter,system-ui,sans-serif;color:#0f1013;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.alt{background:#f3f3f6}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wc{padding:24px;border-radius:18px;background:#fff;border:1px solid #e8e8ec;display:flex;flex-direction:column;gap:8px}
+.wc .t{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7a7d85}
+.wc h3{font-size:21px;letter-spacing:-.025em;line-height:1.2}
+.wc p{color:#5a5d65;font-size:14.5px}
+.wc .m{margin-top:auto;padding-top:14px;border-top:1px solid #efeff2;display:flex;align-items:baseline;gap:10px}
+.wc .m b{font-size:28px;font-weight:800;letter-spacing:-.04em;color:var(--acc)}
+.wc .m span{font-size:13px;color:#7a7d85}
+.tlx{border-left:2px solid #e3e3e8;margin-left:8px}
+.row{position:relative;display:grid;grid-template-columns:90px 1fr;gap:20px;padding:0 0 30px 28px}
+.row::before{content:"";position:absolute;left:-8px;top:4px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #c9c9d0}
+.row.now::before{border-color:var(--acc)}
+.row .y{font:600 13px 'JetBrains Mono',monospace;color:#7a7d85;padding-top:2px}
+.row h4{font-size:19px;letter-spacing:-.02em}
+.row h4 em{font-style:normal;font:600 10px 'JetBrains Mono',monospace;color:var(--acc);background:#e8efff;padding:3px 7px;border-radius:5px;margin-left:8px;vertical-align:3px}
+.row small{display:block;color:#6a6d75;font-size:14px;margin:2px 0 6px}
+.row p{color:#4a4d55;font-size:14.5px}
+.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grp{padding:20px;border-radius:16px;background:#fff;border:1px solid #e8e8ec}
+.grp b{display:block;font-size:15px;margin-bottom:12px}
+.grp div{display:flex;flex-wrap:wrap;gap:6px}
+.grp span{font-size:13px;padding:5px 10px;border-radius:7px;background:#f3f3f6;color:#30333a}
+.aw{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.aw div{padding:18px;border-radius:16px;background:#0f1013;color:#fff}
+.aw i{font:600 12px 'JetBrains Mono',monospace;font-style:normal;color:#7ea2ff}
+.aw b{display:block;font-size:17px;letter-spacing:-.02em;margin:6px 0 2px}
+.aw span{font-size:13px;color:#9ca1a9}
+.ct{border-radius:24px;background:#0f1013;color:#fff;padding:44px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.ct h2{font-size:44px;letter-spacing:-.045em;line-height:1.02;font-weight:800;margin:10px 0 12px}
+.ct h2 span{color:#7ea2ff}
+.ct .k{color:#7ea2ff}
+.ct p{color:#9ca1a9}
+.seg{display:inline-flex;padding:4px;border-radius:10px;background:#1c1e23;margin-bottom:12px}
+.seg button{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:#9ca1a9}
+.seg button.on{background:#fff;color:#0f1013}
+.lk{display:grid;gap:8px}
+.lk a{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-radius:12px;background:#1a1c21;border:1px solid #272a31;font-weight:600;font-size:15px}
+.lk a:hover{border-color:var(--acc)}
+.lk a span{color:#6c717b;font-size:13px;font-weight:500}
+.lk a.p{background:var(--acc);border-color:var(--acc)}
+.lk a.p span{color:#d6e2ff}
+.ft{display:flex;justify-content:space-between;padding:28px 48px 36px;max-width:1120px;margin:0 auto;color:#8a8d95;font-size:13px}
+.glare{position:absolute;inset:0;pointer-events:none;z-index:8;background:linear-gradient(115deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.04) 26%,rgba(255,255,255,0) 40%)}
+.lock{position:absolute;inset:0;z-index:9;pointer-events:none;color:#fff;text-align:center;background:radial-gradient(90% 80% at 25% 20%,#7fa6ff 0%,rgba(127,166,255,0) 60%),radial-gradient(80% 80% at 85% 90%,#ff9bb3 0%,rgba(255,155,179,0) 60%),linear-gradient(160deg,#2a3f9e,#5b3fa6 55%,#c06a8f)}
+.lock .lt{font-size:120px;font-weight:700;letter-spacing:-.04em;line-height:1;margin-top:8%;text-shadow:0 4px 30px rgba(0,0,0,.15)}
+.lock .ld{font-size:22px;font-weight:500;opacity:.9;margin-top:6px}
+.lock .lu{position:absolute;left:0;right:0;bottom:9%;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:17px;font-weight:600}
+.lock .lu i{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font:700 22px Inter;font-style:normal;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35)}
+.lock .lu small{font-size:13px;font-weight:500;opacity:.8}
+@container (max-width:980px){
+  .sec{padding:48px 32px}.snav{padding:0 24px}.snav nav button{padding:7px 9px}
+  .hero{grid-template-columns:1fr;padding-top:36px}.run{display:none}
+  .hero h1{font-size:50px}.h2{font-size:34px}
+  .sk{grid-template-columns:1fr 1fr}.aw{grid-template-columns:1fr 1fr}
+  .ct{grid-template-columns:1fr;padding:32px}.ct h2{font-size:36px}
+  .ft{padding:24px 32px 30px}
+  .lock .lt{font-size:96px}
+}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="track"></div>
+
+<div class="top"><a class="brand" href="#" data-top><i>AS</i>Akash Simon</a><span class="where" id="where">Intro</span></div>
+<div class="bar" id="bar"></div>
+
+<div class="ov hero-ov" id="heroOv">
+  <span class="eb"><i></i>Available for senior roles</span>
+  <h1>Building reliable software through <span>automation &amp; AI.</span></h1>
+  <p>I'm <b>Akash Simon</b> — QA Lead &amp; GenAI Automation Engineer. Take a seat at the desk to explore the portfolio.</p>
+  <div class="hint"><i></i>SCROLL TO SIT DOWN</div>
+</div>
+<div class="ov end-ov" id="endOv">
+  <span class="eb"><i></i>Kuala Lumpur · open to relocation</span>
+  <h2>Let's build something <span>reliable.</span></h2>
+  <p>Senior QA architect, automation lead or AI-augmented testing roles — anywhere in the world.</p>
+  <div class="btns"><a class="btn a" href="mailto:akash.simon@outlook.com">Email me</a><a class="btn g" href="https://www.linkedin.com/in/akash-simon/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn g" href="../resume/Akash_Simon_CV.pdf" download>Résumé</a></div>
+</div>
+
+<!-- screen content: mounted into the 3D display by the script -->
+<div class="scr" id="scr">
+  <div class="mbar"><b>Safari</b><span>File</span><span>Edit</span><span>View</span><span>History</span><span class="r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/></svg><span id="clk">9:41</span></span></div>
+  <div class="brw"><div class="tl"><i></i><i></i><i></i></div><div class="arw">‹ ›</div><div class="url"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 10V8a6 6 0 1 1 12 0v2h1v12H5V10h1zm2 0h8V8a4 4 0 1 0-8 0v2z"/></svg>akashsimon.dev</div><span class="sp"></span></div>
+  <div class="vp" id="vp">
+    <div class="site" id="site">
+      <section class="sec" id="s-top">
+        <div class="hero">
+          <div>
+            <span class="chip rv"><i></i>QA Lead &amp; GenAI Automation Engineer</span>
+            <h1 class="rv">Quality as a <span>competitive advantage.</span></h1>
+            <p class="l rv">I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens.</p>
+            <div class="b rv"><button class="p" data-go="work">See my work</button><a class="s" href="../resume/Akash_Simon_CV.pdf" download>Download CV</a></div>
+          </div>
+          <div class="run rv">
+            <div class="rh">● CI · main · run #2418<span class="ps">PASSED</span></div>
+            <ul>
+              <li><i>✓</i>checkout.spec.py<span>48 · 52s</span></li>
+              <li><i>✓</i>a11y-wcag21aa.spec.py<span>31 · 40s</span></li>
+              <li><i>✓</i>LoginFlowTest.java<span>22 · 1m04</span></li>
+              <li><i>✓</i>orders.api.contract<span>64 · 18s</span></li>
+              <li><i>✓</i>genai-agent.smoke<span>12 · 33s</span></li>
+            </ul>
+            <div class="rf"><b>98.7%</b><div class="meter"><i></i></div><small>pass rate · 12 markets</small></div>
+          </div>
+        </div>
+        <div class="stats rv" id="stats"><div class="st"><b>10+</b><span>Years in QA</span></div><div class="st"><b>12+</b><span>Countries / regions</span></div><div class="st"><b>~40%</b><span>Less test authoring</span></div><div class="st"><b>10+</b><span>Engineers led</span></div></div>
+      </section>
+      <div class="alt"><section class="sec" id="s-work">
+        <span class="k rv">Selected work</span><h2 class="h2 rv">Quality systems, built like products.</h2>
+        <div class="work" id="work"></div>
+      </section></div>
+      <section class="sec" id="s-exp">
+        <span class="k rv">Experience</span><h2 class="h2 rv">Nearly a decade of quality engineering.</h2>
+        <div class="tlx" id="exp"></div>
+      </section>
+      <div class="alt"><section class="sec" id="s-skills">
+        <span class="k rv">Skills &amp; recognition</span><h2 class="h2 rv">A battle-tested toolkit.</h2>
+        <div class="sk" id="sk"></div>
+        <div class="aw" id="aw"></div>
+      </section></div>
+      <section class="sec" id="s-contact">
+        <div class="ct rv">
+          <div><span class="k">Contact</span><h2>Let's build something <span>reliable.</span></h2><p>Open to senior QA architect, automation lead and AI-augmented testing roles globally.</p></div>
+          <div><div class="seg" id="seg"><button class="on" data-c="MY">Malaysia</button><button data-c="IN">India</button></div><div class="lk" id="lk"></div></div>
+        </div>
+      </section>
+      <div class="ft"><span>© 2026 Akash Simon</span><span>Kuala Lumpur · Bangalore</span></div>
+    </div>
+    <div class="snav"><span class="lg"><i>AS</i>Akash Simon</span><nav id="snav"><button data-go="work">Work</button><button data-go="exp">Experience</button><button data-go="skills">Skills</button><button data-go="contact">Contact</button></nav><button class="cta" data-go="contact">Hire me</button></div>
+  </div>
+  <div class="glare"></div>
+  <div class="lock" id="off"><div class="lt" id="lt">9:41</div><div class="ld" id="ld">Wednesday</div><div class="lu"><i>AS</i>Akash Simon<small>Scroll to unlock</small></div></div>
+</div>
+<noscript><div class="noscr">This preview needs JavaScript.</div></noscript>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = t => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+const rng = (p, a, b) => ss(clamp((p - a) / (b - a)));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ---------- screen site content ---------- */
+$('#work').innerHTML = [
+  ["GenAI · Domino's", 'GenAI QA agent infrastructure, from zero.', 'Agents for test case generation, synthetic data and exploratory workflows across 12+ markets.', '~40%', 'less authoring per sprint'],
+  ["Accessibility · Domino's EU", 'WCAG 2.1 AA, enforced in CI.', 'Axe-core inside Playwright — violations raised as first-class CI defects, not afterthoughts.', 'AA', 'WCAG 2.1 in every pipeline'],
+  ['Framework · Quinta / Siemens', 'One framework for web, Android & iOS.', 'Selenium (Java) + TestNG + Appium with CI/CD quality gates and shared page objects.', '6 wks', 'sole E2E ownership · award'],
+  ['Healthcare · Solve.Care', 'Automation for a live patient platform.', 'Blockchain API contract testing plus BMI, heart-rate and ECG data validation.', '300+', 'tests in 3 sprints']
+].map(w => `<article class="wc"><span class="t">${esc(w[0])}</span><h3>${esc(w[1])}</h3><p>${esc(w[2])}</p><div class="m"><b>${esc(w[3])}</b><span>${esc(w[4])}</span></div></article>`).join('');
+$('#exp').innerHTML = [
+  ['2023 —', 'Software Quality Engineer', "Domino's Pizza Enterprises · Kuala Lumpur", 'GenAI QA agents · Axe-core WCAG 2.1 AA · GitHub Actions · 12+ platforms', 1],
+  ['2022', 'Senior Automation QA Engineer', 'Solve.Care · Bangalore', 'Selenium + TestNG framework · blockchain API testing · led a QA team of 10'],
+  ['2017', 'Senior Test Engineer', 'Quinta Systems · Bangalore', 'Hybrid web + mobile framework · Siemens engagement · Scrum Master'],
+  ['2017', 'Application Support Engineer', 'Pole To Win International', 'Structured testing for Rockstar titles · TestRail repositories']
+].map(r => `<div class="row rv${r[4] ? ' now' : ''}"><span class="y">${r[0]}</span><div><h4>${esc(r[1])}${r[4] ? '<em>NOW</em>' : ''}</h4><small>${esc(r[2])}</small><p>${esc(r[3])}</p></div></div>`).join('');
+$('#sk').innerHTML = [
+  ['Automation', ['Playwright', 'Selenium', 'Appium', 'WebDriverIO', 'REST Assured', 'TestNG', 'Cucumber']],
+  ['AI & GenAI', ['GenAI QA agents', 'AI-driven automation', 'Prompt engineering']],
+  ['Accessibility', ['Axe-core', 'WCAG 2.1 AA']],
+  ['CI/CD', ['GitHub Actions', 'Jenkins', 'Git']],
+  ['API & Data', ['Postman', 'Swagger', 'MySQL', 'PostgreSQL']],
+  ['Management', ['Jira', 'TestRail', 'Shift-left', 'Risk-based testing']]
+].map(([t, x]) => `<div class="grp rv"><b>${esc(t)}</b><div>${x.map(s => `<span>${esc(s)}</span>`).join('')}</div></div>`).join('');
+$('#aw').innerHTML = [["'25", 'Best Sprinter', "Domino's"], ["'23", 'Best Team Player', 'Solve.Care'], ["'21", 'Best Employee', 'Quinta Systems'], ["'20", 'Client Appreciation', 'Siemens']]
+  .map(a => `<div class="rv"><i>${a[0]}</i><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
+const contacts = {
+  MY: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+60 12 747 4204', 'https://wa.me/60127474204'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']],
+  IN: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+91 81058 44868', 'https://wa.me/918105844868'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']]
+};
+const renderLinks = c => { $('#lk').innerHTML = contacts[c].map(([k, v, h], i) => `<a class="${i ? '' : 'p'}" href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(k)}<span>${esc(v)} ↗</span></a>`).join(''); };
+renderLinks('MY');
+$$('#seg button').forEach(b => b.addEventListener('click', () => { $$('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderLinks(b.dataset.c); }));
+const now = new Date();
+$('#clk').textContent = $('#lt').textContent = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M$/i, '');
+$('#ld').textContent = now.toLocaleDateString([], { weekday: 'long', day: 'numeric', month: 'long' });
+
+/* ---------- renderers ---------- */
+const gl = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+gl.setPixelRatio(Math.min(devicePixelRatio, 2));
+gl.setClearColor(0x000000, 0);
+gl.outputColorSpace = THREE.SRGBColorSpace;
+gl.toneMapping = THREE.AgXToneMapping ?? THREE.ACESFilmicToneMapping;
+gl.toneMappingExposure = 1.05;
+gl.shadowMap.enabled = true;
+gl.shadowMap.type = THREE.PCFSoftShadowMap;
+gl.domElement.id = 'gl';
+const css = new CSS3DRenderer();
+css.domElement.id = 'css';
+document.body.append(css.domElement, gl.domElement);
+RectAreaLightUniformsLib.init();
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(gl);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+const cam = new THREE.PerspectiveCamera(30, 1, 4, 1200);
+
+const key = new THREE.DirectionalLight(0xfff1e0, 4.2);
+key.position.set(-50, 80, 60);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+Object.assign(key.shadow.camera, { left: -70, right: 70, top: 60, bottom: -60, near: 40, far: 220 });
+key.shadow.camera.updateProjectionMatrix();
+key.shadow.bias = -0.0003;
+key.shadow.normalBias = 0.03;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xdfe8ff, 1.1);
+fill.position.set(70, 50, 40);
+scene.add(fill, new THREE.HemisphereLight(0xffffff, 0xd8c3a5, 0.9));
+
+/* ---------- materials ---------- */
+const body = new THREE.MeshPhysicalMaterial({ color: 0xa9c1df, metalness: 0.75, roughness: 0.36, clearcoat: 0.3, clearcoatRoughness: 0.4 });
+const bodyBack = new THREE.MeshPhysicalMaterial({ color: 0x6f8fc4, metalness: 0.8, roughness: 0.34, clearcoat: 0.3 });
+const alu = new THREE.MeshPhysicalMaterial({ color: 0xd4d7dc, metalness: 1, roughness: 0.32 });
+const whiteGlass = new THREE.MeshPhysicalMaterial({ color: 0xf4f5f6, metalness: 0, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.05 });
+const keyMat = new THREE.MeshStandardMaterial({ color: 0xf6f6f6, roughness: 0.42, metalness: 0 });
+const ceramic = new THREE.MeshPhysicalMaterial({ color: 0xf1ede6, roughness: 0.28, clearcoat: 0.7, clearcoatRoughness: 0.2 });
+const hole = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, blending: THREE.NoBlending });
+
+const rrShape = (w, h, r) => {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+};
+const rr = (w, h, r) => new THREE.ShapeGeometry(rrShape(w, h, r), 6);
+const shadowy = m => { m.castShadow = m.receiveShadow = true; return m; };
+const at = (m, x, y, z) => { m.position.set(x, y, z); return m; };
+
+/* ---------- desk (units ≈ cm, desk top at y = 0) ---------- */
+{
+  const c = document.createElement('canvas'); c.width = 2048; c.height = 1024;
+  const x = c.getContext('2d');
+  x.fillStyle = '#d6b48a'; x.fillRect(0, 0, 2048, 1024);
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 900; i++) {
+    const y = rnd() * 1024, a = rnd() * 0.08, dark = rnd() > 0.45;
+    x.strokeStyle = dark ? `rgba(120,80,40,${a})` : `rgba(255,236,205,${a})`;
+    x.lineWidth = 1 + rnd() * 3;
+    x.beginPath(); x.moveTo(0, y);
+    for (let px = 0; px <= 2048; px += 128) x.lineTo(px, y + Math.sin(px / 300 + i) * 6 + (rnd() - 0.5) * 3);
+    x.stroke();
+  }
+  for (let b = 1; b < 4; b++) { x.fillStyle = 'rgba(90,60,30,.08)'; x.fillRect(0, b * 256 - 1, 2048, 2); }
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
+  const deskTop = new THREE.MeshPhysicalMaterial({ map: tex, roughness: 0.55, clearcoat: 0.25, clearcoatRoughness: 0.5 });
+  const edge = new THREE.MeshStandardMaterial({ color: 0xc29a6c, roughness: 0.6 });
+  const desk = new THREE.Mesh(new RoundedBoxGeometry(170, 3.2, 80, 3, 0.6), [edge, edge, deskTop, edge, edge, edge]);
+  desk.position.set(0, -1.6, -6);
+  desk.receiveShadow = true;
+  scene.add(desk);
+}
+
+/* ---------- desktop computer ---------- */
+const DW = 54.7, DH = 40, T = 1.15, CHIN = 6.6, LIFT = 5.6, DZ = -26;
+const AR = 16 / 9, SW = 51.4, SH = SW / AR;
+const GH = DH - CHIN;
+const display = new THREE.Group();
+display.position.set(0, LIFT, DZ);
+scene.add(display);
+display.add(shadowy(at(new THREE.Mesh(new RoundedBoxGeometry(DW, DH, T, 6, 0.55), [body, body, body, body, body, bodyBack]), 0, DH / 2, -T / 2)));
+const glassPanel = new THREE.Mesh(rr(DW - 0.12, GH - 0.06, 0.5), whiteGlass);
+glassPanel.position.set(0, CHIN + GH / 2, 0.006);
+display.add(glassPanel);
+const SCR_Y = CHIN + GH / 2 - 0.15;
+const holeMesh = new THREE.Mesh(new THREE.PlaneGeometry(SW, SH), hole);
+holeMesh.position.set(0, SCR_Y, 0.06);
+display.add(holeMesh);
+const camDot = new THREE.Mesh(new THREE.CircleGeometry(0.16, 20), new THREE.MeshPhysicalMaterial({ color: 0x1b1d22, roughness: 0.1, clearcoat: 1 }));
+camDot.position.set(0, SCR_Y + SH / 2 + (GH / 2 - 0.15 - SH / 2 + 0.3) / 2, 0.012);
+display.add(camDot);
+const screenLight = new THREE.RectAreaLight(0xeef2ff, 0, SW, SH);
+screenLight.position.set(0, SCR_Y, 0.1);
+screenLight.rotation.y = Math.PI;
+display.add(screenLight);
+
+{ // stand: foot plate + leaning arm
+  const foot = shadowy(new THREE.Mesh(new RoundedBoxGeometry(14.7, 0.5, 15.5, 3, 0.2), body));
+  foot.position.set(0, 0.25, DZ - 6.2);
+  scene.add(foot);
+  const top = new THREE.Vector3(0, LIFT + 16, DZ - T - 0.2), bot = new THREE.Vector3(0, 0.4, DZ - 12.6);
+  const len = top.distanceTo(bot);
+  const arm = shadowy(new THREE.Mesh(new RoundedBoxGeometry(14.7, len, 0.5, 3, 0.2), body));
+  arm.position.copy(top).add(bot).multiplyScalar(0.5);
+  arm.rotation.x = Math.atan2(top.z - bot.z, top.y - bot.y);
+  scene.add(arm);
+}
+
+/* ---------- keyboard ---------- */
+{
+  const kb = new THREE.Group();
+  kb.position.set(-2, 0, 4);
+  kb.rotation.x = 0.035;
+  scene.add(kb);
+  kb.add(shadowy(at(new THREE.Mesh(new RoundedBoxGeometry(27.9, 0.55, 11.5, 3, 0.25), alu), 0, 0.3, 0)));
+  const rows = [
+    [0.75, [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1], ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', '⏻']],
+    [1.55, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.6], ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'delete']],
+    [1.55, [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1], ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\']],
+    [1.55, [1.8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.8], ['caps lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'return']],
+    [1.55, [2.3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.3], ['shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'shift']],
+    [1.55, [1, 1, 1.2, 1.4, 4.5, 1.4, 1.1, 1, 1, 1], ['fn', 'control', 'option', 'command', '', 'command', 'option', '◀', '▲▼', '▶']]
+  ];
+  const n = rows.reduce((a, r) => a + r[1].length, 0);
+  const keys = new THREE.InstancedMesh(new RoundedBoxGeometry(1, 0.22, 1, 2, 0.08), keyMat, n);
+  const m = new THREE.Matrix4(), g = 0.2, KW = 26.4, z0 = -5.05;
+  const labels = [];
+  let i = 0, z = z0;
+  for (const [h, ks, names] of rows) {
+    const sc = (KW - g * (ks.length - 1)) / ks.reduce((a, b) => a + b, 0);
+    let x = -KW / 2;
+    ks.forEach((k, j) => {
+      const w = k * sc;
+      m.makeScale(w, 1, h).setPosition(x + w / 2, 0.62, z + h / 2);
+      keys.setMatrixAt(i++, m);
+      labels.push([x + w / 2, z + h / 2, h, names[j]]);
+      x += w + g;
+    });
+    z += h + g;
+  }
+  keys.castShadow = keys.receiveShadow = true;
+  kb.add(keys);
+
+  const depth = z - z0, cw = 2048, ch = Math.round(cw * depth / KW), px = cw / KW;
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  for (const [lx, lz, h, t] of labels) {
+    if (!t) continue;
+    const big = t.length === 1 || /^[▲▼◀▶⏻]+$/.test(t);
+    x.font = `${big ? 500 : 400} ${Math.round((big ? 0.42 : 0.24) * px)}px Inter, Arial, sans-serif`;
+    x.fillText(t, (lx + KW / 2) * px, (lz - z0) * px + (big ? 0 : h * px * 0.22));
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.anisotropy = 8;
+  const legend = new THREE.Mesh(new THREE.PlaneGeometry(KW, depth), new THREE.MeshBasicMaterial({ alphaMap: tex, transparent: true, depthWrite: false, color: 0x3a3c41 }));
+  legend.rotation.x = -Math.PI / 2;
+  legend.position.set(0, 0.735, z0 + depth / 2);
+  kb.add(legend);
+}
+
+/* ---------- mouse, mug, notebook ---------- */
+{
+  const mouse = shadowy(new THREE.Mesh(new THREE.SphereGeometry(1, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshPhysicalMaterial({ color: 0xfafafa, roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.08 })));
+  mouse.scale.set(2.85, 1.05, 5.6);
+  mouse.position.set(22, 0.05, 6);
+  mouse.rotation.y = -0.12;
+  scene.add(mouse);
+
+  const mug = new THREE.Group();
+  mug.position.set(-36, 0, -2);
+  scene.add(mug);
+  const outer = shadowy(new THREE.Mesh(new THREE.CylinderGeometry(4, 3.7, 9.5, 48, 1, true), ceramic));
+  outer.material = ceramic.clone(); outer.material.side = THREE.DoubleSide;
+  outer.position.y = 4.75;
+  mug.add(outer);
+  const bottom = new THREE.Mesh(new THREE.CircleGeometry(3.7, 40), ceramic);
+  bottom.rotation.x = -Math.PI / 2; bottom.position.y = 0.05;
+  mug.add(bottom);
+  const coffee = new THREE.Mesh(new THREE.CircleGeometry(3.85, 40), new THREE.MeshPhysicalMaterial({ color: 0x2a160c, roughness: 0.05, clearcoat: 1 }));
+  coffee.rotation.x = -Math.PI / 2; coffee.position.y = 8.2;
+  mug.add(coffee);
+  const handle = shadowy(new THREE.Mesh(new THREE.TorusGeometry(2.3, 0.5, 16, 40, Math.PI), ceramic));
+  handle.rotation.z = -Math.PI / 2;
+  handle.position.set(3.9, 4.9, 0);
+  mug.add(handle);
+
+  const book = shadowy(new THREE.Mesh(new RoundedBoxGeometry(15, 1.0, 21, 2, 0.3), new THREE.MeshStandardMaterial({ color: 0x24324d, roughness: 0.7 })));
+  book.position.set(38, 0.5, -6);
+  book.rotation.y = 0.22;
+  scene.add(book);
+  const pen = shadowy(new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 14, 20), new THREE.MeshPhysicalMaterial({ color: 0xe9e9ea, metalness: 0.6, roughness: 0.25 })));
+  pen.rotation.set(Math.PI / 2, 0, 0.35);
+  pen.position.set(43, 1.45, -6);
+  scene.add(pen);
+}
+
+const scrEl = $('#scr');
+
+{ // soft contact shadows under each object
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const x = c.getContext('2d'), g = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+  g.addColorStop(0, 'rgba(20,12,4,.8)'); g.addColorStop(0.45, 'rgba(20,12,4,.42)'); g.addColorStop(1, 'rgba(20,12,4,0)');
+  x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const blob = (px, pz, w, d, o, ry = 0) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: o, depthWrite: false }));
+    m.rotation.set(-Math.PI / 2, 0, ry);
+    m.position.set(px, 0.03, pz);
+    scene.add(m);
+  };
+  blob(0, DZ - 6, 34, 30, 0.6);
+  blob(0, DZ - 1, 72, 12, 0.4);
+  blob(-2, 4.8, 40, 22, 0.5);
+  blob(22, 6.4, 11, 19, 0.6, -0.12);
+  blob(-35, -1.5, 17, 17, 0.7);
+  blob(38, -6, 26, 32, 0.45, 0.22);
+}
+const cssObj = new CSS3DObject(scrEl);
+cssObj.position.set(0, SCR_Y, 0.06);
+display.add(cssObj);
+scene.traverse(o => { if (o.isMesh) [].concat(o.material).forEach(m => { if ('envMapIntensity' in m) m.envMapIntensity = 0.4; }); });
+
+/* ---------- website cards that lift out of the screen ---------- */
+const floaters = { stats: [], work: [] };
+const offIn = el => { let x = 0, y = 0; while (el && el.id !== 'site') { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x, y }; };
+for (const [group, sel, radius] of [['stats', '#stats .st', 16], ['work', '#work .wc', 18]]) {
+  $$(sel).forEach(src => {
+    const el = src.cloneNode(true);
+    el.classList.add('fl');
+    const o = new CSS3DObject(el);
+    const hm = new THREE.Mesh(new THREE.BufferGeometry(), hole);
+    hm.castShadow = true;
+    const gr = new THREE.Group();
+    gr.add(hm, o);
+    gr.visible = o.visible = false;
+    display.add(gr);
+    floaters[group].push({ src, el, o, hm, g: gr, radius, pose: {} });
+  });
+}
+
+/* ---------- scroll choreography ---------- */
+// view = camera framing, y = in-screen scroll anchor, stats/work = how far those cards have lifted out
+const K = [
+  { p: 0.00, v: 'hero', y: 'top' },
+  { p: 0.04, v: 'hero', y: 'top' },
+  { p: 0.12, v: 'near', y: 'top' },
+  { p: 0.18, v: 'fill', y: 'top' },
+  { p: 0.22, v: 'fill', y: 'stats' },
+  { p: 0.29, v: 'stats', y: 'stats', stats: 1 },
+  { p: 0.33, v: 'stats2', y: 'stats', stats: 1 },
+  { p: 0.38, v: 'fill', y: 'stats' },
+  { p: 0.42, v: 'fill', y: 'work' },
+  { p: 0.49, v: 'workL', y: 'work', work: 1 },
+  { p: 0.56, v: 'workR', y: 'work', work: 1 },
+  { p: 0.61, v: 'fill', y: 'work' },
+  { p: 0.68, v: 'tiltL', y: 'exp' },
+  { p: 0.75, v: 'tiltR', y: 'skills' },
+  { p: 0.80, v: 'fill', y: 'awards' },
+  { p: 0.86, v: 'fill', y: 'contact' },
+  { p: 0.89, v: 'fill', y: 'contact' },
+  { p: 0.97, v: 'end', y: 'contact' },
+  { p: 1.00, v: 'end', y: 'contact' }
+];
+const VIEWS = {}, Y = {};
+let elW = 1280, elH = 720, S = 1, innerMax = 1, secTops = {};
+const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+const orbit = (t, dist, az, el) => V(t.x + dist * Math.cos(el) * Math.sin(az), t.y + dist * Math.sin(el), t.z + dist * Math.cos(el) * Math.cos(az));
+const fit = (w, h) => {
+  const f = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  return Math.max(h / 2 / f, w / 2 / (f * cam.aspect));
+};
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  cam.aspect = w / h;
+  cam.updateProjectionMatrix();
+  gl.setSize(w, h);
+  css.setSize(w, h);
+
+  elW = Math.round(clamp(w, 800, 1440));
+  elH = Math.round(elW / AR);
+  S = SW / elW;
+  scrEl.style.width = elW + 'px';
+  scrEl.style.height = elH + 'px';
+  cssObj.scale.setScalar(S);
+
+  const wide = cam.aspect > 1;
+  scene.updateMatrixWorld(true);
+  const sc = holeMesh.getWorldPosition(V());
+  const L = (x, y, z) => display.localToWorld(V(x, y, z));
+  const v = (tgt, pos) => ({ tgt, pos });
+  const t0 = wide ? V(-30, 20, -8) : V(0, 38, -8);
+  const t3 = wide ? V(28, 22, -8) : V(0, 40, -8);
+  const tS = L(0, SCR_Y - 4, 8), tW = L(0, SCR_Y, 10);
+  Object.assign(VIEWS, {
+    hero: v(t0, orbit(t0, wide ? fit(150, 80) : fit(100, 160), -0.55, 0.3)),
+    near: v(sc.clone().add(V(0, -2, 0)), orbit(sc, fit(SW * 1.5, SH * 1.5), -0.12, 0.1)),
+    fill: v(sc, sc.clone().add(V(0, 0, fit(SW, SH)))),
+    stats: v(tS, orbit(tS, fit(SW * 1.75, SH * 1.75), 0.5, 0.16)),
+    stats2: v(tS, orbit(tS, fit(SW * 1.6, SH * 1.6), 0.22, 0.05)),
+    workL: v(tW, orbit(tW, fit(SW * 1.8, SH * 1.8), -0.38, 0.1)),
+    workR: v(tW, orbit(tW, fit(SW * 1.8, SH * 1.8), 0.38, 0.1)),
+    tiltL: v(sc, orbit(sc, fit(SW * 1.12, SH * 1.12), -0.24, 0.06)),
+    tiltR: v(sc, orbit(sc, fit(SW * 1.12, SH * 1.12), 0.24, -0.02)),
+    end: v(t3, orbit(t3, wide ? fit(150, 80) : fit(100, 170), 0.55, 0.26))
+  });
+
+  const vh = elH - 74;
+  innerMax = Math.max(1, $('#site').offsetHeight - $('#vp').clientHeight);
+  const statsEl = $('#stats'), workEl = $('#work');
+  const at = y => clamp(Math.round(y), 0, innerMax);
+  Object.assign(Y, {
+    top: 0,
+    stats: at(offIn(statsEl).y + statsEl.offsetHeight - vh + 28),
+    work: at(offIn(workEl).y - 58 - 14),
+    exp: at(offIn($('#s-exp')).y - 58),
+    skills: at(offIn($('#s-skills')).y - 58),
+    awards: at(offIn($('#aw')).y - 58 - vh * 0.35),
+    contact: at(offIn($('#s-contact')).y - 58)
+  });
+  secTops = { top: 0, work: Y.work, exp: Y.exp, skills: Y.skills, contact: Y.contact };
+
+  for (const [group, list] of Object.entries(floaters)) list.forEach((f, i) => {
+    f.w = f.src.offsetWidth; f.h = f.src.offsetHeight;
+    Object.assign(f, offIn(f.src));
+    f.el.style.width = f.w + 'px';
+    f.el.style.height = f.h + 'px';
+    f.o.scale.setScalar(S);
+    f.hm.geometry.dispose();
+    f.hm.geometry = rr(f.w * S, f.h * S, f.radius * S);
+    const ww = f.w * S, hh = f.h * S;
+    if (group === 'stats') {
+      const c = i - 1.5, k = 1.3;
+      f.pose = { x: c * (ww * k + 2.2), y: SCR_Y - 7 + Math.abs(c) * 1.8, z: 10 + (1.5 - Math.abs(c)) * 2.5, rx: -0.08, ry: -c * 0.2, sc: k };
+    } else {
+      const col = i % 2, row = (i / 2) | 0;
+      f.pose = { x: (col ? 1 : -1) * (ww * 0.55 + 1.6), y: SCR_Y + (row ? -1 : 1) * (hh * 0.55 + 1.0), z: 10 + row * 2.5, rx: -0.04, ry: col ? -0.16 : 0.16, sc: 1.08 };
+    }
+  });
+}
+
+const siteEl = $('#site'), lockEl = $('#off'), rvEls = $$('#scr .rv');
+const heroOv = $('#heroOv'), endOv = $('#endOv'), where = $('#where'), bar = $('#bar'), topEl = $('.top');
+const showOv = (el, o) => { el.style.opacity = o; el.style.visibility = o < 0.02 ? 'hidden' : 'visible'; el.style.pointerEvents = o > 0.6 ? 'auto' : 'none'; };
+const target = () => clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight));
+let p = target(), mx = 0, my = 0, smx = 0, smy = 0, last = performance.now(), lastWhere = '';
+addEventListener('pointermove', e => { mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; });
+
+function placeFloaters(list, out, y, now) {
+  list.forEach((f, i) => {
+    const t = ss(clamp(out * 1.35 - i * 0.1));
+    const on = t > 0.001;
+    f.g.visible = f.o.visible = on;
+    f.src.style.visibility = t > 0.12 ? 'hidden' : '';
+    if (!on) return;
+    f.el.style.opacity = clamp(t * 8).toFixed(3);
+    const fx = (f.x + f.w / 2 - elW / 2) * S;
+    const fy = SCR_Y + (elH / 2 - (74 + f.y - y + f.h / 2)) * S;
+    const P = f.pose, bob = Math.sin(now / 900 + i * 1.7) * 0.35 * t;
+    f.g.position.set(lerp(fx, P.x, t), lerp(fy, P.y, t) + bob, lerp(0.1, P.z, t));
+    f.g.rotation.set(lerp(0, P.rx, t), lerp(0, P.ry, t), 0);
+    f.g.scale.setScalar(lerp(1, P.sc, t));
+  });
+}
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  p += (target() - p) * Math.min(1, dt * 7);
+  smx += (mx - smx) * Math.min(1, dt * 4); smy += (my - smy) * Math.min(1, dt * 4);
+
+  let k = 0;
+  while (k < K.length - 2 && p >= K[k + 1].p) k++;
+  const A = K[k], B = K[k + 1], t = ss(clamp((p - A.p) / (B.p - A.p)));
+  const pos = VIEWS[A.v].pos.clone().lerp(VIEWS[B.v].pos, t), tgt = VIEWS[A.v].tgt.clone().lerp(VIEWS[B.v].tgt, t);
+  const y = lerp(Y[A.y], Y[B.y], t);
+
+  const locked = rng(p, 0.15, 0.18) * (1 - rng(p, 0.89, 0.92));
+  const idle = 1 - rng(p, 0, 0.12);
+  pos.x += (smx * 3 + Math.sin(now / 3000) * 2 * idle) * (1 - locked);
+  pos.y -= smy * 2 * (1 - locked);
+  cam.position.copy(pos);
+  cam.lookAt(tgt);
+
+  const unlock = rng(p, 0.09, 0.15);
+  lockEl.style.opacity = (1 - unlock).toFixed(3);
+  lockEl.style.transform = `translateY(${(-unlock * 8).toFixed(2)}%)`;
+  screenLight.intensity = 0.6 + 1.2 * unlock;
+
+  siteEl.style.transform = `translate3d(0,${-y.toFixed(1)}px,0)`;
+  placeFloaters(floaters.stats, lerp(A.stats || 0, B.stats || 0, t), y, now);
+  placeFloaters(floaters.work, lerp(A.work || 0, B.work || 0, t), y, now);
+  const vh = elH - 74;
+  if (unlock > 0.9) for (const el of rvEls) if (!el.classList.contains('in') && el._top < y + vh * 0.92) el.classList.add('in');
+
+  let sec = 'top';
+  for (const s of ['work', 'exp', 'skills', 'contact']) if (y >= secTops[s] - vh * 0.4) sec = s;
+  $$('#snav button').forEach(b => b.classList.toggle('on', b.dataset.go === sec));
+  const label = p < 0.15 ? 'Intro' : p > 0.92 ? 'Say hello' : { top: 'About', work: 'Selected work', exp: 'Experience', skills: 'Skills', contact: 'Contact' }[sec];
+  if (label !== lastWhere) { where.textContent = label; lastWhere = label; }
+
+  showOv(heroOv, 1 - rng(p, 0.015, 0.06));
+  showOv(endOv, rng(p, 0.92, 0.97));
+  topEl.style.opacity = (1 - locked).toFixed(3);
+  topEl.style.visibility = locked > 0.98 ? 'hidden' : 'visible';
+  where.style.opacity = (1 - rng(p, 0.92, 0.97)).toFixed(3);
+  bar.style.width = (p * 100).toFixed(2) + '%';
+
+  gl.render(scene, cam);
+  css.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+
+const goInner = id => {
+  const kf = K.find(f => f.y === id && f.v === 'fill') || K.find(f => f.y === id);
+  if (kf) scrollTo({ top: kf.p * (document.documentElement.scrollHeight - innerHeight), behavior: 'smooth' });
+};
+$$('#scr [data-go]').forEach(b => b.addEventListener('click', () => goInner(b.dataset.go)));
+$('[data-top]').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+
+const measure = () => { layout(); for (const el of rvEls) el._top = offIn(el).y; };
+measure();
+addEventListener('resize', measure);
+document.fonts?.ready.then(measure);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

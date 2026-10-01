@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Akash Simon — QA Lead &amp; GenAI Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#ff7a2f;--ink:#f3f4f6;--mut:#9aa0a8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#060608}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#060608;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+#track{height:1500vh}
+#css,#gl{position:fixed!important;inset:0}
+#css{z-index:0}
+#gl{z-index:1;pointer-events:none}
+
+.ov{position:fixed;z-index:3}
+.hero-ov{left:6vw;top:50%;transform:translateY(-50%);max-width:min(440px,36vw)}
+.eb{display:inline-flex;align-items:center;gap:8px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.eb i{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399}
+.hero-ov h1{font-size:clamp(28px,min(4.4vw,8.5vh),66px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:18px 0 16px;text-shadow:0 2px 30px rgba(0,0,0,.6)}
+.hero-ov h1 span{color:var(--acc)}
+.hero-ov p{color:#b9bec6;font-size:clamp(14px,2.2vh,17px);line-height:1.6;text-shadow:0 1px 16px rgba(0,0,0,.8)}
+.hero-ov p b{color:var(--ink);font-weight:600}
+.hint{margin-top:26px;display:flex;align-items:center;gap:10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--mut)}
+.hint i{width:22px;height:34px;border:1.5px solid #555a62;border-radius:12px;position:relative}
+.hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--acc);animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+.end-ov{right:6vw;top:50%;transform:translateY(-50%);max-width:min(400px,34vw)}
+.end-ov h2{font-size:clamp(28px,min(3.8vw,7.5vh),56px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:16px 0 14px;text-shadow:0 2px 30px rgba(0,0,0,.6)}
+.end-ov h2 span{color:var(--acc)}
+.end-ov p{color:#b9bec6;line-height:1.6;margin-bottom:22px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:600;font-size:15px;background:#f4f5f7;color:#0d0e10}
+.btn.g{background:rgba(255,255,255,.08);color:var(--ink);border:1px solid rgba(255,255,255,.16)}
+.btn.a{background:var(--acc);color:#fff}
+@media(max-height:520px){.hint{display:none}.hero-ov h1,.end-ov h2{margin:10px 0 8px}.end-ov p{margin-bottom:12px;font-size:13px}.btn{padding:9px 13px;font-size:13px}.end-ov .eb{display:none}}
+@media(max-aspect-ratio:1/1){
+  .hero-ov,.end-ov{left:6vw;right:6vw;top:76px;transform:none;max-width:none}
+  .hero-ov h1{font-size:clamp(28px,8.4vw,42px);margin:12px 0 10px}.end-ov h2{font-size:clamp(26px,7.6vw,38px);margin:12px 0 10px}
+  .hero-ov p,.end-ov p{font-size:14px}.end-ov p{margin-bottom:14px}.hint{margin-top:14px}
+}
+.top{position:fixed;z-index:4;inset:16px 20px auto;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font:700 12px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#ff9a55,#e2520f)}
+.where{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);padding:7px 12px;border-radius:999px;background:rgba(16,16,20,.75);border:1px solid rgba(255,255,255,.08)}
+.bar{position:fixed;z-index:4;left:0;bottom:0;height:2px;background:var(--acc);width:0}
+.noscr{position:fixed;inset:0;display:grid;place-items:center;color:var(--mut)}
+
+/* ===== main monitor: the portfolio site ===== */
+.scr{position:relative;overflow:hidden;width:1280px;height:720px;background:#fbfbfc;color:#0f1013;font:15px/1.55 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.mbar{position:absolute;inset:0 0 auto;height:26px;display:flex;align-items:center;gap:18px;padding:0 16px;font-size:12.5px;font-weight:500;color:#1d1d1f;background:#e9e9ed;z-index:6}
+.mbar b{font-weight:700}
+.mbar .r{margin-left:auto}
+.brw{position:absolute;top:26px;left:0;right:0;height:46px;display:flex;align-items:center;gap:16px;padding:0 16px;background:#f3f3f6;border-bottom:1px solid #dcdce1;z-index:6}
+.tl{display:flex;gap:8px}.tl i{display:block;width:12px;height:12px;border-radius:50%;background:#ff5f57}.tl i:nth-child(2){background:#febc2e}.tl i:nth-child(3){background:#28c840}
+.url{flex:1;max-width:440px;margin:0 auto;height:30px;border-radius:8px;background:#e5e5ea;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;color:#2c2c30}
+.brw .sp{width:60px}
+.vp{position:absolute;top:72px;left:0;right:0;bottom:0;overflow:hidden}
+.snav{position:absolute;inset:0 0 auto;height:56px;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fbfbfc;border-bottom:1px solid #ececf0}
+.snav .lg{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+.snav .lg i{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 11px Inter;font-style:normal;color:#fff;background:linear-gradient(135deg,#ff9a55,#e2520f)}
+.snav nav{display:flex;gap:4px}
+.snav nav button{padding:7px 12px;border-radius:8px;font-size:14px;font-weight:500;color:#4a4d55}
+.snav nav button.on{background:#efeff2;color:#0f1013}
+.snav .cta{padding:9px 14px;border-radius:9px;background:#0f1013;color:#fff;font-size:14px;font-weight:600}
+.site{position:relative;padding-top:56px;will-change:transform}
+.sec{padding:60px 56px;max-width:1180px;margin:0 auto}
+.k{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#e2520f}
+.h2{font-size:42px;line-height:1.05;letter-spacing:-.04em;font-weight:800;margin:10px 0 28px;max-width:700px}
+.rv{opacity:0;transform:perspective(900px) translateY(34px) rotateX(18deg);transform-origin:50% 100%;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding-top:40px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid #e6e6ea;font-size:13px;font-weight:500;color:#3a3d44}
+.chip i{width:7px;height:7px;border-radius:50%;background:#16a34a}
+.hero h1{font-size:66px;line-height:1;letter-spacing:-.05em;font-weight:800;margin:20px 0 18px}
+.hero h1 span{color:#e2520f}
+.hero p.l{font-size:18px;color:#4a4d55;max-width:540px}
+.hero .b{display:flex;gap:10px;margin-top:26px}
+.hero .b a,.hero .b button{padding:12px 18px;border-radius:11px;font-weight:600;font-size:15px}
+.hero .b .p{background:#0f1013;color:#fff}
+.hero .b .s{background:#fff;border:1px solid #e1e1e6}
+.run{border-radius:18px;background:#0f1115;color:#d7dae0;padding:18px;font:13px/1.5 'JetBrains Mono',monospace;box-shadow:0 30px 60px -30px rgba(15,16,19,.45)}
+.run .rh{display:flex;align-items:center;gap:8px;color:#8b909a;padding-bottom:12px;border-bottom:1px solid #22252c}
+.run .rh .ps{margin-left:auto;font-size:11px;font-weight:600;color:#34d399;background:rgba(52,211,153,.12);padding:3px 8px;border-radius:6px}
+.run ul{list-style:none;padding:10px 0 0}
+.run li{display:flex;align-items:center;gap:10px;padding:5px 0}
+.run li i{width:15px;height:15px;border-radius:50%;background:#34d399;display:grid;place-items:center;font-style:normal;font-size:10px;color:#0f1115;font-weight:800}
+.run li span{margin-left:auto;color:#6c717b}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.st{padding:20px;border-radius:16px;background:#fff;border:1px solid #ececf0}
+.st b{display:block;font-size:36px;font-weight:800;letter-spacing:-.04em}
+.st span{font-size:13px;color:#6a6d75}
+.alt{background:#f3f3f6}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wc{padding:24px;border-radius:18px;background:#fff;border:1px solid #e8e8ec;display:flex;flex-direction:column;gap:8px}
+.wc .t{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7a7d85}
+.wc h3{font-size:22px;letter-spacing:-.025em;line-height:1.2}
+.wc p{color:#5a5d65;font-size:14.5px}
+.wc .m{margin-top:auto;padding-top:14px;border-top:1px solid #efeff2;display:flex;align-items:baseline;gap:10px}
+.wc .m b{font-size:28px;font-weight:800;letter-spacing:-.04em;color:#e2520f}
+.wc .m span{font-size:13px;color:#7a7d85}
+.ct{border-radius:24px;background:#0f1013;color:#fff;padding:44px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.ct h2{font-size:46px;letter-spacing:-.045em;line-height:1.02;font-weight:800;margin:10px 0 12px}
+.ct h2 span{color:var(--acc)}
+.ct .k{color:var(--acc)}
+.ct p{color:#9ca1a9}
+.seg{display:inline-flex;padding:4px;border-radius:10px;background:#1c1e23;margin-bottom:12px}
+.seg button{padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;color:#9ca1a9}
+.seg button.on{background:#fff;color:#0f1013}
+.lk{display:grid;gap:8px}
+.lk a{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-radius:12px;background:#1a1c21;border:1px solid #272a31;font-weight:600;font-size:15px}
+.lk a span{color:#6c717b;font-size:13px;font-weight:500}
+.lk a.p{background:#e2520f;border-color:#e2520f}
+.lk a.p span{color:#ffe1cf}
+.ft{display:flex;justify-content:space-between;padding:24px 56px 40px;max-width:1180px;margin:0 auto;color:#8a8d95;font-size:13px}
+.glare{position:absolute;inset:0;pointer-events:none;z-index:8;background:linear-gradient(112deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 30%)}
+.sleep{position:absolute;inset:0;z-index:9;pointer-events:none;background:#000;display:grid;place-items:center}
+.sleep i{font:700 64px Inter;font-style:normal;letter-spacing:-.04em;color:#1c1c22}
+
+/* ===== vertical monitor: dark career dashboard ===== */
+.scrb{position:relative;overflow:hidden;width:720px;height:1280px;background:#0b0c10;color:#e8eaee;font:15px/1.5 Inter,system-ui,sans-serif;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+.scrb .tbar{position:absolute;inset:0 0 auto;height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;background:#14151b;border-bottom:1px solid #22242c;font:500 13px 'JetBrains Mono',monospace;color:#8b909a;z-index:5}
+.scrb .tbar .tl{margin-right:8px}
+.scrb .vpb{position:absolute;top:44px;left:0;right:0;bottom:0;overflow:hidden}
+.siteb{position:relative;padding:28px 32px 60px;will-change:transform}
+.kb2{font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.siteb h2{font-size:38px;line-height:1.05;letter-spacing:-.04em;font-weight:800;margin:8px 0 22px}
+.siteb section{margin-bottom:46px}
+.ex{position:relative;padding:18px 20px 18px 24px;border-radius:16px;background:#13141a;border:1px solid #22242c;margin-bottom:12px}
+.ex::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:3px;background:#3a3d46}
+.ex.now::before{background:var(--acc)}
+.ex .y{font:600 12px 'JetBrains Mono',monospace;color:#8b909a}
+.ex h4{font-size:19px;letter-spacing:-.02em;margin:3px 0 1px}
+.ex h4 em{font-style:normal;font:700 10px 'JetBrains Mono',monospace;color:#111;background:var(--acc);padding:3px 6px;border-radius:5px;margin-left:8px;vertical-align:3px}
+.ex small{display:block;color:#9aa0a8;font-size:13.5px;margin-bottom:6px}
+.ex p{color:#c3c7ce;font-size:14px}
+.gr{padding:16px 18px;border-radius:16px;background:#13141a;border:1px solid #22242c;margin-bottom:10px}
+.gr b{display:block;font-size:14px;margin-bottom:10px;color:#fff}
+.gr div{display:flex;flex-wrap:wrap;gap:6px}
+.gr span{font:500 12.5px 'JetBrains Mono',monospace;padding:5px 9px;border-radius:7px;background:#1d1f27;color:#cfd3da}
+.awb{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.awb div{padding:16px;border-radius:16px;background:linear-gradient(160deg,#1d1610,#13141a);border:1px solid #3a2a1c}
+.awb i{font:700 12px 'JetBrains Mono',monospace;font-style:normal;color:var(--acc)}
+.awb b{display:block;font-size:16px;margin:4px 0 1px}
+.awb span{font-size:12.5px;color:#9aa0a8}
+.log{font:12.5px/1.7 'JetBrains Mono',monospace;color:#9aa0a8;padding:16px 18px;border-radius:16px;background:#08090c;border:1px solid #22242c}
+.log b{color:#34d399;font-weight:600}
+.log em{font-style:normal;color:var(--acc)}
+.fl{font:15px/1.55 Inter,system-ui,sans-serif;color:#0f1013;backface-visibility:hidden;-webkit-backface-visibility:hidden;-webkit-font-smoothing:antialiased}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="track"></div>
+
+<div class="top"><a class="brand" href="#" data-top><i>AS</i>Akash Simon</a><span class="where" id="where">Intro</span></div>
+<div class="bar" id="bar"></div>
+
+<div class="ov hero-ov" id="heroOv">
+  <span class="eb"><i></i>Available for senior roles</span>
+  <h1>Where the <span>quality</span> gets engineered.</h1>
+  <p>I'm <b>Akash Simon</b> — QA Lead &amp; GenAI Automation Engineer. This is my workstation. Scroll to wake it up.</p>
+  <div class="hint"><i></i>SCROLL TO WAKE</div>
+</div>
+<div class="ov end-ov" id="endOv">
+  <span class="eb"><i></i>Kuala Lumpur · open to relocation</span>
+  <h2>Let's build something <span>reliable.</span></h2>
+  <p>Senior QA architect, automation lead or AI-augmented testing roles — anywhere in the world.</p>
+  <div class="btns"><a class="btn a" href="mailto:akash.simon@outlook.com">Email me</a><a class="btn g" href="https://www.linkedin.com/in/akash-simon/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn g" href="../resume/Akash_Simon_CV.pdf" download>Résumé</a></div>
+</div>
+
+<div class="scr" id="scrA">
+  <div class="mbar"><b>Safari</b><span>File</span><span>Edit</span><span>View</span><span>History</span><span class="r" id="clk">9:41</span></div>
+  <div class="brw"><div class="tl"><i></i><i></i><i></i></div><div class="url">🔒 akashsimon.dev</div><span class="sp"></span></div>
+  <div class="vp" id="vpA">
+    <div class="site" id="siteA">
+      <section class="sec" id="a-top">
+        <div class="hero">
+          <div>
+            <span class="chip rv"><i></i>QA Lead &amp; GenAI Automation Engineer</span>
+            <h1 class="rv">Quality as a <span>competitive advantage.</span></h1>
+            <p class="l rv">I don't just find bugs — I architect systems that prevent them, and now I build AI agents that redefine how testing happens.</p>
+            <div class="b rv"><button class="p" data-go="work">See my work</button><a class="s" href="../resume/Akash_Simon_CV.pdf" download>Download CV</a></div>
+          </div>
+          <div class="run rv">
+            <div class="rh">● CI · main · run #2418<span class="ps">PASSED</span></div>
+            <ul>
+              <li><i>✓</i>checkout.spec.py<span>48 · 52s</span></li>
+              <li><i>✓</i>a11y-wcag21aa.spec.py<span>31 · 40s</span></li>
+              <li><i>✓</i>LoginFlowTest.java<span>22 · 1m04</span></li>
+              <li><i>✓</i>orders.api.contract<span>64 · 18s</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="stats rv" id="stats"><div class="st"><b>10+</b><span>Years in QA</span></div><div class="st"><b>12+</b><span>Countries / regions</span></div><div class="st"><b>~40%</b><span>Less test authoring</span></div><div class="st"><b>10+</b><span>Engineers led</span></div></div>
+      </section>
+      <div class="alt"><section class="sec" id="a-work">
+        <span class="k rv">Selected work</span><h2 class="h2 rv">Quality systems, built like products.</h2>
+        <div class="work" id="work"></div>
+      </section></div>
+      <section class="sec" id="a-contact">
+        <div class="ct rv">
+          <div><span class="k">Contact</span><h2>Let's build something <span>reliable.</span></h2><p>Open to senior QA architect, automation lead and AI-augmented testing roles globally.</p></div>
+          <div><div class="seg" id="seg"><button class="on" data-c="MY">Malaysia</button><button data-c="IN">India</button></div><div class="lk" id="lk"></div></div>
+        </div>
+      </section>
+      <div class="ft"><span>© 2026 Akash Simon</span><span>Kuala Lumpur · Bangalore</span></div>
+    </div>
+    <div class="snav"><span class="lg"><i>AS</i>Akash Simon</span><nav id="snav"><button data-go="work">Work</button><button data-go="exp">Experience</button><button data-go="skills">Skills</button><button data-go="contact">Contact</button></nav><button class="cta" data-go="contact">Hire me</button></div>
+  </div>
+  <div class="glare"></div>
+  <div class="sleep" id="sleepA"><i>AS</i></div>
+</div>
+
+<div class="scrb" id="scrB">
+  <div class="tbar"><div class="tl"><i></i><i></i><i></i></div>akash@workstation: ~/career</div>
+  <div class="vpb" id="vpB">
+    <div class="siteb" id="siteB">
+      <section id="b-exp"><span class="kb2">$ git log --career</span><h2>Nearly a decade of quality engineering.</h2><div id="exp"></div></section>
+      <section id="b-skills"><span class="kb2">$ ls ~/toolkit</span><h2>A battle-tested toolkit.</h2><div id="sk"></div></section>
+      <section id="b-aw"><span class="kb2">$ cat awards.txt</span><h2>Recognition.</h2><div class="awb" id="aw"></div></section>
+      <section id="b-log"><span class="kb2">$ tail -f ci.log</span><h2>Always green.</h2>
+        <div class="log"><b>✓</b> checkout.spec.py ............ 48 passed<br><b>✓</b> a11y-wcag21aa.spec.py ....... 31 passed<br><b>✓</b> LoginFlowTest.java .......... 22 passed<br><b>✓</b> orders.api.contract ......... 64 passed<br><b>✓</b> genai-agent.smoke ........... 12 passed<br><em>→</em> 177 checks · 12 markets · 0 failures</div>
+      </section>
+    </div>
+  </div>
+  <div class="glare"></div>
+  <div class="sleep" id="sleepB"><i>AS</i></div>
+</div>
+<noscript><div class="noscr">This preview needs JavaScript.</div></noscript>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ss = t => t * t * (3 - 2 * t);
+const lerp = (a, b, t) => a + (b - a) * t;
+const rng = (p, a, b) => ss(clamp((p - a) / (b - a)));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const MOBILE = matchMedia('(pointer: coarse)').matches || Math.min(innerWidth, innerHeight) < 600;
+
+/* ---------- content ---------- */
+$('#work').innerHTML = [
+  ["GenAI · Domino's", 'GenAI QA agent infrastructure, from zero.', 'Agents for test case generation, synthetic data and exploratory workflows across 12+ markets.', '~40%', 'less authoring per sprint'],
+  ["Accessibility · Domino's EU", 'WCAG 2.1 AA, enforced in CI.', 'Axe-core inside Playwright — violations raised as first-class CI defects, not afterthoughts.', 'AA', 'WCAG 2.1 in every pipeline'],
+  ['Framework · Quinta / Siemens', 'One framework for web, Android & iOS.', 'Selenium (Java) + TestNG + Appium with CI/CD quality gates and shared page objects.', '6 wks', 'sole E2E ownership · award'],
+  ['Healthcare · Solve.Care', 'Automation for a live patient platform.', 'Blockchain API contract testing plus BMI, heart-rate and ECG data validation.', '300+', 'tests in 3 sprints']
+].map(w => `<article class="wc"><span class="t">${esc(w[0])}</span><h3>${esc(w[1])}</h3><p>${esc(w[2])}</p><div class="m"><b>${esc(w[3])}</b><span>${esc(w[4])}</span></div></article>`).join('');
+$('#exp').innerHTML = [
+  ['2023 — now', 'Software Quality Engineer', "Domino's Pizza Enterprises · Kuala Lumpur", 'GenAI QA agents · Axe-core WCAG 2.1 AA · GitHub Actions · 12+ platforms', 1],
+  ['2022', 'Senior Automation QA Engineer', 'Solve.Care · Bangalore', 'Selenium + TestNG framework · blockchain API testing · led a QA team of 10'],
+  ['2017', 'Senior Test Engineer', 'Quinta Systems · Bangalore', 'Hybrid web + mobile framework · Siemens engagement · Scrum Master'],
+  ['2017', 'Application Support Engineer', 'Pole To Win International', 'Structured testing for Rockstar titles · TestRail repositories']
+].map(r => `<div class="ex rv${r[4] ? ' now' : ''}"><span class="y">${r[0]}</span><h4>${esc(r[1])}${r[4] ? '<em>NOW</em>' : ''}</h4><small>${esc(r[2])}</small><p>${esc(r[3])}</p></div>`).join('');
+$('#sk').innerHTML = [
+  ['Automation', ['Playwright', 'Selenium', 'Appium', 'WebDriverIO', 'REST Assured', 'TestNG', 'Cucumber']],
+  ['AI & GenAI', ['GenAI QA agents', 'AI-driven automation', 'Prompt engineering']],
+  ['Accessibility', ['Axe-core', 'WCAG 2.1 AA']],
+  ['CI/CD', ['GitHub Actions', 'Jenkins', 'Git']],
+  ['API & Data', ['Postman', 'Swagger', 'MySQL', 'PostgreSQL']],
+  ['Management', ['Jira', 'TestRail', 'Shift-left', 'Risk-based testing']]
+].map(([t, x]) => `<div class="gr rv"><b>${esc(t)}</b><div>${x.map(s => `<span>${esc(s)}</span>`).join('')}</div></div>`).join('');
+$('#aw').innerHTML = [["'25", 'Best Sprinter', "Domino's"], ["'23", 'Best Team Player', 'Solve.Care'], ["'21", 'Best Employee', 'Quinta Systems'], ["'20", 'Client Appreciation', 'Siemens']]
+  .map(a => `<div class="rv"><i>${a[0]}</i><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
+const contacts = {
+  MY: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+60 12 747 4204', 'https://wa.me/60127474204'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']],
+  IN: [['Email', 'akash.simon@outlook.com', 'mailto:akash.simon@outlook.com'], ['WhatsApp', '+91 81058 44868', 'https://wa.me/918105844868'], ['LinkedIn', 'in/akash-simon', 'https://www.linkedin.com/in/akash-simon/'], ['GitHub', 'Akash-Pilot', 'https://github.com/Akash-Pilot/']]
+};
+const renderLinks = c => { $('#lk').innerHTML = contacts[c].map(([k, v, h], i) => `<a class="${i ? '' : 'p'}" href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(k)}<span>${esc(v)} ↗</span></a>`).join(''); };
+renderLinks('MY');
+$$('#seg button').forEach(b => b.addEventListener('click', () => { $$('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderLinks(b.dataset.c); }));
+$('#clk').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+/* ---------- renderers ---------- */
+const gl = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+gl.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
+gl.setClearColor(0x000000, 0);
+gl.outputColorSpace = THREE.SRGBColorSpace;
+gl.toneMapping = THREE.AgXToneMapping ?? THREE.ACESFilmicToneMapping;
+gl.toneMappingExposure = 1.2;
+gl.shadowMap.enabled = true;
+gl.shadowMap.type = THREE.PCFSoftShadowMap;
+gl.domElement.id = 'gl';
+const css = new CSS3DRenderer();
+css.domElement.id = 'css';
+document.body.append(css.domElement, gl.domElement);
+RectAreaLightUniformsLib.init();
+
+const scene = new THREE.Scene();
+{ // dim room reflections: one window-ish softbox and a warm practical
+  const pmrem = new THREE.PMREMGenerator(gl), s = new THREE.Scene();
+  const room = new THREE.Mesh(new THREE.BoxGeometry(300, 160, 300), new THREE.MeshBasicMaterial({ color: 0x0b0b0e, side: THREE.BackSide }));
+  room.position.y = 60;
+  s.add(room);
+  const panel = (w, h, k, x, y, z, c) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(c).multiplyScalar(k), side: THREE.DoubleSide }));
+    m.position.set(x, y, z); m.lookAt(0, 20, 0); s.add(m);
+  };
+  panel(90, 50, 2.2, -120, 70, 60, 0xdfe6ff);
+  panel(120, 10, 1.6, 0, 140, 0, 0xffffff);
+  panel(60, 30, 1.2, 100, 40, -80, 0x9a8cff);
+  scene.environment = pmrem.fromScene(s, 0.02).texture;
+}
+const cam = new THREE.PerspectiveCamera(32, 1, 2, 1500);
+
+const key = new THREE.DirectionalLight(0xffe6cc, 1.1);
+key.position.set(-70, 120, 60);
+key.castShadow = true;
+key.shadow.mapSize.set(MOBILE ? 1024 : 2048, MOBILE ? 1024 : 2048);
+Object.assign(key.shadow.camera, { left: -90, right: 90, top: 70, bottom: -70, near: 40, far: 320 });
+key.shadow.camera.updateProjectionMatrix();
+key.shadow.bias = -0.0003;
+key.shadow.normalBias = 0.04;
+scene.add(key, new THREE.HemisphereLight(0x8c90a8, 0x1a120c, 0.35));
+
+/* ---------- materials & helpers ---------- */
+const hole = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, blending: THREE.NoBlending });
+const blackMetal = new THREE.MeshPhysicalMaterial({ color: 0x1c1d21, metalness: 0.6, roughness: 0.38, clearcoat: 0.3, clearcoatRoughness: 0.3 });
+const graphite = new THREE.MeshPhysicalMaterial({ color: 0x2f3136, metalness: 0.9, roughness: 0.32 });
+const glass = new THREE.MeshPhysicalMaterial({ color: 0x050506, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03 });
+const rrShape = (w, h, r) => {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+};
+const rr = (w, h, r) => new THREE.ShapeGeometry(rrShape(w, h, r), 8);
+const mesh = (geo, mat, x = 0, y = 0, z = 0, cast = true) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = cast; m.receiveShadow = true; return m; };
+const woodTex = (base, dark, light, seedStart) => {
+  const c = document.createElement('canvas'); c.width = 2048; c.height = 1024;
+  const x = c.getContext('2d');
+  x.fillStyle = base; x.fillRect(0, 0, 2048, 1024);
+  let seed = seedStart; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 1100; i++) {
+    const y = rnd() * 1024, a = rnd() * 0.12, d = rnd() > 0.4;
+    x.strokeStyle = d ? `rgba(${dark},${a})` : `rgba(${light},${a})`;
+    x.lineWidth = 1 + rnd() * 3;
+    x.beginPath(); x.moveTo(0, y);
+    for (let px = 0; px <= 2048; px += 128) x.lineTo(px, y + Math.sin(px / 260 + i) * 7 + (rnd() - 0.5) * 3);
+    x.stroke();
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return t;
+};
+
+/* ---------- room & desk (units ≈ cm, desk top at y = 0) ---------- */
+const wall = mesh(new THREE.PlaneGeometry(400, 220), new THREE.MeshStandardMaterial({ color: 0x24252b, roughness: 0.95 }), 0, 60, -58, false);
+scene.add(wall);
+{
+  const top = new THREE.MeshPhysicalMaterial({ map: woodTex('#4a3322', '30,18,8', '160,110,70', 11), roughness: 0.5, clearcoat: 0.4, clearcoatRoughness: 0.35 });
+  const edge = new THREE.MeshStandardMaterial({ color: 0x3a2818, roughness: 0.6 });
+  const desk = mesh(new RoundedBoxGeometry(190, 4, 86, 3, 0.8), [edge, edge, top, edge, edge, edge], 0, -2, -12, false);
+  scene.add(desk);
+  const mat = mesh(rr(96, 42, 3), new THREE.MeshStandardMaterial({ color: 0x232429, roughness: 1 }), -4, 0.06, 9, false);
+  mat.rotation.x = -Math.PI / 2;
+  scene.add(mat);
+}
+
+/* ---------- monitors ---------- */
+const AR = 16 / 9;
+function monitor({ sw, sh, x, z, cy, yaw, bezel = 0.7, chin = 1.4, depth = 1.4, neckH }) {
+  const g = new THREE.Group();
+  g.position.set(x, 0, z);
+  g.rotation.y = yaw;
+  scene.add(g);
+  const bw = sw + bezel * 2, bh = sh + bezel + chin;
+  const head = new THREE.Group();
+  head.position.y = cy;
+  g.add(head);
+  const sy = (chin - bezel) / 2;
+  head.add(mesh(new RoundedBoxGeometry(bw, bh, depth, 4, 0.35), blackMetal, 0, -sy, -depth / 2));
+  head.add(mesh(new RoundedBoxGeometry(bw * 0.62, bh * 0.62, 3.2, 4, 1.2), blackMetal, 0, -sy, -depth - 1.4));
+  const front = mesh(rr(bw - 0.1, bh - 0.1, 0.35), glass, 0, -sy, 0.01, false);
+  head.add(front);
+  const h = mesh(new THREE.PlaneGeometry(sw, sh), hole, 0, 0, 0.06, false);
+  head.add(h);
+  const logo = mesh(new THREE.CircleGeometry(0.12, 16), new THREE.MeshBasicMaterial({ color: 0xffffff }), bw / 2 - 2, -sh / 2 - chin / 2 - 0.05, 0.02, false);
+  logo.material.color.setScalar(0.6);
+  head.add(logo);
+  g.add(mesh(new RoundedBoxGeometry(5, neckH, 2.6, 3, 0.8), graphite, 0, neckH / 2 + 0.8, -depth - 4));
+  g.add(mesh(new RoundedBoxGeometry(24, 1.2, 18, 3, 0.5), graphite, 0, 0.6, -depth - 4));
+  const light = new THREE.RectAreaLight(0xe8eeff, 0, sw, sh);
+  light.position.set(0, 0, 0.2);
+  light.rotation.y = Math.PI;
+  head.add(light);
+  return { g, head, hole: h, light, sw, sh };
+}
+const MA = monitor({ sw: 59.8, sh: 59.8 / AR, x: -8, z: -32, cy: 33, yaw: 0.1, neckH: 18 });
+const MB = monitor({ sw: 30.2, sh: 30.2 * AR, x: 42, z: -24, cy: 35, yaw: -0.52, neckH: 9, chin: 0.9 });
+
+// light bar on the main monitor, washing the keyboard
+{
+  const bar = mesh(new THREE.CylinderGeometry(0.9, 0.9, 46, 24), graphite, 0, MA.sh / 2 + 1.4, 0.4);
+  bar.rotation.z = Math.PI / 2;
+  MA.head.add(bar);
+  const emit = mesh(new THREE.PlaneGeometry(44, 0.7), new THREE.MeshBasicMaterial({ color: new THREE.Color(1, 0.92, 0.8).multiplyScalar(3) }), 0, MA.sh / 2 + 0.6, 0.9, false);
+  emit.rotation.x = Math.PI / 2;
+  MA.head.add(emit);
+  const wash = new THREE.RectAreaLight(0xffe2bf, 0, 44, 6);
+  wash.position.set(0, MA.sh / 2 + 0.5, 3);
+  wash.rotation.x = -Math.PI / 2 + 0.55;
+  MA.head.add(wash);
+  MA.wash = wash;
+}
+// bias lighting behind the monitors
+const biasA = new THREE.RectAreaLight(0x7a5cff, 0, 70, 30);
+biasA.position.set(-8, 34, -40);
+scene.add(biasA);
+const biasB = new THREE.RectAreaLight(0x18c7b8, 0, 26, 50);
+biasB.position.set(44, 36, -34);
+biasB.rotation.y = -0.4;
+scene.add(biasB);
+
+/* ---------- keyboard, mouse, mug ---------- */
+{
+  const kb = new THREE.Group();
+  kb.position.set(-6, 0.1, 9);
+  kb.rotation.x = 0.06;
+  scene.add(kb);
+  kb.add(mesh(new RoundedBoxGeometry(33, 2.0, 13.4, 3, 0.5), graphite, 0, 1.0, 0));
+  const rows = [
+    [1.4, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], ['esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'del']],
+    [1.7, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '⌫']],
+    [1.7, [1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.5], ['tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\']],
+    [1.7, [1.75, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.25], ['caps', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'enter']],
+    [1.7, [2.25, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.75], ['shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'shift']],
+    [1.7, [1.25, 1.25, 1.25, 6.25, 1.25, 1.25, 1, 1, 1], ['ctrl', 'win', 'alt', '', 'alt', 'fn', '◀', '▼', '▶']]
+  ];
+  const accent = new Set(['esc', 'enter']);
+  const n = rows.reduce((a, r) => a + r[1].length, 0);
+  const caps = new THREE.InstancedMesh(new RoundedBoxGeometry(1, 0.9, 1, 2, 0.14), new THREE.MeshStandardMaterial({ roughness: 0.55, metalness: 0.05 }), n);
+  const m = new THREE.Matrix4(), col = new THREE.Color(), g = 0.18, KW = 31, z0 = -6.1, labels = [];
+  let i = 0, z = z0;
+  for (const [h, ks, names] of rows) {
+    const sc = (KW - g * (ks.length - 1)) / ks.reduce((a, b) => a + b, 0);
+    let x = -KW / 2;
+    ks.forEach((k, j) => {
+      const w = k * sc, nm = names[j];
+      m.makeScale(w, 1, h).setPosition(x + w / 2, 2.35, z + h / 2);
+      caps.setMatrixAt(i, m);
+      caps.setColorAt(i, col.set(accent.has(nm) ? 0xff6a1f : (k > 1.2 || nm.length > 1) ? 0x26282e : 0x3b3e45));
+      labels.push([x + w / 2, z + h / 2, nm]);
+      i++; x += w + g;
+    });
+    z += h + g;
+  }
+  caps.castShadow = true;
+  kb.add(caps);
+  const depth = z - z0, cw = 2048, ch = Math.round(cw * depth / KW), px = cw / KW;
+  const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  for (const [lx, lz, t] of labels) {
+    if (!t) continue;
+    x.font = `600 ${Math.round((t.length === 1 ? 0.5 : 0.28) * px)}px Inter, Arial, sans-serif`;
+    x.fillText(t, (lx + KW / 2) * px, (lz - z0) * px);
+  }
+  const legend = new THREE.Mesh(new THREE.PlaneGeometry(KW, depth), new THREE.MeshBasicMaterial({ alphaMap: new THREE.CanvasTexture(c), transparent: true, depthWrite: false, color: 0xd8dade }));
+  legend.rotation.x = -Math.PI / 2;
+  legend.position.set(0, 2.85, z0 + depth / 2);
+  kb.add(legend);
+
+  const mouse = mesh(new THREE.SphereGeometry(1, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshPhysicalMaterial({ color: 0x1d1e22, roughness: 0.45, clearcoat: 0.4 }), 26, 0.1, 11);
+  mouse.scale.set(3.3, 2.0, 6.0);
+  mouse.rotation.y = -0.15;
+  scene.add(mouse);
+
+  const mug = new THREE.Group();
+  mug.position.set(-46, 0, 2);
+  scene.add(mug);
+  const ceramic = new THREE.MeshPhysicalMaterial({ color: 0x1b1c20, roughness: 0.35, clearcoat: 0.8, side: THREE.DoubleSide });
+  mug.add(mesh(new THREE.CylinderGeometry(4, 3.8, 9.5, 48, 1, true), ceramic, 0, 4.75, 0));
+  const coffee = mesh(new THREE.CircleGeometry(3.9, 40), new THREE.MeshPhysicalMaterial({ color: 0x2a160c, roughness: 0.05, clearcoat: 1 }), 0, 8.2, 0, false);
+  coffee.rotation.x = -Math.PI / 2;
+  mug.add(coffee);
+  const handle = mesh(new THREE.TorusGeometry(2.3, 0.55, 16, 40, Math.PI), ceramic, 3.9, 4.9, 0);
+  handle.rotation.z = -Math.PI / 2;
+  mug.add(handle);
+
+  const book = mesh(new RoundedBoxGeometry(17, 2.2, 23, 2, 0.4), new THREE.MeshStandardMaterial({ color: 0x8a3a1a, roughness: 0.75 }), 50, 1.1, 6);
+  book.rotation.y = -0.25;
+  scene.add(book);
+}
+
+/* ---------- CSS screens ---------- */
+const scrA = $('#scrA'), scrB = $('#scrB');
+const elA = { w: 1280, h: 720 }, elB = { w: 720, h: 1280 };
+const SA = MA.sw / elA.w, SB = MB.sw / elB.w;
+const objA = new CSS3DObject(scrA); objA.position.z = 0.06; objA.scale.setScalar(SA); MA.head.add(objA);
+const objB = new CSS3DObject(scrB); objB.position.z = 0.06; objB.scale.setScalar(SB); MB.head.add(objB);
+scene.traverse(o => { if (o.isMesh) [].concat(o.material).forEach(mt => { if ('envMapIntensity' in mt) mt.envMapIntensity = 0.7; }); });
+
+/* ---------- cards that lift out of the main monitor ---------- */
+const floaters = { stats: [], work: [] };
+const offIn = (el, root) => { let x = 0, y = 0; while (el && el !== root) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x, y }; };
+const siteA = $('#siteA'), siteB = $('#siteB');
+for (const [group, sel, radius] of [['stats', '#stats .st', 16], ['work', '#work .wc', 18]]) {
+  $$(sel).forEach(src => {
+    const el = src.cloneNode(true);
+    el.classList.add('fl');
+    const o = new CSS3DObject(el);
+    o.scale.setScalar(SA);
+    const hm = new THREE.Mesh(new THREE.BufferGeometry(), hole);
+    hm.castShadow = true;
+    const g = new THREE.Group();
+    g.add(hm, o);
+    g.visible = o.visible = false;
+    MA.head.add(g);
+    floaters[group].push({ src, el, o, hm, g, radius });
+  });
+}
+
+/* ---------- scroll choreography ---------- */
+// v = camera view, a/b = scroll anchors for the main and vertical screens, stats/work = lift-out amount
+const K = [
+  { p: 0.00, v: 'hero', a: 'top', b: 'top' },
+  { p: 0.04, v: 'hero', a: 'top', b: 'top' },
+  { p: 0.12, v: 'nearA', a: 'top', b: 'top' },
+  { p: 0.18, v: 'fillA', a: 'top', b: 'top' },
+  { p: 0.22, v: 'fillA', a: 'stats', b: 'top' },
+  { p: 0.29, v: 'desk', a: 'stats', b: 'top', stats: 1 },
+  { p: 0.34, v: 'desk2', a: 'stats', b: 'top', stats: 1 },
+  { p: 0.38, v: 'fillA', a: 'stats', b: 'top' },
+  { p: 0.42, v: 'fillA', a: 'work', b: 'top' },
+  { p: 0.49, v: 'pan', a: 'work', b: 'top', work: 1 },
+  { p: 0.55, v: 'atB', a: 'work', b: 'top', work: 1 },
+  { p: 0.60, v: 'fillB', a: 'work', b: 'top' },
+  { p: 0.67, v: 'tiltB', a: 'work', b: 'skills' },
+  { p: 0.73, v: 'fillB', a: 'work', b: 'aw' },
+  { p: 0.78, v: 'fillB', a: 'work', b: 'log' },
+  { p: 0.84, v: 'fillA', a: 'contact', b: 'log' },
+  { p: 0.89, v: 'fillA', a: 'contact', b: 'log' },
+  { p: 0.97, v: 'end', a: 'contact', b: 'log' },
+  { p: 1.00, v: 'end', a: 'contact', b: 'log' }
+];
+const VIEWS = {}, YA = {}, YB = {};
+let maxA = 1, maxB = 1;
+const V = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+const orbit = (t, dist, az, el) => V(t.x + dist * Math.cos(el) * Math.sin(az), t.y + dist * Math.sin(el), t.z + dist * Math.cos(el) * Math.cos(az));
+const fit = (w, h) => {
+  const f = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  return Math.max(h / 2 / f, w / 2 / (f * cam.aspect));
+};
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  cam.aspect = w / h;
+  cam.updateProjectionMatrix();
+  gl.setSize(w, h);
+  css.setSize(w, h);
+  const wide = cam.aspect > 1;
+  scene.updateMatrixWorld(true);
+  const scA = MA.hole.getWorldPosition(V()), scB = MB.hole.getWorldPosition(V());
+  const yawA = MA.g.rotation.y, yawB = MB.g.rotation.y;
+  const v = (tgt, pos) => ({ tgt, pos });
+  const t0 = wide ? V(-14, 26, -12) : V(8, 44, -12);
+  const t3 = wide ? V(46, 28, -12) : V(8, 46, -12);
+  const desk = V(-6, 13, 6);
+  const workC = MB.head.localToWorld(V(0, 0, 9));
+  Object.assign(VIEWS, {
+    hero: v(t0, orbit(t0, wide ? fit(150, 84) : fit(100, 190), -0.32, 0.2)),
+    nearA: v(scA, orbit(scA, fit(MA.sw * 1.6, MA.sh * 1.6), yawA - 0.15, 0.08)),
+    fillA: v(scA, orbit(scA, fit(MA.sw, MA.sh), yawA, 0)),
+    desk: v(desk, orbit(desk, wide ? fit(56, 30) : fit(36, 60), -0.25, 0.22)),
+    desk2: v(desk, orbit(desk, wide ? fit(56, 30) : fit(36, 60), 0.2, 0.12)),
+    pan: v(V(18, 30, -18), orbit(V(18, 30, -18), wide ? fit(100, 56) : fit(70, 120), -0.05, 0.12)),
+    atB: v(workC, orbit(workC, wide ? fit(52, 40) : fit(34, 62), yawB + 0.35, 0.08)),
+    fillB: v(scB, orbit(scB, fit(MB.sw, MB.sh), yawB, 0)),
+    tiltB: v(scB, orbit(scB, fit(MB.sw * 1.25, MB.sh * 1.12), yawB + 0.3, 0.05)),
+    end: v(t3, orbit(t3, wide ? fit(170, 90) : fit(100, 190), 0.3, 0.18))
+  });
+
+  const vhA = elA.h - 72, vhB = elB.h - 44;
+  maxA = Math.max(1, siteA.offsetHeight - $('#vpA').clientHeight);
+  maxB = Math.max(1, siteB.offsetHeight - $('#vpB').clientHeight);
+  const atA = y => clamp(Math.round(y), 0, maxA), atB = y => clamp(Math.round(y), 0, maxB);
+  const statsEl = $('#stats');
+  Object.assign(YA, {
+    top: 0,
+    stats: atA(offIn(statsEl, siteA).y + statsEl.offsetHeight - vhA + 30),
+    work: atA(offIn($('#work'), siteA).y - 56 - 14),
+    contact: atA(offIn($('#a-contact'), siteA).y - 56)
+  });
+  Object.assign(YB, {
+    top: 0,
+    skills: atB(offIn($('#b-skills'), siteB).y - 20),
+    aw: atB(offIn($('#b-aw'), siteB).y - 20),
+    log: maxB
+  });
+
+  // stats hover above the keyboard; work cards line up in front of the vertical monitor
+  const inv = new THREE.Matrix4().copy(MA.head.matrixWorld).invert();
+  const toA = p => p.clone().applyMatrix4(inv);
+  for (const [group, list] of Object.entries(floaters)) list.forEach((f, i) => {
+    f.w = f.src.offsetWidth; f.h = f.src.offsetHeight;
+    Object.assign(f, offIn(f.src, siteA));
+    f.el.style.width = f.w + 'px';
+    f.el.style.height = f.h + 'px';
+    f.hm.geometry.dispose();
+    f.hm.geometry = rr(f.w * SA, f.h * SA, f.radius * SA);
+    if (group === 'stats') {
+      const c = i - 1.5;
+      const world = wide ? V(-6 + c * 11.5, 12 + (1.5 - Math.abs(c)) * 1.6, 6 + Math.abs(c) * 2.2)
+        : V(-6 + (i % 2 ? 7.2 : -7.2), 18 - ((i / 2) | 0) * 7, 9);
+      f.pose = { p: toA(world), ry: (wide ? -c * 0.18 : 0) - yawA, sc: wide ? 0.62 : 0.6 };
+    } else {
+      const col = i % 2, row = (i / 2) | 0;
+      const world = MB.head.localToWorld(V((col ? 1 : -1) * 9.8, (row ? -1 : 1) * 7.6 + 2, 12 + row * 2));
+      f.pose = { p: toA(world), ry: yawB - yawA + (col ? -0.12 : 0.12), sc: 0.6 };
+    }
+  });
+}
+
+const rvA = $$('#scrA .rv'), rvB = $$('#scrB .rv'), navBtns = $$('#snav button');
+const heroOv = $('#heroOv'), endOv = $('#endOv'), where = $('#where'), bar = $('#bar'), topEl = $('.top');
+const showOv = (el, o) => { el.style.opacity = o; el.style.visibility = o < 0.02 ? 'hidden' : 'visible'; el.style.pointerEvents = o > 0.6 ? 'auto' : 'none'; };
+const target = () => clamp(scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight));
+let p = target(), mx = 0, my = 0, smx = 0, smy = 0, last = performance.now(), lastWhere = '', lastSec = '';
+addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { mx = e.clientX / innerWidth * 2 - 1; my = e.clientY / innerHeight * 2 - 1; } }, { passive: true });
+const _p = V(), _q = new THREE.Quaternion(), _s = V(), _n = V(), _d = V();
+
+function placeFloaters(list, out, y, now) {
+  list.forEach((f, i) => {
+    const t = ss(clamp(out * 1.35 - i * 0.1));
+    const on = t > 0.001;
+    if (f.g.visible !== on) f.g.visible = on;
+    if (!on && f.o.visible) f.o.visible = false;
+    const hide = t > 0.12;
+    if (f.hid !== hide) { f.src.style.visibility = hide ? 'hidden' : ''; f.hid = hide; }
+    if (!on) return;
+    f.el.style.opacity = clamp(t * 8).toFixed(3);
+    const fx = (f.x + f.w / 2 - elA.w / 2) * SA;
+    const fy = (elA.h / 2 - (72 + f.y - y + f.h / 2)) * SA;
+    const P = f.pose, bob = Math.sin(now / 900 + i * 1.7) * 0.35 * t;
+    f.g.position.set(lerp(fx, P.p.x, t), lerp(fy, P.p.y, t) + bob, lerp(0.1, P.p.z, t));
+    f.g.rotation.set(0, lerp(0, P.ry, t), 0);
+    f.g.scale.setScalar(lerp(1, P.sc, t));
+    f.g.updateWorldMatrix(true, false);
+    f.g.matrixWorld.decompose(_p, _q, _s);
+    const facing = _n.set(0, 0, 1).applyQuaternion(_q).dot(_d.subVectors(cam.position, _p)) > 0;
+    if (f.o.visible !== facing) f.o.visible = facing;
+  });
+}
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  p += (target() - p) * Math.min(1, dt * 7);
+  smx += (mx - smx) * Math.min(1, dt * 4); smy += (my - smy) * Math.min(1, dt * 4);
+
+  let k = 0;
+  while (k < K.length - 2 && p >= K[k + 1].p) k++;
+  const A = K[k], B = K[k + 1], t = ss(clamp((p - A.p) / (B.p - A.p)));
+  const pos = VIEWS[A.v].pos.clone().lerp(VIEWS[B.v].pos, t), tgt = VIEWS[A.v].tgt.clone().lerp(VIEWS[B.v].tgt, t);
+  const ya = lerp(YA[A.a], YA[B.a], t), yb = lerp(YB[A.b], YB[B.b], t);
+
+  const free = 1 - rng(p, 0.15, 0.18) * (1 - rng(p, 0.9, 0.93));
+  const idle = 1 - rng(p, 0, 0.12);
+  pos.x += (smx * 4 + Math.sin(now / 3200) * 3 * idle) * free;
+  pos.y -= smy * 2.5 * free;
+  cam.position.copy(pos);
+  cam.lookAt(tgt);
+
+  const wake = rng(p, 0.06, 0.13);
+  $('#sleepA').style.opacity = (1 - wake).toFixed(3);
+  $('#sleepB').style.opacity = (1 - rng(p, 0.09, 0.16)).toFixed(3);
+  MA.light.intensity = 0.15 + 1.6 * wake;
+  MB.light.intensity = 0.1 + 1.2 * wake;
+  MA.wash.intensity = 4 * wake;
+  biasA.intensity = 1.5 + 5 * wake;
+  biasB.intensity = 1 + 4 * wake;
+
+  siteA.style.transform = `translate3d(0,${-ya.toFixed(1)}px,0)`;
+  siteB.style.transform = `translate3d(0,${-yb.toFixed(1)}px,0)`;
+  placeFloaters(floaters.stats, lerp(A.stats || 0, B.stats || 0, t), ya, now);
+  placeFloaters(floaters.work, lerp(A.work || 0, B.work || 0, t), ya, now);
+
+  if (wake > 0.9) {
+    for (const el of rvA) if (!el.classList.contains('in') && el._top < ya + (elA.h - 72) * 0.9) el.classList.add('in');
+    for (const el of rvB) if (!el.classList.contains('in') && el._top < yb + (elB.h - 44) * 0.9) el.classList.add('in');
+  }
+
+  const onB = p > 0.52 && p < 0.81;
+  const sec = onB ? (yb >= YB.skills - 200 ? 'skills' : 'exp') : ya >= YA.contact - 200 ? 'contact' : ya >= YA.work - 200 ? 'work' : 'top';
+  if (sec !== lastSec) { navBtns.forEach(b => b.classList.toggle('on', b.dataset.go === sec)); lastSec = sec; }
+  const label = p < 0.15 ? 'Intro' : p > 0.93 ? 'Say hello' : { top: 'About', work: 'Selected work', exp: 'Experience', skills: 'Skills', contact: 'Contact' }[sec];
+  if (label !== lastWhere) { where.textContent = label; lastWhere = label; }
+
+  showOv(heroOv, 1 - rng(p, 0.015, 0.06));
+  showOv(endOv, rng(p, 0.93, 0.975));
+  const lock = 1 - free;
+  topEl.style.opacity = (1 - lock).toFixed(3);
+  topEl.style.visibility = lock > 0.98 ? 'hidden' : 'visible';
+  where.style.opacity = (1 - rng(p, 0.93, 0.975)).toFixed(3);
+  bar.style.width = (p * 100).toFixed(2) + '%';
+
+  gl.render(scene, cam);
+  css.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+
+const JUMP = { work: 0.42, exp: 0.6, skills: 0.67, contact: 0.86 };
+const goTo = id => scrollTo({ top: JUMP[id] * (document.documentElement.scrollHeight - innerHeight), behavior: 'smooth' });
+$$('#scrA [data-go]').forEach(b => b.addEventListener('click', () => goTo(b.dataset.go)));
+$('[data-top]').addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+
+const measure = () => { layout(); for (const el of rvA) el._top = offIn(el, siteA).y; for (const el of rvB) el._top = offIn(el, siteB).y; };
+measure();
+let rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(measure, 120); });
+document.fonts?.ready.then(measure);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
